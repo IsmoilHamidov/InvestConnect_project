@@ -1,12 +1,13 @@
-import Navbar from '../Navbar/Navbar'
+import Introduction_Image from "../Introduction/Introduction"
+
 
 function Home() {
 
 
   return (
-    <div>
-        <Navbar/>
-    </div>
+    <>
+      <Introduction_Image/>
+    </>
   )
 }
 
