@@ -3,8 +3,8 @@ import { ServiceArr } from '@/constants/service';
 
 function Service() {
   return (
-    <div className="py-16  mt-32">
-     <h2 className='text-center text-[2.5rem] font-light mb-9'>Onze diensten</h2>
+    <div className="py-16 mt-20 flex flex-col justify-center items-center">
+     <h2 className='text-center text-[2.5rem] font-light mb-7'>Onze diensten</h2>
       {ServiceArr.map((service, index) => (
         <div
           key={service.id}
@@ -35,8 +35,10 @@ function Service() {
               className="w-[20rem] h-[15rem] object-contain"
             />
           </div>
+
         </div>
       ))}
+      <button className=' rounded-3xl p-3 px-12 text-base text-white bg-custom-gray mt-16 '>NEEM CONTACT OP</button>
     </div>
   );
 }

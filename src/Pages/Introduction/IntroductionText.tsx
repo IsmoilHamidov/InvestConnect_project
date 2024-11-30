@@ -23,7 +23,7 @@ function IntroductionText() {
                         Maar hebt u al eens aan een investering in vastgoed gedacht?
                     </span>
                 </div>       
-                <button className='rounded-3xl p-3 px-9  text-sm bg-custom-gray mt-16 '>NEEM CONTACT OP</button>
+                <button className=' rounded-3xl p-3 px-12 text-base text-white bg-custom-gray mt-16 '>NEEM CONTACT OP</button>
             </div>
         </div>
         <img className='absolute top-[330px] left-1/2 transform -translate-x-1/2 z-5 w-[53rem] h-[53rem] object-contain' 

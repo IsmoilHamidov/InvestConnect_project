@@ -1,4 +1,3 @@
-import React from 'react'
 import about_image from "../../assets/images/img01.jpg"
 
 function About() {
