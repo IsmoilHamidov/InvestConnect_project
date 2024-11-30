@@ -1,12 +1,13 @@
 import Navbar from '../Navbar/Navbar'
 import intro_image from "../../assets/images/Head_image.png"
 import Intro_logo from "../../assets/images/Altro icon.png"
+import IntroductionText from './IntroductionText'
 
 function Introduction_Image() {
   return (
 
         <div
-            className=' intro_box relative h-[55rem] w-full  py-5'
+            className='intro_box relative h-[55rem] w-full  py-5'
             style={{
                 backgroundImage: `url(${intro_image})`,
                 backgroundSize: "cover",
@@ -15,12 +16,12 @@ function Introduction_Image() {
             }}>
              
             <Navbar/>
-            
-            <div 
-             style={{position: 'absolute', top: '57%', left: '50%', transform: 'translate(-50%, -50%)'}}
-            className='w-full flex justify-center items-center'>
-                <img className='h-[26rem] object-contain' src={Intro_logo} alt="" />
-            </div>
+          
+                <div 
+                style={{position: 'absolute', top: '57%', left: '50%', transform: 'translate(-50%, -50%)'}}
+                className='w-full flex justify-center items-center'>
+                    <img className='h-[26rem] object-contain' src={Intro_logo} alt="" />
+                </div>
         </div>
   )
 }
