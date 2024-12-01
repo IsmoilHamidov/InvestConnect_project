@@ -2,6 +2,7 @@ import About from "../About/About"
 import AboutImage from "../About/AboutImage"
 import Introduction_Image from "../Introduction/Introduction"
 import IntroductionText from "../Introduction/IntroductionText"
+import Projects from "../OurService/Projects"
 import Service from "../OurService/Service"
 
 
@@ -15,6 +16,7 @@ function Home() {
       <About/>
       <AboutImage/>
       <Service/>
+      <Projects/>
     </>
   )
 }
