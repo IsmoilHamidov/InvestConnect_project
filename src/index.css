@@ -6,6 +6,37 @@
 @import '@shadcn/ui/styles.css';
 
 
+section {
+  margin: 0 30px;
+}
+
+
+h1 {
+  font-size: 72px;
+}
+
+p {
+  font-size: 18px;
+}
+
+.product-details {
+  grid-template-areas:
+    "a b"
+    "c b";
+}
+
+.product-details__a {
+  grid-area: a;
+}
+.product-details__b {
+  grid-area: b;
+}
+.product-details__c {
+  grid-area: c;
+}
+
+
+
 @layer base {
   :root {
 

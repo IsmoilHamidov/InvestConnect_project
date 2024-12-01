@@ -1,3 +1,4 @@
+import { Outlet } from "react-router-dom"
 import Introduction_Image from "../Introduction/Introduction"
 
 

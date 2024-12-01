@@ -3,6 +3,7 @@ import intro_image from "../../assets/images/Head_image.png";
 import Intro_logo from "../../assets/images/Altro icon.png";
 
 function Introduction_Image() {
+
   return (
     <div
       className=" intro_box relative h-[55rem] w-full  py-5"
@@ -14,7 +15,7 @@ function Introduction_Image() {
       }}
     >
       <Navbar />
-
+      
       <div
         style={{
           position: "absolute",
