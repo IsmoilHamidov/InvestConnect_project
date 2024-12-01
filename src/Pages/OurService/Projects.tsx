@@ -43,48 +43,57 @@ function Projects() {
   return (
     <div className="relative min-h-[60rem] mt-8">
       <div
-        className="w-full z-10 h-[50rem] bg-[#443B3A] rounded-br-none py-12"
+        className="w-full z-10 h-[45rem] bg-[#443B3A] rounded-br-none py-12"
         style={{
           clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 75%)",
         }}
       ></div>
 
-      <div className="z-20 absolute top-[150px] left-1/2 transform -translate-x-1/2">
+      <div className="z-20 absolute top-[120px] left-1/2 transform -translate-x-1/2">
         <h3 className="text-center text-[2.5rem] font-light text-white">
           Projecten in de kijker
         </h3>
-        <div className="flex justify-between items-center mt-16 w-[80rem]">
+        <div className="flex justify-between items-center mt-20 w-[80rem]">
             {cardData.map((card) => (
                 <div
                     key={card.id}
-                    className="max-w-sm border rounded-lg overflow-hidden shadow-lg mx-4"
+                    className="relative overflow-visible w-[30%] border border-[#443B3A] shadow-lg mx-4 "
                     >
-
                     <div className="relative overflow-visible">
-                 
+                        <img src={card.image} alt={card.location} className="w-full h-[22rem] "/>
+                        <div className="absolute top-3 left-3 z-30">
+                          <img src={star} alt="star" />
+                        </div>
                     </div>
 
-                    
-                    <div className="p-4 bg-white">
-                        <h2 className="text-lg font-bold text-blue-700">
-                            {card.location}
-                        </h2>
-                        <p className="text-sm text-gray-600">{card.description}</p>
-                        <p className="text-sm text-gray-500">{card.type}</p>
-                        <div className="flex items-center justify-between mt-3">
-                            <div>
-                                <p className="text-2xl font-semibold text-gray-800">
+                      <div className="absolute top-3 z-20 -right-5
+                          bg-[#B29C6F] text-white text-md px-3 py-1">
+                          {card.label}
+                      </div>
+        
+                    <div className="px-3 py-5 bg-white ">
+                          <div className='flex justify-between items-center'>
+                            <h2 className="text-xl font-semibold text-custom-blue-gray">
+                                {card.location}
+                            </h2>
+                              <p className="text-2xl font-semibold text-custom-gray">
                                 {card.rendement}
-                                </p>
-                                <p className="text-xs text-gray-500">BRUTO RENDEMENT</p>
-                            </div>
-                            <p className="text-lg font-semibold text-gray-800">
-                                {card.price}
-                            </p>
-                        </div>
-                        <button className="mt-4 w-full bg-blue-500 text-white text-sm font-semibold py-2 rounded">
-                        Ontdek meer
-                        </button>
+                              </p>
+                          </div>
+                          <div className='flex justify-between items-center mt-1 mb-2'>
+                              <p className="text-md text-custom-gray font-medium">{card.description}</p>
+                              <p className="text-xs text-custom-gray">BRUTO RENDEMENT</p>
+                          </div>
+                          <p className="text-sm text-custom-gray">{card.type}</p>
+
+                          <div className="flex items-center justify-between mt-7">            
+                              <p className="text-xl font-medium text-gray-900">
+                                  {card.price}
+                              </p>
+                            <button className=" bg-custom-blue-gray text-white text-sm font-medium py-1 px-4 rounded-2xl">
+                              Ontdek meer
+                            </button>
+                          </div>      
                     </div>
                 </div>
             ))}
