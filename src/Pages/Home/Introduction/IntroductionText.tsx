@@ -1,4 +1,4 @@
-import TextImage from "../../assets/images/Group 524.png"
+import TextImage from "../../../assets/images/Group 524.png"
 
 
 function IntroductionText() {

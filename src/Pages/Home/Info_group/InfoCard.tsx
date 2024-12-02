@@ -1,7 +1,7 @@
-import image1  from '../../assets/images/Rectangle 409 (1).png'
-import image2  from '../../assets/images/Rectangle 409.png'
-import image3  from '../../assets/images/Rectangle 410.png'
-import AltroLogo from "../../assets/images/Altro Logo.png"
+import image1  from '../../../assets/images/Rectangle 409 (1).png'
+import image2  from '../../../assets/images/Rectangle 409.png'
+import image3  from '../../../assets/images/Rectangle 410.png'
+import AltroLogo from "../../../assets/images/Altro Logo.png"
 
 const cardData = [
     {
@@ -27,7 +27,7 @@ const cardData = [
   
 function InfoCard() {
   return (
-    <div className="bg-[#88A8B5] mt-16 pb-40 pt-[18rem] relative">
+    <div className="bg-[#88A8B5]  pb-40 pt-[18rem] relative">
 
       <div className="max-w-7xl mx-auto px-4 z-50 relative">
         <div className="flex flex-col  md:flex-row justify-between items-center mb-8">

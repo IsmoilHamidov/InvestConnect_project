@@ -1,6 +1,6 @@
-import About_long_image from "../../assets/images/quote-img.jpg"
-import quotes from "../../assets/images/quote-icon.png"
-import aboutLogo from '../../assets/images/Altro Logo Icon.png'
+import About_long_image from "../../../assets/images/quote-img.jpg"
+import quotes from "../../../assets/images/quote-icon.png"
+import aboutLogo from '../../../assets/images/Altro Logo Icon.png'
 
 
 function AboutImage() {
