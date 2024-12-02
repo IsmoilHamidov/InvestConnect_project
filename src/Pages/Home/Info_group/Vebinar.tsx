@@ -1,4 +1,4 @@
-import rectangle from "../../assets/images/vebunar_image.png"
+import rectangle from "../../../assets/images/vebunar_image.png"
 
 
 function Vebinar() {
