@@ -29,7 +29,7 @@ const cardInfo = [
 
 function Professionals() {
   return (
-    <div className='py-24'>
+    <div className='py-32'>
         <div className='max-w-7xl m-auto '>
           <div className='w-full flex justify-center'>
             <h3 className="w-3/5 text-center text-[2.5rem] font-light text-custom-gray">
