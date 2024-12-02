@@ -38,7 +38,7 @@ function Service() {
 
         </div>
       ))}
-      <button className=' rounded-3xl p-3 px-12 text-base text-white bg-custom-gray mt-16 '>NEEM CONTACT OP</button>
+      <button className='Brown_button rounded-3xl p-3 px-12 text-base text-white bg-custom-gray mt-16 '>NEEM CONTACT OP</button>
     </div>
   );
 }

@@ -63,7 +63,7 @@ function InfoCard() {
         </div>
 
         <div className='w-full flex justify-end'>
-           <button className='mt-5 rounded-3xl p-3 px-12 text-base text-white bg-custom-gray'>Lees meer</button>
+           <button className='Brown_button mt-5 rounded-3xl p-3 px-12 text-base text-white bg-custom-gray'>Lees meer</button>
         </div>
       </div>
 

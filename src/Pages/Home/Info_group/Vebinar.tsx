@@ -9,7 +9,7 @@ function Vebinar() {
                 <img className='h-[31rem] object-contain' src={rectangle} alt="vebinar image" />
                 <div className='w-[53%]'>
                     <h2 className='font-semibold text-5xl leading-[60px] text-custom-blue-gray'>Webinar - Anti-Crisis Strategy for Business Success</h2>
-                    <button className='rounded-3xl p-3 px-12 text-base text-white bg-custom-gray mt-16'>SCHRIJF IN</button>
+                    <button className='Brown_button rounded-3xl p-3 px-12 text-base text-white bg-custom-gray mt-16'>SCHRIJF IN</button>
                 </div>
 
                 <div className=' px-12 py-5 gap-x-3 flex flex-wrap justify-center items-end  
