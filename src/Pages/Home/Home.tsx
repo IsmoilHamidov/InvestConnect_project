@@ -6,6 +6,7 @@ import InfoCard from "./Info_group/InfoCard"
 import Projects from "./Info_group/Projects"
 import Service from "./Info_group/Service"
 import Vebinar from "./Info_group/Vebinar"
+import Professionals from "./Info_group/Professionals"
 
 
 function Home() {
@@ -21,6 +22,7 @@ function Home() {
       <Projects/>
       <Vebinar/>
       <InfoCard/>
+      <Professionals/>
     </>
   )
 }
