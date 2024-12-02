@@ -49,7 +49,7 @@ function Projects() {
         }}
       ></div>
 
-      <div className="z-20 absolute top-[120px] left-1/2 transform -translate-x-1/2">
+      <div className="flex flex-col justify-center items-center z-20 absolute top-[120px] left-1/2 transform -translate-x-1/2">
         <h3 className="text-center text-[2.5rem] font-light text-white">
           Projecten in de kijker
         </h3>
@@ -98,6 +98,8 @@ function Projects() {
                 </div>
             ))}
         </div>
+
+        <button className='rounded-3xl p-3 px-12 text-base text-white bg-custom-gray mt-16 '>Bekijk ons aanbod</button>
       </div>
     </div>
   );
