@@ -118,4 +118,24 @@
   font-style: italic;
 }
 
+.Brown_button{
+  transition: .2s ease-in;
+}
 
+.Brown_button:hover{
+  background-color: #675C5B ;
+}
+
+.Blue_button{
+  transition: .2s ease-in;
+}
+.Blue_button:hover{
+  background-color: #57737d ;
+}
+
+.nav_links{
+  transition: .2s ease-in;
+}
+.Nav_links a:hover{
+  color: #749BA9;
+}

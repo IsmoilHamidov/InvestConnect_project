@@ -90,7 +90,7 @@ function Projects() {
                               <p className="text-xl font-medium text-gray-900">
                                   {card.price}
                               </p>
-                            <button className=" bg-custom-blue-gray text-white text-sm font-medium py-1 px-4 rounded-2xl">
+                            <button className="Blue_button bg-custom-blue-gray text-white text-sm font-medium py-1 px-4 rounded-2xl">
                               Ontdek meer
                             </button>
                           </div>      
@@ -99,7 +99,7 @@ function Projects() {
             ))}
         </div>
 
-        <button className='rounded-3xl p-3 px-12 text-base text-white bg-custom-gray mt-16 '>Bekijk ons aanbod</button>
+        <button className='Brown_button rounded-3xl p-3 px-12 text-base text-white bg-custom-gray mt-16 '>Bekijk ons aanbod</button>
       </div>
     </div>
   );

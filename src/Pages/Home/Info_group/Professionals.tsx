@@ -64,7 +64,7 @@ function Professionals() {
           </div>
 
           <div className='w-full flex justify-center items-center mt-12'>
-              <button className='mt-5 rounded-3xl p-3 px-10 text-base text-white bg-custom-blue-gray'>CONTACTEER</button>
+              <button className='Blue_button mt-5 rounded-3xl p-3 px-10 text-base text-white bg-custom-blue-gray'>CONTACTEER</button>
           </div>
         </div>
     </div>
