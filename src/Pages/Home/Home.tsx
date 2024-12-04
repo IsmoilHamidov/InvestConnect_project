@@ -1,13 +1,13 @@
-import About from "./About/About"
-import AboutImage from "./About/AboutImage"
-import Introduction_Image from "./Introduction/Introduction"
-import IntroductionText from "./Introduction/IntroductionText"
-import InfoCard from "./Info_group/InfoCard"
-import Projects from "./Info_group/Projects"
-import Service from "./Info_group/Service"
-import Vebinar from "./Info_group/Vebinar"
-import Professionals from "./Info_group/Professionals"
-import Footer from "../Footer/Footer"
+import About from "./About"
+import AboutImage from "./AboutImage"
+import Introduction_Image from "./Introduction"
+import IntroductionText from "./IntroductionText"
+import InfoCard from "./InfoCard"
+import Projects from "./Projects"
+import Service from "./Service"
+import Vebinar from "./Vebinar"
+import Professionals from "./Professionals"
+import Footer from "../../components/Footer/Footer"
 
 function Home() {
 

@@ -1,4 +1,4 @@
-import Navbar from '../Navbar/Navbar'
+import Navbar from '../../components/Navbar/Navbar'
 import intro_image from "../../assets/images/Head_image.png"
 import Intro_logo from "../../assets/images/Altro icon.png"
 
