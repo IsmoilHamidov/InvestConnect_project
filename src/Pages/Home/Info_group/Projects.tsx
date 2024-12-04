@@ -1,8 +1,7 @@
-import React from 'react';
-import property1 from "../../assets/images/property.jpg";
-import property2 from "../../assets/images/property (1).jpg";
-import property3 from "../../assets/images/property (2).jpg";
-import star from "../../assets/images/Star 1.png"
+import property1 from "../../../assets/images/property.jpg";
+import property2 from "../../../assets/images/property (1).jpg";
+import property3 from "../../../assets/images/property (2).jpg";
+import star from "../../../assets/images/Star 1.png"
 
 
 const cardData = [
@@ -49,7 +48,7 @@ function Projects() {
         }}
       ></div>
 
-      <div className="z-20 absolute top-[120px] left-1/2 transform -translate-x-1/2">
+      <div className="flex flex-col justify-center items-center z-20 absolute top-[120px] left-1/2 transform -translate-x-1/2">
         <h3 className="text-center text-[2.5rem] font-light text-white">
           Projecten in de kijker
         </h3>
@@ -90,7 +89,7 @@ function Projects() {
                               <p className="text-xl font-medium text-gray-900">
                                   {card.price}
                               </p>
-                            <button className=" bg-custom-blue-gray text-white text-sm font-medium py-1 px-4 rounded-2xl">
+                            <button className="Blue_button bg-custom-blue-gray text-white text-sm font-medium py-1 px-4 rounded-2xl">
                               Ontdek meer
                             </button>
                           </div>      
@@ -98,6 +97,8 @@ function Projects() {
                 </div>
             ))}
         </div>
+
+        <button className='Brown_button rounded-3xl p-3 px-12 text-base text-white bg-custom-gray mt-16 '>Bekijk ons aanbod</button>
       </div>
     </div>
   );

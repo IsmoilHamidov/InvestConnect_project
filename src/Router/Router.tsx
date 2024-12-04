@@ -1,6 +1,8 @@
+import Home from "@/Pages/Home/Home";
+import Product from "@/Pages/Product/Product";
 import { ProductDetailsPage } from "@/Pages/ProductDetailsPage/ProductsDetailsPage";
 import ProductListPage from "@/Pages/ProductListPage/ProductListPage";
-import { Home } from "lucide-react";
+import Profile from "@/Pages/profile";
 import { createBrowserRouter } from "react-router-dom";
 
 export const router = createBrowserRouter([
@@ -16,5 +18,6 @@ export const router = createBrowserRouter([
   {
     path: "/product/:productName", 
     element: <ProductDetailsPage />,
+
   },
 ]);
