@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FaFacebook, FaYoutube, FaInstagram, FaTwitter, FaLinkedin } from "react-icons/fa";
 import logo from "../../assets/images/Group.png";
 import logo_text from "../../assets/images/Group-1.png";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -27,7 +28,7 @@ function Navbar() {
             <a href="#">Over ons</a>
             <a href="#">Blog</a>
             <a href="#">Podcast</a>
-            <a href="#">Events</a>
+            <Link to={"/profile"} >Profile</Link>
             <a href="#">Pers</a>
             <a href="#">Contact</a>
 
