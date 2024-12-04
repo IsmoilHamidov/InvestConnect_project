@@ -1,4 +1,4 @@
-import about_image from "../../assets/images/img01.jpg"
+import about_image from "../../../assets/images/img01.jpg"
 
 function About() {
   return (

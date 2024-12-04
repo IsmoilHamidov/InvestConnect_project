@@ -1,9 +1,13 @@
-import About from "../About/About"
-import AboutImage from "../About/AboutImage"
-import Introduction_Image from "../Introduction/Introduction"
-import IntroductionText from "../Introduction/IntroductionText"
-import Projects from "../OurService/Projects"
-import Service from "../OurService/Service"
+import About from "./About/About"
+import AboutImage from "./About/AboutImage"
+import Introduction_Image from "./Introduction/Introduction"
+import IntroductionText from "./Introduction/IntroductionText"
+import InfoCard from "./Info_group/InfoCard"
+import Projects from "./Info_group/Projects"
+import Service from "./Info_group/Service"
+import Vebinar from "./Info_group/Vebinar"
+import Professionals from "./Info_group/Professionals"
+import Footer from "../Footer/Footer"
 
 
 function Home() {
@@ -17,6 +21,10 @@ function Home() {
       <AboutImage/>
       <Service/>
       <Projects/>
+      <Vebinar/>
+      <InfoCard/>
+      <Professionals/>
+      <Footer/>
     </>
   )
 }
