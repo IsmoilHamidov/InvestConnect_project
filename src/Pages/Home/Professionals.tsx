@@ -1,7 +1,6 @@
-import React from 'react'
-import image1 from "../../../assets/images/Dimitri.png"
-import image2 from "../../../assets/images/Nico.png"
-import image3 from "../../../assets/images/Dave.png"
+import image1 from "../../assets/images/Dimitri.png"
+import image2 from "../../assets/images/Nico.png"
+import image3 from "../../assets/images/Dave.png"
 
 
 
