@@ -9,7 +9,6 @@ import Vebinar from "./Info_group/Vebinar"
 import Professionals from "./Info_group/Professionals"
 import Footer from "../Footer/Footer"
 
-
 function Home() {
 
 

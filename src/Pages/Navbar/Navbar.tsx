@@ -28,7 +28,7 @@ function Navbar() {
             <a href="#">Over ons</a>
             <a href="#">Blog</a>
             <a href="#">Podcast</a>
-            <Link to={"/profile"} >Profile</Link>
+            <Link to={"/profile"}>Profile</Link>
             <a href="#">Pers</a>
             <a href="#">Contact</a>
 
@@ -118,3 +118,8 @@ function Navbar() {
 }
 
 export default Navbar;
+
+
+
+
+
