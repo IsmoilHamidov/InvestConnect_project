@@ -22,7 +22,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => (
       <img
         src={product.image}
         alt={product.title}
-        className="w-full h-40 object-cover"
+        className="w-full"
       />
 
       <div className="absolute inset-0 bg-primary bg-opacity-50 opacity-0 group-hover:opacity-85 transition-opacity duration-300 flex items-center justify-center">
@@ -33,7 +33,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => (
         Topligging
       </div>
 
-      <Star className="absolute top-3.5 left-4 fill-white" />
+      <Star className="cursor-pointer absolute top-3.5 left-4 fill-white" />
     </div>
 
     {/* Контент карточки */}
@@ -52,7 +52,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => (
       <div className="flex justify-between pt-5">
         <div className="text-2xl">{product.price}</div>
         <Link to={`/product/${product.title}`}>
-          <Button className="border rounded-[40px] px-4 py-2">
+          <Button className=" border rounded-[40px] px-4 py-2">
             Ontdek meer
           </Button>
         </Link>
