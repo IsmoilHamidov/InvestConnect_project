@@ -15,7 +15,7 @@
     "@radix-ui/react-slot": "^1.1.0",
     "@reduxjs/toolkit": "https://pkg.csb.dev/reduxjs/redux-toolkit/commit/e7b851eb/@reduxjs/toolkit",
     "@shadcn/ui": "^0.0.4",
-    "axios": "^1.7.8",
+    "axios": "^1.7.9",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.462.0",
