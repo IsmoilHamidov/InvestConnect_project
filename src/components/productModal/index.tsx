@@ -24,12 +24,12 @@ const ProductModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
                             className="absolute top-5 right-4 bg-transparent hover:bg-[#749BA9] text-black text-3xl hover:text-white shadow-none "
                             onClick={onClose}
                         >
-                            <IoMdClose  />
+                            <IoMdClose />
                         </Button>
                         <h2 className="text-xl font-bold mb-4">Add Product</h2>
                         <div className="mb-4">
                             <label htmlFor="name" className="block text-sm font-medium text-gray-900">
-                                Product Name 
+                                Product Name
                             </label>
                             <Input
                                 id="name"
