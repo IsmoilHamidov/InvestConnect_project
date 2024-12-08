@@ -3,9 +3,12 @@ import NavbarAdmin from "@/components/navbarAdmin";
 import Sidebar from "@/components/sidebar";
 import { Button } from "@/components/ui/button";
 import { Product, ProductCard } from "@/components/ui/ProductCard";
+import { useGetProductsQuery } from "@/store/slice/products";
 // import ProductList from "@/store/slice/productlist";
 
 const ProductListPage = () => {
+  const { data, error, isLoading } = useGetProductsQuery();
+
   return (
     <>
       <NavbarAdmin />
@@ -33,12 +36,17 @@ const ProductListPage = () => {
           </div>
         </Banner>
         <div className="products grid grid-cols-3 pt-44 pr-5">
-          {/* <ProductList /> */}
-          {productlist.map((product) => (
+          {error ? (
+            <>Oh no, there was an error</>
+          ) : isLoading ? (
+            <>Loading...</>
+          ) : data ? (
             <>
-              <ProductCard key={product.id} product={product} />
+              {data?.map((product, index) => (
+                <ProductCard key={index} product={product} />
+              ))}
             </>
-          ))}
+          ) : null}
         </div>
       </main>
     </>
@@ -46,66 +54,3 @@ const ProductListPage = () => {
 };
 
 export default ProductListPage;
-
-export const productlist: Product[] = [
-  {
-    id: 6,
-    title: "MACHELEN",
-    percentage: "4,22 %",
-    subtitle: "City Gate",
-    description: "BRUTO RENDEMENT",
-    type: "Appartementen",
-    price: "Vanaf € 160 000",
-    image: "/src/assets/images/property.jpg",
-  },
-  {
-    id: 5,
-    title: "BRUSSEL",
-    percentage: "3,5 %",
-    subtitle: "Central Park",
-    description: "NETTO RENDEMENT",
-    type: "Kantoren",
-    price: "Vanaf € 200 000",
-    image: "/src/assets/images/property%20(1).jpg",
-  },
-  {
-    id: 4,
-    title: "ANTWERPEN",
-    percentage: "5,0 %",
-    subtitle: "Diamond Square",
-    description: "BRUTO RENDEMENT",
-    type: "Appartementen",
-    price: "Vanaf € 180 000",
-    image: "/src/assets/images/property%20(2).jpg",
-  },
-  {
-    id: 1,
-    title: "MACHELEN",
-    percentage: "4,22 %",
-    subtitle: "City Gate",
-    description: "BRUTO RENDEMENT",
-    type: "Appartementen",
-    price: "Vanaf € 160 000",
-    image: "/src/assets/images/property.jpg",
-  },
-  {
-    id: 2,
-    title: "BRUSSEL",
-    percentage: "3,5 %",
-    subtitle: "Central Park",
-    description: "NETTO RENDEMENT",
-    type: "Kantoren",
-    price: "Vanaf € 200 000",
-    image: "/src/assets/images/property%20(1).jpg",
-  },
-  {
-    id: 3,
-    title: "ANTWERPEN",
-    percentage: "5,0 %",
-    subtitle: "Diamond Square",
-    description: "BRUTO RENDEMENT",
-    type: "Appartementen",
-    price: "Vanaf € 180 000",
-    image: "/src/assets/images/property%20(2).jpg",
-  },
-];

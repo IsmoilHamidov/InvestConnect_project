@@ -1,14 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { productApi } from './slice/productApiSlice';
+import { api } from './slice/products';
 
 export const store = configureStore({
   reducer: {
-    [productApi.reducerPath]: productApi.reducer,
+    [api.reducerPath]: api.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(productApi.middleware),
+    getDefaultMiddleware().concat(api.middleware),
 });
 
-// Типизация хранилища
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

@@ -1,22 +1,27 @@
 import React from 'react';
-import { useGetProductListQuery } from './productApiSlice';
+import { useGetProductsQuery } from '../slice/products';
 
-const ProductList: React.FC = () => {
-  const { data, error, isLoading } = useGetProductListQuery();
+const ProductsList: React.FC = () => {
+  const { data, error, isLoading } = useGetProductsQuery();
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error instanceof Error ? error.message : 'Error occurred'}</div>;
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>Error occurred: {JSON.stringify(error)}</p>;
 
   return (
     <div>
-      <h1>Product List</h1>
+      <h1>Products List</h1>
       <ul>
         {data?.map((product) => (
-          <li key={product.id}>{product.name}</li> // Замените `id` и `name` на реальные поля из API
+          <li key={product.id}>
+            <h2>{product.name}</h2>
+            <p>Degree: {product.degree}</p>
+            <p>Description: {product.description}</p>
+            <p>Category: {product.category.name}</p>
+          </li>
         ))}
       </ul>
     </div>
   );
 };
 
-export default ProductList;
+export default ProductsList;
