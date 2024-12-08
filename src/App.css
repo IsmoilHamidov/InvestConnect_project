@@ -120,6 +120,7 @@
 
 .Brown_button{
   transition: .2s ease-in;
+  outline: none !important;
 }
 
 .Brown_button:hover{
@@ -128,7 +129,9 @@
 
 .Blue_button{
   transition: .2s ease-in;
+  outline: none !important;
 }
+
 .Blue_button:hover{
   background-color: #57737d ;
 }

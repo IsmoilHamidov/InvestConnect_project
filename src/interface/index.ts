@@ -44,7 +44,7 @@ export interface OfferCardProps {
     isTopLocation?: boolean;
 }
 
-export  interface Activity {
+export interface Activity {
     title: string;
     date: string;
     month: string;
@@ -53,4 +53,4 @@ export  interface Activity {
 export interface ModalProps {
     isOpen: boolean;
     onClose: () => void;
-  }
+}
