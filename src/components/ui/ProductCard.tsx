@@ -31,8 +31,12 @@ export interface Product {
   category: Category;     // Категория продукта
 }
 
+interface ProductCardProps {
+  product: Product;
+}
 
-export const ProductCard: React.FC<Product> = ({ product }) => (
+
+export const ProductCard: React.FC<ProductCardProps> = ({ product }) => (
   <div className="product grid px-4 py-6">
     <div className="relative group">
 
@@ -61,7 +65,7 @@ export const ProductCard: React.FC<Product> = ({ product }) => (
         <span className="title text-2xl text-primary font-semibold">
           {product.name}
         </span>
-        <span className="text-3xl">{product.contact}</span>
+        <span className="text-3xl">{product.contract.contract}</span>
       </div>
       <div className="flex justify-between">
         <div className="title">{product.category.name}</div>
@@ -69,7 +73,6 @@ export const ProductCard: React.FC<Product> = ({ product }) => (
       </div>
       <div>{product.description}</div>
       <div className="flex justify-between pt-5">
-        {console.log(product)}
         <div className="text-2xl">{product.degree}</div>
         <Link to={`/product/${product.name}`}>
           <Button className=" border rounded-[40px] px-4 py-2">
