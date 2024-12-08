@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { OfferCardProps } from "@/interface";
 import { Link } from "react-router-dom"
+import { AiOutlinePlus } from "react-icons/ai";
+import ProductModal from "../productModal";
+
 
 const ProperyCard: React.FC<OfferCardProps> = ({
   image,
@@ -12,6 +15,7 @@ const ProperyCard: React.FC<OfferCardProps> = ({
   price,
   isTopLocation,
 }) => {
+
   return (
     <Card className="flex relative border-[#C5C3C3]  items-center p-4 mb-4">
       <img
@@ -53,6 +57,13 @@ const ProperyCard: React.FC<OfferCardProps> = ({
 };
 
 const Offers: React.FC = () => {
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const navBtn = () => {
+    setIsModalOpen(true)
+  }
+  const closeBtn = () => {
+    setIsModalOpen(false)
+  }
   const offers = [
     {
       image: "https://via.placeholder.com/150",
@@ -81,21 +92,33 @@ const Offers: React.FC = () => {
   ];
 
   return (
-    <div className="p-6 w-full mx-auto shadow-xl border-[1px]  rounded-[15px]  ">
-      <h1 className="text-base font-semibold mb-4">Aanbod</h1>
-      {offers.map((offer, index) => (
-        <ProperyCard key={index} {...offer} />
-      ))}
-      <div className="flex justify-end" >
+    <>
+      <div className="p-6 w-full mx-auto shadow-xl border-[1px]  rounded-[15px]  ">
+        <div className="flex flex-row items-center justify-between mb-5 " >
+          <h1 className="text-base font-semibold mb-4">Aanbod</h1>
+          <Button className="rounded-full p-7 text-white bg-[#749BA9] hover:bg-[#52717c]  "
+            onClick={navBtn}
+          >
+            <AiOutlinePlus />
+          </Button>
 
-        <Link
-          to={"#"}
-          className=" text-end  text-[#443B3A] font-normal hover:underline"
-        >
-          Het aanbod
-        </Link>
+        </div>
+        {offers.map((offer, index) => (
+          <ProperyCard key={index} {...offer} />
+        ))}
+        <div className="flex justify-end" >
+
+          <Link
+            to={"#"}
+            className=" text-end  text-[#443B3A] font-normal hover:underline"
+          >
+            Het aanbod
+          </Link>
+        </div>
       </div>
-    </div>
+      <ProductModal isOpen={isModalOpen} onClose={closeBtn} />
+
+    </>
   );
 };
 
