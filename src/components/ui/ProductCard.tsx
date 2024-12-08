@@ -2,56 +2,79 @@ import { Star } from "lucide-react";
 import { Button } from "./button";
 import { Link } from "react-router-dom";
 
-type ProductCardProps = {
+
+// Тип для User
+interface User {
+  firstname: string; // Имя пользователя (обязательно, от 1 до 30 символов)
+  lastname: string;  // Фамилия пользователя (обязательно, от 1 до 50 символов)
+  role: "admin" | "user"; // Роль пользователя (Enum: "admin" или "user")
+}
+
+// Тип для Contract
+interface Contract {
+  contract: string; // Название контракта (обязательно, от 1 символа)
+}
+
+// Тип для Category
+interface Category {
+  name: string; // Название категории (обязательно, от 1 до 100 символов)
+}
+
+// Тип для Product
+export interface Product {
+  id: number;             // Уникальный идентификатор продукта (readOnly)
+  name: string;           // Название продукта (обязательно, от 1 до 50 символов)
+  degree?: "bronze" | "silver" | "gold"; // Уровень продукта (Enum: "bronze", "silver", "gold")
+  description: string;    // Описание продукта (обязательно, от 1 символа)
+  user: User;             // Данные о пользователе, связанного с продуктом
+  contract: Contract;     // Данные контракта
+  category: Category;     // Категория продукта
+}
+
+interface ProductCardProps {
   product: Product;
-};
-export type Product = {
-  id: number;
-  title: string;
-  percentage: string;
-  subtitle: string;
-  description: string;
-  type: string;
-  price: string;
-  image: string;
-};
+}
+
 
 export const ProductCard: React.FC<ProductCardProps> = ({ product }) => (
   <div className="product grid px-4 py-6">
     <div className="relative group">
-      <img
-        src={product.image}
-        alt={product.title}
-        className="w-full"
-      />
+
+
+      {/* ДОБАВИТЬ ФОТО */}
+
+
+      <img src="/src/assets/images/property.jpg" alt={product.name} className="w-full" />
 
       <div className="absolute inset-0 bg-primary bg-opacity-50 opacity-0 group-hover:opacity-85 transition-opacity duration-300 flex items-center justify-center">
-        <span className="text-white text-lg font-semibold">Подробнее</span>
+        <Link to={`/product/${product.name}`}>
+          <span className="text-white text-lg font-semibold">Подробнее</span>
+        </Link>
       </div>
 
       <div className="px-4 py-2 bg-yellow-600 absolute top-3.5 -right-[25px] text-red-50">
         Topligging
       </div>
 
-      <Star className="cursor-pointer absolute top-3.5 left-4 fill-white" />
+      <Star className="cursor-pointer absolute top-5 left-5 scale-125 fill-white text-yellow-600 active:fill-yellow-600" />
     </div>
 
     {/* Контент карточки */}
     <div className="border-2 border-black grid px-4 py-6 gap-3">
       <div className="flex justify-between">
         <span className="title text-2xl text-primary font-semibold">
-          {product.title}
+          {product.name}
         </span>
-        <span className="text-3xl">{product.percentage}</span>
+        <span className="text-3xl">{product.contract.contract}</span>
       </div>
       <div className="flex justify-between">
-        <div className="title">{product.subtitle}</div>
-        <div>{product.description}</div>
+        <div className="title">{product.category.name}</div>
+        <div>{product.user.firstname}</div>
       </div>
-      <div>{product.type}</div>
+      <div>{product.description}</div>
       <div className="flex justify-between pt-5">
-        <div className="text-2xl">{product.price}</div>
-        <Link to={`/product/${product.title}`}>
+        <div className="text-2xl">{product.degree}</div>
+        <Link to={`/product/${product.name}`}>
           <Button className=" border rounded-[40px] px-4 py-2">
             Ontdek meer
           </Button>

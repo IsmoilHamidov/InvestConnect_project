@@ -6,7 +6,6 @@ import { Product } from "@/components/ui/ProductCard";
 import UnitCard from "@/components/ui/UnitCard";
 import { useParams } from "react-router-dom";
 
-
 export const ProductDetailsPage = () => {
   const { productName } = useParams<{ productName: string }>();
 
@@ -30,15 +29,16 @@ export const ProductDetailsPage = () => {
               <span>Leiestraat 10</span>
             </div>
             <div className="grid">
-              <span>Ligging</span>
-              <span>Leiestraat 10</span>
+              <span>Bouwjaar </span>
+              <span>2021</span>
             </div>
             <div className="grid">
-              <span>Ligging</span>
-              <span>Leiestraat 10</span>
+              <span>Referentie</span>
+              <span>4633457</span>
             </div>
           </div>
           <span className="text-xl">Deel</span>
+          {/*ПРИНАЖАТИИ НА КНОПКУ СКРОЛ ДО ФОРМА */}
           <Button className="text-xl max-w-52 rounded-[40px] m-auto py-4 px-9">
             Afspraak maken
           </Button>
@@ -62,14 +62,15 @@ export const ProductDetailsPage = () => {
             alt="Parkresidentie Bernice"
           />
         </section>
-        <section className="rounded-xl border-2 border-black flex mx-20">
+        <section className="rounded-xl border-2 border-black flex mx-20 bg-white shadow-custom">
           <FeedBack />
 
           <div className="w-1/2 flex items-center justify-center">
             <img
-              className="rounded-s-full object-cover w-full"
+              className="object-cover w-full"
               src="https://masterpiecer-images.s3.yandex.net/5ff2ab7ee7cfbbc:upscaled"
               alt="Beautiful Residence"
+              style={{ borderRadius: "50% 10px 10px 50%" }}
             />
           </div>
         </section>
@@ -80,7 +81,10 @@ export const ProductDetailsPage = () => {
             <UnitCard />
             <UnitCard />
           </div>
-          <Button className="block m-auto my-3 py-4 px-10" variant="secondary">
+          <Button
+            className="block m-auto my-3 py-4 px-10 text-white"
+            variant="secondary"
+          >
             Ontdek het volledige aanbod
           </Button>
         </section>
