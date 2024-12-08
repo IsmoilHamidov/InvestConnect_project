@@ -19,11 +19,7 @@ export type Product = {
 export const ProductCard: React.FC<ProductCardProps> = ({ product }) => (
   <div className="product grid px-4 py-6">
     <div className="relative group">
-      <img
-        src={product.image}
-        alt={product.title}
-        className="w-full"
-      />
+      <img src={product.image} alt={product.title} className="w-full" />
 
       <div className="absolute inset-0 bg-primary bg-opacity-50 opacity-0 group-hover:opacity-85 transition-opacity duration-300 flex items-center justify-center">
         <Link to={`/product/${product.title}`}>
