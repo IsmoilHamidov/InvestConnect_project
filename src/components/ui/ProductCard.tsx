@@ -33,7 +33,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => (
         Topligging
       </div>
 
-      <Star className="absolute top-3.5 left-4 fill-white" />
+      <Star className="cursor-pointer absolute top-3.5 left-4 fill-white" />
     </div>
 
     {/* Контент карточки */}

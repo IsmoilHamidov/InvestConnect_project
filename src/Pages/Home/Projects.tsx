@@ -1,7 +1,7 @@
-import property1 from "../../../assets/images/property.jpg";
-import property2 from "../../../assets/images/property (1).jpg";
-import property3 from "../../../assets/images/property (2).jpg";
-import star from "../../../assets/images/Star 1.png"
+import property1 from "../../assets/images/property.jpg";
+import property2 from "../../assets/images/property (1).jpg";
+import property3 from "../../assets/images/property (2).jpg";
+import star from "../../assets/images/Star 1.png"
 
 
 const cardData = [

@@ -38,7 +38,7 @@ function Footer() {
                         gap-y-2 text-[#756E6E] font-medium'>
                         <h4 className='text-custom-gray text-lg mb-2'>SITEMAP </h4>
                         <a href='#'>Aanbod</a>
-                        <p>Invest platform</p>
+                        <a>Invest platform</a>
                         <a href='#'>Onze diensten</a>
                         <a href='#'>Events</a>
                         <a href='#'>Partners</a>
