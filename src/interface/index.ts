@@ -49,7 +49,6 @@ export interface Activity {
     month: string;
     image: string;
 }
-
 export interface ModalProps {
     isOpen: boolean;
     onClose: () => void;
