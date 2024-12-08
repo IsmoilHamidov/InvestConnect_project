@@ -45,9 +45,11 @@ const ProperyCard: React.FC<OfferCardProps> = ({
           </p>
         </div>
       )}
-      <Button variant="outline" className=" bg-[#749BA9] rounded-[40px] text-xs text-white ">
-        Ontdek meer!
-      </Button>
+      <Link to={`/product/${title}`}>
+        <Button variant="outline" className=" bg-[#749BA9] rounded-[40px] text-xs text-white ">
+          Ontdek meer!
+        </Button>
+      </Link>
     </Card>
   );
 };
@@ -89,7 +91,7 @@ const Offers: React.FC = () => {
       <div className="flex justify-end" >
 
         <Link
-          to={"#"}
+          to={""}
           className=" text-end  text-[#443B3A] font-normal hover:underline"
         >
           Het aanbod

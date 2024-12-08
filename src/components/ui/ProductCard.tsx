@@ -26,7 +26,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => (
       />
 
       <div className="absolute inset-0 bg-primary bg-opacity-50 opacity-0 group-hover:opacity-85 transition-opacity duration-300 flex items-center justify-center">
-        <span className="text-white text-lg font-semibold">Подробнее</span>
+        <Link to={`/product/${product.title}`}>
+          <span className="text-white text-lg font-semibold">Подробнее</span>
+        </Link>
       </div>
 
       <div className="px-4 py-2 bg-yellow-600 absolute top-3.5 -right-[25px] text-red-50">
