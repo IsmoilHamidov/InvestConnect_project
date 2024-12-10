@@ -11,10 +11,6 @@ export const ProductDetailsPage = () => {
   console.log("product id:", productid);
   const { data, error, isLoading } = useGetProductQuery(productid);
 
-  if (!data) {
-    return <div>Product not found</div>;
-  }
-
   return (
     <>
       <NavbarAdmin />
