@@ -1,3 +1,4 @@
+import { Product } from '@/components/ui/ProductCard';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const api = createApi({
@@ -12,10 +13,14 @@ export const api = createApi({
     },
   }),
   endpoints: (builder) => ({
-    getProducts: builder.query<any[], void>({
+    getProducts: builder.query<Product[], void>({
       query: () => '/products/list/',
+    }),
+    getProduct: builder.query({
+      query: (id: string) => `/products/${id}/`,
     }),
   }),
 });
 
 export const { useGetProductsQuery } = api;
+export const { useGetProductQuery } = api;

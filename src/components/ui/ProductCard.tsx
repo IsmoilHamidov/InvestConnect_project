@@ -43,11 +43,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => (
 
       {/* ДОБАВИТЬ ФОТО */}
 
-
       <img src="/src/assets/images/property.jpg" alt={product.name} className="w-full" />
 
       <div className="absolute inset-0 bg-primary bg-opacity-50 opacity-0 group-hover:opacity-85 transition-opacity duration-300 flex items-center justify-center">
-        <Link to={`/product/${product.name}`}>
+        <Link to={`/product/${product.id}`}>
           <span className="text-white text-lg font-semibold">Подробнее</span>
         </Link>
       </div>
@@ -74,7 +73,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => (
       <div>{product.description}</div>
       <div className="flex justify-between pt-5">
         <div className="text-2xl">{product.degree}</div>
-        <Link to={`/product/${product.name}`}>
+        <Link to={`/product/${product.id}`}>
           <Button className=" border rounded-[40px] px-4 py-2">
             Ontdek meer
           </Button>
