@@ -1,5 +1,4 @@
 import Home from "@/Pages/Home/Home";
-import Product from "@/Pages/Product/Product";
 import { ProductDetailsPage } from "@/Pages/ProductDetailsPage/ProductsDetailsPage";
 import ProductListPage from "@/Pages/ProductListPage/ProductListPage";
 import Profile from "@/Pages/profile";
@@ -17,7 +16,7 @@ export const router = createBrowserRouter([
     element: <ProductListPage />,
   },
   {
-    path: "/product/:productName", 
+    path: "/product/:productid", 
     element: <ProductDetailsPage />,
   },
   {
