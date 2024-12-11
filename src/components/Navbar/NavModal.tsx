@@ -120,7 +120,7 @@ const SignUpModal: React.FC = () => {
                   </div>
                   <button
                     type="submit"
-                    className="w-full bg-[#749BA9] text-white p-2 rounded-lg"
+                    className="Blue_button w-full bg-[#749BA9] text-white p-2 rounded-lg"
                   >
                     Next
                   </button>
@@ -134,7 +134,7 @@ const SignUpModal: React.FC = () => {
                       <input
                         type="radio"
                         name="userType"
-                        className="mr-2"
+                        id='Modal_radio'
                         checked={selectedOption === 'investor'}
                         onChange={() => handleOptionChange('investor')}
                       />
@@ -146,7 +146,7 @@ const SignUpModal: React.FC = () => {
                       <input
                         type="radio"
                         name="userType"
-                        className="mr-2"
+                        id='Modal_radio'
                         checked={selectedOption === 'startup'}
                         onChange={() => handleOptionChange('startup')}
                       />
@@ -155,7 +155,7 @@ const SignUpModal: React.FC = () => {
                   </div>
                   <button
                     type="submit"
-                    className="w-full bg-[#749BA9] text-white p-2 rounded-lg"
+                    className="Blue_button w-full bg-[#749BA9] text-white p-2 rounded-lg mt-3"
                   >
                     Submit
                   </button>

@@ -1,4 +1,4 @@
-import React, { useRef, useEffect} from 'react';
+import React, { useRef, useEffect } from 'react';
 import { FaFacebook, FaYoutube, FaInstagram, FaTwitter, FaLinkedin } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { useNavbarContext } from './SignUp_Context';
@@ -13,7 +13,7 @@ const Navbar: React.FC = () => {
     setUsername,
     setIsModalOpen,
     selectedOption,
-    setSelectedOption, // Assuming you have a function to update selectedOption
+    setSelectedOption,
   } = useNavbarContext();
 
   const [showPopover, setShowPopover] = React.useState<boolean>(false);
@@ -21,7 +21,6 @@ const Navbar: React.FC = () => {
   const popoverButtonRef = useRef<HTMLButtonElement | null>(null);
   const navigate = useNavigate();
 
-  // Load saved username and selectedOption from localStorage
   useEffect(() => {
     const savedUsername = localStorage.getItem('username');
     const savedOption = localStorage.getItem('selectedOption');
@@ -31,41 +30,41 @@ const Navbar: React.FC = () => {
       setIsSignedUp(true);
     }
     if (savedOption) {
-      setSelectedOption(savedOption as 'investor' | 'startup' | null); // Ensure type safety
+      setSelectedOption(savedOption as 'investor' | 'startup' | null);
     }
   }, [setUsername, setIsSignedUp, setSelectedOption]);
-  
-  
+
+  const handleSignOut = () => {
+    localStorage.removeItem('username');
+    localStorage.removeItem('selectedOption');
+    setUsername('');
+    setIsSignedUp(false);
+    setSelectedOption(null);
+    setShowPopover(false);
+    navigate('/'); // Signing Out
+  };
 
   const handleProfileClick = () => {
-    console.log('Navigating with selectedOption:', selectedOption);
-  
     const route =
       selectedOption === 'investor'
         ? '/investorProfile'
         : selectedOption === 'startup'
         ? '/profile'
         : null;
-  
-    console.log('Generated route:', route);
-  
+
     if (route) {
       navigate(route + '?timestamp=' + new Date().getTime());
-      setTimeout(() => {
-        setShowPopover(false);
-      }, 100);
+      setTimeout(() => setShowPopover(false), 100);
     } else {
       console.error('Invalid or missing selectedOption:', selectedOption);
     }
   };
-  
-  
-  
 
   const initials =
     username
       ?.trim()
       .split(' ')
+      .slice(0, 2)
       .map((word) => word[0]?.toUpperCase())
       .join('') || '';
 
@@ -80,7 +79,7 @@ const Navbar: React.FC = () => {
           <a href="#"><FaTwitter /></a>
         </div>
         <div className="flex gap-x-7 items-center text-white text-base font-normal">
-          <button className="Blue_button focus:outline-none border-0 rounded-3xl p-2 px-3 text-sm bg-[#749BA9]">
+          <button className="Blue_button border-0 rounded-3xl p-2 px-3 text-sm bg-[#749BA9]">
             ALTRO INVEST PLATFORM
           </button>
           <a href="#">Over ons</a>
@@ -99,7 +98,7 @@ const Navbar: React.FC = () => {
               </button>
             ) : (
               <button
-                className="Blue_button flex items-center justify-between bg-[#749BA9] text-white p-2 px-4 rounded-2xl font-normal focus:outline-none"
+                className="Blue_button bg-[#749BA9] text-white p-2 px-4 rounded-2xl font-normal"
                 onClick={() => setIsModalOpen(true)}
               >
                 Sign Up
@@ -113,19 +112,14 @@ const Navbar: React.FC = () => {
                 className="overflow-hidden absolute right-0 mt-2 bg-white rounded-lg shadow-lg w-40 z-50"
               >
                 <button
-                  className="block w-full text-left text-md px-4 py-2 hover:bg-gray-100 text-gray-800"
+                  className="block w-full text-left text-md px-4 py-2 hover:bg-gray-100 hover:text-black text-custom-gray"
                   onClick={handleProfileClick}
                 >
                   Profile
                 </button>
                 <button
-                  className="block w-full text-left text-md px-4 py-2 hover:bg-gray-100 text-gray-800"
-                  onClick={() => {
-                    localStorage.removeItem('username');
-                    setUsername('');
-                    setIsSignedUp(false);
-                    setShowPopover(false);
-                  }}
+                  className="block w-full text-left text-md px-4 py-2 hover:bg-gray-100 hover:text-black text-custom-gray"
+                  onClick={handleSignOut}
                 >
                   Sign Out
                 </button>
