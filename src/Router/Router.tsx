@@ -3,29 +3,31 @@ import Product from "@/Pages/Product/Product";
 import { ProductDetailsPage } from "@/Pages/ProductDetailsPage/ProductsDetailsPage";
 import ProductListPage from "@/Pages/ProductListPage/ProductListPage";
 import Profile from "@/Pages/profile";
-import ProfilePage from "@/components/Navbar/ProfilePage";
+import InvesterProfile from "@/Pages/profile/InvesterProfile";
 import { createBrowserRouter } from "react-router-dom";
+
+
 
 export const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/",                // Home route
     element: <Home />,
-    children: [],
+    children: [],             // Ready for nesting child routes if needed
   },
   {
-    path: "/products",
+    path: "/products",        // Products list
     element: <ProductListPage />,
   },
   {
-    path: "/product/:productName", 
+    path: "/product/:productName", // Dynamic route for product details
     element: <ProductDetailsPage />,
   },
   {
-    path: "/profile", 
+    path: "/profile",         // Profile page
     element: <Profile />,
   },
   {
-    path: "/profilePage", 
-    element: <ProfilePage />,
+    path: "/investorProfile", // Investor profile page
+    element: <InvesterProfile />,
   },
 ]);
