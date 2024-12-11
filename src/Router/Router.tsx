@@ -1,5 +1,4 @@
 import Home from "@/Pages/Home/Home";
-import Product from "@/Pages/Product/Product";
 import { ProductDetailsPage } from "@/Pages/ProductDetailsPage/ProductsDetailsPage";
 import ProductListPage from "@/Pages/ProductListPage/ProductListPage";
 import Profile from "@/Pages/profile";
@@ -10,24 +9,25 @@ import { createBrowserRouter } from "react-router-dom";
 
 export const router = createBrowserRouter([
   {
-    path: "/",                // Home route
+    path: "/",                
     element: <Home />,
-    children: [],             // Ready for nesting child routes if needed
+    children: [],             
   },
   {
-    path: "/products",        // Products list
+    path: "/products",        
     element: <ProductListPage />,
   },
   {
-    path: "/product/:productName", // Dynamic route for product details
+
+    path: "/product/:productName", 
     element: <ProductDetailsPage />,
   },
   {
-    path: "/profile",         // Profile page
+    path: "/profile",         
     element: <Profile />,
   },
   {
-    path: "/investorProfile", // Investor profile page
+    path: "/investorProfile", 
     element: <InvesterProfile />,
   },
 ]);

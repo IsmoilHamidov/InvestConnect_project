@@ -2,9 +2,8 @@ import Banner from "@/components/Banner";
 import NavbarAdmin from "@/components/navbarAdmin";
 import Sidebar from "@/components/sidebar";
 import { Button } from "@/components/ui/button";
-import { Product, ProductCard } from "@/components/ui/ProductCard";
+import { ProductCard } from "@/components/ui/ProductCard";
 import { useGetProductsQuery } from "@/store/slice/products";
-// import ProductList from "@/store/slice/productlist";
 
 const ProductListPage = () => {
   const { data, error, isLoading } = useGetProductsQuery();
