@@ -1,14 +1,11 @@
-import React from 'react';
-import Navbar from '../../components/Navbar/Navbar';
 import intro_image from "../../assets/images/Head_image.png";
 import Intro_logo from "../../assets/images/Altro icon.png";
-import { NavbarProvider } from '@/components/Navbar/SignUp_Context';
-import SignUpModal from '@/components/Navbar/NavModal';
+import Navbar from "@/components/Navbar/Navbar";
 
-const Introduction_Image: React.FC = () => {
+function Introduction_Image() {
   return (
     <div
-      className="intro_box relative h-[55rem] w-full py-5"
+      className=" intro_box relative h-[55rem] w-full  py-5"
       style={{
         backgroundImage: `url(${intro_image})`,
         backgroundSize: "cover",
@@ -16,11 +13,8 @@ const Introduction_Image: React.FC = () => {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <NavbarProvider>
-        <Navbar />
-        <SignUpModal/>
-      </NavbarProvider>
-      
+      <Navbar />
+
       <div
         style={{
           position: "absolute",
@@ -30,7 +24,7 @@ const Introduction_Image: React.FC = () => {
         }}
         className="w-full flex justify-center items-center"
       >
-        <img className="h-[26rem] object-contain" src={Intro_logo} alt="Intro Logo" />
+        <img className="h-[26rem] object-contain" src={Intro_logo} alt="" />
       </div>
     </div>
   );

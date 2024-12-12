@@ -142,3 +142,24 @@
 .Nav_links a:hover{
   color: #749BA9;
 }
+
+#Modal_radio {
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+  border: 3px solid gray;
+  padding: 2.5px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  cursor:pointer;
+  border-radius:50%;
+}
+#Modal_radio:checked {
+  background: #749BA9 content-box;
+  border-color: #749BA9;
+}
+
+
+
+  
