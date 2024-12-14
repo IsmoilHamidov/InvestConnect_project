@@ -143,7 +143,7 @@
   color: #749BA9;
 }
 
-#Modal_radio {
+.Modal_radio {
   width: 18px;
   height: 18px;
   margin-right: 8px;
@@ -155,7 +155,7 @@
   cursor:pointer;
   border-radius:50%;
 }
-#Modal_radio:checked {
+.Modal_radio:checked {
   background: #749BA9 content-box;
   border-color: #749BA9;
 }

@@ -24,25 +24,38 @@ const Navbar: React.FC = () => {
   useEffect(() => {
     const savedUsername = localStorage.getItem('username');
     const savedOption = localStorage.getItem('selectedOption');
-    
-    if (savedUsername) {
+    if (savedUsername && savedOption) {
       setUsername(savedUsername);
+      setSelectedOption(savedOption as 'investor' | 'startup');
       setIsSignedUp(true);
     }
-    if (savedOption) {
-      setSelectedOption(savedOption as 'investor' | 'startup' | null);
-    }
-  }, [setUsername, setIsSignedUp, setSelectedOption]);
+  }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        popoverRef.current && !popoverRef.current.contains(event.target as Node) && 
+        popoverButtonRef.current && !popoverButtonRef.current.contains(event.target as Node)
+      ) {
+        setShowPopover(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   const handleSignOut = () => {
-    localStorage.removeItem('username');
-    localStorage.removeItem('selectedOption');
-    setUsername('');
     setIsSignedUp(false);
+    setUsername('');
     setSelectedOption(null);
     setShowPopover(false);
-    navigate('/'); // Signing Out
+    localStorage.removeItem('username');
+    localStorage.removeItem('selectedOption');
   };
+  
 
   const handleProfileClick = () => {
     const route =
