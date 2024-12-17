@@ -17,12 +17,14 @@ export const api = createApi({
     getProduct: builder.query({
       query: (id: string) => `/products/${id}/`,
     }),
-    getProductsCategory: builder.query({
+    getCategories: builder.query({
       query: () => `/products/category/`,
     }),
   }),
 });
 
-export const { useGetProductsQuery } = api;
-export const { useGetProductQuery } = api;
-export const { useGetProductsCategoryQuery } = api;
+export const { 
+  useGetProductsQuery, 
+  useGetProductQuery, 
+  useGetCategoriesQuery // Auto-generated hook for categories
+} = api;
