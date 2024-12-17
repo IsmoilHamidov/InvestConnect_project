@@ -1,0 +1,35 @@
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+
+export const apiSlice = createApi({
+  reducerPath: 'api', // Уникальное имя для вашего slice
+  baseQuery: fetchBaseQuery({ baseUrl: 'https://bakirali007.pythonanywhere.com/api/v1/app/users/' }),
+  endpoints: (builder) => ({
+    loginUser: builder.mutation({
+      query: (credentials) => ({
+        url: 'login/',
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': '5bGK88tlnKhTIegNs15t6LP4bAkQSV0qEeCOycG4SsKWthtO2BW3XJNNFsjHSt5D', // Укажите токен
+        },
+        body: credentials,
+        invalidatesTags: ['User'], // Указывает, что после изменения данные с тегом "User" становятся неактуальными
+      }),
+    }),
+    updateUser: builder.mutation({
+      query: (user) => ({
+        url: `users/${user.id}/`,
+        method: 'PUT',
+        body: user,
+      }),
+      invalidatesTags: ['User'], // Указывает, что после изменения данные с тегом "User" становятся неактуальными
+    }),
+    getUsers: builder.query({
+      query: () => 'users/',
+      providesTags: ['User'], // Указывает, что запрос предоставляет данные с тегом "User"
+    }),
+    
+  }),
+});
+
+export const { useLoginUserMutation } = apiSlice;

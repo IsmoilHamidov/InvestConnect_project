@@ -9,6 +9,7 @@ import Vebinar from "./Vebinar"
 import Professionals from "./Professionals"
 import Footer from "../../components/Footer/Footer"
 
+
 function Home() {
 
 

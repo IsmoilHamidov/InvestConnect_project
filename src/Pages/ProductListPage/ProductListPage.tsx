@@ -1,26 +1,27 @@
 import Banner from "@/components/Banner";
 import CategoriesModal from "@/components/Category";
-import DonationForm from "@/components/DonationForm";
 import NavbarAdmin from "@/components/navbarAdmin";
 import Sidebar from "@/components/sidebar";
 import { Button } from "@/components/ui/button";
 import { Product, ProductCard } from "@/components/ui/ProductCard";
+import { Toaster } from "@/components/ui/toaster";
 import { useGetProductsQuery } from "@/store/slice/products";
 import { useEffect, useState } from "react";
 
 const ProductListPage = () => {
   const [search, setSearch] = useState("");
   const [degree, setDegree] = useState("");
-  const [isModalOpen, setModalOpen] = useState(false);
-  
   const [category, setCategory] = useState("");
+  const [isModalOpen, setModalOpen] = useState(false);
+
+
   const { data, error, isLoading } = useGetProductsQuery(
     `?search=${search}&degree=${degree}&category__name=${category}`
   );
 
   useEffect(() => {
-    console.log("category" ,category)
-  }, [category])
+    console.log("category", category);
+  }, [category]);
 
   return (
     <>
@@ -30,13 +31,19 @@ const ProductListPage = () => {
         <Banner>
           <div>
             <div className="flex gap-3 pt-36 pb-24 justify-center items-center">
-              <Button variant="secondary" onClick={() => setModalOpen(true)} className="px-6 py-3 text-sm text-white">
+              <Button
+                variant="secondary"
+                onClick={() => setModalOpen(true)}
+                className="px-6 py-3 text-sm text-white"
+              >
                 Показать категории
               </Button>
               <CategoriesModal
                 open={isModalOpen}
                 onClose={() => setModalOpen(false)}
-                onSelectCategory={(selectedCategory) => setCategory(selectedCategory)}
+                onSelectCategory={(selectedCategory) =>
+                  setCategory(selectedCategory)
+                }
               />
               <select
                 className="border bg-background px-6 py-3 border-black rounded-[75px] text-primary"
@@ -73,8 +80,8 @@ const ProductListPage = () => {
             </>
           ) : null}
         </div>
+        <Toaster/>
       </main>
-      <DonationForm />
     </>
   );
 };
