@@ -1,36 +1,84 @@
+import Banner from "@/components/Banner";
+import Category from "@/components/Category";
 import NavbarAdmin from "@/components/navbarAdmin";
 import Sidebar from "@/components/sidebar";
 import { Button } from "@/components/ui/button";
 import { Product, ProductCard } from "@/components/ui/ProductCard";
+import { useGetProductsQuery } from "@/store/slice/products";
+import { useState } from "react";
 
 const ProductListPage = () => {
+  const [search, setSearch] = useState("");
+  const [degree, setDegree] = useState("");
+  const { data, error, isLoading } = useGetProductsQuery(
+    `?search=${search}&degree=${degree}`
+  );
+
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <>
       <NavbarAdmin />
       <Sidebar />
       <main className="pl-[270px]">
-        <div className="flex gap-3 pt-36 pb-24 justify-center bg-[#f4f4f5]">
-          <select className="border bg-background px-6 py-3 border-black rounded-[75px] text-primary">
-            <option className="text-gray-700">Waar wil je investeren?</option>
-            <option className="text-gray-700">Waar wil je investeren?</option>
-            <option className="text-gray-700">Waar wil je investeren?</option>
-          </select>
-          <select className="border bg-background px-6 py-3 border-black rounded-[75px] text-primary">
-            <option className="text-gray-700">Kies een straal</option>
-            <option className="text-gray-700">Kies een straal</option>
-            <option className="text-gray-700">Kies een straal</option>
-          </select>
-
-          <Button variant="secondary" className="rounded-[75px] p-6">
-            Investeringsaanbod
-          </Button>
-        </div>
-        <div className="products grid grid-cols-3 -mt-[50px]">
-          {productlist.map((product) => (
+        <Banner>
+          <div>
+            <div className="flex gap-3 pt-36 pb-24 justify-center">
+              <div>
+                <Button
+                  variant="secondary"
+                  className="rounded-[75px] p-6 text-white"
+                  onClick={openModal}
+                >
+                  Category
+                </Button>
+                <Category
+                  isOpen={isModalOpen}
+                  onClose={closeModal}
+                />
+              </div>
+              <select
+                className="border bg-background px-6 py-3 border-black rounded-[75px] text-primary"
+                value={degree} // Привязка состояния к select
+                onChange={(e) => setDegree(e.target.value)} // Обновление состояния Degree
+              >
+                <option value="">---</option>
+                <option value="bronze">bronze</option>
+                <option value="silver">silver</option>
+                <option value="gold">gold</option>
+              </select>
+              <input
+                className="border bg-background px-6 py-3 border-black rounded-[75px]"
+                type="text"
+                value={search}
+                onChange={(e) => {
+                  setSearch(e.target.value);
+                }}
+              />
+            </div>
+          </div>
+        </Banner>
+        <div className="products grid grid-cols-3 pt-44 pr-5">
+          {error ? (
+            <>Oh no, there was an error</>
+          ) : isLoading ? (
+            <>Loading...</>
+          ) : data ? (
             <>
-              <ProductCard key={product.id} product={product} />
+              {console.log(data)}
+              {data?.map((product: Product, index: number) => (
+                <ProductCard key={index} product={product} />
+              ))}
             </>
-          ))}
+          ) : null}
         </div>
       </main>
     </>
@@ -38,66 +86,3 @@ const ProductListPage = () => {
 };
 
 export default ProductListPage;
-
-export const productlist: Product[] = [
-  {
-    id: 6,
-    title: "MACHELEN",
-    percentage: "4,22 %",
-    subtitle: "City Gate",
-    description: "BRUTO RENDEMENT",
-    type: "Appartementen",
-    price: "Vanaf € 160 000",
-    image: "/src/assets/images/property.jpg",
-  },
-  {
-    id: 5,
-    title: "BRUSSEL",
-    percentage: "3,5 %",
-    subtitle: "Central Park",
-    description: "NETTO RENDEMENT",
-    type: "Kantoren",
-    price: "Vanaf € 200 000",
-    image: "/src/assets/images/property%20(1).jpg",
-  },
-  {
-    id: 4,
-    title: "ANTWERPEN",
-    percentage: "5,0 %",
-    subtitle: "Diamond Square",
-    description: "BRUTO RENDEMENT",
-    type: "Appartementen",
-    price: "Vanaf € 180 000",
-    image: "/src/assets/images/property%20(2).jpg",
-  },
-  {
-    id: 1,
-    title: "MACHELEN",
-    percentage: "4,22 %",
-    subtitle: "City Gate",
-    description: "BRUTO RENDEMENT",
-    type: "Appartementen",
-    price: "Vanaf € 160 000",
-    image: "/src/assets/images/property.jpg",
-  },
-  {
-    id: 2,
-    title: "BRUSSEL",
-    percentage: "3,5 %",
-    subtitle: "Central Park",
-    description: "NETTO RENDEMENT",
-    type: "Kantoren",
-    price: "Vanaf € 200 000",
-    image: "/src/assets/images/property%20(1).jpg",
-  },
-  {
-    id: 3,
-    title: "ANTWERPEN",
-    percentage: "5,0 %",
-    subtitle: "Diamond Square",
-    description: "BRUTO RENDEMENT",
-    type: "Appartementen",
-    price: "Vanaf € 180 000",
-    image: "/src/assets/images/property%20(2).jpg",
-  },
-];

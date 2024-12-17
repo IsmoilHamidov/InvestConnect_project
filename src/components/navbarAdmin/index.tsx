@@ -2,6 +2,7 @@ import { Bell, Mail, Menu } from 'lucide-react'
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
 import { Button } from "../ui/button"
 import { Badge } from "../ui/badge"
+import { Link } from 'react-router-dom'
 
 export default function NavbarAdmin() {
   return (
@@ -43,11 +44,12 @@ export default function NavbarAdmin() {
             2
           </Badge>
         </div>
-
-        <Avatar className="h-8 w-8">
-          <AvatarImage src="/placeholder.svg" alt="User profile" />
-          <AvatarFallback>U</AvatarFallback>
-        </Avatar>
+        <Link to="/profile">
+          <Avatar className="h-8 w-8">
+            <AvatarImage src="/placeholder.svg" alt="User profile" />
+            <AvatarFallback>U</AvatarFallback>
+          </Avatar>
+        </Link>
       </div>
     </nav>
   )

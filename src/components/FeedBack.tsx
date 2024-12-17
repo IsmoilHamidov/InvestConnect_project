@@ -24,7 +24,7 @@ export const FeedBack = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col justify-center gap-4 p-8 w-full sm:w-full md:w-1/2"
+      className="flex flex-col justify-center gap-4 p-8 w-full sm:w-full md:w-1/2 "
     >
       <div className="flex gap-4">
         <div className="flex flex-col w-full">
@@ -121,7 +121,7 @@ export const FeedBack = () => {
           <span className="text-red-500 text-sm">{errors.message.message}</span>
         )}
       </div>
-      <Button variant="secondary" type="submit" className="self-start px-6 py-3">
+      <Button variant="secondary" type="submit" className="self-start px-6 py-3 text-white">
         Verzenden
       </Button>
     </form>
