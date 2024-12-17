@@ -2,11 +2,10 @@ import { Star } from "lucide-react";
 import { Button } from "./button";
 import { Link } from "react-router-dom";
 
-
 // Тип для User
 interface User {
   firstname: string; // Имя пользователя (обязательно, от 1 до 30 символов)
-  lastname: string;  // Фамилия пользователя (обязательно, от 1 до 50 символов)
+  lastname: string; // Фамилия пользователя (обязательно, от 1 до 50 символов)
   role: "admin" | "user"; // Роль пользователя (Enum: "admin" или "user")
 }
 
@@ -22,28 +21,26 @@ interface Category {
 
 // Тип для Product
 export interface Product {
-  id: number;             // Уникальный идентификатор продукта (readOnly)
-  name: string;           // Название продукта (обязательно, от 1 до 50 символов)
+  category: Category; // Категория продукта
   degree?: "bronze" | "silver" | "gold"; // Уровень продукта (Enum: "bronze", "silver", "gold")
-  description: string;    // Описание продукта (обязательно, от 1 символа)
-  user: User;             // Данные о пользователе, связанного с продуктом
-  contract: Contract;     // Данные контракта
-  category: Category;     // Категория продукта
+  id: number; // Уникальный идентификатор продукта (readOnly)
+  image: string; // Описание продукта (обязательно, от 1 символа)
+  name: string; // Название продукта (обязательно, от 1 до 50 символов)
+  description: string;
 }
 
 interface ProductCardProps {
   product: Product;
 }
 
-
 export const ProductCard: React.FC<ProductCardProps> = ({ product }) => (
   <div className="product grid px-4 py-6">
     <div className="relative group">
-
-
-      {/* ДОБАВИТЬ ФОТО */}
-
-      <img src="/src/assets/images/property.jpg" alt={product.name} className="w-full" />
+      <img
+        src={product.image}
+        alt={product.title}
+        className="w-full h-40 object-cover"
+      />
 
       <div className="absolute inset-0 bg-primary bg-opacity-50 opacity-0 group-hover:opacity-85 transition-opacity duration-300 flex items-center justify-center">
         <Link to={`/product/${product.id}`}>
@@ -64,17 +61,17 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => (
         <span className="title text-2xl text-primary font-semibold">
           {product.name}
         </span>
-        <span className="text-3xl">{product.contract.contract}</span>
+        {/* <span className="text-3xl">{product.name}</span> */}
       </div>
       <div className="flex justify-between">
         <div className="title">{product.category.name}</div>
-        <div>{product.user.firstname}</div>
+        {/* <div>{product.name}</div> */}
       </div>
       <div>{product.description}</div>
       <div className="flex justify-between pt-5">
-        <div className="text-2xl">{product.degree}</div>
-        <Link to={`/product/${product.id}`}>
-          <Button className=" border rounded-[40px] px-4 py-2">
+        <div className="text-2xl">{product.price}</div>
+        <Link to={`/product/${product.title}`}>
+          <Button className="border rounded-[40px] px-4 py-2">
             Ontdek meer
           </Button>
         </Link>
