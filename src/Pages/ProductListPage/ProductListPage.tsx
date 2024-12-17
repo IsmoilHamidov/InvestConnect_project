@@ -1,12 +1,28 @@
 import Banner from "@/components/Banner";
+import Category from "@/components/Category";
 import NavbarAdmin from "@/components/navbarAdmin";
 import Sidebar from "@/components/sidebar";
 import { Button } from "@/components/ui/button";
-import { ProductCard } from "@/components/ui/ProductCard";
+import { Product, ProductCard } from "@/components/ui/ProductCard";
 import { useGetProductsQuery } from "@/store/slice/products";
+import { useState } from "react";
 
 const ProductListPage = () => {
-  const { data, error, isLoading } = useGetProductsQuery();
+  const [search, setSearch] = useState("");
+  const [degree, setDegree] = useState("");
+  const { data, error, isLoading } = useGetProductsQuery(
+    `?search=${search}&degree=${degree}`
+  );
+
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <>
@@ -14,24 +30,40 @@ const ProductListPage = () => {
       <Sidebar />
       <main className="pl-[270px]">
         <Banner>
-          <div className="flex gap-3 pt-36 pb-24 justify-center">
-            <select className="border bg-background px-6 py-3 border-black rounded-[75px] text-primary">
-              <option className="text-gray-700">Waar wil je investeren?</option>
-              <option className="text-gray-700">Waar wil je investeren?</option>
-              <option className="text-gray-700">Waar wil je investeren?</option>
-            </select>
-            <select className="border bg-background px-6 py-3 border-black rounded-[75px] text-primary">
-              <option className="text-gray-700">Kies een straal</option>
-              <option className="text-gray-700">Kies een straal</option>
-              <option className="text-gray-700">Kies een straal</option>
-            </select>
-
-            <Button
-              variant="secondary"
-              className="rounded-[75px] p-6 text-white"
-            >
-              Investeringsaanbod
-            </Button>
+          <div>
+            <div className="flex gap-3 pt-36 pb-24 justify-center">
+              <div>
+                <Button
+                  variant="secondary"
+                  className="rounded-[75px] p-6 text-white"
+                  onClick={openModal}
+                >
+                  Category
+                </Button>
+                <Category
+                  isOpen={isModalOpen}
+                  onClose={closeModal}
+                />
+              </div>
+              <select
+                className="border bg-background px-6 py-3 border-black rounded-[75px] text-primary"
+                value={degree} // Привязка состояния к select
+                onChange={(e) => setDegree(e.target.value)} // Обновление состояния Degree
+              >
+                <option value="">---</option>
+                <option value="bronze">bronze</option>
+                <option value="silver">silver</option>
+                <option value="gold">gold</option>
+              </select>
+              <input
+                className="border bg-background px-6 py-3 border-black rounded-[75px]"
+                type="text"
+                value={search}
+                onChange={(e) => {
+                  setSearch(e.target.value);
+                }}
+              />
+            </div>
           </div>
         </Banner>
         <div className="products grid grid-cols-3 pt-44 pr-5">
@@ -41,7 +73,8 @@ const ProductListPage = () => {
             <>Loading...</>
           ) : data ? (
             <>
-              {data?.map((product, index) => (
+              {console.log(data)}
+              {data?.map((product: Product, index: number) => (
                 <ProductCard key={index} product={product} />
               ))}
             </>
