@@ -1,28 +1,26 @@
 import Banner from "@/components/Banner";
-import Category from "@/components/Category";
+import CategoriesModal from "@/components/Category";
+import DonationForm from "@/components/DonationForm";
 import NavbarAdmin from "@/components/navbarAdmin";
 import Sidebar from "@/components/sidebar";
 import { Button } from "@/components/ui/button";
 import { Product, ProductCard } from "@/components/ui/ProductCard";
 import { useGetProductsQuery } from "@/store/slice/products";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const ProductListPage = () => {
   const [search, setSearch] = useState("");
   const [degree, setDegree] = useState("");
+  const [isModalOpen, setModalOpen] = useState(false);
+  
+  const [category, setCategory] = useState("");
   const { data, error, isLoading } = useGetProductsQuery(
-    `?search=${search}&degree=${degree}`
+    `?search=${search}&degree=${degree}&category__name=${category}`
   );
 
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
+  useEffect(() => {
+    console.log("category" ,category)
+  }, [category])
 
   return (
     <>
@@ -31,20 +29,15 @@ const ProductListPage = () => {
       <main className="pl-[270px]">
         <Banner>
           <div>
-            <div className="flex gap-3 pt-36 pb-24 justify-center">
-              <div>
-                <Button
-                  variant="secondary"
-                  className="rounded-[75px] p-6 text-white"
-                  onClick={openModal}
-                >
-                  Category
-                </Button>
-                <Category
-                  isOpen={isModalOpen}
-                  onClose={closeModal}
-                />
-              </div>
+            <div className="flex gap-3 pt-36 pb-24 justify-center items-center">
+              <Button variant="secondary" onClick={() => setModalOpen(true)} className="px-6 py-3 text-sm text-white">
+                Показать категории
+              </Button>
+              <CategoriesModal
+                open={isModalOpen}
+                onClose={() => setModalOpen(false)}
+                onSelectCategory={(selectedCategory) => setCategory(selectedCategory)}
+              />
               <select
                 className="border bg-background px-6 py-3 border-black rounded-[75px] text-primary"
                 value={degree} // Привязка состояния к select
@@ -81,6 +74,7 @@ const ProductListPage = () => {
           ) : null}
         </div>
       </main>
+      <DonationForm />
     </>
   );
 };
