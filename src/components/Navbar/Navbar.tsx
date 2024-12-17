@@ -56,6 +56,7 @@ const Navbar: React.FC = () => {
     localStorage.removeItem('selectedOption');
   };
   
+  
 
   const handleProfileClick = () => {
     const route =

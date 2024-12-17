@@ -15,6 +15,8 @@ interface NavbarContextProps {
   setIsSignedUp: (state: boolean) => void;
   selectedOption: 'investor' | 'startup' | null;
   setSelectedOption: (option: 'investor' | 'startup' | null) => void;
+  isUserActive: boolean;
+  toggleUserActive: () => void;
 }
 
 const NavbarContext = createContext<NavbarContextProps | undefined>(undefined);
@@ -26,8 +28,10 @@ export const NavbarProvider: React.FC<{ children: ReactNode }> = ({ children }) 
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [isSignedUp, setIsSignedUp] = useState(false);
-  
   const [selectedOption, setSelectedOption] = useState<'investor' | 'startup' | null>(null);
+  const [isUserActive, setIsUserActive] = useState(false);
+
+  const toggleUserActive = () => setIsUserActive((prev) => !prev);
 
   return (
     <NavbarContext.Provider
@@ -46,6 +50,8 @@ export const NavbarProvider: React.FC<{ children: ReactNode }> = ({ children }) 
         setIsSignedUp,
         selectedOption,
         setSelectedOption,
+        isUserActive,
+        toggleUserActive,
       }}
     >
       {children}

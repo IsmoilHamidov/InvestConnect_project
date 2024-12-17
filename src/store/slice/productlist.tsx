@@ -1,27 +1,51 @@
-import React from 'react';
-import { useGetProductsQuery } from '../slice/products';
+import React, { useState } from 'react';
 
-const ProductsList: React.FC = () => {
-  const { data, error, isLoading } = useGetProductsQuery();
+const LoginForm = () => {
+  const [phone, setPhone] = useState('');
+  const [password, setPassword] = useState('');
+  const [loginUser, { isLoading, isError, error, isSuccess }] = useLoginUserMutation();
 
-  if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>Error occurred: {JSON.stringify(error)}</p>;
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const result = await loginUser({ phone, password }).unwrap();
+      console.log('Login successful:', result); // Успешный результат
+    } catch (err) {
+      console.error('Failed to login:', err); // Ошибка
+    }
+  };
 
   return (
-    <div>
-      <h1>Products List</h1>
-      <ul>
-        {data?.map((product) => (
-          <li key={product.id}>
-            <h2>{product.name}</h2>
-            <p>Degree: {product.degree}</p>
-            <p>Description: {product.description}</p>
-            <p>Category: {product.category.name}</p>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label>
+          Phone:
+          <input
+            type="text"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            required
+          />
+        </label>
+      </div>
+      <div>
+        <label>
+          Password:
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </label>
+      </div>
+      <button type="submit" disabled={isLoading}>
+        {isLoading ? 'Logging in...' : 'Login'}
+      </button>
+      {isError && <p style={{ color: 'red' }}>Error: {error?.data?.detail || 'Failed to login'}</p>}
+      {isSuccess && <p style={{ color: 'green' }}>Login successful!</p>}
+    </form>
   );
 };
 
-export default ProductsList;
+export default LoginForm;
