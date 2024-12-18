@@ -28,6 +28,7 @@ interface DonatFormData {
   amount: number;
   cardNumber: string;
   expiryDate: string;
+  message?: string;
   paymentMethod: string;
 }
 
