@@ -1,65 +1,46 @@
-import { useGetProductsCategoryQuery } from "@/store/slice/products";
-import React from "react";
+import React from 'react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { useGetCategoriesQuery } from '@/store/slice/products';
 
-interface Category {
-  name: string;
-  image?: string;
-}
-
-interface CategoryModalProps {
-  isOpen: boolean;
+type CategoriesModalProps = {
+  open: boolean;
   onClose: () => void;
-}
+  onSelectCategory: (category: string) => void; // Функция для выбора категории
+};
 
-const Category: React.FC<CategoryModalProps> = ({ isOpen, onClose }) => {
-  if (!isOpen) return null;
-
-  const { data, error, isLoading } = useGetProductsCategoryQuery();
+const CategoriesModal: React.FC<CategoriesModalProps> = ({ open, onClose, onSelectCategory }) => {
+  const { data: categories, isLoading, error } = useGetCategoriesQuery();
 
   return (
-    <div
-      className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50"
-      onClick={onClose}
-    >
-      <div
-        className="relative bg-white p-6 rounded-lg grid grid-cols-3 gap-7"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div className="relative" key={index}>
-          {error ? (
-            <>Oh no, there was an error</>
-          ) : isLoading ? (
-            <>Loading...</>
-          ) : data ? (
-            <>
-              {data?.map((ctg, index) => (
-                <div key={index}>
-                  <img
-                    src="/src/assets/images/property.jpg"
-                    alt={ctg.name}
-                    className="w-full h-60 object-cover rounded-lg"
-                    style={{ filter: "blur(5px)" }}
-                  />
-                  {/* Название категории поверх изображения */}
-                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-xl font-bold">
-                    {ctg.name}
-                  </div>
-                </div>
-              ))}
-            </>
-          ) : null}
-          {/* Блюр на фоне изображения */}
-        </div>
-        {/* Кнопка закрытия модалки */}
-        <button
-          onClick={onClose}
-          className="absolute top-2 right-2 text-white bg-black p-2 rounded-full hover:bg-gray-700"
-        >
-          ×
-        </button>
-      </div>
-    </div>
+    <Dialog open={open} onOpenChange={onClose}>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Категории</DialogTitle>
+        </DialogHeader>
+        {isLoading && <p>Загрузка...</p>}
+        {error && <p>Произошла ошибка при загрузке категорий.</p>}
+        <ul className="space-y-2">
+          {categories?.map((category) => (
+            <li
+              key={category.id}
+              className="flex items-center space-x-4 cursor-pointer hover:bg-gray-100 p-2 rounded"
+              onClick={() => {
+                onSelectCategory(category.name); // Установка категории
+                onClose(); // Закрытие модалки
+              }}
+            >
+              {category.img ? (
+                <img src={category.img} alt={category.name} className="w-12 h-12 rounded" />
+              ) : (
+                <div className="w-12 h-12 bg-gray-300 rounded" />
+              )}
+              <span>{category.name}</span>
+            </li>
+          ))}
+        </ul>
+      </DialogContent>
+    </Dialog>
   );
 };
 
-export default Category;
+export default CategoriesModal;

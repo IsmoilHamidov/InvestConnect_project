@@ -1,18 +1,6 @@
 import { Star } from "lucide-react";
-import { Button } from "./button";
+import DonationForm from "../DonationForm";
 import { Link } from "react-router-dom";
-
-// Тип для User
-interface User {
-  firstname: string; // Имя пользователя (обязательно, от 1 до 30 символов)
-  lastname: string; // Фамилия пользователя (обязательно, от 1 до 50 символов)
-  role: "admin" | "user"; // Роль пользователя (Enum: "admin" или "user")
-}
-
-// Тип для Contract
-interface Contract {
-  contract: string; // Название контракта (обязательно, от 1 символа)
-}
 
 // Тип для Category
 interface Category {
@@ -27,6 +15,7 @@ export interface Product {
   image: string; // Описание продукта (обязательно, от 1 символа)
   name: string; // Название продукта (обязательно, от 1 до 50 символов)
   description: string;
+  price: number;
 }
 
 interface ProductCardProps {
@@ -38,7 +27,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => (
     <div className="relative group">
       <img
         src={product.image}
-        alt={product.title}
+        alt={product.name}
         className="w-full h-40 object-cover"
       />
 
@@ -69,12 +58,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => (
       </div>
       <div>{product.description}</div>
       <div className="flex justify-between pt-5">
-        <div className="text-2xl">{product.price}</div>
-        <Link to={`/product/${product.title}`}>
-          <Button className="border rounded-[40px] px-4 py-2">
-            Ontdek meer
-          </Button>
-        </Link>
+        <div className="text-2xl">{product.price} UZS</div>
+        {/* <Link to={`/product/${product.id}`}> */}
+          <DonationForm id={product.id} price={product.price}/>
+          
+        {/* </Link> */}
       </div>
     </div>
   </div>
