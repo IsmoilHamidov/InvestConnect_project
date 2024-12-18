@@ -41,7 +41,7 @@ const VerificationPage: React.FC = () => {
 
   useEffect(() => {
     setUserId(localStorage.getItem("user_id"));
-  }, [localStorage.getItem("user_id")]);
+  }, []);
 
   return (
     <div>

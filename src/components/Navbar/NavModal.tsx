@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavbarContext } from "./SignUp_Context";
 import { HiX } from "react-icons/hi";
-import { HiEye, HiEyeOff } from "react-icons/hi"; // Add these imports
+import { HiEye, HiEyeOff } from "react-icons/hi";
 
 const SignUpModal: React.FC = () => {
     const {
@@ -22,13 +22,16 @@ const SignUpModal: React.FC = () => {
 
     const [errorMessage, setErrorMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
-    const [passwordVisible, setPasswordVisible] = useState(false); // State to toggle password visibility
+    const [passwordVisible, setPasswordVisible] = useState(false);
+    const [userId, setUserId] = useState("");
+    const [verificationCode, setVerificationCode] = useState("");
+    const [isCodeSent, setIsCodeSent] = useState(false);
 
     const toggleModal = (): void => {
         setIsModalOpen(!isModalOpen);
         setCurrentStep(1);
         setErrorMessage("");
-        setSuccessMessage(""); // Reset success message when modal is toggled
+        setSuccessMessage("");
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -38,8 +41,11 @@ const SignUpModal: React.FC = () => {
             currentStep === 1
                 ? "https://bakirali007.pythonanywhere.com/api/v1/app/users/register/"
                 : "https://bakirali007.pythonanywhere.com/api/v1/app/users/login/";
-        const payload = currentStep === 1 ? { username, phone, password, role: selectedOption } : { phone, password };
+        const payload = currentStep === 1
+            ? { username, phone, password, role: selectedOption }
+            : { phone, password };
 
+        // Check for empty fields before proceeding
         if (!phone || !password || (currentStep === 1 && (!username || !selectedOption))) {
             setErrorMessage("Please fill in all required fields.");
             return;
@@ -53,26 +59,27 @@ const SignUpModal: React.FC = () => {
             });
 
             const data = await response.json();
-          
-          console.log(data);
+            console.log("API Response Data:", data); // Log the entire response data
 
             if (response.ok) {
                 if (currentStep === 1) {
                     setIsSignedUp(true);
-                    localStorage.setItem("username", username);
-                    localStorage.setItem("selectedOption", selectedOption!);
-                    setSuccessMessage("Signup successful!");
+                    setSuccessMessage("Signup successful! Please verify your account.");
+                    setCurrentStep(3); // Move to the verification step
                 } else {
-                    setIsSignedUp(true);
-                    localStorage.setItem("username", data.username); // Save username
-                    localStorage.setItem("selectedOption", data.role); // Save role
-                    setSuccessMessage("Login successful!");
+                    const userId = data.user_id;
+                    if (userId) {
+                        localStorage.setItem("user_id", userId); // Save user_id in localStorage
+                        setSuccessMessage("Login successful!");
+                    } else {
+                        setErrorMessage("User ID is missing in the response.");
+                    }
                 }
-                setIsModalOpen(false);
             } else {
                 setErrorMessage(data.detail || "An error occurred. Please try again.");
             }
         } catch (err) {
+            console.error("Error occurred:", err);
             setErrorMessage("Failed to connect to the server.");
         }
     };
@@ -90,29 +97,97 @@ const SignUpModal: React.FC = () => {
         setCurrentStep(1);
     };
 
+    const handleSendVerificationCode = async () => {
+        if (!userId) {
+            setErrorMessage("User ID is required to send the verification code.");
+            return;
+        }
+    
+        try {
+            // Send the verification code request including the userId in the URL
+            const response = await fetch(
+                `https://bakirali007.pythonanywhere.com/api/v1/app/verification-code/${userId}/`, // Include the userId in the URL
+                {
+                    method: "GET",
+                    headers: {
+                        "accept": "application/json",
+                        "X-CSRFToken": "L3emqPlDs7gmw9Ss6DdqCfXzPYc79Njtk6aqQTymXPJphc5tGd40tdVijQbY9loG", // Ensure the CSRF token is correct
+                    },
+                }
+            );
+    
+            const data = await response.json();
+            console.log("API Response Data:", data); // Log the response for debugging
+    
+            if (response.ok) {
+                if (data.verification_code) {
+                    setIsCodeSent(true);
+                    setSuccessMessage(`Verification code sent: ${data.verification_code}`);
+                } else {
+                    setErrorMessage("Unexpected response: Verification code not found.");
+                }
+            } else {
+                setErrorMessage("Failed to send verification code.");
+            }
+        } catch (err) {
+            setErrorMessage("Error sending verification code.");
+        }
+    };
+    
+
+    const handleVerifyCode = async () => {
+        if (!verificationCode) {
+            setErrorMessage("Please enter the verification code.");
+            return;
+        }
+
+        try {
+            const response = await fetch("https://bakirali007.pythonanywhere.com/api/v1/app/users/verify/", {
+                method: "POST",
+                headers: {
+                    "accept": "application/json",
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": "L3emqPlDs7gmw9Ss6DdqCfXzPYc79Njtk6aqQTymXPJphc5tGd40tdVijQbY9loG", // Ensure the CSRF token is correct
+                },
+                body: JSON.stringify({
+                    user: userId, // Include the userId here
+                    code: verificationCode, // Include the verification code entered by the user
+                }),
+            });
+
+            const data = await response.json();
+            if (response.ok) {
+                setSuccessMessage("Account verified successfully!");
+                setCurrentStep(1); // Go back to the first step (sign up)
+                setIsModalOpen(false);
+            } else {
+                setErrorMessage(data.detail || "Verification failed.");
+            }
+        } catch (err) {
+            setErrorMessage("Failed to verify the account.");
+        }
+    };
+
     return (
         <>
             {isModalOpen && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-                    <div
-                        className="bg-white p-6 rounded-lg w-96 relative"
-                        // Removed the onClick to prevent closing the modal on background click
-                    >
-                        {currentStep === 1 && (
+                    <div className="bg-white p-6 rounded-lg w-96 relative">
+                        {currentStep !== 1 && (
                             <button onClick={handleCloseModal} className="absolute top-4 right-4 text-gray-600">
                                 <HiX size={24} />
                             </button>
                         )}
 
-                        <h2 className="text-lg font-bold mb-4">{currentStep === 1 ? "Sign Up" : "Login"}</h2>
+                        <h2 className="text-lg font-bold mb-4">{currentStep === 1 ? "Sign Up" : currentStep === 2 ? "Login" : "Verify Account"}</h2>
 
-                        {/* Display error or success messages */}
                         {errorMessage && <div className="text-red-500 mb-4">{errorMessage}</div>}
                         {successMessage && <div className="text-green-500 mb-4">{successMessage}</div>}
 
                         <form onSubmit={handleSubmit}>
                             {currentStep === 1 && (
                                 <>
+                                    {/* Sign up form */}
                                     <div className="mb-3">
                                         <label className="block text-gray-700 mb-2">Username</label>
                                         <input
@@ -189,13 +264,14 @@ const SignUpModal: React.FC = () => {
 
                             {currentStep === 2 && (
                                 <>
+                                    {/* Login form */}
                                     <div className="mb-3">
                                         <label className="block text-gray-700 mb-2">Phone number</label>
                                         <input
                                             type="text"
                                             className="w-full border border-gray-300 rounded-lg p-2"
                                             value={phone}
-                                            onChange={(e) => setPhone(e.target.value)} // Use phone for login
+                                            onChange={(e) => setPhone(e.target.value)}
                                         />
                                     </div>
                                     <div className="mb-3 relative">
@@ -215,19 +291,56 @@ const SignUpModal: React.FC = () => {
                                     </div>
                                     <button
                                         type="submit"
-                                        className="mt-2 Blue_button w-full bg-[#749BA9] text-white p-2 rounded-lg"
+                                        className="Blue_button font-semibold w-full bg-[#749BA9] text-white p-2 rounded-lg"
                                     >
                                         Login
                                     </button>
                                     <p className="mt-4 text-center font-normal text-base">
                                         Don't have an account?{" "}
-                                        <span
-                                            onClick={() => setCurrentStep(1)}
-                                            className="text-blue-500 cursor-pointer"
-                                        >
+                                        <span onClick={() => setCurrentStep(1)} className="text-blue-500 cursor-pointer">
                                             Sign Up
                                         </span>
                                     </p>
+                                </>
+                            )}
+
+                            {currentStep === 3 && (
+                                <>
+                                    {/* Verification Step */}
+                                    <div className="mb-3">
+                                        <label className="block text-gray-700 mb-2">Enter User ID</label>
+                                        <input
+                                            type="text"
+                                            className="w-full border border-gray-300 rounded-lg p-2"
+                                            value={userId}
+                                            onChange={(e) => setUserId(e.target.value)}
+                                        />
+                                    </div>
+                                    <div className="mb-3">
+                                        <label className="block text-gray-700 mb-2">Enter Verification Code</label>
+                                        <input
+                                            type="text"
+                                            className="w-full border border-gray-300 rounded-lg p-2"
+                                            value={verificationCode}
+                                            onChange={(e) => setVerificationCode(e.target.value)}
+                                        />
+                                    </div>
+                                    {!isCodeSent && (
+                                        <button
+                                            onClick={handleSendVerificationCode}
+                                            className="Blue_button font-semibold w-full bg-[#749BA9] text-white p-2 rounded-lg"
+                                        >
+                                            Send Verification Code
+                                        </button>
+                                    )}
+                                    {isCodeSent && (
+                                        <button
+                                            onClick={handleVerifyCode}
+                                            className="Blue_button font-semibold w-full bg-[#749BA9] text-white p-2 rounded-lg"
+                                        >
+                                            Verify Account
+                                        </button>
+                                    )}
                                 </>
                             )}
                         </form>
