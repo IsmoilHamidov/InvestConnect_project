@@ -6,6 +6,7 @@ export const api = createApi({
     baseUrl: 'https://bakirali007.pythonanywhere.com/api/v1/app',
     prepareHeaders: (headers) => {
       headers.set('accept', 'application/json');
+      
       headers.set('X-CSRFToken', 'znrEoqzLTYgBvFR8QSOGQafq5YRd8xbDSYnSspeCnzlABl5DfTp6QQGdRNHIEBSE'); // CSRF токен
       return headers;
     },
