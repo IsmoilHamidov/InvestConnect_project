@@ -11,7 +11,7 @@ interface RegistrationFormValues {
   password: string;
 }
 
-export const Registrationform: React.FC = () => {
+export const Registration: React.FC = () => {
   const { isOpen, openModal } = useAuthModalStore();
 
   const { toast } = useToast();

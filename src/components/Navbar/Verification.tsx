@@ -6,7 +6,7 @@ import {
 import { useAuthModalStore } from "@/store/authModalStore";
 import React, { useEffect, useState } from "react";
 
-export const Verificationform: React.FC = () => {
+export const Verification: React.FC = () => {
   const [userId, setUserId] = useState<string>("");
   const [verificationCode, setVerificationCode] = useState<string>("");
   const { data, error } = useGetVerificationCodeQuery(userId, {

@@ -3,8 +3,8 @@ import React from "react";
 import { useAuthModalStore } from "@/store/authModalStore";
 
 // import Login from './Login';
-import { Registrationform } from "./Registerform";
-import { Verificationform } from "./Verificationform";
+import { Registration } from "./Registration";
+import { Verification } from "./Verification";
 import { HiX } from "react-icons/hi";
 import { LoginModal } from "./Login";
 
@@ -16,9 +16,9 @@ export const NavbarSaid = () => {
   const renderStep = () => {
     switch (currentStep) {
       case "registration":
-        return <Registrationform onNext={() => goToStep("verification")} />;
+        return <Registration onNext={() => goToStep("verification")} />;
       case "verification":
-        return <Verificationform onNext={() => goToStep("login")} />;
+        return <Verification onNext={() => goToStep("login")} />;
       case "login":
         return <LoginModal onNext={() => goToStep("login")} />;
       default:
