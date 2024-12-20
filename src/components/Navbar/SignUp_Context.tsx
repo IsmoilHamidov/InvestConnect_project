@@ -17,6 +17,8 @@ interface NavbarContextProps {
   setSelectedOption: (option: 'investor' | 'startup' | null) => void;
   isUserActive: boolean;
   toggleUserActive: () => void;
+  userId: string | null; // Add userId to the context
+  setUserId: (id: string | null) => void; // Function to update userId
 }
 
 const NavbarContext = createContext<NavbarContextProps | undefined>(undefined);
@@ -30,6 +32,7 @@ export const NavbarProvider: React.FC<{ children: ReactNode }> = ({ children }) 
   const [isSignedUp, setIsSignedUp] = useState(false);
   const [selectedOption, setSelectedOption] = useState<'investor' | 'startup' | null>(null);
   const [isUserActive, setIsUserActive] = useState(false);
+  const [userId, setUserId] = useState<string | null>(null); // State for userId
 
   const toggleUserActive = () => setIsUserActive((prev) => !prev);
 
@@ -52,6 +55,8 @@ export const NavbarProvider: React.FC<{ children: ReactNode }> = ({ children }) 
         setSelectedOption,
         isUserActive,
         toggleUserActive,
+        userId, // Add userId to the provider
+        setUserId, // Add setUserId to the provider
       }}
     >
       {children}
