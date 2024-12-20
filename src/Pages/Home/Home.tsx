@@ -8,13 +8,22 @@ import Service from "./Service"
 import Vebinar from "./Vebinar"
 import Professionals from "./Professionals"
 import Footer from "../../components/Footer/Footer"
+import { NavbarSaid } from "@/components/Navbar/NavbarSaid"
+import { useAuthModalStore } from "@/store/authModalStore"
 
 
 function Home() {
-
+  const { openModal } = useAuthModalStore();
 
   return (
     <>
+      <button onClick={() => openModal('registration')}>
+        Открыть модалку регистрации
+      </button>
+      <button onClick={() => openModal('verification')}>
+        Открыть модалку входа
+      </button>
+      <NavbarSaid />
       <Introduction_Image/>
       <IntroductionText/>
       <About/>
