@@ -21,11 +21,30 @@ export const api = createApi({
     getCategories: builder.query({
       query: () => `/products/category/`,
     }),
+    getProductsInformationList: builder.query<
+      ProductInformation[], // Тип ответа
+      { key?: string; value?: string; search?: string } // Параметры запроса
+    >({
+      query: (params) => ({
+        url: '/products/information-list/',
+        params,
+      }),
+    }),
   }),
 });
 
 export const { 
   useGetProductsQuery, 
   useGetProductQuery, 
-  useGetCategoriesQuery // Auto-generated hook for categories
+  useGetCategoriesQuery,
+  useGetProductsInformationListQuery,
 } = api;
+
+export interface ProductInformation {
+  id: number;
+  product: {
+    name: string;
+  };
+  key: string;
+  value: string;
+}

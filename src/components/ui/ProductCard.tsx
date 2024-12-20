@@ -28,7 +28,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => (
       <img
         src={product.image}
         alt={product.name}
-        className="w-full h-40 object-cover"
+        className="object-cover"
       />
 
       <div className="absolute inset-0 bg-primary bg-opacity-50 opacity-0 group-hover:opacity-85 transition-opacity duration-300 flex items-center justify-center">

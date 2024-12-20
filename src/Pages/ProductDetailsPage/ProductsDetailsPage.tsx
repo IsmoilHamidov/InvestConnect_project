@@ -1,3 +1,4 @@
+import InformationList from "@/components/InformationList";
 import NavbarAdmin from "@/components/navbarAdmin";
 import Sidebar from "@/components/sidebar";
 import { useGetProductQuery } from "@/store/slice/products";
@@ -12,7 +13,7 @@ export const ProductDetailsPage = () => {
     <>
       <NavbarAdmin />
       <Sidebar />
-      <main className="pl-[270px] pt-12 mb-10 grid gap-24">
+      <main className="pl-[270px] pt-12 mb-10 flexf">
 
 
         {error ? (
@@ -20,7 +21,7 @@ export const ProductDetailsPage = () => {
         ) : isLoading ? (
           <>Loading...</>
         ) : data ? (
-          <div className="px-20 grid gap-4">
+          <div className="px-2 grid gap-4">
             <div className="">
               <h1>{data.name}</h1>
             </div>
@@ -34,6 +35,7 @@ export const ProductDetailsPage = () => {
             </p>
           </div>
         ) : null}
+        <InformationList />
       </main>
     </>
   );
