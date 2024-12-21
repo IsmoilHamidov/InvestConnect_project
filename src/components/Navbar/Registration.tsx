@@ -40,8 +40,6 @@ export const Registration: React.FC = () => {
     }
   };
 
-  console.log("Modal open:", isOpen);
-
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="mb-3">
       <h2 className="text-lg font-bold mb-4">Registration</h2>

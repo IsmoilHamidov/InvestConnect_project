@@ -67,8 +67,6 @@ export const Verification: React.FC = () => {
     }
   }, [error]);
 
-  console.log("Modal open:", isOpen);
-
   return (
     <div className="bg-white p-6 rounded-lg w-96">
       <h2 className="text-lg font-bold mb-4">Verification</h2>

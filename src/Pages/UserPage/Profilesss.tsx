@@ -1,20 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useGetUserProfileQuery } from "./apiSlice";
 import { Button } from "@/components/ui/button";
 
 const UserProfile: React.FC = () => {
-  const [userId, setUserId] = useState<number | null>(null);
-
-  useEffect(() => {
-    const storedUserId = localStorage.getItem("user_id");
-    if (storedUserId) {
-      setUserId(Number(storedUserId));
-    }
-  }, []);
-
-  const { data, error, isLoading, refetch } = useGetUserProfileQuery(userId!, {
-    skip: userId === null, // Пропускаем запрос, если userId не установлен
-  });
+  const { data, error, isLoading, refetch } = useGetUserProfileQuery();
 
   return (
     <div>
@@ -27,9 +16,8 @@ const UserProfile: React.FC = () => {
           <>Oh no, there was an error. Error: {JSON.stringify(error)}</>
         ) : data ? (
           <div>
-            {console.log(data)}
             <p>
-              <strong>ID:</strong> {userId}
+              <strong>ID:</strong> {data.id}
             </p>
             <p>
               <strong>Firstname:</strong> {data.firstname}
@@ -50,17 +38,9 @@ const UserProfile: React.FC = () => {
         ) : (
           <p>No data available</p>
         )}
-        <div>
-          <span>Show another user</span>
-          <input
-            className="border-2 p-1"
-            type="text"
-            value={userId}
-            onChange={(e) => setUserId(e.target.value)}
-          />
-        </div>
       </div>
     </div>
   );
 };
+
 export default UserProfile;
