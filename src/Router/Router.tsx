@@ -3,7 +3,6 @@ import { ProductDetailsPage } from "@/Pages/ProductDetailsPage/ProductsDetailsPa
 import ProductListPage from "@/Pages/ProductListPage/ProductListPage";
 import Profile from "@/Pages/profile";
 import InvesterProfile from "@/Pages/profile/InvesterProfile";
-import UserPage from "@/Pages/UserPage/UserPage";
 import { createBrowserRouter } from "react-router-dom";
 
 
@@ -30,9 +29,5 @@ export const router = createBrowserRouter([
   {
     path: "/investorProfile", 
     element: <InvesterProfile />,
-  },
-  {
-    path: "/user", 
-    element: <UserPage />,
   },
 ]);
