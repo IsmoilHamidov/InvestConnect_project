@@ -1,13 +1,13 @@
 import React from "react";
-import { useGetUserProfileQuery } from "./apiSlice";
 import { Button } from "@/components/ui/button";
+import { useGetUsersQuery } from "@/store/slice/products";
 
-const UserProfile: React.FC = () => {
-  const { data, error, isLoading, refetch } = useGetUserProfileQuery();
+const ProfileGetUser: React.FC = () => {
+  const { data, error, isLoading, refetch } = useGetUsersQuery();
 
   return (
     <div>
-      <h1>User Profile</h1>
+      <h1>User get Profile</h1>
       <Button onClick={() => refetch()}>Refresh</Button>
       <div className="flex gap-5">
         {isLoading ? (
@@ -20,13 +20,7 @@ const UserProfile: React.FC = () => {
               <strong>ID:</strong> {data.id}
             </p>
             <p>
-              <strong>Firstname:</strong> {data.firstname}
-            </p>
-            <p>
-              <strong>Lastname:</strong> {data.lastname}
-            </p>
-            <p>
-              <strong>Email:</strong> {data.email}
+              <strong>username:</strong> {data.username}
             </p>
             <p>
               <strong>Phone:</strong> {data.phone}
@@ -43,4 +37,4 @@ const UserProfile: React.FC = () => {
   );
 };
 
-export default UserProfile;
+export default ProfileGetUser;
