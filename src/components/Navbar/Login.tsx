@@ -1,5 +1,6 @@
+// Login Modal Component
 import { useToast } from "@/hooks/use-toast";
-import { useLoginUserMutation } from "@/Pages/UserPage/apiSlice";
+import { useLoginUserMutation } from "@/store/slice/apiSlice";
 import { useAuthModalStore } from "@/store/authModalStore";
 import React, { useState } from "react";
 
@@ -8,7 +9,6 @@ export const LoginModal: React.FC = () => {
   const [password, setPassword] = useState("");
   const [loginUser, { isLoading }] = useLoginUserMutation();
   const { closeModal, openModal } = useAuthModalStore();
-
   const { toast } = useToast();
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -18,16 +18,22 @@ export const LoginModal: React.FC = () => {
       const response = await loginUser({ phone, password }).unwrap();
 
       toast({
+        className: "top-center",
         description: `Login successful`,
         variant: "success",
       });
       localStorage.setItem("authToken", response.token);
       localStorage.setItem("user_id", response.user);
+      localStorage.setItem("username", response.username);  // Store username here
       console.log("Login successful! Token:", response);
       closeModal();
     } catch (err) {
       console.error("Login failed:", err);
-      alert("Login failed. Please check your credentials.");
+      toast({
+        className: "top-center bg-red-500",
+        description: `Login failed. Please check your credentials and try again.`,
+        variant: "destructive",
+      });
     }
   };
 
@@ -67,7 +73,7 @@ export const LoginModal: React.FC = () => {
         <p className="mt-4 text-center font-normal text-base">
           Don't have an account?
           <span
-            className="text-blue-500 cursor-pointer"
+            className="text-blue-500 cursor-pointer ms-2"
             onClick={() => openModal("registration")}
           >
             Sign Up
