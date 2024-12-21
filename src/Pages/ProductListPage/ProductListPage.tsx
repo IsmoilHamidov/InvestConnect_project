@@ -5,7 +5,6 @@ import Sidebar from "@/components/sidebar";
 import { Button } from "@/components/ui/button";
 import { Product, ProductCard } from "@/components/ui/ProductCard";
 import { Toaster } from "@/components/ui/toaster";
-import Productlist from "@/store/slice/productlist";
 import { useGetProductsQuery } from "@/store/slice/products";
 import { useEffect, useState } from "react";
 
@@ -81,7 +80,6 @@ const ProductListPage = () => {
             </>
           ) : null}
         </div>
-        <Productlist />
       </main>
     </>
   );
