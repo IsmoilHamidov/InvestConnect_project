@@ -6,6 +6,7 @@ import { NavbarProvider } from '@/components/Navbar/SignUp_Context';
 import SignUpModal from '@/components/Navbar/NavModal';
 
 const Introduction_Image: React.FC = () => {
+  
   return (
     <div
       className="intro_box relative h-[55rem] w-full py-5"
@@ -16,10 +17,9 @@ const Introduction_Image: React.FC = () => {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <NavbarProvider>
+
         <Navbar />
-        <SignUpModal/>
-      </NavbarProvider>
+
       
       <div
         style={{
