@@ -7,7 +7,7 @@ export const api = createApi({
     prepareHeaders: (headers) => {
       headers.set('accept', 'application/json');
       
-      headers.set('X-CSRFToken', 'znrEoqzLTYgBvFR8QSOGQafq5YRd8xbDSYnSspeCnzlABl5DfTp6QQGdRNHIEBSE'); // CSRF токен
+      headers.set('X-CSRFToken', 'NsBgsgNCHjopnvKGkTMzJPkz3vH99oGYyU7SeHFc9iA6seh2MCrnQff7JrLffxvI'); // CSRF токен
       return headers;
     },
   }),
@@ -30,6 +30,24 @@ export const api = createApi({
         params,
       }),
     }),
+    getUserProfile: builder.query<ProfileDetail, void>({
+      query: () => ({
+        url: "/profile-detail/",
+        method: "GET",
+        headers: {
+          "Authorization": `Token ${localStorage.getItem("token") || ""}`,
+        },
+      }),
+    }),
+    getUsers: builder.query({
+      query: () => ({
+        url: "/users/profile/",
+        method: "GET",
+        headers: {
+          "Authorization": `Token ${localStorage.getItem("token") || ""}`,
+        },
+      }),
+    }),
   }),
 });
 
@@ -38,6 +56,8 @@ export const {
   useGetProductQuery, 
   useGetCategoriesQuery,
   useGetProductsInformationListQuery,
+  useGetUserProfileQuery,
+  useGetUsersQuery,
 } = api;
 
 export interface ProductInformation {
