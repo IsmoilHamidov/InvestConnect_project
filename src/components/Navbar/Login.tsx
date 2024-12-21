@@ -22,11 +22,10 @@ export const LoginModal: React.FC = () => {
         description: `Login successful`,
         variant: "success",
       });
-      localStorage.setItem("authToken", response.token);
-      localStorage.setItem("user_id", response.user);
-      localStorage.setItem("username", response.username);  // Store username here
+      localStorage.setItem("token", response.token);
       console.log("Login successful! Token:", response);
       closeModal();
+      window.location.reload();
     } catch (err) {
       console.error("Login failed:", err);
       toast({

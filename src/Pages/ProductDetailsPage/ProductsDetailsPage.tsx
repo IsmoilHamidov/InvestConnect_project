@@ -13,7 +13,7 @@ export const ProductDetailsPage = () => {
     <>
       <NavbarAdmin />
       <Sidebar />
-      <main className="pl-[270px] pt-12 mb-10 flexf">
+      <main className="pl-[270px] pt-12 mb-10 flex">
 
 
         {error ? (
