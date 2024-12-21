@@ -43,7 +43,7 @@ export const userApi = createApi({
       }),
     }),
     loginUser: builder.mutation<
-      { token: string, user: number | string },
+      { token: string; user: number | string },
       { phone: string; password: string }
     >({
       query: (credentials) => ({
@@ -52,16 +52,26 @@ export const userApi = createApi({
         body: credentials,
       }),
     }),
-    getUserProfile: builder.query({
-      query: (userId: string) => `/profile-detail/${userId}/`,
+    getUserProfile: builder.query<ProfileDetail, void>({
+      query: () => ({
+        url: "/users/profile/",
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }),
     }),
-    updateProfileDetail: builder.mutation<ProfileDetail, UpdateProfileDetailArgs>({
+
+    updateProfileDetail: builder.mutation<
+      ProfileDetail,
+      UpdateProfileDetailArgs
+    >({
       query: ({ id, data }) => ({
         url: `/profile-detail/${id}/`,
-        method: 'PATCH',
+        method: "PATCH",
         body: data,
       }),
-    })
+    }),
   }),
 });
 

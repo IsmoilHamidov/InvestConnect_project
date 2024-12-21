@@ -80,7 +80,6 @@ const ProductListPage = () => {
             </>
           ) : null}
         </div>
-        <Toaster/>
       </main>
     </>
   );
