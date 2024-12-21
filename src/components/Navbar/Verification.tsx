@@ -84,6 +84,7 @@ export const Verification: React.FC = () => {
         variant: "success",
       });
       closeModal();
+      console.log("token", response.token);
       localStorage.setItem("token", response.token);
       localStorage.setItem("isVerified", "true");
       window.location.reload();
