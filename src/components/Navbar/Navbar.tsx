@@ -7,39 +7,32 @@ import logo_text from "../../assets/images/Group-1.png";
 
 const Navbar: React.FC = () => {
   const { openModal } = useAuthModalStore();
-  const [isSignedUp, setIsSignedUp] = useState<boolean>(false);
+  const [isVerified, setIsVerified] = useState<boolean>(false);
   const [username, setUsername] = useState<string | null>(null);
   const [showPopover, setShowPopover] = useState<boolean>(false);
   const popoverRef = useRef<HTMLDivElement | null>(null);
   const popoverButtonRef = useRef<HTMLButtonElement | null>(null);
   const navigate = useNavigate();
 
-  // Check localStorage on load and update state
+  // Check localStorage on load and update state for verification
   useEffect(() => {
     const savedUsername = localStorage.getItem("username");
-    console.log("Saved username in localStorage:", savedUsername);
+    const verifiedStatus = localStorage.getItem("isVerified");
     if (savedUsername) {
       setUsername(savedUsername);
-      setIsSignedUp(true);
-    } else {
-      setIsSignedUp(false);
-      setUsername(null);
     }
+    setIsVerified(verifiedStatus === "true");
   }, []);
-  
 
   // Listen for changes in localStorage to update state
   useEffect(() => {
-    
     const handleStorageChange = () => {
       const savedUsername = localStorage.getItem("username");
+      const verifiedStatus = localStorage.getItem("isVerified");
       if (savedUsername) {
         setUsername(savedUsername);
-        setIsSignedUp(true);
-      } else {
-        setIsSignedUp(false);
-        setUsername(null);
       }
+      setIsVerified(verifiedStatus === "true");
     };
     window.addEventListener("storage", handleStorageChange);
     return () => {
@@ -63,20 +56,19 @@ const Navbar: React.FC = () => {
   }, []);
 
   const handleSignOut = () => {
-    setIsSignedUp(false);
+    setIsVerified(false);
     setUsername(null);
     localStorage.removeItem("username");
     localStorage.removeItem("user_id");
     localStorage.removeItem('selectedOption');
+    localStorage.removeItem('isVerified');
     setTimeout(() => {
       window.location.reload(); 
     }, 200); 
   };
-  
 
   const handleProfileClick = () => {
     const selectedOption = localStorage.getItem("selectedOption");
-    console.log("Selected option:", selectedOption);
   
     const route =
       selectedOption === "investor"
@@ -92,7 +84,6 @@ const Navbar: React.FC = () => {
       console.error("Invalid or missing selectedOption:", selectedOption);
     }
   };
-  
   
   const initials = username?.charAt(0).toUpperCase() || "";
 
@@ -119,8 +110,8 @@ const Navbar: React.FC = () => {
           <a href="#">Pers</a>
           <a href="#">Contact</a>
           
-          <div className="relative ">
-            {isSignedUp ? (
+          <div className="relative">
+            {isVerified ? (
               <button
                 className="flex items-center justify-center bg-[#B29C6F] text-white p-1 w-[35px] h-[33px] rounded-full text-lg font-medium"
                 onClick={() => setShowPopover((prev) => !prev)}
@@ -129,7 +120,6 @@ const Navbar: React.FC = () => {
                 {initials}
               </button>
             ) : (
-              
               <button
                 className="Blue_button bg-[#749BA9] text-white p-2 px-4 rounded-2xl font-normal"
                 onClick={() => openModal("registration")}
