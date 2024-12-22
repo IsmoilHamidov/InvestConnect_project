@@ -9,7 +9,7 @@ const ProfilePopover: React.FC = () => {
   const popoverButtonRef = useRef<HTMLButtonElement | null>(null);
   const navigate = useNavigate();
 
-  const { data, error, isLoading } = useGetUsersQuery();
+  const { data, error } = useGetUsersQuery();
   const { openModal } = useAuthModalStore();
   const username = data?.username || null;
 
@@ -61,11 +61,7 @@ const ProfilePopover: React.FC = () => {
 
   return (
     <div className="relative">
-      {isLoading ? (
-        <button className="Blue_button bg-gray-400 text-white p-2 px-4 rounded-2xl font-normal" disabled>
-          Loading...
-        </button>
-      ) : error || !username ? (
+      {error || !username ? (
         <button
           className="Blue_button bg-[#749BA9] text-white p-2 px-4 rounded-2xl font-normal"
           onClick={() => openModal("registration")}
@@ -85,7 +81,8 @@ const ProfilePopover: React.FC = () => {
       {showPopover && username && (
         <div
           ref={popoverRef}
-          className="overflow-hidden absolute right-0 mt-2 bg-white rounded-lg shadow-lg w-40 z-50"
+          className="overflow-hidden absolute right-0 mt-2
+           bg-white rounded-lg shadow-lg w-40 z-50"
         >
           <button
             className="block w-full text-left text-md px-4 py-2 hover:bg-gray-100 text-black"

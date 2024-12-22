@@ -3,6 +3,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useLoginUserMutation } from "@/store/slice/apiSlice";
 import { useAuthModalStore } from "@/store/authModalStore";
 import React, { useState } from "react";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 export const LoginModal: React.FC = () => {
   const [phone, setPhone] = useState("");
@@ -10,6 +11,7 @@ export const LoginModal: React.FC = () => {
   const [loginUser, { isLoading }] = useLoginUserMutation();
   const { closeModal, openModal } = useAuthModalStore();
   const { toast } = useToast();
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -38,8 +40,8 @@ export const LoginModal: React.FC = () => {
 
   return (
     <div>
-      <h2 className="text-lg font-bold mb-4">Login</h2>
-      <form onSubmit={handleLogin} className="mb-3 grid gap-5">
+      <h2 className="text-xl font-bold mb-5">Login</h2>
+      <form onSubmit={handleLogin} className="mb-3 grid gap-4">
         <div>
           <label className="block text-gray-700 mb-2">Phone number</label>
           <input
@@ -47,36 +49,51 @@ export const LoginModal: React.FC = () => {
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
             placeholder="Enter phone number"
-            className="w-full border border-gray-300 rounded-lg p-2"
+            className="w-full border border-gray-300 focus:border-2 
+            focus:border-custom-blue-gray ease-out delay-150
+            rounded-xl py-2 px-3"
           />
         </div>
         <div>
           <label className="block text-gray-700 mb-2">Password</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full border border-gray-300 rounded-lg p-2"
-            placeholder="Enter password"
-          />
+          <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full border border-gray-300 focus:border-2 
+                focus:border-custom-blue-gray ease-out delay-150
+                rounded-xl py-2 px-3"
+                placeholder="Enter password"
+              />
+              <span
+                className="absolute right-3 top-3 cursor-pointer"
+                onClick={() => setShowPassword(!showPassword)} 
+              >
+                {showPassword ? (
+                  <AiOutlineEyeInvisible size={20} color="black" /> 
+                ) : (
+                  <AiOutlineEye size={20} color="black" /> 
+                )}
+              </span>
+          </div>
         </div>
         <button
           type="submit"
           disabled={isLoading}
-          className="Blue_button font-semibold w-full bg-[#749BA9] text-white p-2
-        rounded-lg"
+          className="Blue_button font-semibold w-full bg-[#749BA9] text-white p-2 rounded-2xl mt-2"
         >
           {isLoading ? "Logging in..." : "Login"}
         </button>
 
-        <p className="mt-4 text-center font-normal text-base">
+        <p className="mt-3 text-center font-normal text-base">
           Don't have an account?
           <span
             className="text-blue-500 cursor-pointer ms-2"
             onClick={() => openModal("registration")}
           >
             Sign Up
-          </span>
+        </span>
         </p>
       </form>
     </div>

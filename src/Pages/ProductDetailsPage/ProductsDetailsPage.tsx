@@ -13,7 +13,7 @@ export const ProductDetailsPage = () => {
     <>
       <NavbarAdmin />
       <Sidebar />
-      <main className="pl-[270px] pt-12 mb-10 flex">
+      <main className="pl-[270px] pt-12 mb-10 flex ">
 
 
         {error ? (
@@ -21,7 +21,7 @@ export const ProductDetailsPage = () => {
         ) : isLoading ? (
           <>Loading...</>
         ) : data ? (
-          <div className="px-2 grid gap-4">
+          <div className="px-2 grid gap-4 ">
             <div className="">
               <h1>{data.name}</h1>
             </div>

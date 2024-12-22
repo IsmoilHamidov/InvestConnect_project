@@ -2,7 +2,8 @@ import property1 from "../../assets/images/property.jpg";
 import property2 from "../../assets/images/property (1).jpg";
 import property3 from "../../assets/images/property (2).jpg";
 import star from "../../assets/images/Star 1.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuthModalStore } from "@/store/authModalStore";
 
 const cardData = [
   {
@@ -38,6 +39,14 @@ const cardData = [
 ];
 
 function Projects() {
+  const { openModal } = useAuthModalStore();
+  const navigate = useNavigate()
+
+  const checkUser = () => {
+    const user = localStorage.getItem("token")
+    user ? navigate("/products") : openModal("registration")
+  }
+
   return (
     <div className="relative min-h-[60rem] mt-8">
       <div
@@ -107,11 +116,9 @@ function Projects() {
           ))}
         </div>
 
-        <Link to="/products">
-          <button className="Brown_button rounded-3xl p-3 px-12 text-base text-white bg-custom-gray mt-16 ">
+          <button onClick={checkUser} className="Brown_button rounded-3xl p-3 px-12 text-base text-white bg-custom-gray mt-16 ">
             Bekijk ons aanbod
           </button>
-        </Link>
       </div>
     </div>
   );

@@ -1,13 +1,14 @@
 import Banner from "@/components/Banner";
 import CategoriesModal from "@/components/Category";
 import NavbarAdmin from "@/components/navbarAdmin";
-import Sidebar from "@/components/sidebar";
 import { Button } from "@/components/ui/button";
 import { Product, ProductCard } from "@/components/ui/ProductCard";
 import { useGetProductsQuery } from "@/store/slice/products";
 import { useEffect, useState } from "react";
 import UserProfile from "../UserPage/UserProfile";
 import ProfileGetUser from "../UserPage/Profilesss";
+import { useNavigate } from "react-router-dom";
+
 
 const ProductListPage = () => {
   const [search, setSearch] = useState("");
@@ -15,6 +16,7 @@ const ProductListPage = () => {
   const [category, setCategory] = useState("");
   const [isModalOpen, setModalOpen] = useState(false);
 
+  const navigate = useNavigate()
 
   const { data, error, isLoading } = useGetProductsQuery(
     `?search=${search}&degree=${degree}&category__name=${category}`
@@ -24,14 +26,19 @@ const ProductListPage = () => {
     console.log("category", category);
   }, [category]);
 
+
+  useEffect(() => {
+    const user = localStorage.getItem("token")
+    user ? null : navigate("/")
+  },[])
+
   return (
     <>
       <NavbarAdmin />
-      <Sidebar />
-      <main className="pl-[270px]">
+      <main >
         <Banner>
           <div>
-            <div className="flex gap-3 pt-36 pb-24 justify-center items-center">
+            <div className="flex gap-3 pt-36 pb-24 justify-center items-center ">
               <Button
                 variant="secondary"
                 onClick={() => setModalOpen(true)}
@@ -67,7 +74,7 @@ const ProductListPage = () => {
             </div>
           </div>
         </Banner>
-        <div className="products grid grid-cols-3 pt-44 pr-5">
+        <div className="products grid grid-cols-3 pt-44 pr-5 max-w-7xl m-auto">
           {error ? (
             <>Oh no, there was an error</>
           ) : isLoading ? (
@@ -81,8 +88,8 @@ const ProductListPage = () => {
             </>
           ) : null}
         </div>
-        <ProfileGetUser />
-        <UserProfile />
+    
+        
       </main>
     </>
   );
