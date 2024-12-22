@@ -4,9 +4,8 @@ import { Button } from "../ui/button"
 import { Input } from "../ui/input"
 import { Card, CardContent } from "../ui/card"
 import { ProfileFormProps } from '@/interface'
-import { useGetUserProfileQuery, } from "@/store/slice/products"
+import { useGetUserProfileQuery, useUpdateProfileDetailMutation, } from "@/store/slice/products"
 
-import { useUpdateProfileDetailMutation } from '@/store/slice/apiSlice'
 import UserImg from "../../assets/images/user-img.svg"
 import { useEffect, useState } from 'react'
 import { useToast } from '@/hooks/use-toast'

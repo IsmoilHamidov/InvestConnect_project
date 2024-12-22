@@ -27,7 +27,7 @@ export default function Sidebar() {
                 <img
                     src="/src/assets/images/invest-icon.png"
                     alt="Altro"
-                    className="h-8"
+                    className="h-8 pl-3"
                 />
             </div>
 

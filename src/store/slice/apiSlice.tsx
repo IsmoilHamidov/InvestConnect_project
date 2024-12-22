@@ -61,20 +61,6 @@ export const userApi = createApi({
         },
       }),
     }),
-
-    updateProfileDetail: builder.mutation<
-      ProfileDetail,
-      UpdateProfileDetailArgs
-    >({
-      query: ({ id, data }) => ({
-        url: `/profile-detail/${id}/`,
-        method: "PATCH",
-        body: data,
-        headers: {
-          "Authorization": `Token ${localStorage.getItem("token") || ""}`
-        },
-      }),
-    }),
   }),
 });
 
@@ -84,5 +70,4 @@ export const {
   useGetVerificationCodeQuery,
   useLoginUserMutation,
   useGetUserProfileQuery,
-  useUpdateProfileDetailMutation,
 } = userApi;
