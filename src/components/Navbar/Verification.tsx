@@ -95,6 +95,10 @@ export const Verification: React.FC = () => {
   };
 
   useEffect(() => {
+    setUserId(localStorage.getItem("user_id") || "");
+  }, []);
+
+  useEffect(() => {
     if (data) {
       toast({
         duration: 13000,

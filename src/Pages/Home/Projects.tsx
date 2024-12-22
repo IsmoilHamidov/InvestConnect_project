@@ -48,7 +48,7 @@ function Projects() {
   }
 
   return (
-    <div className="relative min-h-[60rem] mt-8">
+    <div id="Project" className="relative min-h-[60rem] mt-8">
       <div
         className="w-full z-10 h-[45rem] bg-[#443B3A] rounded-br-none py-12"
         style={{

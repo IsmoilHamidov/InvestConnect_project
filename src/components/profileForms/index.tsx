@@ -1,135 +1,134 @@
-import { Pencil } from 'lucide-react'
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
-import { Button } from "../ui/button"
-import { Input } from "../ui/input"
-import { Card, CardContent } from "../ui/card"
-import { ProfileFormProps } from '@/interface'
-import { useGetUserProfileQuery, useUpdateProfileDetailMutation, } from "@/store/slice/products"
+import { Pencil } from 'lucide-react';
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
+import { Card, CardContent } from "../ui/card";
+import { ProfileFormProps } from '@/interface';
+import { useGetUserProfileQuery, useUpdateProfileDetailMutation } from "@/store/slice/products";
+import { useForm } from "react-hook-form";
+import { useEffect } from 'react';
+import { useToast } from '@/hooks/use-toast';
 
-import UserImg from "../../assets/images/user-img.svg"
-import { useEffect, useState } from 'react'
-import { useToast } from '@/hooks/use-toast'
+import UserImg from "../../assets/images/user-img.svg";
 
 export function ProfileForm({ defaultValues }: ProfileFormProps) {
-
-    const { toast } = useToast()
-
+    const { toast } = useToast();
     const { data, error, isLoading } = useGetUserProfileQuery();
-    const [updateProfileDetail] = useUpdateProfileDetailMutation(); // Mutation hook
+    const [updateProfileDetail] = useUpdateProfileDetailMutation();
 
-    const [formData, setFormData] = useState({
-        firstname: '',
-        lastname: '',
-        email: '',
-        username: "",
-        phone: "",
-        role: "investor"
+    function capitalizeFirstLetter(str: string): string {
+        return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+    }
+
+    const {
+        register,
+        handleSubmit,
+        setValue,
+        formState: { errors },
+    } = useForm({
+        defaultValues: {
+            firstname: '', 
+            lastname: '',
+            email: '',
+            username: '',
+            phone: '',
+            role: 'investor',
+        },
     });
 
-    // Handle form input changes
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, field: string) => {
-        setFormData({ ...formData, [field]: e.target.value });
-    }
-
-    // Handle form submission
-    const handleSave = async () => {
-        
+    const onSubmit = async (formData: any) => {
         try {
-            const updatedData = { ...formData };
-            await updateProfileDetail({ id: data?.id, data: updatedData }).unwrap(); // Dispatch mutation
-            alert("Profile updated successfully!");
-        } catch (error) {
-            alert("Failed to update profile!");
+            await updateProfileDetail({ id: data?.id, data: formData }).unwrap();
+            toast({
+                description: `Saved!`,
+                variant: "success",
+            });
+            window.location.reload()
+        } catch (err) {
+            toast({
+                description: `Failed to update profile!`,
+                variant: "destructive",
+            });
         }
-    }
+    };
 
     useEffect(() => {
         if (data) {
-            console.log("In get users slice: ", data);
-
-            setFormData({
-                firstname: data.firstname,
-                lastname: data.lastname,
-                email: data.email,
-                username: data.username,
-                phone: data.phone,
-                role: data.role
-            })
-
-
-            toast({
-                duration: 13000,
-                description: `Your username is ${data.username}`,
-                variant: "success",
+            Object.keys(data).forEach((key) => {
+                setValue(key as keyof typeof data, data[key]);
             });
         }
-    }, [data]);
+    }, [data, setValue]);
 
     useEffect(() => {
         if (error) {
-            console.error("Error fetching verification code:", error);
+            console.error("Error fetching user data:", error);
             toast({
-                description: `Failed to fetch code: ${String(error)}`,
+                description: `Failed to fetch profile data.`,
                 variant: "destructive",
             });
         }
     }, [error]);
 
-
     return (
-        <Card className="w-full pt-8 pr-7 rounded-2xl h-[1036px]">
-            <CardContent className="flex gap-x-14">
+        <Card className="w-full pt-10  rounded-2xl h-[1036px]">
+            <CardContent className="grid gap-14">
                 <div className="flex flex-col items-center">
                     <Avatar className="w-32 h-32 mb-4">
-                        <AvatarImage src={UserImg} alt="John Doe" />
+                        <AvatarImage src={UserImg} alt="User Image" />
                         <AvatarFallback>JD</AvatarFallback>
                     </Avatar>
-                    <h2 className="text-xl font-semibold">John Doe</h2>
-                </div>
-                <div className='w-full'>
-                    <div className="space-y-4 relative">
-                        {error ? (
-                            <>Oh no, there was an error</>
+                    {error ? (
+                        <>Oh no, there was an error</>
                         ) : isLoading ? (
-                            <>Loading...</>
+                        <>Loading...</>
                         ) : data ? (
-                            <>
-                                {[
-                                    { label: "First Name", value: formData.firstname, field: 'firstname' },
-                                    { label: "Last Name", value: formData.lastname, field: 'lastname' },
-                                    { label: "Email", value: formData.email, field: 'email' },
-                                    { label: "Username", value: formData.username, field: 'username' },
-                                    { label: "Phone", value: formData.phone, field: 'phone' },
-                                    { Rolelabel: "Role", value: formData.role, field: 'role' },
-                                ].map((field) => (
-                                    <div key={field.label} className="relative">
-                                        <Input
-                                            placeholder={field.label}
-                                            value={field.value}
-                                            onChange={(e) => handleInputChange(e, field.field)}
-                                            className="pr-10 rounded-[75px]"
-                                        />
-                    
-                                        <Button
-                                            size="icon"
-                                            variant="ghost"
-                                            className="absolute rounded-[52px] -right-8 top-1/2 -translate-y-1/2 h-8 w-8 text-muted-foreground hover:text-foreground"
-                                        >
-                                            <Pencil className="h-4 w-4" />
-                                            <span className="sr-only">Edit {field.label}</span>
-                                        </Button>
-                                    </div>
-                                ))}
-                            </>
+                        <>
+                            <h2 className="text-xl font-semibold"> {data?.firstname || "Unknown"} {data?.lastname || "User"}</h2>
+                        </>
                         ) : null}
+                </div>
+                <div className="w-full">
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 w-full">
+                    {[
+                        { label: "First Name", field: "firstname", required: "First name is required" },
+                        { label: "Last Name", field: "lastname", required: "Last name is required" },
+                        { label: "Email", field: "email", required: "Email is required" },
+                        { label: "Username", field: "username", required: "Username is required" },
+                        { label: "Phone", field: "phone", required: "Phone number is required" },
+                    ].map(({ label, field, required }, index) => (
+                        <div key={index} className="relative w-full">
+                            <Input
+                                placeholder={label}
+                                {...register(field, {
+                                required,
+                                onChange: (e) => {
+                                if (field === "firstname" || field === "lastname") {
+                                    e.target.value = capitalizeFirstLetter(e.target.value);
+                                        }
+                                    },
+                                })}
+                                className="rounded-[75px] w-full p-5"
+                            />
+                            
+                            {errors[field] && (
+                                <span className="text-red-500 text-sm mt-2">
+                                    {errors[field]?.message}
+                                </span>
+                            )}
+                        </div>
+                    ))}
+                    <div className="flex justify-center items-center pt-3">
+                        <Button
+                            type="submit"
+                            className="w-36 h-10 m-auto text-md bg-[#7497a7] hover:bg-[#7497a7]/90 rounded-3xl"
+                        >
+                            Save
+                        </Button>
                     </div>
+                </form>
 
-                    <Button
-                        onClick={handleSave} // Call save function on button click
-                        className="w-[203px] mt-8 bg-[#7497a7] hover:bg-[#7497a7]/90"
-                    >
-                        Save
-                    </Button>
+
                 </div>
             </CardContent>
         </Card>

@@ -1,5 +1,5 @@
 import React from 'react'
-import logo from "../../assets/images/Altro Invest Logo.png"
+import logo from "../../assets/images/footerLogo.png"
 import bigLogo from "../../assets/images/Altro Logo.png"
 
 
@@ -9,7 +9,7 @@ function Footer() {
         <div className='w-full bg-[#F0F3F4] py-24 relative'>
                 <div className='max-w-7xl  m-auto flex justify-between relative z-40'>
                     <div className='w-[35%]  flex flex-col'>
-                        <img src={logo} className='w-[11rem] h-[5rem] object-contain' alt="logo" />
+                        <img src={logo} className='w-[11rem] h-[3.5rem] object-contain' alt="logo" />
                         <a href="#" className='text-custom-blue-gray mt-8 '>
                             <i className="fa-solid fa-phone me-2"></i>
                             09 / 279 88 92

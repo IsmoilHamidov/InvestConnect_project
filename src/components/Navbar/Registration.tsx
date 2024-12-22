@@ -58,7 +58,7 @@ export const Registration: React.FC = () => {
       <h2 className="text-xl font-bold mb-6">Sign Up</h2>
 
       {hasErrors && (
-        <p className="text-red-500 text-sm mb-4">
+        <p className="text-red-500 text-[15px] mb-4">
           Fill all fields to proceed.
         </p>
       )}

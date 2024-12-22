@@ -67,7 +67,7 @@ const AddProduct: React.FC = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto p-4 bg-white rounded shadow">
+    <div className="max-w-md mx-auto p-4 bg-white rounded">
       <h1 className="text-2xl font-bold mb-4">Add Product</h1>
       <form
         onSubmit={(e) => {
