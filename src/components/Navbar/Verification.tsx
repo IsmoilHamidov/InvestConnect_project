@@ -95,12 +95,7 @@ export const Verification: React.FC = () => {
   };
 
   useEffect(() => {
-    setUserId(localStorage.getItem("user_id") || "");
-  }, []);
-
-  useEffect(() => {
     if (data) {
-      console.log("Verification code received:", data);
       toast({
         duration: 13000,
         description: `Your verification code is ${data.verification_code}`,

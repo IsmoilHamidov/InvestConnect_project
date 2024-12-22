@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-
+import { useGetUserProfileQuery } from "@/store/slice/products";
 export const api = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({
@@ -47,7 +47,9 @@ export const api = createApi({
           "Authorization": `Token ${localStorage.getItem("token") || ""}`,
         },
       }),
+      
     }),
+   
   }),
 });
 
