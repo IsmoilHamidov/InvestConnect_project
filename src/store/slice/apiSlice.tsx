@@ -70,6 +70,9 @@ export const userApi = createApi({
         url: `/profile-detail/${id}/`,
         method: "PATCH",
         body: data,
+        headers: {
+          "Authorization": `Token ${localStorage.getItem("token") || ""}`
+        },
       }),
     }),
   }),
