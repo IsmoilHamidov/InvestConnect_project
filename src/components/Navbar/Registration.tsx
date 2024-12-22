@@ -1,8 +1,9 @@
 import { useToast } from "@/hooks/use-toast";
 import { useRegisterUserMutation } from "@/store/slice/apiSlice";
 import { useAuthModalStore } from "@/store/authModalStore";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"; // Import React Icons for the eye toggle
 
 interface RegistrationFormValues {
   username: string;
@@ -15,6 +16,8 @@ export const Registration: React.FC = () => {
   const { isOpen, openModal } = useAuthModalStore();
   const { toast } = useToast();
 
+  const [showPassword, setShowPassword] = useState(false); // State for toggling password visibility
+
   const {
     register,
     handleSubmit,
@@ -23,74 +26,93 @@ export const Registration: React.FC = () => {
   const [registerUser, { isLoading, isSuccess, isError, error }] =
     useRegisterUserMutation();
 
-    const onSubmit = async (data: RegistrationFormValues) => {
-      try {
-        const response = await registerUser(data).unwrap();
-        console.log("otvet: ", response);
-    
-        localStorage.setItem("user_id", response.user);
-        localStorage.setItem("username", data.username); // Save username
-        localStorage.setItem("selectedOption", data.role); // Store the selected role
-    
-        toast({
-          description: `Registration successful!`,
-          variant: "success",
-        });
-    
-        openModal("verification");
-      } catch (err) {
-        toast({
-          className: " bg-red-500",
-          description: `Failed to register`,
-          variant: "destructive",
-        });
-        console.error("Failed to register:", err);
-      }
-    };
-    
+  const onSubmit = async (data: RegistrationFormValues) => {
+    try {
+      const response = await registerUser(data).unwrap();
+      console.log("Response: ", response);
+
+      localStorage.setItem("user_id", response.user);
+      localStorage.setItem("username", data.username);
+      localStorage.setItem("selectedOption", data.role);
+
+      toast({
+        description: `Registration successful!`,
+        variant: "success",
+      });
+
+      openModal("verification");
+    } catch (err) {
+      toast({
+        className: " bg-red-500",
+        description: `Failed to register`,
+        variant: "destructive",
+      });
+      console.error("Failed to register:", err);
+    }
+  };
+
+  const hasErrors = Object.keys(errors).length > 0;
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="mb-3">
-      <h2 className="text-lg font-bold mb-4">Registration</h2>
-      <div className="mt-3">
-        <label className="block text-gray-700 mb-2">Username</label>
+      <h2 className="text-xl font-bold mb-6">Sign Up</h2>
+
+      {hasErrors && (
+        <p className="text-red-500 text-sm mb-4">
+          Fill all fields to proceed.
+        </p>
+      )}
+
+      <div className="mt-4">
+        <label className="block text-custom-gray mb-2">Username</label>
         <input
           placeholder="UserName"
-          className="w-full border border-gray-300 rounded-lg p-2 "
-          {...register("username", { required: "Username is required" })}
+          className="w-full border border-gray-300 focus:border-2 
+           focus:border-custom-blue-gray ease-out delay-150
+           rounded-xl py-2 px-3"
+          {...register("username", { required: true })}
         />
-        {errors.username && <span>{errors.username.message}</span>}
       </div>
 
-      <div className="mt-3">
-        <label className="mb-2">Phone</label>
+      <div className="mt-4">
+        <label className="block text-custom-gray mb-2">Phone</label>
         <input
           placeholder="+998"
-          className="w-full border border-gray-300 rounded-lg p-2"
-          {...register("phone", { required: "Phone is required" })}
+          className="w-full border border-gray-300 focus:border-2 
+          focus:border-custom-blue-gray ease-out delay-150
+          rounded-xl py-2 px-3"
+          {...register("phone", { required: true })}
         />
-        {errors.phone && <span>{errors.phone.message}</span>}
-        {errors.role && (
-          <p className="text-red-500 text-sm mt-2">
-            {errors.role.message}
-          </p>
-        )}
       </div>
 
-      <div className="mb-3 mt-3 relative">
-        <label className="block text-gray-700 mb-2">Password</label>
-        <input
-          type="password"
-          className="w-full border border-gray-300 rounded-lg p-2"
-          {...register("password", { required: "Password is required" })}
-        />
-        {errors.password && <span>{errors.password.message}</span>}
+      <div className="mb-3 mt-4 relative">
+        <label className="block text-custom-gray mb-2">Password</label>
+        <div className="relative">
+          <input
+            type={showPassword ? "text" : "password"} // Toggle password visibility
+            className="w-full border border-gray-300 focus:border-2 
+            focus:border-custom-blue-gray ease-out delay-150
+            rounded-xl py-2 px-3"
+            {...register("password", { required: true })}
+          />
+          <span
+            className="absolute right-3 top-3 cursor-pointer"
+            onClick={() => setShowPassword(!showPassword)} 
+          >
+            {showPassword ? (
+              <AiOutlineEyeInvisible size={20} color="black" /> 
+            ) : (
+              <AiOutlineEye size={20} color="black" /> 
+            )}
+          </span>
+        </div>
       </div>
 
       <div className="flex gap-x-7 my-6">
         <div>
           <label className="flex items-center">
             <input
-              {...register("role", { required: "Role is required" })}
+              {...register("role", { required: true })}
               type="radio"
               className="Modal_radio"
               value="investor"
@@ -104,23 +126,21 @@ export const Registration: React.FC = () => {
               type="radio"
               className="Modal_radio"
               value="startup"
-              {...register("role", { required: "Role is required" })}
+              {...register("role", { required: true })}
             />
             Startup Funder
           </label>
         </div>
-        {errors.role && (
-          <span className="text-red-500">{errors.role.message}</span>
-        )}
       </div>
 
       <button
         type="submit"
         disabled={isLoading}
-        className="Blue_button font-semibold w-full bg-[#749BA9] text-white p-2 rounded-lg"
+        className="Blue_button font-semibold w-full bg-[#749BA9] text-white p-2 rounded-2xl"
       >
         Register
       </button>
+
       <p className="mt-4 text-center font-normal text-base">
         Already have an account?
         <span
@@ -131,7 +151,11 @@ export const Registration: React.FC = () => {
         </span>
       </p>
 
-      {isError && <p>Registration failed: {JSON.stringify(error)}</p>}
+      {isError && (
+        <p className="text-center text-[15px] text-red-500 mt-2">
+          Registration failed: {JSON.stringify(error)}
+        </p>
+      )}
       {isSuccess && <p>Registration successful!</p>}
     </form>
   );

@@ -9,6 +9,7 @@ import logo from "../../assets/images/Group.png";
 import logo_text from "../../assets/images/Group-1.png";
 import ProfilePopover from "./ProfilePopover ";
 
+
 const Navbar: React.FC = () => {
   return (
     <nav className="max-w-7xl m-auto Nav_links">

@@ -28,7 +28,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => (
       <img
         src={product.image}
         alt={product.name}
-        className="object-cover"
+        className="w-[391px] h-[368px] object-cover"
+        style={{ objectPosition: "center" }} // Центрирование изображения
       />
 
       <div className="absolute inset-0 bg-primary bg-opacity-50 opacity-0 group-hover:opacity-85 transition-opacity duration-300 flex items-center justify-center">
@@ -38,7 +39,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => (
       </div>
 
       <div className="px-4 py-2 bg-yellow-600 absolute top-3.5 -right-[25px] text-red-50">
-        Topligging
+        {product ? product.degree :`Topligging`}
       </div>
 
       <Star className="cursor-pointer absolute top-5 left-5 scale-125 fill-white text-yellow-600 active:fill-yellow-600" />
@@ -59,10 +60,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => (
       <div>{product.description}</div>
       <div className="flex justify-between pt-5">
         <div className="text-2xl">{product.price} UZS</div>
-        {/* <Link to={`/product/${product.id}`}> */}
-          <DonationForm id={product.id} price={product.price}/>
-          
-        {/* </Link> */}
+        <DonationForm id={product.id} price={product.price} />
       </div>
     </div>
   </div>

@@ -1,15 +1,13 @@
 import React from 'react';
 import Navbar from '../../components/Navbar/Navbar';
-import intro_image from "../../assets/images/Head_image.png";
+import intro_image from "../../assets/images/9899513.jpeg";
+// import intro_image from "../../assets/images/Leadership-Excellence-Header-scaled-1.jpg";
 import Intro_logo from "../../assets/images/Altro icon.png";
-import { NavbarProvider } from '@/components/Navbar/SignUp_Context';
-import SignUpModal from '@/components/Navbar/NavModal';
 
 const Introduction_Image: React.FC = () => {
-  
   return (
     <div
-      className="intro_box relative h-[55rem] w-full py-5"
+      className="intro_box relative h-[55rem] w-full py-5 z-10"
       style={{
         backgroundImage: `url(${intro_image})`,
         backgroundSize: "cover",
@@ -17,9 +15,20 @@ const Introduction_Image: React.FC = () => {
         backgroundRepeat: "no-repeat",
       }}
     >
-
-        <Navbar />
-
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: "rgba(0, 0, 0, 0.54)",  
+          filter: "brightness(50%)", 
+          zIndex: -1, 
+        }}
+      />
+      
+      <Navbar />
       
       <div
         style={{

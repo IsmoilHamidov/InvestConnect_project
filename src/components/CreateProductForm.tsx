@@ -1,7 +1,10 @@
 import { useCreateProductMutation } from "@/store/slice/products";
 import React, { useState } from "react";
+import { Button } from "./ui/button";
+import { useToast } from "@/hooks/use-toast";
+import { ModalProps } from "@/interface";
 
-const CreateProductForm = () => {
+const CreateProductForm: React.FC<ModalProps> = ({onClose}) => {
   const [createProduct, { isLoading, isError, isSuccess, error }] =
     useCreateProductMutation();
 
@@ -15,9 +18,11 @@ const CreateProductForm = () => {
     contract: 1,
     price: "",
   });
-
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
+
+  const {toast} = useToast()
+  
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -54,6 +59,11 @@ const CreateProductForm = () => {
     try {
       const result = await createProduct(payload).unwrap();
       console.log("Product created:", result);
+      onClose()
+      toast({
+        description: `Product created`,
+        variant: "success",
+      });
     } catch (err) {
       console.error("Failed to create product:", err);
     }
@@ -66,6 +76,7 @@ const CreateProductForm = () => {
       className="grid gap-4"
     >
       <input
+        className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-gray-500"
         name="name"
         placeholder="Name"
         value={formData.name}
@@ -73,6 +84,7 @@ const CreateProductForm = () => {
         required
       />
       <input
+        className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-gray-500"
         name="rendement"
         placeholder="Rendement"
         value={formData.rendement}
@@ -80,6 +92,7 @@ const CreateProductForm = () => {
         required
       />
       <input
+        className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-gray-500"
         name="location"
         placeholder="Location"
         value={formData.location}
@@ -87,6 +100,7 @@ const CreateProductForm = () => {
         required
       />
       <textarea
+        className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-gray-500"
         name="description"
         placeholder="Description"
         value={formData.description}
@@ -94,20 +108,7 @@ const CreateProductForm = () => {
         required
       />
       <input
-        name="category"
-        placeholder="category"
-        value={formData.category}
-        onChange={handleChange}
-        required
-      />
-      <input
-        name="contract"
-        placeholder="contract"
-        value={formData.contract}
-        onChange={handleChange}
-        required
-      />
-      <input
+        className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-gray-500"
         name="price"
         placeholder="Price"
         value={formData.price}
@@ -121,9 +122,9 @@ const CreateProductForm = () => {
         onChange={handleFileChange}
         required
       />
-      <button type="submit" disabled={isLoading}>
+      <Button type="submit" disabled={isLoading}>
         {isLoading ? "Creating..." : "Create Product"}
-      </button>
+      </Button>
       {isSuccess && <p>Product created successfully!</p>}
       {isError && <p>Error creating product: {JSON.stringify(error)}</p>}
     </form>

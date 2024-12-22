@@ -1,11 +1,11 @@
 import Banner from "@/components/Banner";
 import CategoriesModal from "@/components/Category";
 import NavbarAdmin from "@/components/navbarAdmin";
-import Sidebar from "@/components/sidebar";
 import { Button } from "@/components/ui/button";
 import { Product, ProductCard } from "@/components/ui/ProductCard";
 import { useGetProductsQuery } from "@/store/slice/products";
 import { useEffect, useState } from "react";
+
 const ProductListPage = () => {
   const [search, setSearch] = useState("");
   const [degree, setDegree] = useState("");
@@ -24,11 +24,10 @@ const ProductListPage = () => {
   return (
     <>
       <NavbarAdmin />
-      <Sidebar />
-      <main className="pl-[270px]">
+      <main >
         <Banner>
           <div>
-            <div className="flex gap-3 pt-36 pb-24 justify-center items-center">
+            <div className="flex gap-3 pt-36 pb-24 justify-center items-center ">
               <Button
                 variant="secondary"
                 onClick={() => setModalOpen(true)}
@@ -64,7 +63,7 @@ const ProductListPage = () => {
             </div>
           </div>
         </Banner>
-        <div className="products grid grid-cols-3 pt-44 pr-5">
+        <div className="products grid grid-cols-3 pt-44 pr-5 max-w-7xl m-auto">
           {error ? (
             <>Oh no, there was an error</>
           ) : isLoading ? (

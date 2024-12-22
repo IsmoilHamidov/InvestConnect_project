@@ -1,8 +1,8 @@
 
 import { ModalProps } from "../../interface"
 import { Card } from "../ui/card"
-import { Button } from "../ui/button"
-import { Input } from "../ui/input"
+import CreateProductForm from "../CreateProductForm"
+import { HiX } from "react-icons/hi"
 const ProductModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
     return (
         <>
@@ -20,57 +20,16 @@ const ProductModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
                         onClick={(e) => e.stopPropagation()}
                         style={{ zIndex: 51, boxShadow: '0px 6px 44px 0px #e9e9e9' }}
                     >
-                        <Button
-                            className="absolute top-5 right-4 bg-transparent hover:bg-[#749BA9] text-black text-3xl hover:text-white shadow-none "
+                        <div className="flex justify-between items-center pb-5">
+                        <h2 className="text-xl">Add Product</h2>
+                        <span
+                            className="text-black hover:text-primary"
                             onClick={onClose}
                         >
-                            X
-                        </Button>
-                        <h2 className="text-xl font-bold mb-4">Add Product</h2>
-                        <div className="mb-4">
-                            <label htmlFor="name" className="block text-sm font-medium text-gray-900">
-                                Product Name
-                            </label>
-                            <Input
-                                id="name"
-                                name="name"
-                                type="text"
-                                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-gray-500"
-                                required
-                            />
+                            <HiX size="25"/>
+                        </span>
                         </div>
-                        <div className="mb-4">
-                            <label htmlFor="tel" className="block text-sm font-medium text-gray-900">
-                                Product Price
-                            </label>
-                            <Input
-                                id="price"
-                                name="price"
-                                type="text"
-                                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-gray-500"
-                                required
-                            />
-                        </div>
-                        <div className="mb-4">
-                            <label htmlFor="tel" className="block text-sm font-medium text-gray-900">
-                                Product Category
-                            </label>
-                            <Input
-                                id="category"
-                                name="category"
-                                type="text"
-                                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-gray-500"
-                                required
-                            />
-                        </div>
-                        <div className="flex justify-center w-full">
-                            <Button
-                                type="submit"
-                                className="text-white bg-[#749BA9] hover:bg-[#52717c] focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2"
-                            >
-                                Added Product
-                            </Button>
-                        </div>
+                        <CreateProductForm onClose={onClose} />
                     </Card>
                 </div>
 
