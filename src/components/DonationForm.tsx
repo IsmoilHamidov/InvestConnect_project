@@ -12,6 +12,8 @@ import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 
+
+
 const paymentMethods = [
   { id: "uzcard", name: "Uzcard" },
   { id: "humo", name: "Humo" },
@@ -90,9 +92,15 @@ const DonationForm: React.FC<DonationFormProps> = ({ price, id }) => {
 
   return (
     <Dialog>
-      <DialogTrigger asChild>
-        <Button className="border rounded-[40px] px-4 py-2">Ontdek meer</Button>
-      </DialogTrigger>
+
+  
+
+       <DialogTrigger asChild>
+          <Button className="border rounded-[40px] px-4 py-2">Ontdek meer</Button>
+        </DialogTrigger>
+    
+
+
       <DialogContent className="sm:max-w-md">
         <DialogTitle>Оплатить</DialogTitle>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
