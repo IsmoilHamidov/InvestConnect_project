@@ -7,12 +7,14 @@ import {
   import {
     Mail,
     Home,
-    LayoutDashboard,
+    Briefcase, 
     Calendar,
     Activity,
     Users,
     HelpCircle,
     Building2,
+    CircleUserRound,
+    UserRound,
   } from "lucide-react";
   import { cn } from "@/lib/utils";
   import { SidebarItemProps } from "@/interface";
@@ -46,18 +48,17 @@ import { Link } from "react-router-dom";
         </Link>
   
         <div className="flex flex-col items-center border-b p-6">
-          <Avatar className="h-16 w-16 mb-4">
-            <AvatarImage src={UserImg} alt="Profile picture" />
-            <AvatarFallback>AC</AvatarFallback>
-          </Avatar>
-          <div className="text-center">
+          
+          <UserRound size={'40'} className="text-custom-gray mt-2" />
+          
+          <div className="text-center mt-2">
             {error ? (
               <>Oh no, there was an error</>
             ) : isLoading ? (
               <>Loading...</>
             ) : data ? (
               <>
-                <h2 className="font-semibold text-base">
+                <h2 className="font-semibold text-base text-custom-gray">
                   {data?.firstname || "Unknown"} {data?.lastname || "User"}
                 </h2>
                 <p className="text-base text-[#749BA9]">
@@ -73,9 +74,11 @@ import { Link } from "react-router-dom";
             <Button variant="ghost" size="icon">
               <Users className="h-4 w-4" />
             </Button>
-            <Button variant="ghost" size="icon">
-              <Activity className="h-4 w-4" />
-            </Button>
+            <Link to={'/products'}>
+              <Button variant="ghost" size="icon">
+                <Briefcase className="h-4 w-4" />
+              </Button>
+            </Link>
           </div>
         </div>
   
@@ -86,7 +89,13 @@ import { Link } from "react-router-dom";
               label="Home"
             />
           </Link>
-        
+
+          <Link to={'/products'}>
+            <SidebarItem 
+              icon={<Briefcase  className="h-4 w-4" />}
+              label="Projects"
+            />
+          </Link>
           <SidebarItem
             icon={<Building2 className="h-4 w-4" />}
             label="Aanbod"
@@ -95,10 +104,6 @@ import { Link } from "react-router-dom";
           <SidebarItem
             icon={<Calendar className="h-4 w-4" />}
             label="Kalender"
-          />
-          <SidebarItem
-            icon={<Activity className="h-4 w-4" />}
-            label="Activiteiten"
           />
           <SidebarItem
             icon={<Users className="h-4 w-4" />}

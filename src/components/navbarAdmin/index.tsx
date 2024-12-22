@@ -9,6 +9,8 @@ export default function NavbarAdmin() {
 
   const initials = data?.username?.charAt(0).toUpperCase() || "";
 
+
+
   return (
     <nav className="flex fixed z-50 w-full items-center justify-between px-4 py-2 bg-[#7497a7] text-white">
       <div className="flex items-center gap-2">
@@ -20,7 +22,6 @@ export default function NavbarAdmin() {
           <Menu className="h-5 w-5" />
           <span className="sr-only">Toggle menu</span>
         </Button>
-        <h1 className="text-lg font-medium">Profile</h1>
       </div>
 
       <div className="flex items-center gap-4">
