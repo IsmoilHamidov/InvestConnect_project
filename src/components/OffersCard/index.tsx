@@ -5,6 +5,8 @@ import { OfferCardProps } from "@/interface";
 import { Link } from "react-router-dom";
 import { AiOutlinePlus } from "react-icons/ai";
 import ProductModal from "../productModal";
+import { FiPlus } from 'react-icons/fi';
+
 
 const ProperyCard: React.FC<OfferCardProps> = ({
   image,
@@ -98,13 +100,13 @@ const Offers: React.FC = () => {
   return (
     <>
       <div className="p-6 w-full mx-auto shadow-xl border-[1px]  rounded-[15px]  ">
-        <div className="flex flex-row items-center justify-between mb-5 ">
+        <div className="flex flex-row items-center justify-between mb-6 ">
           <h1 className="text-base font-semibold mb-4">Aanbod</h1>
           <Button
-            className="rounded-full p-7 text-white bg-[#749BA9] hover:bg-[#52717c]  "
+            className="rounded-full py-4 px-6 text-white bg-[#B29C6F] Brown_button  "
             onClick={navBtn}
           >
-            <AiOutlinePlus />
+            <i className="fa-solid fa-plus text-[15px]"></i>
           </Button>
         </div>
         {offers.map((offer, index) => (

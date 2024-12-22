@@ -2,7 +2,7 @@ import React from 'react';
 import Navbar from '../../components/Navbar/Navbar';
 import intro_image from "../../assets/images/9899513.jpeg";
 // import intro_image from "../../assets/images/Leadership-Excellence-Header-scaled-1.jpg";
-import Intro_logo from "../../assets/images/Altro icon.png";
+import Intro_logo from "../../assets/images/InvestLogo.png";
 
 const Introduction_Image: React.FC = () => {
   return (
@@ -33,13 +33,17 @@ const Introduction_Image: React.FC = () => {
       <div
         style={{
           position: "absolute",
-          top: "57%",
+          top: "59%",
           left: "50%",
           transform: "translate(-50%, -50%)",
         }}
         className="w-full flex justify-center items-center"
       >
-        <img className="h-[26rem] object-contain" src={Intro_logo} alt="Intro Logo" />
+        <img className="h-[27rem] object-contain" src={Intro_logo} 
+        alt="Intro Logo"
+        style={{  
+          filter: "brightness(50%)", 
+        }}/>
       </div>
     </div>
   );

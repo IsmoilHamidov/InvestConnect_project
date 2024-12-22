@@ -62,16 +62,6 @@ export const userApi = createApi({
       }),
     }),
 
-    updateProfileDetail: builder.mutation<
-      ProfileDetail,
-      UpdateProfileDetailArgs
-    >({
-      query: ({ id, data }) => ({
-        url: `/profile-detail/${id}/`,
-        method: "PATCH",
-        body: data,
-      }),
-    }),
   }),
 });
 
@@ -81,5 +71,4 @@ export const {
   useGetVerificationCodeQuery,
   useLoginUserMutation,
   useGetUserProfileQuery,
-  useUpdateProfileDetailMutation,
 } = userApi;

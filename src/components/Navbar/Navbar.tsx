@@ -5,9 +5,10 @@ import {
   FaYoutube,
   FaTwitter,
 } from "react-icons/fa";
-import logo from "../../assets/images/Group.png";
+import logo from "../../assets/images/logo-removebg-preview.png";
 import logo_text from "../../assets/images/Group-1.png";
 import ProfilePopover from "./ProfilePopover ";
+
 
 
 const Navbar: React.FC = () => {
@@ -41,7 +42,7 @@ const Navbar: React.FC = () => {
           <a href="#">Over ons</a>
           <a href="#">Blog</a>
           <a href="#">Podcast</a>
-          <a href="#">Pers</a>
+          <a href="#Project">Projects</a>
           <a href="#">Contact</a>
 
           <ProfilePopover />
@@ -50,7 +51,7 @@ const Navbar: React.FC = () => {
       <div className="w-full border-t my-1 border-[#749BA9]"></div>
       <div className="flex justify-between items-center">
         <div className="flex justify-center items-center gap-x-3 py-2">
-          <img src={logo} alt="logo" />
+          <img src={logo} alt="logo" className="h-[60px] object-contain" />
           <div className="w-28">
             <img src={logo_text} alt="logo_text" />
             <p

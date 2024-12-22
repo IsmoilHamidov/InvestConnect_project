@@ -40,6 +40,10 @@ const ProfilePopover: React.FC = () => {
   const handleProfileClick = () => {
     const selectedOption = data?.role;
 
+    setTimeout(() => {
+      window.location.reload();
+    }, 200);
+
     const route =
       selectedOption === "investor"
         ? "/investorProfile"
