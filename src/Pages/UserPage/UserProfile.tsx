@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useGetUserProfileQuery } from "@/store/slice/products";
 
 const UserProfile: React.FC = () => {
-  const { data, error, isLoading, refetch } = useGetUserProfileQuery();
+  const { data, error, isLoading, refetch } = useGetUserProfileQuery(undefined);
 
   return (
     <div className="p-4 mb-10">

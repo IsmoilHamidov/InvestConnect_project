@@ -1,5 +1,4 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { useGetUserProfileQuery } from "@/store/slice/products";
 export const api = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({
@@ -37,7 +36,7 @@ export const api = createApi({
         body: data,
       }),
     }),
-    getUserProfile: builder.query<ProfileDetail, void>({
+    getUserProfile: builder.query({
       query: () => ({
         url: "/profile-detail/",
         method: "GET",
@@ -64,10 +63,7 @@ export const api = createApi({
         body: productData,
       }),
     }),
-    updateProfileDetail: builder.mutation<
-      ProfileDetail,
-      UpdateProfileDetailArgs
-    >({
+    updateProfileDetail: builder.mutation({
       query: ({ data }) => ({
         url: `/profile-detail/`,
         method: "PATCH",
@@ -111,6 +107,6 @@ interface CreateProductRequest {
   description: string;
   category: number;
   contract: number;
-  price?: string;
-  image?: File;
+  price: string;
+  image: File;
 }

@@ -75,9 +75,6 @@ const DonationForm: React.FC<DonationFormProps> = ({ price, id }) => {
   const paymentMethod = watch("paymentMethod");
 
   const onSubmit = (data: DonatFormData) => {
-    console.log("id: ", id);
-
-    console.log("Отправленные данные:", data);
     toast({
       title: "Оплата прошла успешно!",
       description: `Вы перевели ${data.amount} UZS`,

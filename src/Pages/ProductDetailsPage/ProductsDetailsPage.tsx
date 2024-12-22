@@ -6,7 +6,6 @@ import { useParams } from "react-router-dom";
 
 export const ProductDetailsPage = () => {
   const { productid } = useParams<{ productid: string | any }>();
-  console.log("product id:", productid);
   const { data, error, isLoading } = useGetProductQuery(productid);
 
   return (

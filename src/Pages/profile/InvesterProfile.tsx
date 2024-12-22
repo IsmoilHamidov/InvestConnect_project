@@ -1,8 +1,6 @@
-import React from 'react'
 import NavbarAdmin from "@/components/navbarAdmin";
 import Sidebar from "@/components/sidebar";
 import { ProfileForm } from "@/components/profileForms";
-import Offers from "../../components/OffersCard";
 import TimeCount from "../../components/timeCount";
 import Activities from "../../components/Activities";
 
