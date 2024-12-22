@@ -34,7 +34,7 @@ export function ProfileForm({ defaultValues }: ProfileFormProps) {
 
     // Handle form submission
     const handleSave = async () => {
-        
+        cos
         try {
             const updatedData = { ...formData };
             await updateProfileDetail({ id: data?.id, data: updatedData }).unwrap(); // Dispatch mutation
