@@ -10,7 +10,7 @@ export default function NavbarAdmin() {
   const initials = data?.username?.charAt(0).toUpperCase() || "";
 
   return (
-    <nav className="flex fixed z-50  items-center justify-between px-4 py-2 bg-[#7497a7] text-white">
+    <nav className="flex fixed z-50 w-full items-center justify-between px-4 py-2 bg-[#7497a7] text-white">
       <div className="flex items-center gap-2">
         <Button
           variant="ghost"
