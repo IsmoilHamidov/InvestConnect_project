@@ -6,9 +6,6 @@ import { Button } from "@/components/ui/button";
 import { Product, ProductCard } from "@/components/ui/ProductCard";
 import { useGetProductsQuery } from "@/store/slice/products";
 import { useEffect, useState } from "react";
-import UserProfile from "../UserPage/UserProfile";
-import ProfileGetUser from "../UserPage/Profilesss";
-
 const ProductListPage = () => {
   const [search, setSearch] = useState("");
   const [degree, setDegree] = useState("");
@@ -81,8 +78,6 @@ const ProductListPage = () => {
             </>
           ) : null}
         </div>
-        <ProfileGetUser />
-        <UserProfile />
       </main>
     </>
   );
