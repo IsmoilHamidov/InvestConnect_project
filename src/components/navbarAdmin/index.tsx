@@ -1,15 +1,22 @@
-import { Bell, Mail, Menu } from 'lucide-react'
-import { Button } from "../ui/button"
-import { Badge } from "../ui/badge"
-import { Link } from 'react-router-dom'
-import { useGetUsersQuery } from '@/store/slice/products';
+import { Bell, Mail, Menu } from "lucide-react";
+import { Button } from "../ui/button";
+import { Badge } from "../ui/badge";
+import { useNavigate } from "react-router-dom";
+import { useGetUsersQuery } from "@/store/slice/products";
 
 export default function NavbarAdmin() {
-  const { data, error } = useGetUsersQuery();
+  const { data } = useGetUsersQuery();
+  const navigate = useNavigate();
 
   const initials = data?.username?.charAt(0).toUpperCase() || "";
 
-
+  const handelNavigateProfile = () => {
+    if (data?.role === "investor") {
+      navigate("/investorProfile");
+    } else {
+      navigate("/profile");
+    }
+  };
 
   return (
     <nav className="flex fixed z-50 w-full items-center justify-between px-4 py-2 bg-[#7497a7] text-white">
@@ -43,22 +50,17 @@ export default function NavbarAdmin() {
           >
             <Bell className="h-5 w-5" />
           </Button>
-          <Badge
-            className="absolute -top-1 -right-1 h-4 w-4 p-0 flex items-center justify-center bg-red-500 text-white text-xs"
-          >
+          <Badge className="absolute -top-1 -right-1 h-4 w-4 p-0 flex items-center justify-center bg-red-500 text-white text-xs">
             2
           </Badge>
         </div>
-        <Link to="/profile">
-          <button
-            className="flex items-center justify-center bg-[#B29C6F] text-white p-1 w-[35px] h-[33px] rounded-full text-lg font-medium"
-          >
-            {initials}
-          </button>
-        </Link>
-
+        <button
+          onClick={handelNavigateProfile}
+          className="flex items-center justify-center bg-[#B29C6F] text-white p-1 w-[35px] h-[33px] rounded-full text-lg font-medium"
+        >
+          {initials}
+        </button>
       </div>
     </nav>
-  )
+  );
 }
-
