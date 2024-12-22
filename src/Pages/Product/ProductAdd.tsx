@@ -1,23 +1,38 @@
 import { useState } from 'react';
 
+
+interface FormData {
+  user: number;
+  name: string;
+  rendement: string;
+  location: string;
+  description: string;
+  category: number;
+  contract: number;
+  price: string;
+  image: File | null;
+}
+
 function ProductForm() {
-  const [formData, setFormData] = useState({
-    user: 1, // Default value, replace with the actual user ID
+  const [formData, setFormData] = useState<FormData>({
+    user: 1,
     name: '',
     rendement: '',
     location: '',
     description: '',
-    category: 1, // Default category, replace with actual category ID
-    contract: 1, // Default contract, replace with actual contract ID
+    category: 1,
+    contract: 1,
     price: '',
     image: null,
   });
+  
 
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
 
-  const handleInputChange = (e) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleInputChange = (e: { target: { name: any; value: any; }; }) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
@@ -25,14 +40,17 @@ function ProductForm() {
     });
   };
 
-  const handleFileChange = (e) => {
-    setFormData({
-      ...formData,
-      image: e.target.files[0],
-    });
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setFormData({
+        ...formData,
+        image: e.target.files[0],
+      });
+    }
   };
+  
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
@@ -41,8 +59,11 @@ function ProductForm() {
     // Create FormData to send the file along with other form data
     const form = new FormData();
     for (const key in formData) {
-      if (formData[key]) form.append(key, formData[key]);
+      if (formData[key as keyof FormData]) {
+        form.append(key, formData[key as keyof FormData] as Blob | string);
+      }
     }
+    
 
     try {
       const response = await fetch('https://bakirali007.pythonanywhere.com/api/v1/app/products/create/', {
@@ -57,7 +78,6 @@ function ProductForm() {
       const data = await response.json();
 
       if (response.ok) {
-        console.log('Product added successfully:', data);
         setSuccess(true);
       } else {
         console.error('Failed to add product:', data);

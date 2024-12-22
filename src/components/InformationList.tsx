@@ -1,5 +1,4 @@
 import { useGetProductsInformationListQuery } from '@/store/slice/products';
-import React from 'react';
 
 const InformationList = () => {
   const { data, error, isLoading } = useGetProductsInformationListQuery({

@@ -3,9 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { OfferCardProps } from "@/interface";
 import { Link } from "react-router-dom";
-import { AiOutlinePlus } from "react-icons/ai";
 import ProductModal from "../productModal";
-import { FiPlus } from 'react-icons/fi';
 
 
 const ProperyCard: React.FC<OfferCardProps> = ({

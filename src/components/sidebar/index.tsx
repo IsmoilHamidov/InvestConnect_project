@@ -1,24 +1,15 @@
-import {
-    Avatar,
-    AvatarFallback,
-    AvatarImage,
-  } from "@/components/ui/avatar";
   import { Button } from "@/components/ui/button";
   import {
     Mail,
     Home,
     Briefcase, 
     Calendar,
-    Activity,
     Users,
     HelpCircle,
     Building2,
-    CircleUserRound,
     UserRound,
   } from "lucide-react";
   import { cn } from "@/lib/utils";
-  import { SidebarItemProps } from "@/interface";
-  import UserImg from "@/assets/images/user-img.svg"; // Ensure path correctness
   import { useGetUserProfileQuery } from "@/store/slice/products";
 import { Link } from "react-router-dom";
   
@@ -35,7 +26,7 @@ import { Link } from "react-router-dom";
   }
   
   export default function Sidebar() {
-    const { data, error, isLoading } = useGetUserProfileQuery();
+    const { data, error, isLoading } = useGetUserProfileQuery(undefined);
   
     return (
       <div className="flex fixed z-50 flex-col left-0 items-center w-[270px] min-h-screen border-r bg-white">
@@ -124,4 +115,10 @@ import { Link } from "react-router-dom";
       </div>
     );
   }
+
   
+  export interface SidebarItemProps {
+  icon: React.ReactNode; // Accepts any React element
+  label: string;
+  isActive?: boolean;
+}

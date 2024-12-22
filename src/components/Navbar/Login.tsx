@@ -4,8 +4,9 @@ import { useLoginUserMutation } from "@/store/slice/apiSlice";
 import { useAuthModalStore } from "@/store/authModalStore";
 import React, { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { INavbarStepProps } from "./NavbarStep";
 
-export const LoginModal: React.FC = () => {
+export const LoginModal: React.FC<INavbarStepProps> = () => {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [loginUser, { isLoading }] = useLoginUserMutation();
@@ -25,7 +26,6 @@ export const LoginModal: React.FC = () => {
         variant: "success",
       });
       localStorage.setItem("token", response.token);
-      console.log("Login successful! Token:", response);
       closeModal();
       window.location.reload();
     } catch (err) {

@@ -8,34 +8,27 @@ interface ProfileDetail {
   role: string;
 }
 
-interface UpdateProfileDetailArgs {
-  id: number;
-  data: ProfileDetail;
-}
-
 export const userApi = createApi({
   reducerPath: "userApi",
   baseQuery: fetchBaseQuery({
     baseUrl: "https://bakirali007.pythonanywhere.com/api/v1/app",
   }),
   endpoints: (builder) => ({
-    registerUser: builder.mutation<
-      void,
-      { username: string; phone: string; role: string; password: string }
-    >({
+    registerUser: builder.mutation<{ user: string }, { username: string; phone: string; role: string; password: string }>({
       query: (data) => ({
         url: "/users/register/",
         method: "POST",
         body: data,
       }),
     }),
+    
     getVerificationCode: builder.query<
       { id: string; verification_code: string },
       string
     >({
       query: (userId) => `/verification-code/${userId}/`,
     }),
-    verifyUser: builder.mutation<void, { user: string; code: string }>({
+    verifyUser: builder.mutation<{ token: string }, { user: string; code: string }>({
       query: (data) => ({
         url: "/users/verify/",
         method: "POST",

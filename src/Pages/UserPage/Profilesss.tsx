@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useGetUsersQuery } from "@/store/slice/products";
 
 const ProfileGetUser: React.FC = () => {
-  const { data, error, isLoading, refetch } = useGetUsersQuery();
+  const { data, error, isLoading, refetch } = useGetUsersQuery(undefined);
 
   return (
     <div>

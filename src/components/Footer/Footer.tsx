@@ -1,4 +1,3 @@
-import React from 'react'
 import logo from "../../assets/images/footerLogo.png"
 import bigLogo from "../../assets/images/Altro Logo.png"
 

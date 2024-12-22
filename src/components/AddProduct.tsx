@@ -28,8 +28,17 @@ const AddProduct: React.FC = () => {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
 
   const onSubmit: SubmitHandler<ProductFormInputs> = async (data) => {
-    console.log("form clicked");
-    console.log("Submitted data:", data); // Логируем данные формы
+    const productData = {
+      user: data.user,
+      name: data.name,
+      rendement: data.rendement,
+      location: data.location,
+      description: data.description,
+      category: data.category,
+      contract: data.contract,
+      price: data.price,
+      image: data.image, // image should be handled separately
+    };
 
     const formData = new FormData();
     formData.append("user", data.user.toString());
@@ -49,7 +58,7 @@ const AddProduct: React.FC = () => {
     }
 
     try {
-      await createProduct(formData).unwrap();
+      await createProduct(productData).unwrap();
       alert("Product added successfully!");
     } catch (error) {
       console.error("Error adding product:", error);
@@ -59,7 +68,6 @@ const AddProduct: React.FC = () => {
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
-    console.log("Selected file:", file); // Логируем выбранный файл
     if (file) {
       setImagePreview(URL.createObjectURL(file));
       setValue("image", file);
@@ -72,7 +80,6 @@ const AddProduct: React.FC = () => {
       <form
         onSubmit={(e) => {
           e.preventDefault(); // предотвращаем стандартную отправку формы
-          console.log("Form submitted manually");
           handleSubmit(onSubmit)(e); // вручную вызываем onSubmit
         }}
         className="space-y-4"

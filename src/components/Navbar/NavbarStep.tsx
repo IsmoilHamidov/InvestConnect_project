@@ -1,5 +1,3 @@
-import React from "react";
-
 import { useAuthModalStore } from "@/store/authModalStore";
 
 // import Login from './Login';
@@ -41,3 +39,8 @@ export const NavbarStep = () => {
     </div>
   );
 };
+
+
+export interface INavbarStepProps {
+  onNext: () => void;  // Define onNext prop
+}

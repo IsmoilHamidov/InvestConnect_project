@@ -18,7 +18,8 @@ export const FeedBack = () => {
   } = useForm<FormData>();
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
-    console.log("Form Data:", data);
+    console.log("data: ", data);
+    
   };
 
   return (

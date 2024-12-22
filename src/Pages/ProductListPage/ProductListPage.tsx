@@ -4,7 +4,7 @@ import NavbarAdmin from "@/components/navbarAdmin";
 import { Button } from "@/components/ui/button";
 import { Product, ProductCard } from "@/components/ui/ProductCard";
 import { useGetProductsQuery } from "@/store/slice/products";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const ProductListPage = () => {
   const [search, setSearch] = useState("");
@@ -16,10 +16,6 @@ const ProductListPage = () => {
   const { data, error, isLoading } = useGetProductsQuery(
     `?search=${search}&degree=${degree}&category__name=${category}`
   );
-
-  useEffect(() => {
-    console.log("category", category);
-  }, [category]);
 
   return (
     <>
@@ -70,7 +66,6 @@ const ProductListPage = () => {
             <>Loading...</>
           ) : data ? (
             <>
-              {console.log(data)}
               {data?.map((product: Product, index: number) => (
                 <ProductCard key={index} product={product} />
               ))}

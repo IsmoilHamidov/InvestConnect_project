@@ -9,7 +9,7 @@ const ProfilePopover: React.FC = () => {
   const popoverButtonRef = useRef<HTMLButtonElement | null>(null);
   const navigate = useNavigate();
 
-  const { data, error } = useGetUsersQuery();
+  const { data, error } = useGetUsersQuery(undefined);
   const { openModal } = useAuthModalStore();
   const username = data?.username || null;
 

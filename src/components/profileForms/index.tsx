@@ -2,40 +2,33 @@ import { LogOut } from 'lucide-react';
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Card, CardContent } from "../ui/card";
-import { ProfileFormProps } from '@/interface';
 import { useGetUserProfileQuery, useUpdateProfileDetailMutation } from "@/store/slice/products";
 import { useForm } from "react-hook-form";
 import { useEffect } from 'react';
 import { useToast } from '@/hooks/use-toast';
 
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog';
 import { useNavigate } from 'react-router-dom';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog';
 
-export function ProfileForm({ defaultValues }: ProfileFormProps) {
+export function ProfileForm() {
     const { toast } = useToast();
-    const { data, error, isLoading } = useGetUserProfileQuery();
+    const { data, error, isLoading } = useGetUserProfileQuery(null);
     const [updateProfileDetail] = useUpdateProfileDetailMutation();
 
-    function capitalizeFirstLetter(str: string): string {
-        return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
-    }
+    const { register, handleSubmit, setValue } = useForm();
 
-    const {
-        register,
-        handleSubmit,
-        setValue,
-        formState: { errors },
-    } = useForm({
-        defaultValues: {
-            firstname: '', 
-            lastname: '',
-            email: '',
-            username: '',
-            phone: '',
-            role: 'investor',
-        },
-    });
 
+    useEffect(() => {
+        if (data) {
+            (Object.keys(data)).forEach((key) => {
+                setValue(key, data[key]);
+            });
+        }
+    }, [data, setValue]);
+    
+
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const onSubmit = async (formData: any) => {
         try {
             await updateProfileDetail({ id: data?.id, data: formData }).unwrap();
@@ -44,6 +37,7 @@ export function ProfileForm({ defaultValues }: ProfileFormProps) {
                 variant: "success",
             });
             window.location.reload()
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (err) {
             toast({
                 description: `Failed to update profile!`,
@@ -51,14 +45,6 @@ export function ProfileForm({ defaultValues }: ProfileFormProps) {
             });
         }
     };
-
-    useEffect(() => {
-        if (data) {
-            Object.keys(data).forEach((key) => {
-                setValue(key as keyof typeof data, data[key]);
-            });
-        }
-    }, [data, setValue]);
 
     useEffect(() => {
         if (error) {
@@ -119,34 +105,19 @@ export function ProfileForm({ defaultValues }: ProfileFormProps) {
                 </div>
                 <div className="w-full">
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 w-full">
-                    {[
-                        { label: "First Name", field: "firstname", required: "First name is required" },
-                        { label: "Last Name", field: "lastname", required: "Last name is required" },
-                        { label: "Email", field: "email", required: "Email is required" },
-                        { label: "Username", field: "username", required: "Username is required" },
-                        { label: "Phone", field: "phone", required: "Phone number is required" },
-                    ].map(({ label, field, required }, index) => (
-                        <div key={index} className="relative w-full">
-                            <Input
-                                placeholder={label}
-                                {...register(field, {
-                                required,
-                                onChange: (e) => {
-                                if (field === "firstname" || field === "lastname") {
-                                    e.target.value = capitalizeFirstLetter(e.target.value);
-                                        }
-                                    },
-                                })}
-                                className="rounded-[75px] w-full p-5"
-                            />
-                            
-                            {errors[field] && (
-                                <span className="text-red-500 text-sm mt-2">
-                                    {errors[field]?.message}
-                                </span>
-                            )}
-                        </div>
-                    ))}
+                {[
+                    { label: "First Name", field: "firstname" },
+                    { label: "Last Name", field: "lastname" },
+                    { label: "Email", field: "email" },
+                    { label: "Username", field: "username" },
+                    { label: "Phone", field: "phone" },
+                ].map(({ label, field }, index) => (
+                    <Input
+                        key={index}
+                        placeholder={label}
+                        {...register(field as FormFields, { required: `${label} is required` })}
+                    />
+                ))}
                     <div className="flex justify-center items-center pt-3">
                         <Button
                             type="submit"
@@ -163,3 +134,6 @@ export function ProfileForm({ defaultValues }: ProfileFormProps) {
         </Card>
     );
 }
+
+type FormFields = "firstname" | "lastname" | "email" | "username" | "phone";
+

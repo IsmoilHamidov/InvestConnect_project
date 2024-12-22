@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { useAuthModalStore } from "@/store/authModalStore";
 import { useGetVerificationCodeQuery, useVerifyUserMutation } from "@/store/slice/apiSlice";
+import { INavbarStepProps } from "./NavbarStep";
 
-export const Verification: React.FC = () => {
+export const Verification: React.FC<INavbarStepProps> = () => {
   const [userId, setUserId] = useState<string>("");
   const [verificationCode, setVerificationCode] = useState<string[]>(new Array(6).fill(""));
 
@@ -18,7 +19,7 @@ export const Verification: React.FC = () => {
 
   const handleResendCode = async () => {
     try {
-      const response = await refetch({ userId });
+      const response = await refetch();
 
       if (response.data) {
         toast({
@@ -106,6 +107,7 @@ export const Verification: React.FC = () => {
         variant: "success",
       });
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   useEffect(() => {
@@ -116,6 +118,7 @@ export const Verification: React.FC = () => {
         variant: "destructive",
       });
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [error]);
 
   return (

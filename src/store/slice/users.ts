@@ -25,7 +25,6 @@ export const apiSlice = createApi({
         method: "PUT",
         body: user,
       }),
-      invalidatesTags: ["User"], // Указывает, что после изменения данные с тегом "User" становятся неактуальными
     }),
     getUsers: builder.query({
       query: () => ({

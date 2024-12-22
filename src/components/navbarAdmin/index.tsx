@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useGetUsersQuery } from "@/store/slice/products";
 
 export default function NavbarAdmin() {
-  const { data } = useGetUsersQuery();
+  const { data } = useGetUsersQuery(undefined);
   const navigate = useNavigate();
 
   const initials = data?.username?.charAt(0).toUpperCase() || "";

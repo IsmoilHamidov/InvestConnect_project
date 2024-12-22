@@ -42,13 +42,13 @@ const CreateProductForm: React.FC<ModalProps> = ({onClose}) => {
     e.preventDefault();
 
     const payload = new FormData();
-    payload.append("user", 6);
+    payload.append("user", String(6));
     payload.append("name", formData.name);
     payload.append("rendement", formData.rendement);
     payload.append("location", formData.location);
     payload.append("description", formData.description);
-    payload.append("category", formData.category);
-    payload.append("contract", formData.contract);
+    payload.append("category", String(formData.category));
+    payload.append("contract", String(formData.contract));
     payload.append("price", formData.price);
 
     if (selectedFile) {

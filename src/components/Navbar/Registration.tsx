@@ -4,6 +4,7 @@ import { useAuthModalStore } from "@/store/authModalStore";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"; // Import React Icons for the eye toggle
+import { INavbarStepProps } from "./NavbarStep";
 
 interface RegistrationFormValues {
   username: string;
@@ -12,8 +13,8 @@ interface RegistrationFormValues {
   password: string;
 }
 
-export const Registration: React.FC = () => {
-  const { isOpen, openModal } = useAuthModalStore();
+export const Registration: React.FC<INavbarStepProps> = () => {
+  const { openModal } = useAuthModalStore();
   const { toast } = useToast();
 
   const [showPassword, setShowPassword] = useState(false); // State for toggling password visibility
@@ -29,7 +30,6 @@ export const Registration: React.FC = () => {
   const onSubmit = async (data: RegistrationFormValues) => {
     try {
       const response = await registerUser(data).unwrap();
-      console.log("Response: ", response);
 
       localStorage.setItem("user_id", response.user);
       localStorage.setItem("username", data.username);
@@ -97,12 +97,12 @@ export const Registration: React.FC = () => {
           />
           <span
             className="absolute right-3 top-3 cursor-pointer"
-            onClick={() => setShowPassword(!showPassword)} 
+            onClick={() => setShowPassword(!showPassword)}
           >
             {showPassword ? (
-              <AiOutlineEyeInvisible size={20} color="black" /> 
+              <AiOutlineEyeInvisible size={20} color="black" />
             ) : (
-              <AiOutlineEye size={20} color="black" /> 
+              <AiOutlineEye size={20} color="black" />
             )}
           </span>
         </div>
