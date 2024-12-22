@@ -1,4 +1,4 @@
-import { Pencil } from 'lucide-react';
+import { LogOut, Pencil } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
@@ -10,6 +10,9 @@ import { useEffect } from 'react';
 import { useToast } from '@/hooks/use-toast';
 
 import UserImg from "../../assets/images/user-img.svg";
+import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@radix-ui/react-dialog';
+import { DialogHeader } from '../ui/dialog';
+import { useNavigate } from 'react-router-dom';
 
 export function ProfileForm({ defaultValues }: ProfileFormProps) {
     const { toast } = useToast();
@@ -70,14 +73,43 @@ export function ProfileForm({ defaultValues }: ProfileFormProps) {
         }
     }, [error]);
 
+    const navigate = useNavigate();
+
+    const handleSignOut = () => {
+        localStorage.clear(); 
+        setTimeout(() => {
+            window.location.reload();
+        }, 200);
+        navigate('/')
+      };
+
     return (
         <Card className="w-full pt-10  rounded-2xl h-[1036px]">
             <CardContent className="grid gap-14">
-                <div className="flex flex-col items-center">
-                    <Avatar className="w-32 h-32 mb-4">
-                        <AvatarImage src={UserImg} alt="User Image" />
-                        <AvatarFallback>JD</AvatarFallback>
-                    </Avatar>
+        
+                <div className="flex flex-col items-center relative">
+                    <div className='absolute top-1 right-1'>
+                        <Dialog >
+                            <DialogTrigger> 
+                                <LogOut className='hover:text-custom-blue-gray text-2xl ease-in'/>
+                            </DialogTrigger>
+                            <DialogContent>
+                                <DialogHeader>
+                                <DialogTitle>You want to log out of the account?</DialogTitle>
+                                <div className="flex justify-center gap-10 pt-5">
+                                    <DialogTrigger>No</DialogTrigger>
+                                    <Button onClick={handleSignOut}>Yes</Button>
+                                </div>
+                                </DialogHeader>
+                            </DialogContent>
+                        </Dialog>
+                    </div>
+
+                    <div className="flex items-center justify-center bg-[#B29C6F] text-white 
+                        p-1 w-[53px] h-[50px] rounded-full text-xl font-medium mb-4">
+                        {data?.username.charAt(0).toUpperCase() || ""}
+                    </div>
+
                     {error ? (
                         <>Oh no, there was an error</>
                         ) : isLoading ? (
