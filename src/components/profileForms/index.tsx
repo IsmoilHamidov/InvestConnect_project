@@ -1,5 +1,4 @@
-import { LogOut, Pencil } from 'lucide-react';
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { LogOut } from 'lucide-react';
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Card, CardContent } from "../ui/card";
@@ -9,9 +8,7 @@ import { useForm } from "react-hook-form";
 import { useEffect } from 'react';
 import { useToast } from '@/hooks/use-toast';
 
-import UserImg from "../../assets/images/user-img.svg";
-import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@radix-ui/react-dialog';
-import { DialogHeader } from '../ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog';
 import { useNavigate } from 'react-router-dom';
 
 export function ProfileForm({ defaultValues }: ProfileFormProps) {
@@ -106,7 +103,7 @@ export function ProfileForm({ defaultValues }: ProfileFormProps) {
                     </div>
 
                     <div className="flex items-center justify-center bg-[#B29C6F] text-white 
-                        p-1 w-[53px] h-[50px] rounded-full text-xl font-medium mb-4">
+                        p-1 w-[83px] h-[80px] rounded-full text-4xl font-medium mb-4">
                         {data?.username.charAt(0).toUpperCase() || ""}
                     </div>
 
