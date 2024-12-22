@@ -25,9 +25,9 @@ export default function Sidebar() {
         <div className="flex  fixed z-50 flex-col   left-0 items-center w-[270px] min-h-screen  border-r bg-white">
             <div className="pt-4  ">
                 <img
-                    src="../../assets/images/invest-icon.png"
+                    src="/src/assets/images/invest-icon.png"
                     alt="Altro"
-                    className="h-8"
+                    className="h-8 pl-3"
                 />
             </div>
 

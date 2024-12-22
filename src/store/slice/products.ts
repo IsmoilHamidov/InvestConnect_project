@@ -64,7 +64,19 @@ export const api = createApi({
         body: productData,
       }),
     }),
-
+    updateProfileDetail: builder.mutation<
+      ProfileDetail,
+      UpdateProfileDetailArgs
+    >({
+      query: ({ data }) => ({
+        url: `/profile-detail/`,
+        method: "PATCH",
+        body: data,
+        headers: {
+          "Authorization": `Token ${localStorage.getItem("token") || ""}`
+        },
+      }),
+    }),
       
   }),
 });
@@ -77,7 +89,9 @@ export const {
   useGetUserProfileQuery,
   useGetUsersQuery,
   useCreateProductMutation,
-  useGetcreateProductMutation
+  useGetcreateProductMutation,
+  useUpdateProfileDetailMutation,
+
 } = api;
 
 export interface ProductInformation {
