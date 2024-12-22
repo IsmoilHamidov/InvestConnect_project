@@ -57,8 +57,6 @@ const ProfilePopover: React.FC = () => {
   
   const initials = username?.charAt(0).toUpperCase() || "";
 
-
-
   return (
     <div className="relative">
       {error || !username ? (

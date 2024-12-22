@@ -50,6 +50,6 @@ export interface Activity {
     image: string;
 }
 export interface ModalProps {
-    isOpen: boolean;
+    isOpen?: boolean;
     onClose: () => void;
 }
