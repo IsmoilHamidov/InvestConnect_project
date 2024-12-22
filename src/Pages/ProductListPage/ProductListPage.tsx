@@ -5,10 +5,6 @@ import { Button } from "@/components/ui/button";
 import { Product, ProductCard } from "@/components/ui/ProductCard";
 import { useGetProductsQuery } from "@/store/slice/products";
 import { useEffect, useState } from "react";
-import UserProfile from "../UserPage/UserProfile";
-import ProfileGetUser from "../UserPage/Profilesss";
-import { useNavigate } from "react-router-dom";
-
 
 const ProductListPage = () => {
   const [search, setSearch] = useState("");
@@ -16,7 +12,6 @@ const ProductListPage = () => {
   const [category, setCategory] = useState("");
   const [isModalOpen, setModalOpen] = useState(false);
 
-  const navigate = useNavigate()
 
   const { data, error, isLoading } = useGetProductsQuery(
     `?search=${search}&degree=${degree}&category__name=${category}`
@@ -25,12 +20,6 @@ const ProductListPage = () => {
   useEffect(() => {
     console.log("category", category);
   }, [category]);
-
-
-  useEffect(() => {
-    const user = localStorage.getItem("token")
-    user ? null : navigate("/")
-  },[])
 
   return (
     <>
@@ -88,8 +77,6 @@ const ProductListPage = () => {
             </>
           ) : null}
         </div>
-    
-        
       </main>
     </>
   );

@@ -20,7 +20,7 @@ const Banner: React.FC<BannerProps> = ({ children }) => {
         <img 
           src={logoImage} 
           alt="Логотип" 
-          className="object-contain pt-[275px]" 
+          className="object-contain pt-[312px]" 
         />
       </div>
       {/* Слой с контентом */}

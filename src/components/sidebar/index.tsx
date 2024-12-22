@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button"
 import { Mail, LayoutDashboard, Calendar, Activity, Users, ContactIcon as ContactsIcon, HelpCircle, Building2 } from 'lucide-react'
 import { cn } from "@/lib/utils"
 import { SidebarItemProps } from "@/interface"
-import SidebarLogo from "../../assets/images/altro-logo.svg"
 import UserImg from "../../assets/images/user-img.svg"
 
 function SidebarItem({ icon, label, isActive }: SidebarItemProps) {
@@ -26,7 +25,7 @@ export default function Sidebar() {
         <div className="flex  fixed z-50 flex-col   left-0 items-center w-[270px] min-h-screen  border-r bg-white">
             <div className="pt-4  ">
                 <img
-                    src={SidebarLogo}
+                    src="../../assets/images/invest-icon.png"
                     alt="Altro"
                     className="h-8"
                 />
