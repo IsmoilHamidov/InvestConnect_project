@@ -1,4 +1,6 @@
   import { Button } from "@/components/ui/button";
+  import ivestIcon from "../../assets/images/invest-icon.png"
+
   import {
     Mail,
     Home,
@@ -32,7 +34,7 @@ import { Link } from "react-router-dom";
       <div className="flex fixed z-50 flex-col left-0 items-center w-[270px] min-h-screen border-r bg-white">
         <Link to={"/"} className="pt-4">
           <img
-            src="/src/assets/images/invest-icon.png" // Update this path if needed
+            src={ivestIcon}
             alt="Altro"
             className="h-8 pl-3"
           />
