@@ -4,25 +4,24 @@ import { Button } from "./ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { ModalProps } from "@/interface";
 
-const CreateProductForm: React.FC<ModalProps> = ({onClose}) => {
+const CreateProductForm: React.FC<ModalProps> = ({ onClose }) => {
   const [createProduct, { isLoading, isError, isSuccess, error }] =
     useCreateProductMutation();
 
   const [formData, setFormData] = useState({
-    user: 1,
+    user: "6", 
     name: "",
     rendement: "",
     location: "",
     description: "",
-    category: 1,
-    contract: 1,
+    category: "1",
+    contract: "1",
     price: "",
   });
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
+  const { toast } = useToast();
 
-  const {toast} = useToast()
-  
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -38,34 +37,45 @@ const CreateProductForm: React.FC<ModalProps> = ({onClose}) => {
     }
   };
 
+  const debugFormData = (formData: FormData) => {
+    for (let pair of formData.entries()) {
+      console.log(`${pair[0]}: ${pair[1]}`);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const payload = new FormData();
-    payload.append("user", String(6));
+    payload.append("user", formData.user);
     payload.append("name", formData.name);
     payload.append("rendement", formData.rendement);
     payload.append("location", formData.location);
     payload.append("description", formData.description);
-    payload.append("category", String(formData.category));
-    payload.append("contract", String(formData.contract));
+    payload.append("category", formData.category);
+    payload.append("contract", formData.contract);
     payload.append("price", formData.price);
 
     if (selectedFile) {
-      payload.append("image", selectedFile); // Добавляем файл изображения
+      payload.append("image", selectedFile);
     }
 
-    console.log("payload: ", payload);
+    debugFormData(payload); // Optional: Logs FormData content for debugging.
+
     try {
       const result = await createProduct(payload).unwrap();
       console.log("Product created:", result);
-      onClose()
+      onClose();
       toast({
-        description: `Product created`,
+        description: "Product created successfully!",
         variant: "success",
       });
     } catch (err) {
       console.error("Failed to create product:", err);
+      toast({
+        description: "Failed to create product. Please try again.",
+        variant: "destructive",
+      });
     }
   };
 
@@ -125,8 +135,12 @@ const CreateProductForm: React.FC<ModalProps> = ({onClose}) => {
       <Button type="submit" disabled={isLoading}>
         {isLoading ? "Creating..." : "Create Product"}
       </Button>
-      {isSuccess && <p>Product created successfully!</p>}
-      {isError && <p>Error creating product: {JSON.stringify(error)}</p>}
+      {isSuccess && <p className="text-green-600">Product created successfully!</p>}
+      {isError && (
+        <p className="text-red-600">
+          Error creating product: {JSON.stringify(error)}
+        </p>
+      )}
     </form>
   );
 };

@@ -28,17 +28,17 @@ const AddProduct: React.FC = () => {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
 
   const onSubmit: SubmitHandler<ProductFormInputs> = async (data) => {
-    const productData = {
-      user: data.user,
-      name: data.name,
-      rendement: data.rendement,
-      location: data.location,
-      description: data.description,
-      category: data.category,
-      contract: data.contract,
-      price: data.price,
-      image: data.image, // image should be handled separately
-    };
+    // const productData = {
+    //   user: data.user,
+    //   name: data.name,
+    //   rendement: data.rendement,
+    //   location: data.location,
+    //   description: data.description,
+    //   category: data.category,
+    //   contract: data.contract,
+    //   price: data.price,
+    //   image: data.image, // image should be handled separately
+    // };
 
     const formData = new FormData();
     formData.append("user", data.user.toString());
@@ -58,7 +58,7 @@ const AddProduct: React.FC = () => {
     }
 
     try {
-      await createProduct(productData).unwrap();
+      await createProduct(formData).unwrap();
       alert("Product added successfully!");
     } catch (error) {
       console.error("Error adding product:", error);

@@ -29,13 +29,23 @@ export const api = createApi({
         params,
       }),
     }),
-    createProduct: builder.mutation<void, CreateProductRequest>({
+    
+    // createProduct: builder.mutation<void, CreateProductRequest>({
+    //   query: (data) => ({
+    //     url: '/products/create/',
+    //     method: 'POST',
+    //     body: data,
+    //   }),
+    // }),
+
+    createProduct: builder.mutation<void, FormData>({
       query: (data) => ({
         url: '/products/create/',
         method: 'POST',
         body: data,
       }),
     }),
+
     getUserProfile: builder.query({
       query: () => ({
         url: "/profile-detail/",
@@ -99,14 +109,14 @@ export interface ProductInformation {
   value: string;
 }
 
-interface CreateProductRequest {
-  user: number;
-  name: string;
-  rendement: string;
-  location: string;
-  description: string;
-  category: number;
-  contract: number;
-  price: string;
-  image: File;
-}
+// interface CreateProductRequest {
+//   user: number;
+//   name: string;
+//   rendement: string;
+//   location: string;
+//   description: string;
+//   category: number;
+//   contract: number;
+//   price: string;
+//   image: File;
+// }
