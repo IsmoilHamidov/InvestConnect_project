@@ -6,7 +6,7 @@ import {
   FaTwitter,
 } from "react-icons/fa";
 import logo from "../../assets/images/logo-removebg-preview.png";
-import logo_text from "../../assets/images/Group-1.png";
+import logo_text from "../../assets/images/navLogo.png";
 import ProfilePopover from "./ProfilePopover ";
 
 
@@ -51,16 +51,10 @@ const Navbar: React.FC = () => {
       <div className="w-full border-t my-1 border-[#749BA9]"></div>
       <div className="flex justify-between items-center">
         <div className="flex justify-center items-center gap-x-3 py-2">
-          <img src={logo} alt="logo" className="h-[60px] object-contain" />
-          <div className="w-28">
-            <img src={logo_text} alt="logo_text" />
-            <p
-              style={{ letterSpacing: "3px" }}
-              className="text-white text-[11px] mt-1"
-            >
-              INVEST
-            </p>
-          </div>
+          {/* <img src={logo} alt="logo" className="h-[60px] object-contain" /> */}
+      
+            <img src={logo_text} className="h-14 object-contain" alt="logo_text" />
+          
         </div>
         <div className="h-full flex items-center gap-x-7 text-white text-base font-normal">
           <a href="#">Aanbod</a>
