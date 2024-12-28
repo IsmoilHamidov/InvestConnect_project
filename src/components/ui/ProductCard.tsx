@@ -1,6 +1,6 @@
 import { Star } from "lucide-react";
-import DonationForm from "../DonationForm";
 import { Link } from "react-router-dom";
+import { Button } from "./button";
 
 // Тип для Category
 interface Category {
@@ -39,7 +39,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => (
       </div>
 
       <div className="px-4 py-2 bg-yellow-600 absolute top-3.5 -right-[25px] text-red-50">
-        {product ? product.degree :`Topligging`}
+        Topligging
       </div>
 
       <Star className="cursor-pointer absolute top-5 left-5 scale-125 fill-white text-yellow-600 active:fill-yellow-600" />
@@ -60,7 +60,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => (
       <div>{product.description}</div>
       <div className="flex justify-between pt-5">
         <div className="text-2xl">{product.price} UZS</div>
-        <DonationForm id={product.id} price={product.price} />
+        <Link to={`/product/${product.id}`}>
+          <Button className="border rounded-[40px] px-4 py-2">
+            Ontdek meer
+          </Button>
+        </Link>
       </div>
     </div>
   </div>
