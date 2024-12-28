@@ -9,7 +9,6 @@ import { Button } from "./ui/button";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 
 
@@ -23,7 +22,8 @@ const paymentMethods = [
 
 interface DonationFormProps {
   price: number;
-  id: number;
+  id?: number;
+  onPaymentSuccess: () => void;
 }
 
 interface DonatFormData {
@@ -52,9 +52,10 @@ const schema = yup.object({
   paymentMethod: yup.string().required("Выберите способ оплаты"),
 });
 
-const DonationForm: React.FC<DonationFormProps> = ({ price, id }) => {
+const DonationForm: React.FC<DonationFormProps> = ({ price, id, onPaymentSuccess }) => {
   const { toast } = useToast();
-  const navigate = useNavigate(); // Хук для перенаправления
+  console.log(id);
+  
 
   const {
     control,
@@ -82,9 +83,7 @@ const DonationForm: React.FC<DonationFormProps> = ({ price, id }) => {
     });
 
     // Задержка и перенаправление
-    setTimeout(() => {
-      navigate(`/product/${id}/`); // Страница перенаправления
-    }, 2000);
+    onPaymentSuccess()
   };
 
   return (
@@ -92,8 +91,8 @@ const DonationForm: React.FC<DonationFormProps> = ({ price, id }) => {
 
   
 
-       <DialogTrigger asChild>
-          <Button className="border rounded-[40px] px-4 py-2">Ontdek meer</Button>
+        <DialogTrigger asChild>
+          <Button className="border rounded-[40px] px-4 py-2">Получить данные</Button>
         </DialogTrigger>
     
 
