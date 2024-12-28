@@ -8,13 +8,13 @@ import { useState } from "react";
 
 const ProductListPage = () => {
   const [search, setSearch] = useState("");
-  const [degree, setDegree] = useState("");
+  // const [degree, setDegree] = useState("");
   const [category, setCategory] = useState("");
   const [isModalOpen, setModalOpen] = useState(false);
 
 
   const { data, error, isLoading } = useGetProductsQuery(
-    `?search=${search}&degree=${degree}&category__name=${category}`
+    `?search=${search}&degree=&category__name=${category}`
   );
 
   return (
@@ -38,20 +38,21 @@ const ProductListPage = () => {
                   setCategory(selectedCategory)
                 }
               />
-              <select
-                className="border bg-background px-6 py-3 border-black rounded-[75px] text-primary"
-                value={degree} // Привязка состояния к select
-                onChange={(e) => setDegree(e.target.value)} // Обновление состояния Degree
-              >
-                <option value="">---</option>
-                <option value="bronze">bronze</option>
-                <option value="silver">silver</option>
-                <option value="gold">gold</option>
-              </select>
+              {/* <select
+              //   className="border bg-background px-6 py-3 border-black rounded-[75px] text-primary"
+              //   value={degree} // Привязка состояния к select
+              //   onChange={(e) => setDegree(e.target.value)} // Обновление состояния Degree
+              // >
+              //   <option value="">---</option>
+              //   <option value="bronze">bronze</option>
+              //   <option value="silver">silver</option>
+              //   <option value="gold">gold</option>
+              // </select> */}
               <input
                 className="border bg-background px-6 py-3 border-black rounded-[75px]"
                 type="text"
                 value={search}
+                placeholder="search"
                 onChange={(e) => {
                   setSearch(e.target.value);
                 }}

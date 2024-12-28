@@ -36,7 +36,7 @@ const Navbar: React.FC = () => {
         {/* Navbar Content */}
         <div className="flex gap-x-7 items-center text-white text-base font-normal">
           <button className="Blue_button border-0 rounded-3xl p-2 px-3 text-sm bg-[#749BA9]">
-            ALTRO INVEST PLATFORM
+            INVEST CONNECT PLATFORM
           </button>
           <a href="#">Over ons</a>
           <a href="#">Blog</a>
@@ -66,7 +66,7 @@ const Navbar: React.FC = () => {
             <i className="fa-solid fa-phone me-2"></i>09 / 279 88 92
           </a>
           <a href="#">
-            <i className="fa-solid fa-envelope me-2"></i>info@altro-invest.be
+            <i className="fa-solid fa-envelope me-2"></i>info@invest-connect.be
           </a>
         </div>
       </div>

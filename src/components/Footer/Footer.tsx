@@ -67,7 +67,7 @@ function Footer() {
         </div>
         
         <div className='w-full bg-custom-blue-gray py-4 relative z-40'>
-            <p className='max-w-7xl m-auto text-white'>Copyright © 2022 Altro Invest. All Rights Reserved.</p>
+            <p className='max-w-7xl m-auto text-white'>Copyright © 2022 Invest Connect All Rights Reserved.</p>
         </div>
     </>
   )
