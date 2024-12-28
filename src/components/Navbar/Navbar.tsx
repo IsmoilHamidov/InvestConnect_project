@@ -5,7 +5,6 @@ import {
   FaYoutube,
   FaTwitter,
 } from "react-icons/fa";
-import logo from "../../assets/images/logo-removebg-preview.png";
 import logo_text from "../../assets/images/navLogo.png";
 import ProfilePopover from "./ProfilePopover ";
 

@@ -121,6 +121,7 @@ html{
 }
 
 .Brown_button{
+  background-color: #B29C6F;
   transition: .2s ease-in;
   outline: none !important;
 }
