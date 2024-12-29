@@ -1,21 +1,32 @@
   import { Button } from "@/components/ui/button";
   import ivestIcon from "../../assets/images/invest-icon.png"
+  import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog';
+  import { useNavigate } from 'react-router-dom';
 
   import {
-    Mail,
     Home,
     Briefcase, 
     Calendar,
     Users,
     HelpCircle,
     Building2,
-    UserRound,
+    LogOut,
+    Pencil,
   } from "lucide-react";
   import { cn } from "@/lib/utils";
   import { useGetUserProfileQuery } from "@/store/slice/products";
 import { Link } from "react-router-dom";
+import { ProfileForm } from "../profileForms";
+import { useEffect, useRef, useState } from "react";
+import { HiX } from "react-icons/hi";
+
+
+
+
+function SidebarItem({ icon, label, isActive }: SidebarItemProps) {
   
-  function SidebarItem({ icon, label, isActive }: SidebarItemProps) {
+
+
     return (
       <Button
         variant="ghost"
@@ -28,7 +39,28 @@ import { Link } from "react-router-dom";
   }
   
   export default function Sidebar() {
+    
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+
+    const toggleModal = () => {
+      setIsModalOpen(!isModalOpen);
+    };
+
+
+
+    
+    const navigate = useNavigate();
     const { data, error, isLoading } = useGetUserProfileQuery(undefined);
+    const handleSignOut = () => {
+      localStorage.clear();
+      setTimeout(() => {
+          window.location.reload();
+      }, 200);
+      navigate('/');
+  };
+
+
   
     return (
       <div className="flex fixed z-50 flex-col left-0 items-center w-[270px] min-h-screen border-r bg-white">
@@ -42,9 +74,13 @@ import { Link } from "react-router-dom";
   
         <div className="flex flex-col items-center border-b p-6">
           
-          <UserRound size={'40'} className="text-custom-gray mt-2" />
-          
+        
+          <div className="flex items-center justify-center bg-[#B29C6F] text-white p-1
+           w-[53px] h-[50px] rounded-full text-3xl font-medium mb-2 mt-3">
+                    {data?.username?.charAt(0).toUpperCase() || ""}
+                </div>
           <div className="text-center mt-2">
+
             {error ? (
               <>Oh no, there was an error</>
             ) : isLoading ? (
@@ -61,17 +97,52 @@ import { Link } from "react-router-dom";
             ) : null}
           </div>
           <div className="flex gap-2 mt-4 mb-8">
-            <Button variant="ghost" size="icon">
-              <Mail className="h-4 w-4" />
-            </Button>
-            <Button variant="ghost" size="icon">
-              <Users className="h-4 w-4" />
-            </Button>
+
+          <Button variant="ghost" size="icon" onClick={toggleModal}>
+              <Pencil className="h-4 w-4" />
+          </Button>
+
+            {isModalOpen && (
+              <div
+                className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+                <div
+                  className="bg-white rounded-xl p-6 w-[31%] h-[auto] relative"
+                  onClick={(e) => e.stopPropagation()} 
+                >
+                  <button
+                    className="absolute top-3 right-3 text-gray-500 hover:text-gray-800"
+                    onClick={toggleModal} 
+                  >
+                    <HiX size={24} />
+                  </button>
+                  <ProfileForm />
+                </div>
+              </div>
+            )}
+
+          
             <Link to={'/products'}>
-              <Button variant="ghost" size="icon">
-                <Briefcase className="h-4 w-4" />
+              <Button  variant="ghost" size="icon">
+                  <Briefcase className="h-4 w-4" />
               </Button>
             </Link>
+
+            <Button variant="ghost" size="icon">
+                    <Dialog>
+                        <DialogTrigger>
+                            <LogOut className="hover:text-custom-blue-gray w-4 h-4 ease-in" />
+                        </DialogTrigger>
+                        <DialogContent>
+                            <DialogHeader>
+                                <DialogTitle>You want to log out of the account?</DialogTitle>
+                                <div className="flex justify-center gap-10 pt-5">
+                                    <DialogTrigger>No</DialogTrigger>
+                                    <Button onClick={handleSignOut}>Yes</Button>
+                                </div>
+                            </DialogHeader>
+                        </DialogContent>
+                    </Dialog>
+              </Button>
           </div>
         </div>
   

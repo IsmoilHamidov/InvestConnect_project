@@ -33,7 +33,7 @@ const AddProduct: React.FC = () => {
     //   name: data.name,
     //   rendement: data.rendement,
     //   location: data.location,
-    //   description: data.description,
+    //   description: data.descriptiona,
     //   category: data.category,
     //   contract: data.contract,
     //   price: data.price,

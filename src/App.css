@@ -121,6 +121,7 @@ html{
 }
 
 .Brown_button{
+  background-color: #B29C6F;
   transition: .2s ease-in;
   outline: none !important;
 }
@@ -130,6 +131,7 @@ html{
 }
 
 .Blue_button{
+  background-color: #749BA9;
   transition: .2s ease-in;
   outline: none !important;
 }
