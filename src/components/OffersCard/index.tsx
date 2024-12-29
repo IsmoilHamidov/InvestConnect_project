@@ -15,11 +15,12 @@ const ProperyCard: React.FC<OfferCardProps> = ({
   isTopLocation,
 }) => {
   return (
-    <Card className="flex relative border-[#C5C3C3]  items-center p-4 mb-4">
+    <Card className="flex  relative border border-[#C5C3C3] items-center 
+    px-4 py-3 mb-5 ">
       <img
         src={image}
         alt={title}
-        className="w-24 h-24 rounded object-cover mr-4"
+        className="w-20 h-20 rounded object-cover mr-4"
       />
       <div className="flex-1">
         <CardHeader className="p-0">
@@ -27,7 +28,7 @@ const ProperyCard: React.FC<OfferCardProps> = ({
             {title}
           </CardTitle>
         </CardHeader>
-        <CardContent className="p-0 flex flex-row items-center gap-2 mt-1">
+        <CardContent className="flex flex-col gap-2 mt-1 ">
           <div>
             <p className="text-sm text-[#948F8F] font-light ">
               {location} ·{" "}
@@ -37,21 +38,29 @@ const ProperyCard: React.FC<OfferCardProps> = ({
             </p>
           </div>
           <div>
-            <p className="text-base font-semibold mt-2">{price}</p>
+            <p className="text-base font-medium text-custom-gray">{price}</p>
           </div>
         </CardContent>
       </div>
       {isTopLocation && (
-        <div className="bg-[#B29C6F] absolute top-0 right-0   px-3 py-1">
-          <p className="font-normal text-white text-[10px] leading-3 ">
-            Topligging
-          </p>
+        <div className="absolute top-1 -right-3 grid justify-items-end">
+          <div className="bg-[#B29C6F]  px-2 py-2">
+            <p className="font-normal text-white text-[12px] leading-3 ">
+              Topligging
+            </p>
+          </div>
+          <div
+            className="bg-[#443B3A] w-3 h-3"
+            style={{
+              clipPath: "polygon(0 0, 0 100%, 100% 0)",
+            }}
+          ></div>
         </div>
       )}
       <Link to={`/product/${title}`}>
         <Button
           variant="outline"
-          className=" bg-[#749BA9] rounded-[40px] text-xs text-white "
+          className=" Blue_button hover:text-white mt-5 rounded-[40px] text-xs text-white "
         >
           Ontdek meer!
         </Button>
@@ -97,14 +106,14 @@ const Offers: React.FC = () => {
 
   return (
     <>
-      <div className="p-6 w-full mx-auto shadow-xl border-[1px]  rounded-[15px]  ">
-        <div className="flex flex-row items-center justify-between mb-6 ">
+      <div className="p-6 w-full mx-auto shadow-xl border-[1px] rounded-[15px]  ">
+        <div className="flex flex-row items-center justify-between mb-9 ">
           <h1 className="text-base font-semibold">Aanbod</h1>
 
           <Link to={'/ProjectAdd'}>
-              <button className="rounded-full py-2 px-5 text-white Blue_button" >
-                <i className="fa-solid fa-plus text-[16px] me-3"></i>
-                Add New Project
+              <button className="rounded-full text-[15px] py-[7px] px-5 text-white Blue_button" >
+                <i className="fa-solid fa-plus  me-3"></i>
+                Add Project
               </button>
           </Link>
 
@@ -121,14 +130,7 @@ const Offers: React.FC = () => {
         {offers.map((offer, index) => (
           <ProperyCard key={index} {...offer} />
         ))}
-        <div className="flex justify-end">
-          <Link
-            to={"#"}
-            className=" text-end  text-[#443B3A] font-normal hover:underline"
-          >
-            Het aanbod
-          </Link>
-        </div>
+       
       </div>
       <ProductModal isOpen={isModalOpen} onClose={closeBtn} />
     </>

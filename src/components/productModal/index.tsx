@@ -16,7 +16,7 @@ const ProductModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
                         style={{ zIndex: 50 }}
                     />
                     <Card
-                        className="bg-white p-6 rounded-lg shadow-lg w-96 relative transform transition-transform duration-500 scale-100"
+                        className="w-full bg-white p-6 rounded-lg shadow-lg  relative transform transition-transform duration-500 scale-100"
                         onClick={(e) => e.stopPropagation()}
                         style={{ zIndex: 51, boxShadow: '0px 6px 44px 0px #e9e9e9' }}
                     >

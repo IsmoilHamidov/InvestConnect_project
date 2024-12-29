@@ -132,6 +132,7 @@ const CreateProductForm: React.FC<ModalProps> = ({ onClose }) => {
         onChange={handleFileChange}
         required
       />
+      
       <Button type="submit" disabled={isLoading}>
         {isLoading ? "Creating..." : "Create Product"}
       </Button>
