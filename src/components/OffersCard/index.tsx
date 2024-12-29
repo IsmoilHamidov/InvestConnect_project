@@ -100,12 +100,23 @@ const Offers: React.FC = () => {
       <div className="p-6 w-full mx-auto shadow-xl border-[1px]  rounded-[15px]  ">
         <div className="flex flex-row items-center justify-between mb-6 ">
           <h1 className="text-base font-semibold">Aanbod</h1>
-          <Button
+
+          <Link to={'/ProjectAdd'}>
+              <button className="rounded-full py-2 px-5 text-white Blue_button" >
+                <i className="fa-solid fa-plus text-[16px] me-3"></i>
+                Add New Project
+              </button>
+          </Link>
+
+
+          {/* <Button
             className="rounded-full py-4 px-6 text-white bg-[#B29C6F] Brown_button  "
             onClick={navBtn}
           >
             <i className="fa-solid fa-plus text-[15px]"></i>
-          </Button>
+          </Button> */}
+
+          
         </div>
         {offers.map((offer, index) => (
           <ProperyCard key={index} {...offer} />
