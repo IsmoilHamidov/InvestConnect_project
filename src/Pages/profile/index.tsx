@@ -2,6 +2,7 @@ import NavbarAdmin from "@/components/navbarAdmin";
 import Sidebar from "@/components/sidebar";
 // import { ProfileForm } from "@/components/profileForms";
 import Offers from "../../components/OffersCard";
+import AnalyticsBox from "@/components/OffersCard/AnalyticsBox";
 
 
 
@@ -21,8 +22,12 @@ const Profile = () => {
               <ProfileForm />
             </div> */}
 
-            <div className="flex flex-col w-full gap-y-7">
-              <div>
+            <div className="flex flex-row w-full justify-between gap-y-7 ">
+              <div className="w-2/5">
+                <AnalyticsBox/>
+              </div>
+              
+              <div className="w-[55%]">
                 <Offers />
               </div>
             </div>

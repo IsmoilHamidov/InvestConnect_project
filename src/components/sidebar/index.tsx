@@ -76,7 +76,7 @@ function SidebarItem({ icon, label, isActive }: SidebarItemProps) {
           
         
           <div className="flex items-center justify-center bg-[#B29C6F] text-white p-1
-           w-[53px] h-[50px] rounded-full text-3xl font-medium mb-2 mt-3">
+           w-[70px] h-[70px] rounded-full text-5xl font-normal mb-2 mt-3">
                     {data?.username?.charAt(0).toUpperCase() || ""}
                 </div>
           <div className="text-center mt-2">
