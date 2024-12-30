@@ -3,7 +3,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 import { useGetCategoriesQuery } from '@/store/slice/products';
 
 // Define the Category type
-type Category = {
+export type CategoryType = {
   id: string;
   name: string;
   img?: string;
@@ -27,7 +27,7 @@ const CategoriesModal: React.FC<CategoriesModalProps> = ({ open, onClose, onSele
         {isLoading && <p>Загрузка...</p>}
         {error && <p>Произошла ошибка при загрузке категорий.</p>}
         <ul className="space-y-2">
-          {categories?.map((category: Category) => (
+          {categories?.map((category: CategoryType) => (
             <li
               key={category.id}
               className="flex items-center space-x-4 cursor-pointer hover:bg-gray-100 p-2 rounded"
