@@ -3,6 +3,7 @@ import Sidebar from "@/components/sidebar";
 // import { ProfileForm } from "@/components/profileForms";
 import Offers from "../../components/OffersCard";
 import AnalyticsBox from "@/components/OffersCard/AnalyticsBox";
+import Sample from "@/components/Activities/sample";
 
 
 
@@ -27,12 +28,15 @@ const Profile = () => {
                 <AnalyticsBox/>
               </div>
               
+              <div>
+                  <Sample/>
+              </div>
+              
               <div className="w-[55%]">
                 <Offers />
               </div>
+         
             </div>
-
-
           </div>
         </main>
       </div>

@@ -60,7 +60,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => (
       <div>{product.description}</div>
       <div className="flex justify-between pt-5">
         <div className="text-2xl">{product.price} UZS</div>
-        <Link to={`/product/${product.id}`}>
+        <Link to={`/product/${product.id}`}
+           onClick={() => {
+            sessionStorage.setItem("scrollPosition", String(window.scrollY));
+          }}>
           <Button className="border rounded-[40px] px-4 py-2">
             Ontdek meer
           </Button>

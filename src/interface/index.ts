@@ -45,7 +45,7 @@ export interface OfferCardProps {
 
 export interface Activity {
     title: string;
-    date: string;
+    price: string;
     month: string;
     image: string;
 }

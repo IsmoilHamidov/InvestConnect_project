@@ -4,6 +4,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { OfferCardProps } from "@/interface";
 import { Link } from "react-router-dom";
 import ProductModal from "../productModal";
+import {
+  useCreateProductMutation,
+  useGetCategoriesQuery,
+  useGetUsersQuery,
+} from "@/store/slice/products";
 
 
 const ProperyCard: React.FC<OfferCardProps> = ({
