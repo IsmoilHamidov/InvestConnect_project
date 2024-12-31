@@ -48,15 +48,15 @@ function Projects() {
   }
 
   return (
-    <div id="Project" className="relative min-h-[60rem] mt-8">
-      <div
+    <div  className="relative min-h-[60rem] mt-8">
+      <div 
         className="w-full z-10 h-[45rem] bg-[#443B3A] rounded-br-none py-12"
         style={{
           clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 75%)",
         }}
       ></div>
 
-      <div className="flex flex-col justify-center items-center z-20 absolute top-[120px] left-1/2 transform -translate-x-1/2">
+      <div id="Project" className="flex flex-col justify-center items-center z-20 absolute top-[120px] left-1/2 transform -translate-x-1/2">
         <h3 className="text-center text-[2.5rem] font-light text-white">
           Projecten in de kijker
         </h3>

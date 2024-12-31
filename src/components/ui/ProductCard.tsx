@@ -1,7 +1,7 @@
 import { Star } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "./button";
-
+import { IoIosStarOutline } from "react-icons/io";
 // Тип для Category
 interface Category {
   name: string; // Название категории (обязательно, от 1 до 100 символов)
@@ -28,25 +28,30 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => (
       <img
         src={product.image}
         alt={product.name}
-        className="w-[391px] h-[368px] object-cover"
+        className="w-[391px] h-[368px] object-cover z-20"
         style={{ objectPosition: "center" }} // Центрирование изображения
       />
 
-      <div className="absolute inset-0 bg-primary bg-opacity-50 opacity-0 group-hover:opacity-85 transition-opacity duration-300 flex items-center justify-center">
-        <Link to={`/product/${product.id}`}>
-          <span className="text-white text-lg font-semibold">Подробнее</span>
-        </Link>
+      <Link to={`/product/${product.id}`} className="absolute inset-0 bg-primary bg-opacity-60 opacity-0 z-20 group-hover:opacity-85 transition-opacity duration-300 flex items-center justify-center">
+          <span className="text-white text-lg font-semibold z-40">Подробнее</span>
+      </Link>
+
+      <div className="px-4 py-2 bg-[#B29C6F] absolute top-3.5 -right-[25px] text-red-50 z-20">
+          Topligging
       </div>
 
-      <div className="px-4 py-2 bg-yellow-600 absolute top-3.5 -right-[25px] text-red-50">
-        Topligging
-      </div>
+      <Star
+        role="button"
+        tabIndex={0}
+        className="cursor-pointer absolute top-5 left-5 scale-125 fill-white text-[#B29C6F] focus:fill-[#B29C6F]  focus:text-gray-800 focus:scale-30 outline-none z-30"
+      />
 
-      <Star className="cursor-pointer absolute top-5 left-5 scale-125 fill-white text-yellow-600 active:fill-yellow-600" />
+      
     </div>
 
+
     {/* Контент карточки */}
-    <div className="border-2 border-black grid px-4 py-6 gap-3">
+    <div className="border-2 border-custom-gray grid px-4 py-6 gap-3">
       <div className="flex justify-between">
         <span className="title text-2xl text-primary font-semibold">
           {product.name}
@@ -64,7 +69,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => (
            onClick={() => {
             sessionStorage.setItem("scrollPosition", String(window.scrollY));
           }}>
-          <Button className="border rounded-[40px] px-4 py-2">
+          <Button className="Blue_button border rounded-[40px] px-4 py-2">
             Ontdek meer
           </Button>
         </Link>

@@ -13,10 +13,9 @@ const ProductListPage = () => {
   const [category, setCategory] = useState("");
   const [isModalOpen, setModalOpen] = useState(false);
 
-
   const { data, error, isLoading } = useGetProductsQuery(
     `?search=${search}&degree=&category__name=${category}`
-  );
+    );
 
   const location = useLocation();
   useEffect(() => {
@@ -34,7 +33,7 @@ const ProductListPage = () => {
       <main >
         <Banner>
           <div>
-            <div className="flex gap-3 pt-36 pb-24 justify-center items-center ">
+            <div className="flex gap-5 pt-36 pb-28 justify-center items-center">
               <Button
                 variant="secondary"
                 onClick={() => setModalOpen(true)}
@@ -60,10 +59,10 @@ const ProductListPage = () => {
               //   <option value="gold">gold</option>
               // </select> */}
               <input
-                className="border bg-background px-6 py-3 border-black rounded-[75px]"
+                className="border bg-background w-[20rem] px-5 py-3 border-black rounded-[75px]"
                 type="text"
                 value={search}
-                placeholder="search"
+                placeholder="Search"
                 onChange={(e) => {
                   setSearch(e.target.value);
                 }}
