@@ -12,6 +12,7 @@ import { CategoryType } from "../Category";
 function ProjectForm() {
   const [createProduct, { isLoading, isError, isSuccess, error }] =
     useCreateProductMutation();
+  
   const { data: getUserId } = useGetUsersQuery(undefined);
 
   const { data: getCategories } = useGetCategoriesQuery(undefined);
@@ -26,6 +27,7 @@ function ProjectForm() {
     }
   }, [isSuccess, navigate]);
 
+  
   const [formData, setFormData] = useState({
     user: getUserId?.id,
     name: "",
@@ -37,7 +39,6 @@ function ProjectForm() {
     price: "",
   });
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-
   const { toast } = useToast();
 
   const handleChange = (

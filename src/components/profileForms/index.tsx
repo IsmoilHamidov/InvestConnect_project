@@ -28,6 +28,7 @@ export function ProfileForm() {
             Object.keys(data).forEach((key) => {
                 const typedKey = key as keyof typeof data;
                 setValue(typedKey as string, data[typedKey]);
+        
             });
         }
     }, [data, setValue]);
@@ -41,6 +42,7 @@ export function ProfileForm() {
     const onSubmit = async (formData: Record<string, string>) => {
         try {
             await updateProfileDetail({ id: data?.id, data: formData }).unwrap();
+         
             toast({
                 description: `Saved!`,
                 variant: "success",

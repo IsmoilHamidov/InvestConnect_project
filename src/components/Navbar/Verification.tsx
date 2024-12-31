@@ -153,7 +153,8 @@ export const Verification: React.FC<INavbarStepProps> = () => {
 
             <button
               onClick={handleResendCode}
-              className="Blue_button text-center font-semibold h-10 w-[47%] border-2 border-custom-blue-gray hover:text-white hover:border-0 text-custom-blue-gray p-2 rounded-lg "
+              className="text-center font-semibold h-10 w-[47%] border-2 border-custom-blue-gray hover:text-white hover:border-0
+               text-custom-blue-gray p-2 rounded-lg hover:bg-[#57737d] transition-all duration-200 ease-in "
             >
               Resend Code
             </button>
