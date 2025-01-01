@@ -7,6 +7,7 @@ import { EyeOff } from "lucide-react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 
+
 export const ProductDetailsPage = () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { productid } = useParams<{ productid: string | any }>();
@@ -28,17 +29,17 @@ export const ProductDetailsPage = () => {
   return (
     <>
       <NavbarAdmin />
-      <Sidebar />
+      {/* <Sidebar /> */}
 
-      <main className="max-w-5xl mx-auto p-10 pt-20">
+      <main className="max-w-7xl mx-auto p-10 pt-32">
         <Tabs defaultValue="free">
           <TabsList>
             <TabsTrigger value="free">Total information</TabsTrigger>
             <TabsTrigger value="paid">Private information</TabsTrigger>
           </TabsList>
-          <div className="my-8 flex gap-8 items-center">
-            <h1 className="text-4xl font-semibold">{data?.name}</h1>
-            <div className="bg-green-100 py-1 px-4 rounded-xl text-green-600">активный</div>
+          <div className="mt-16 mb-5 flex gap-8 items-center">
+            <h1 className="text-4xl font-semibold text-custom-gray">{data?.name}</h1>
+            <div className="bg-green-200 py-1 px-4 rounded-xl text-green-700">активный</div>
           </div>
           <TabsContent value="free">
             {error ? (
