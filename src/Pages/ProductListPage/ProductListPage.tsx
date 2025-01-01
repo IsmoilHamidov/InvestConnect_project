@@ -16,6 +16,7 @@ const ProductListPage = () => {
   const { data, error, isLoading } = useGetProductsQuery(
     `?search=${search}&degree=&category__name=${category}`
     );
+  
 
   const location = useLocation();
   useEffect(() => {
@@ -70,7 +71,7 @@ const ProductListPage = () => {
             </div>
           </div>
         </Banner>
-        <div className="products grid grid-cols-3 pt-44 pr-5 max-w-7xl m-auto">
+        <div className="products grid grid-cols-3 pt-48 pr-5 max-w-7xl m-auto">
           {error ? (
             <>Oh no, there was an error</>
           ) : isLoading ? (

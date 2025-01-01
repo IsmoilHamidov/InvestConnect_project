@@ -3,8 +3,8 @@ import { FaCreditCard } from "react-icons/fa";
 
 export default function BankCardBalance() {
   return (
-    <div className="w-full min-h-[16rem] h-auto   bg-gradient-to-r
-     from-[#1e2f36] to-[#57737d] text-white rounded-lg shadow-lg p-6">
+    <div className="w-full min-h-[16rem] h-auto   bg-gradient-to-r 
+     from-[#1e2f36] to-[#57737d] text-white shadow-lg border-[1px] rounded-xl p-6">
       <div className="flex items-center justify-between mb-6">
         <div>
           <h2 className="text-lg font-semibold tracking-wide">Bank Card</h2>

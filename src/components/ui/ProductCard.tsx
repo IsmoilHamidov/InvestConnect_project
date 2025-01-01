@@ -1,7 +1,10 @@
 import { Star } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Button } from "./button";
 import { IoIosStarOutline } from "react-icons/io";
+
+
+
 // Тип для Category
 interface Category {
   name: string; // Название категории (обязательно, от 1 до 100 символов)
@@ -18,9 +21,12 @@ export interface Product {
   price: number;
 }
 
+
 interface ProductCardProps {
   product: Product;
 }
+
+
 
 export const ProductCard: React.FC<ProductCardProps> = ({ product }) => (
   <div className="product grid px-4 py-6">
