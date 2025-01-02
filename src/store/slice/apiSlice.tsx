@@ -56,13 +56,14 @@ export const userApi = createApi({
     }),
 
     // startup profile uchun
-    getProductsList: builder.query<any, void>({
+    getUserProductsList: builder.query<any, void>({
       query: () => ({
         url: "/users/products/list",
         method: "GET",
         headers: {
           accept: "application/json",
           "X-CSRFToken": "uL30ziq8sA10mDy97pNjSzsF0J56vpm90aBLkPjgQppWNIR37fzeKpzYT0k9zz4q", 
+          "Authorization": `Token ${localStorage.getItem("token") || ""}`
         },
       }),
     }),
@@ -76,5 +77,5 @@ export const {
   useGetVerificationCodeQuery,
   useLoginUserMutation,
   useGetUserProfileQuery,
-  useGetProductsListQuery, 
+  useGetUserProductsListQuery, 
 } = userApi;

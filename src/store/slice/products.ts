@@ -65,6 +65,16 @@ export const api = createApi({
       }),
       
     }),
+    getUserProductsList: builder.query({
+      query: () => ({
+        url: "/users/products/list",
+        method: "GET",
+        headers: {
+          "Authorization": `Token ${localStorage.getItem("token") || ""}`,
+        },
+      }),
+      
+    }),
 
     getcreateProduct: builder.mutation({
       query: (productData) => ({
@@ -97,6 +107,7 @@ export const {
   useCreateProductMutation,
   useGetcreateProductMutation,
   useUpdateProfileDetailMutation,
+  useGetUserProductsListQuery
 
 } = api;
 
