@@ -34,14 +34,7 @@ export interface AanbodCardProps {
     price: string
     topLocation?: boolean
 }
-export interface OfferCardProps {
-    image: string;
-    title: string;
-    location: string;
-    type: string;
-    price: string;
-    isTopLocation?: boolean;
-}
+
 
 export interface Activity {
     title: string;

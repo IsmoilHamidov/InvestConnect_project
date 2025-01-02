@@ -129,14 +129,11 @@ function ProjectForm() {
 
               <div className="w-[48%]">
                 <label className="block text-sm font-medium text-gray-600 mb-2">
-                  Name
+                  User Name
                 </label>
                 <input
                   name="name"
-                  placeholder="Name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
+                  placeholder="User Name"
                   className="w-full border-gray-300 rounded-lg px-2 h-10"
                 />
               </div>
@@ -180,6 +177,8 @@ function ProjectForm() {
                 </label>
                 <input
                   type="text"
+                  value={formData.name}
+                  onChange={handleChange}
                   placeholder="Enter Project Name"
                   className="w-full border-gray-300 rounded-lg px-2 h-10"
                 />
