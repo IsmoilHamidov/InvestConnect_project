@@ -30,9 +30,9 @@ type ProperyCardProps = {
     <Card className="flex  relative border border-[#C5C3C3] items-center 
         px-4 py-4 mb-5 ">
         <img
-            src={image}
+            src={`https://bakirali007.pythonanywhere.com/${image}`}
             alt={title}
-            className="w-20 h-20 rounded object-cover mr-4"
+            className="w-28 h-20 rounded object-cover mr-4"
             onError={(e) => {
                 e.currentTarget.src = 'https://via.placeholder.com/150';
             }}
