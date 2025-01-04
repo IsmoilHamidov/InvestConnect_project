@@ -1,9 +1,7 @@
 import NavbarAdmin from "@/components/navbarAdmin";
 import Sidebar from "@/components/sidebar";
-// import { ProfileForm } from "@/components/profileForms";
-import TimeCount from "../../components/timeCount";
+// import TimeCount from "../../components/timeCount";
 import Activities from "../../components/Activities";
-import Offers from "@/components/OffersCard";
 import InvestorAnalytics from "@/components/OffersCard/InvestorAnalytics";
 import BankCardBalance from "@/components/timeCount/Balance";
 
