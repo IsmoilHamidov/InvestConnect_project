@@ -132,7 +132,6 @@ function ProjectForm() {
                   User Name
                 </label>
                 <input
-                  name="name"
                   placeholder="User Name"
                   className="w-full border-gray-300 rounded-lg px-2 h-10"
                 />
@@ -177,6 +176,7 @@ function ProjectForm() {
                 </label>
                 <input
                   type="text"
+                  name="name"
                   value={formData.name}
                   onChange={handleChange}
                   placeholder="Enter Project Name"
@@ -224,6 +224,7 @@ function ProjectForm() {
                 <input
                   name="price"
                   placeholder="Price"
+                  type="number" 
                   value={formData.price}
                   onChange={handleChange}
                   required

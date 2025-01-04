@@ -1,6 +1,5 @@
 import DonationForm from "@/components/DonationForm";
 import NavbarAdmin from "@/components/navbarAdmin";
-import Sidebar from "@/components/sidebar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useGetProductQuery } from "@/store/slice/products";
 import { EyeOff } from "lucide-react";
@@ -29,7 +28,6 @@ export const ProductDetailsPage = () => {
   return (
     <>
       <NavbarAdmin />
-      {/* <Sidebar /> */}
 
       <main className="max-w-7xl mx-auto p-10 pt-32">
         <Tabs defaultValue="free">

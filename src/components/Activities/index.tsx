@@ -1,6 +1,10 @@
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Activity } from "@/interface";
+import property1 from "../../assets/images/property.jpg";
+import property2 from "../../assets/images/property (1).jpg";
+import property3 from "../../assets/images/property (2).jpg";
+
+
 const ActivityCard: React.FC<Activity> = ({ title, price, month, image }) => {
     return (
         <Card className="flex w-full justify-between items-center bg-gray-100
@@ -33,19 +37,19 @@ const Activities = () => {
             title: "City Gate",
             price: "€ 160 000 ",
             month: "April",
-            image: "http:/src/assets/images/property.jpg",
+            image: property1,
         },
         {
             title: "Urban Living",
             price: "€ 200 000",
             month: "March",
-            image: "http:/src/assets/images/property%20(1).jpg",
+            image: property2,
         },
         {
             title: "Sky Towers",
             price: "€ 300 000",
             month: "May",
-            image: "http:/src/assets/images/property%20(2).jpg",
+            image: property3,
         },
     ];
 

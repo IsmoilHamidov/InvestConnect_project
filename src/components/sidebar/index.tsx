@@ -17,7 +17,7 @@
   import { useGetUserProfileQuery } from "@/store/slice/products";
 import { Link } from "react-router-dom";
 import { ProfileForm } from "../profileForms";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { HiX } from "react-icons/hi";
 
 

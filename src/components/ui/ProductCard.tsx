@@ -1,7 +1,6 @@
 import { Star } from "lucide-react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Button } from "./button";
-import { IoIosStarOutline } from "react-icons/io";
 
 
 // Тип для Category

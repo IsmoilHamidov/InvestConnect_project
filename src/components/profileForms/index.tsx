@@ -6,14 +6,12 @@ import { useGetUserProfileQuery, useUpdateProfileDetailMutation } from "@/store/
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from 'react';
 import { useToast } from '@/hooks/use-toast'
-import { FaUserCircle } from "react-icons/fa";
-import { MdAddAPhoto } from "react-icons/md";
 
 
 export function ProfileForm() {
 
     const { toast } = useToast();
-    const { data, error, isLoading } = useGetUserProfileQuery(null);
+    const { data, error } = useGetUserProfileQuery(null);
     const [updateProfileDetail] = useUpdateProfileDetailMutation();
 
     const {
