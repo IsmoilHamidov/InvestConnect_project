@@ -55,6 +55,7 @@ export const userApi = createApi({
       }),
     }),
 
+    
     // startup profile uchun
     getUserProductsList: builder.query<any, void>({
       query: () => ({
@@ -63,10 +64,11 @@ export const userApi = createApi({
         headers: {
           accept: "application/json",
           "X-CSRFToken": "uL30ziq8sA10mDy97pNjSzsF0J56vpm90aBLkPjgQppWNIR37fzeKpzYT0k9zz4q", 
-          "Authorization": `Token ${localStorage.getItem("token") || ""}`
+          "Authorization": `Token ${localStorage.getItem("a9d0d22c4353032a6cd658cfb5f6291e3bf90228") || ""}`
         },
       }),
     }),
+
 
   }),
 });

@@ -1,145 +1,68 @@
-import React, { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { OfferCardProps } from "@/interface";
-import { Link } from "react-router-dom";
-import ProductModal from "../productModal";
-import {
-  useCreateProductMutation,
-  useGetCategoriesQuery,
-  useGetUsersQuery,
-} from "@/store/slice/products";
-
-
-const ProperyCard: React.FC<OfferCardProps> = ({
-  image,
-  title,
-  location,
-  type,
-  price,
-  isTopLocation,
-}) => {
-  return (
-    <Card className="flex  relative border border-[#C5C3C3] items-center 
-    px-4 py-3 mb-5 ">
-      <img
-        src={image}
-        alt={title}
-        className="w-20 h-20 rounded object-cover mr-4"
-      />
-      <div className="flex-1">
-        <CardHeader className="p-0">
-          <CardTitle className="text-lg font-bold text-[#749BA9] uppercase">
-            {title}
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="flex flex-col gap-2 mt-1 ">
-          <div>
-            <p className="text-sm text-[#948F8F] font-light ">
-              {location} ·{" "}
-              <span className="font-normal text-[#443B3A] text-xs  ">
-                {type}
-              </span>
-            </p>
-          </div>
-          <div>
-            <p className="text-base font-medium text-custom-gray">{price}</p>
-          </div>
-        </CardContent>
-      </div>
-      {isTopLocation && (
-        <div className="absolute top-1 -right-3 grid justify-items-end">
-          <div className="bg-[#B29C6F]  px-2 py-2">
-            <p className="font-normal text-white text-[12px] leading-3 ">
-              Topligging
-            </p>
-          </div>
-          <div
-            className="bg-[#443B3A] w-3 h-3"
-            style={{
-              clipPath: "polygon(0 0, 0 100%, 100% 0)",
-            }}
-          ></div>
-        </div>
-      )}
-      <Link to={`/product/${title}`}>
-        <Button
-          variant="outline"
-          className=" Blue_button hover:text-white mt-5 rounded-[40px] text-xs text-white "
-        >
-          Ontdek meer!
-        </Button>
-      </Link>
-    </Card>
-  );
-};
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useGetUserProductsListQuery } from '@/store/slice/products';
+import ProperyCard from './ProperyCards';
 
 const Offers: React.FC = () => {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const navBtn = () => {
-    setIsModalOpen(true);
-  };
-  const closeBtn = () => {
-    setIsModalOpen(false);
-  };
-  const offers = [
-    {
-      image: "https://via.placeholder.com/150",
-      title: "Machelen",
-      location: "City Gate",
-      type: "Apartment",
-      price: "Vanaf € 160 000",
-      isTopLocation: true,
-    },
-    {
-      image: "https://via.placeholder.com/150",
-      title: "Machelen",
-      location: "City Gate",
-      type: "Apartment",
-      price: "Vanaf € 160 000",
-      isTopLocation: true,
-    },
-    {
-      image: "https://via.placeholder.com/150",
-      title: "Machelen",
-      location: "City Gate",
-      type: "Apartment",
-      price: "Vanaf € 160 000",
-      isTopLocation: true,
-    },
-  ];
+  const { data, error, isLoading } = useGetUserProductsListQuery(undefined);
+  console.log(data)
+
 
   return (
-    <>
-      <div className="p-6 w-full mx-auto shadow-xl border-[1px] rounded-[15px]  ">
-        <div className="flex flex-row items-center justify-between mb-9 ">
-          <h1 className="text-base font-semibold">Aanbod</h1>
+    <div className="p-6 w-full mx-auto shadow-xl border-[1px] rounded-[15px]  ">
+    <div className="flex flex-row items-center justify-between mb-9 ">
+      <h1 className="text-base font-semibold">Aanbod</h1>
+        
+      <Link to={'/ProjectAdd'}>
+          <button className="rounded-full text-[15px] py-[7px] px-5 text-white Blue_button" >
+            <i className="fa-solid fa-plus  me-3"></i>
+            Add Project
+          </button>
+      </Link>
+    </div>
 
-          <Link to={'/ProjectAdd'}>
-              <button className="rounded-full text-[15px] py-[7px] px-5 text-white Blue_button" >
-                <i className="fa-solid fa-plus  me-3"></i>
-                Add Project
-              </button>
-          </Link>
 
-
-          {/* <Button
-            className="rounded-full py-4 px-6 text-white bg-[#B29C6F] Brown_button  "
-            onClick={navBtn}
-          >
-            <i className="fa-solid fa-plus text-[15px]"></i>
-          </Button> */}
-
-          
+      {isLoading && (
+        <div className="flex items-center justify-center h-full">
+          <p>Loading projects..</p>
         </div>
-        {offers.map((offer, index) => (
-          <ProperyCard key={index} {...offer} />
-        ))}
-       
-      </div>
-      <ProductModal isOpen={isModalOpen} onClose={closeBtn} />
-    </>
+      )}
+
+      {error && (
+        <div className="flex items-center justify-center h-full">
+          <p>Error loading projects... Please try again later.</p>
+        </div>
+      )}
+      
+      {data?.length === 0 && (
+        <div className="flex items-start justify-start h-full">
+          <p className='italic'>You do not have available projects.</p>
+        </div>
+      )}
+    
+    <div className="">
+      {data?.map((item: {id:number; image: any; name: string; category: string; degree: string; price: any; location: string; }, index: React.Key | null | undefined) => {
+        
+        return (    
+            <ProperyCard
+              key={index}
+              image={item.image}
+              id={item.id}
+              title={typeof item.name === 'string' ? item.name : 'Untitled'}
+              location={typeof item.location === 'string' ? item.location : 'Topligging'}
+              category={typeof item.category === 'string' ? item.category : 'Unknown'}
+              type={typeof item.degree === 'string' ? item.degree : 'N/A'}
+              price={item.price ? `$${item.price}` : 'N/A'}
+            />
+        );
+      })}
+    </div>
+
+
+   
+  </div>
   );
 };
+
 
 export default Offers;

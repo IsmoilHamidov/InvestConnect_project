@@ -17,7 +17,7 @@
   import { useGetUserProfileQuery } from "@/store/slice/products";
 import { Link } from "react-router-dom";
 import { ProfileForm } from "../profileForms";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { HiX } from "react-icons/hi";
 
 
@@ -99,7 +99,7 @@ function SidebarItem({ icon, label, isActive }: SidebarItemProps) {
           <div className="flex gap-2 mt-4 mb-8">
 
           <Button variant="ghost" size="icon" onClick={toggleModal}>
-              <Pencil className="h-4 w-4" />
+              <Pencil style={{ width: '17px', height: '17px' }} />
           </Button>
 
             {isModalOpen && (
@@ -123,14 +123,14 @@ function SidebarItem({ icon, label, isActive }: SidebarItemProps) {
           
             <Link to={'/products'}>
               <Button  variant="ghost" size="icon">
-                  <Briefcase className="h-4 w-4" />
+                  <Briefcase style={{ width: '17px', height: '17px' }} />
               </Button>
             </Link>
 
             <Button variant="ghost" size="icon">
                     <Dialog>
                         <DialogTrigger>
-                            <LogOut className="hover:text-custom-blue-gray w-4 h-4 ease-in" />
+                            <LogOut style={{ width: '17px', height: '17px' }} className="hover:text-custom-blue-gray ease-in" />
                         </DialogTrigger>
                         <DialogContent>
                             <DialogHeader>

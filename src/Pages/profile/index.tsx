@@ -3,18 +3,17 @@ import Sidebar from "@/components/sidebar";
 // import { ProfileForm } from "@/components/profileForms";
 import Offers from "../../components/OffersCard";
 import AnalyticsBox from "@/components/OffersCard/AnalyticsBox";
-import Sample from "@/components/Activities/sample";
 
 
 
 const Profile = () => {
   return (
     <div className="flex flex-col w-full h-screen">
-      <header className="w-full relative">
-        <NavbarAdmin />
+      <header className="w-full relative z-20">
+            <NavbarAdmin/>
       </header>
       <div className="flex w-full flex-1 relative">
-        <aside className="w-[270px] bg-white border relative">
+        <aside className="w-[270px] bg-white border relative z-40">
           <Sidebar />
         </aside>
         <main className="flex-1 relative pt-10 pl-6 pr-9">
@@ -28,9 +27,6 @@ const Profile = () => {
                 <AnalyticsBox/>
               </div>
               
-              <div>
-                  <Sample/>
-              </div>
               
               <div className="w-[55%]">
                 <Offers />

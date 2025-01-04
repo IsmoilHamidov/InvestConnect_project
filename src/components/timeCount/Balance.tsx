@@ -1,4 +1,3 @@
-import React from "react";
 import { FaCreditCard } from "react-icons/fa";
 
 export default function BankCardBalance() {
@@ -18,7 +17,7 @@ export default function BankCardBalance() {
       </div>
       <div>
         <h3 className="text-sm opacity-80 mb-1">Available Balance</h3>
-        <p className="text-3xl font-bold">$1</p>
+        <p className="text-3xl font-bold">$500000</p>
       </div>
     </div>
   );

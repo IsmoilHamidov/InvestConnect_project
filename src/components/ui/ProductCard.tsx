@@ -1,18 +1,15 @@
 import { Star } from "lucide-react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Button } from "./button";
-import { IoIosStarOutline } from "react-icons/io";
-
 
 
 // Тип для Category
 interface Category {
-  name: string; // Название категории (обязательно, от 1 до 100 символов)
+  name: string; 
 }
 
-// Тип для Product
 export interface Product {
-  category: Category; // Категория продукта
+  category: Category; 
   degree?: "bronze" | "silver" | "gold"; // Уровень продукта (Enum: "bronze", "silver", "gold")
   id: number; // Уникальный идентификатор продукта (readOnly)
   image: string; // Описание продукта (обязательно, от 1 символа)
@@ -25,7 +22,6 @@ export interface Product {
 interface ProductCardProps {
   product: Product;
 }
-
 
 
 export const ProductCard: React.FC<ProductCardProps> = ({ product }) => (
@@ -51,12 +47,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => (
         tabIndex={0}
         className="cursor-pointer absolute top-5 left-5 scale-125 fill-white text-[#B29C6F] focus:fill-[#B29C6F]  focus:text-gray-800 focus:scale-30 outline-none z-30"
       />
-
-      
     </div>
 
 
-    {/* Контент карточки */}
     <div className="border-2 border-custom-gray grid px-4 py-6 gap-3">
       <div className="flex justify-between">
         <span className="title text-2xl text-primary font-semibold">
@@ -71,6 +64,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => (
       <div>{product.description}</div>
       <div className="flex justify-between pt-5">
         <div className="text-2xl">{product.price} UZS</div>
+
         <Link to={`/product/${product.id}`}
            onClick={() => {
             sessionStorage.setItem("scrollPosition", String(window.scrollY));
