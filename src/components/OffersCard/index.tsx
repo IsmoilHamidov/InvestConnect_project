@@ -9,7 +9,7 @@ const Offers: React.FC = () => {
 
 
   return (
-    <div className="p-6 w-full mx-auto shadow-xl border-[1px] rounded-[15px]  ">
+    <div className="p-6 w-full mx-auto shadow-lg border-[1px] rounded-[15px]  ">
     <div className="flex flex-row items-center justify-between mb-9 ">
       <h1 className="text-base font-semibold">Aanbod</h1>
         
@@ -36,7 +36,7 @@ const Offers: React.FC = () => {
       
       {data?.length === 0 && (
         <div className="flex items-start justify-start h-full">
-          <p className='italic'>You do not have available projects.</p>
+          <p className='italic text-base'>You do not have available projects.</p>
         </div>
       )}
     

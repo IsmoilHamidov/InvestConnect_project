@@ -21,9 +21,8 @@ function ProjectForm() {
   useEffect(() => {
     if (isSuccess) {
       setTimeout(() => {
-        navigate("/profile");
-        window.location.reload();
-      }, 3000);
+        navigate("/profile");     
+      });
     }
   }, [isSuccess, navigate]);
 

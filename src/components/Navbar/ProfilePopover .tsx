@@ -2,6 +2,9 @@ import { useAuthModalStore } from "@/store/authModalStore";
 import { useGetUsersQuery } from "@/store/slice/products";
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog';
+import { Button } from "../ui/button";
+
 
 const ProfilePopover: React.FC = () => {
   const [showPopover, setShowPopover] = useState<boolean>(false);
@@ -34,15 +37,11 @@ const ProfilePopover: React.FC = () => {
     localStorage.clear(); // Очистка всех данных
     setTimeout(() => {
       window.location.reload();
-    }, 200);
+    }, 100);
   };
 
   const handleProfileClick = () => {
-    const selectedOption = data?.role;
-
-    setTimeout(() => {
-      window.location.reload();
-    }, 200);
+    const selectedOption = data?.role;;
 
     const route =
       selectedOption === "investor"
@@ -92,12 +91,34 @@ const ProfilePopover: React.FC = () => {
           >
             Profile
           </button>
-          <button
-            className="block w-full text-left text-md px-4 py-2 hover:bg-gray-100 text-black"
-            onClick={handleSignOut}
-          >
-            Sign Out
+
+          <button className="block w-full text-left text-md px-4 py-2 hover:bg-gray-100 text-black"
+          onClick={handleSignOut}>
+              Sign Out
           </button>
+
+
+          {/* <Dialog>
+            <DialogTrigger asChild>
+              <button className="block w-full text-left text-md px-4 py-2 hover:bg-gray-100 text-black">
+                Sign Out
+              </button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>You want to log out of the account?</DialogTitle>
+                    <div className="flex justify-center items-center gap-9">
+                        <DialogTrigger asChild>
+                            <button
+                            className="text-lg font-semibold">No</button>
+                        </DialogTrigger>
+                        <Button className="rounded-2xl text-lg font-normal px-5 py-3 " 
+                        onClick={handleSignOut}>Yes</Button>
+                    </div>
+              </DialogHeader>
+            </DialogContent>
+          </Dialog> */}
+          
         </div>
       )}
     </div>

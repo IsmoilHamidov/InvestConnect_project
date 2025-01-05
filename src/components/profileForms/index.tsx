@@ -8,7 +8,14 @@ import { useEffect, useState } from 'react';
 import { useToast } from '@/hooks/use-toast'
 
 
-export function ProfileForm() {
+
+interface ProfileFormProps {
+    closeModal: () => void; 
+  }
+
+
+const ProfileForm: React.FC<ProfileFormProps> = ({ closeModal }) => {
+
 
     const { toast } = useToast();
     const { data, error } = useGetUserProfileQuery(null);
@@ -40,14 +47,14 @@ export function ProfileForm() {
     const onSubmit = async (formData: Record<string, string>) => {
         try {
             await updateProfileDetail({ id: data?.id, data: formData }).unwrap();
-         
             toast({
                 description: `Saved!`,
                 variant: "success",
-            });
+            })
+            closeModal();
             setTimeout(() => {
                 window.location.reload();
-            }, 500);
+              }, 800); 
         } catch (err) {
             toast({
                 description: `Failed to update profile!`,
@@ -76,6 +83,8 @@ export function ProfileForm() {
         }
     };
 
+
+    
 
     return (
         <Card className="w-full h-full">
@@ -163,3 +172,5 @@ export function ProfileForm() {
         </Card>
     );
 }
+
+export default ProfileForm;

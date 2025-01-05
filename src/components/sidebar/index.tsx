@@ -16,9 +16,9 @@
   import { cn } from "@/lib/utils";
   import { useGetUserProfileQuery } from "@/store/slice/products";
 import { Link } from "react-router-dom";
-import { ProfileForm } from "../profileForms";
 import { useState } from "react";
 import { HiX } from "react-icons/hi";
+import ProfileForm from "../profileForms";
 
 
 
@@ -56,7 +56,7 @@ function SidebarItem({ icon, label, isActive }: SidebarItemProps) {
       localStorage.clear();
       setTimeout(() => {
           window.location.reload();
-      }, 200);
+      }, 100);
       navigate('/');
   };
 
@@ -115,7 +115,7 @@ function SidebarItem({ icon, label, isActive }: SidebarItemProps) {
                   >
                     <HiX size={24} />
                   </button>
-                  <ProfileForm />
+                  <ProfileForm closeModal={toggleModal} />
                 </div>
               </div>
             )}
@@ -135,9 +135,11 @@ function SidebarItem({ icon, label, isActive }: SidebarItemProps) {
                         <DialogContent>
                             <DialogHeader>
                                 <DialogTitle>You want to log out of the account?</DialogTitle>
-                                <div className="flex justify-center gap-10 pt-5">
-                                    <DialogTrigger>No</DialogTrigger>
-                                    <Button onClick={handleSignOut}>Yes</Button>
+                                <div className="flex justify-center items-center gap-9">
+                                    <DialogTrigger>
+                                        <button className="text-lg font-semibold">No</button>
+                                    </DialogTrigger>
+                                    <Button className="rounded-2xl text-lg font-normal px-5 py-3 " onClick={handleSignOut}>Yes</Button>
                                 </div>
                             </DialogHeader>
                         </DialogContent>
