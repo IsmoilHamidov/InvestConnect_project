@@ -2,8 +2,8 @@ import { useAuthModalStore } from "@/store/authModalStore";
 import { useGetUsersQuery } from "@/store/slice/products";
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog';
-import { Button } from "../ui/button";
+// import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog';
+// import { Button } from "../ui/button";
 
 
 const ProfilePopover: React.FC = () => {
