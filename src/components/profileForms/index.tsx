@@ -89,7 +89,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ closeModal }) => {
     return (
         <Card className="w-full h-full">
             <CardContent className="grid mt-6 ">
-                <h2 className="mb-6 font-semibold text-xl text-center">Profile Details</h2>
+                <h2 className="mb-7 font-semibold text-[21px] text-center">Profil tafsilotlari</h2>
                     {/* <div className="flex flex-col items-center relative mb-3">
                     <FaUserCircle   size={'68'} className="text-black mb-2 " />
                         {error ? (
@@ -161,7 +161,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ closeModal }) => {
                                     className="w-full h-10 m-auto font-normal text-base 
                                     bg-[#7497a7] hover:bg-[#7497a7]/90 rounded-3xl"
                                 >
-                                    Save Details
+                                    Saqlash
                                 </Button>
                             </div>
 

@@ -9,12 +9,14 @@ import Vebinar from "./Vebinar"
 import Professionals from "./Professionals"
 import Footer from "../../components/Footer/Footer"
 import { NavbarStep } from "@/components/Navbar/NavbarStep"
+import ScrollPositionManager from "@/components/Loading/ScrollPosition/SaveScroll"
 
 
 function Home() {
  
   return (
     <>
+      <ScrollPositionManager />
       <NavbarStep />
       <Introduction_Image/>
       <IntroductionText/>

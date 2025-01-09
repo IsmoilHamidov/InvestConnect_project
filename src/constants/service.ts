@@ -7,26 +7,26 @@ import image4 from "../assets/images/srv-icon-ratina02.png"
 export const ServiceArr = [
     {
         id: 1,
-        title: "Vastgoedplanning",
-        text:"De selectie en structurering van beleggingsvastgoed vereist deskundig advies. Laat u dan ook begeleiden door onze vastgoedcoach. Wij adviseren onze klanten omtrent de meest optimale structuur om de aankoop te realiseren, zowel vanuit financieel (financiering) en fiscaal oogpunt, als naar successieplanning. ",
+        title: "Ko'chmas mulkni rejalashtirish",
+        text:"Investitsiya xususiyatlarini tanlash va tuzish mutaxassislarning maslahatini talab qiladi. O'zingizni ko'chmas mulk bo'yicha murabbiyimiz boshqarsin. Biz mijozlarimizga moliyaviy (moliyalashtirish) va soliq nuqtai nazaridan, shuningdek merosni rejalashtirish bo'yicha sotib olishni amalga oshirish uchun eng maqbul tuzilma haqida maslahat beramiz. ",
         img: image1,
     },
     {
         id: 2,
-        title: "Aan-en Verkoopbemiddeling",
-        text:"U bent geïnteresseerd in een vastgoedinvestering, maar hebt geen tijd om op zoek te gaan naar het ideale pand? Wij nemen deze zorg uit uw handen en gaan voor u op zoek naar het investeringsvastgoed dat aan al uw eisen voldoet. Op basis van uw wensen naar locatie, rendement, type vastgoed en vele andere factoren gaan wij op zoek naar de ideale opbrengsteigendom. ",
+        title: "Sotib olish va sotish",
+        text:"Siz ko'chmas mulk investitsiya manfaatdor, lekin ideal mulk uchun qarash uchun vaqt yo'q? Biz sizning qo'lingizdan bu g'amxo'rlik va barcha talablariga javob investitsiya mulkni qarash. Joylashuv, qaytish, mulk turi va boshqa ko'plab omillarga bo'lgan istaklaringiz asosida biz ideal rentabellik xususiyatini qidiramiz. ",
         img: image2,
     },
     {
         id: 3,
-        title: "Verhuur & Beheer",
-        text:"Een degelijke administratieve, technische en commerciële opvolging blijven de sleutel tot succes van iedere vastgoedinvestering. Daarom bieden wij onze investeerders de mogelijkheid om het verhuren en/of beheren van hun vastgoed zo vlot en zorgeloos mogelijk via Altro Invest te laten verlopen.",
+        title: "Ijara Va Boshqaruv",
+        text:"Ovozli ma'muriy, texnik va tijorat kuzatuvi har qanday ko'chmas mulk sarmoyasi muvaffaqiyatining kaliti bo'lib qolmoqda. Shuning uchun biz investorlarga Altro Invest orqali ko'chmas mulkni iloji boricha muammosiz va beparvo boshqarish va/yoki boshqarish imkoniyatini taklif etamiz.",
         img: image3,
     },
     {
         id: 4,
-        title: "Altro Interieur",
-        text:"Het pand die u koopt, is nog niet meteen verhuurbaar. Wij zorgen, indien gewenst, voor een uitgekiende basisinrichting (schilderwerken, verlichting, raamdecoratie). De huurder hoeft alleen nog meubels en huisraad mee te brengen. Ook indien de huurder een technisch probleempje heeft, staan wij voor u klaar.",
+        title: "Invest Connect Ichki Qismi",
+        text:"Siz sotib olgan mulk darhol ijaraga olinmaydi. Agar so'ralsa, biz murakkab asosiy jihozlarni (rasm, yoritish, deraza bezaklari) taqdim etamiz. Ijarachiga faqat mebel va uy-ro'zg'or buyumlarini olib kelish kerak. Agar ijarachida texnik muammo bo'lsa ham, biz sizga tayyormiz.",
         img: image4,
     },
 ];

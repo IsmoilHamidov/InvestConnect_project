@@ -4,7 +4,7 @@ import { ServiceArr } from '@/constants/service';
 function Service() {
   return (
     <div className="py-16 mt-20 flex flex-col justify-center items-center">
-     <h2 className='text-center text-[2.5rem] font-light mb-7'>Onze diensten</h2>
+     <h2 className='text-center text-[2.5rem] font-light mb-7'>Bizning xizmatlar</h2>
       {ServiceArr.map((service, index) => (
         <div
           key={service.id}
@@ -14,12 +14,12 @@ function Service() {
         >
           <div className="w-[62%]  h-auto p-2 py-4">
             <h3 className="text-custom-blue-gray text-2xl font-semibold 
-                mb-1 first-letter:text-4xl ">
+                mb-1 first-letter:text-3xl ">
                 {service.title}
             </h3>
 
             <div className='flex gap-x-4 mt-4'>
-                <div className="px-[7px] h-[full]  bg-custom-blue-gray "></div>
+                <div className="px-[5px] h-[full]  bg-custom-blue-gray "></div>
                 <p className='text-custom-gray leading-7' >{service.text}</p>
             </div>
           </div>
@@ -38,7 +38,7 @@ function Service() {
 
         </div>
       ))}
-      <button className='Brown_button rounded-3xl p-3 px-12 text-base text-white bg-custom-gray mt-16 '>NEEM CONTACT OP</button>
+      <button className='Brown_button rounded-3xl p-3 px-12 text-base text-white bg-custom-gray mt-16 '>ALOQA</button>
     </div>
   );
 }

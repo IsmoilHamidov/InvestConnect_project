@@ -67,7 +67,7 @@ const ImagePickerButton = React.forwardRef<HTMLButtonElement, ImagePickerButtonP
           {...props}
         >
 
-          Profile Image
+        Profil rasmi
           <MdAddAPhoto className="text-xl"/>
         </Comp>
         <input

@@ -123,10 +123,10 @@ export const Verification: React.FC<INavbarStepProps> = () => {
 
   return (
     <div className="bg-white p-6 rounded-lg w-96">
-      <h2 className="text-xl font-bold mb-5">Verification Code</h2>
+      <h2 className="text-xl font-bold mb-5">Tasdiqlash kodi</h2>
       <div className="grid gap-8">
         <div className="mb-3 grid gap-3">
-          <label className="block text-gray-700 mb-2">Enter Verification Code</label>
+          <label className="block text-gray-700 mb-2">Tasdiqlash kodini kiriting</label>
           <div className="flex space-x-2.5">
             {verificationCode.map((digit, index) => (
               <input
@@ -156,11 +156,11 @@ export const Verification: React.FC<INavbarStepProps> = () => {
               className="text-center font-semibold h-10 w-[47%] border-2 border-custom-blue-gray hover:text-white hover:border-0
                text-custom-blue-gray p-2 rounded-lg hover:bg-[#57737d] transition-all duration-200 ease-in "
             >
-              Resend Code
+             Kodni qayta yuborish
             </button>
           </div>
         </div>
-        {isSuccess && <p style={{ color: "green" }}>User verified successfully!</p>}
+        {isSuccess && <p style={{ color: "green" }}>Foydalanuvchi muvaffaqiyatli tasdiqlandi!</p>}
       </div>
     </div>
   );

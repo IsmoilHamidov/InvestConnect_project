@@ -15,7 +15,7 @@ function AboutImage() {
             }}>
 
             <img className="absolute left-20 top-16 w-24 h-20 " src={quotes} alt="quotes" />
-            <h3 className=" left-28 w-8/12 top-14 text-6xl font-medium leading-[64px] text-white">Investeer in vastgoed met een helder plan	</h3>
+            <h3 className=" left-28 w-8/12 top-14 text-6xl font-medium leading-[64px] text-white">Aniq reja bilan ko'chmas mulkka sarmoya kiriting</h3>
             <img className="absolute -bottom-24 -right-16 h-[12.5rem]" src={aboutLogo} alt="aboutLogo" />
         </div>
     </div>
