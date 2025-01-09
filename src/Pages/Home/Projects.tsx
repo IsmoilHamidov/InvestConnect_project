@@ -10,31 +10,31 @@ const cardData = [
     id: 1,
     image: property1,
     location: "MACHELEN",
-    description: "City Gate",
-    type: "Apartementen",
+    description: "Shahar Darvozasi",
+    type: "Kvartiralar",
     rendement: "4,22 %",
-    price: "Vanaf € 160 000",
-    label: "Topligging",
+    price: "€ 160 000 dan",
+    label: "Top joylashuv",
   },
   {
     id: 2,
     image: property2,
     location: "BRUSSEL",
-    description: "Urban Living",
+    description: "Shahar Markazi",
     type: "Lofts",
     rendement: "3,75 %",
-    price: "Vanaf € 200 000",
-    label: "Nieuwbouw",
+    price: "€ 200 000 dan",
+    label: "Yangi qurilish",
   },
   {
     id: 3,
     image: property3,
     location: "ANTWERPEN",
-    description: "Sky Towers",
-    type: "Penthouse",
+    description: "Ochiq Osmon Minoralari",
+    type: "Pentxaus",
     rendement: "5,10 %",
-    price: "Vanaf € 300 000",
-    label: "High-End",
+    price: "€ 300 000 dan",
+    label: "Yuqori Darajadagi",
   },
 ];
 
@@ -58,7 +58,7 @@ function Projects() {
 
       <div id="Project" className="flex flex-col justify-center items-center z-20 absolute top-[120px] left-1/2 transform -translate-x-1/2">
         <h3 className="text-center text-[2.5rem] font-light text-white">
-          Projecten in de kijker
+          Top Loyhalar
         </h3>
         <div className="flex justify-between items-center mt-20 w-[80rem]">
           {cardData.map((card) => (
@@ -97,7 +97,7 @@ function Projects() {
                   <p className="text-md text-custom-gray font-medium">
                     {card.description}
                   </p>
-                  <p className="text-xs text-custom-gray">BRUTO RENDEMENT</p>
+                  <p className="text-xs text-custom-gray">Yalpi Hosildorlik</p>
                 </div>
                 <p className="text-sm text-custom-gray">{card.type}</p>
 
@@ -107,7 +107,7 @@ function Projects() {
                   </p>
                   <Link to={`/product/${card.location}`}>
                     <button className="Blue_button bg-custom-blue-gray text-white text-sm font-medium py-1 px-4 rounded-2xl">
-                      Ontdek meer
+                     Ko'proq bilib oling
                     </button>
                   </Link>
                 </div>
@@ -117,7 +117,7 @@ function Projects() {
         </div>
 
           <button onClick={checkUser} className="Brown_button rounded-3xl p-3 px-12 text-base text-white bg-custom-gray mt-16 ">
-            Bekijk ons aanbod
+            Bizning taklifimizni ko'ring
           </button>
       </div>
     </div>

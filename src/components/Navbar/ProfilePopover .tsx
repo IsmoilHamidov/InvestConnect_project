@@ -67,7 +67,7 @@ const ProfilePopover: React.FC = () => {
           className="Blue_button bg-[#749BA9] text-white p-2 px-4 rounded-2xl font-normal"
           onClick={() => openModal("registration")}
         >
-          Sign Up
+          Ro'yxatdan O'tish
         </button>
       ) : (
         <button
@@ -89,12 +89,12 @@ const ProfilePopover: React.FC = () => {
             className="block w-full text-left text-md px-4 py-2 hover:bg-gray-100 text-black"
             onClick={handleProfileClick}
           >
-            Profile
+            Profil
           </button>
 
           <button className="block w-full text-left text-md px-4 py-2 hover:bg-gray-100 text-black"
           onClick={handleSignOut}>
-              Sign Out
+            Chiqish
           </button>
 
 

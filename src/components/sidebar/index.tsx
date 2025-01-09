@@ -82,9 +82,9 @@ function SidebarItem({ icon, label, isActive }: SidebarItemProps) {
           <div className="text-center mt-2">
 
             {error ? (
-              <>Oh no, there was an error</>
+              <>Yo'q, xatolik yuz berdi</>
             ) : isLoading ? (
-              <>Loading...</>
+              <>Yuklanmoqda...</>
             ) : data ? (
               <>
                 <h2 className="font-semibold text-base text-custom-gray">
@@ -134,12 +134,12 @@ function SidebarItem({ icon, label, isActive }: SidebarItemProps) {
                         </DialogTrigger>
                         <DialogContent>
                             <DialogHeader>
-                                <DialogTitle>You want to log out of the account?</DialogTitle>
-                                <div className="flex justify-center items-center gap-9">
+                                <DialogTitle>Hisobdan chiqmoqchimisiz?</DialogTitle>
+                                <div className="flex justify-center items-center gap-10">
                                     <DialogTrigger>
-                                        <button className="text-lg font-semibold">No</button>
+                                        <button className="text-lg font-semibold">Yo'q</button>
                                     </DialogTrigger>
-                                    <Button className="rounded-2xl text-lg font-normal px-5 py-3 " onClick={handleSignOut}>Yes</Button>
+                                    <Button className="rounded-2xl text-lg font-normal px-6 py-3 " onClick={handleSignOut}>Ha</Button>
                                 </div>
                             </DialogHeader>
                         </DialogContent>
@@ -152,39 +152,39 @@ function SidebarItem({ icon, label, isActive }: SidebarItemProps) {
           <Link to={'/'}>
             <SidebarItem 
               icon={<Home className="h-4 w-4" />}
-              label="Home"
+              label="Bosh sahifa"
             />
           </Link>
 
           <Link to={'/products'}>
             <SidebarItem 
               icon={<Briefcase  className="h-4 w-4" />}
-              label="Projects"
+              label="Loyihalar"
             />
           </Link>
           <SidebarItem
             icon={<Building2 className="h-4 w-4" />}
-            label="Aanbod"
+            label="Takliflar"
             isActive
           />
           <SidebarItem
             icon={<Calendar className="h-4 w-4" />}
-            label="Kalender"
+            label="Kalendar"
           />
           <SidebarItem
             icon={<Users className="h-4 w-4" />}
-            label="Community"
+            label="Jamiyat"
           />
           <SidebarItem
             icon={<Users className="h-4 w-4" />} // Update icon if incorrect
-            label="Mijncontacten"
+            label="Mening kontaktlarim"
           />
         </div>
   
         <div className="mt-auto border-t p-2">
           <SidebarItem
             icon={<HelpCircle className="h-4 w-4" />}
-            label="Altro Support"
+            label="Boshqa yordamlar"
           />
         </div>
       </div>

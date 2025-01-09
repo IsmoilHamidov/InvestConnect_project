@@ -74,9 +74,9 @@ type ProperyCardProps = {
             }}>
            <Button
             variant="outline"
-            className="Blue_button hover:text-white mt-7 rounded-[40px] font-normal text-sm text-white"
+            className="Blue_button hover:text-white mt-7 px-6 rounded-[40px] font-medium text-sm text-white"
              >
-            Click to see
+            Ko'rish
              </Button>
         </Link>
 

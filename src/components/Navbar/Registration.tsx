@@ -55,16 +55,16 @@ export const Registration: React.FC<INavbarStepProps> = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="mb-3">
-      <h2 className="text-xl font-bold mb-6">Sign Up</h2>
+      <h2 className="text-xl font-bold mb-6">Ro'yxatdan O'tish</h2>
 
       {hasErrors && (
         <p className="text-red-500 text-[15px] mb-4">
-          Fill all fields to proceed.
+          Davom etish uchun barcha maydonlarni to'ldiring.
         </p>
       )}
 
       <div className="mt-4">
-        <label className="block text-custom-gray mb-2">Username</label>
+        <label className="block text-custom-gray mb-2">Foydalanuvchi nomi</label>
         <input
           placeholder="UserName"
           className="w-full border border-gray-300 focus:border-2 
@@ -75,7 +75,7 @@ export const Registration: React.FC<INavbarStepProps> = () => {
       </div>
 
       <div className="mt-4">
-        <label className="block text-custom-gray mb-2">Phone</label>
+        <label className="block text-custom-gray mb-2">Telefon</label>
         <input
           placeholder="+998"
           className="w-full border border-gray-300 focus:border-2 
@@ -86,7 +86,7 @@ export const Registration: React.FC<INavbarStepProps> = () => {
       </div>
 
       <div className="mb-3 mt-4 relative">
-        <label className="block text-custom-gray mb-2">Password</label>
+        <label className="block text-custom-gray mb-2">Parol</label>
         <div className="relative">
           <input
             type={showPassword ? "text" : "password"} // Toggle password visibility
@@ -128,7 +128,7 @@ export const Registration: React.FC<INavbarStepProps> = () => {
               value="startup"
               {...register("role", { required: true })}
             />
-            Startup Funder
+            Startap asoschisi
           </label>
         </div>
       </div>
@@ -138,25 +138,25 @@ export const Registration: React.FC<INavbarStepProps> = () => {
         disabled={isLoading}
         className="Blue_button font-semibold w-full bg-[#749BA9] text-white p-2 rounded-2xl"
       >
-        Register
+       Ro'yxatdan o'tish
       </button>
 
       <p className="mt-4 text-center font-normal text-base">
-        Already have an account?
+        Allaqachon ro'yxatdan o'tganmisiz?
         <span
           className="text-blue-500 ms-2 cursor-pointer"
           onClick={() => openModal("login")}
         >
-          Login
+         Kirish
         </span>
       </p>
 
       {isError && (
         <p className="text-center text-[15px] text-red-500 mt-2">
-          Registration failed: {JSON.stringify(error)}
+          Ro'yxatdan o'tish muvaffaqiyatsiz tugadi: {JSON.stringify(error)}
         </p>
       )}
-      {isSuccess && <p>Registration successful!</p>}
+      {isSuccess && <p>Muvaffaqiyatli ro'yxatdan o'tdingiz!</p>}
     </form>
   );
 };
