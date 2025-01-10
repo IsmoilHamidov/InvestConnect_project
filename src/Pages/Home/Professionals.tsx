@@ -9,19 +9,19 @@ const cardInfo = [
     id: 1,
     image: image1,
     name: "Dimitri Raemdonck",
-    specialist: "Specialist investeringsvastgoed",
+    specialist: "Ixtisoslashgan investitsiya mulk menejer",
   },
   {
     id: 2,
     image: image2,
     name: "Nico Di Tarantok",
-    specialist: "Specialist investeringsvastgoed",
+    specialist: "Starup boshqarish menejer",
   },
   {
     id: 3,
     image: image3,
     name: "Dave Bracke",
-    specialist: "Zaakvoerder",
+    specialist: "Boshqaruvchi direktor",
   }
 ]
 
@@ -32,7 +32,7 @@ function Professionals() {
         <div className='max-w-7xl m-auto '>
           <div className='w-full flex justify-center'>
             <h3 className="w-3/5 text-center text-[2.5rem] font-light text-custom-gray">
-              Een gespecialiseerd team met een persoonlijke aanpak
+               Shaxsiy yondashuvga ega ixtisoslashgan jamoa
             </h3>
           </div>
 

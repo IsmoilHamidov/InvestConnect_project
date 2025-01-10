@@ -21,9 +21,8 @@ function ProjectForm() {
   useEffect(() => {
     if (isSuccess) {
       setTimeout(() => {
-        navigate("/profile");
-        window.location.reload();
-      }, 3000);
+        navigate("/profile");     
+      });
     }
   }, [isSuccess, navigate]);
 
@@ -85,17 +84,17 @@ function ProjectForm() {
 
     try {
       const result = await createProduct(payload).unwrap();
-      console.log("Product created:", result);
+      console.log("Mahsulot qo'shildi:", result);
       // onClose();
       toast({
-        description: "Product created successfully!",
+        description: "Loyiha muvaffaqiyatli yaratildi!",
         variant: "success",
         duration: 3000,
       });
     } catch (err) {
       console.error("Failed to create product:", err);
       toast({
-        description: "Failed to create product. Please try again.",
+        description: "Mahsulot yaratilmadi. Iltimos, qayta urinib ko'ring.",
         variant: "destructive",
       });
     }
@@ -104,8 +103,8 @@ function ProjectForm() {
   return (
     <div className="min-h-[100vh] py-14 bg-gray-100">
       <div className="max-w-7xl m-auto ">
-        <h1 className="text-2xl font-bold mb-6 text-custom-gray">
-          Add New Project
+        <h1 className="text-2xl font-bold mb-8 text-custom-gray">
+        Yangi loyiha qo'shish
         </h1>
         <form
           onSubmit={handleSubmit}
@@ -114,47 +113,47 @@ function ProjectForm() {
         >
           {/* Personal Details Section */}
           <div>
-            <h2 className="font-medium text-xl mb-4">Personal Details</h2>
+            <h2 className="font-medium text-xl mb-4">Shaxsiy ma'lumotlar</h2>
             <div className="flex flex-wrap justify-between items-center gap-y-5">
               <div className="w-[48%]">
                 <label className="block text-sm font-medium text-gray-600 mb-2">
-                  Phone Number
+                Telefon raqami
                 </label>
                 <input
                   type="tel"
-                  placeholder="Enter phone number"
+                  placeholder="Telefon raqamini kiriting"
                   className="w-full border-gray-300 rounded-lg px-2 h-10"
                 />
               </div>
 
               <div className="w-[48%]">
                 <label className="block text-sm font-medium text-gray-600 mb-2">
-                  User Name
+                Foydalanuvchi nomi
                 </label>
                 <input
-                  placeholder="User Name"
+                  placeholder="Foydalanuvchi nomini kiriting"
                   className="w-full border-gray-300 rounded-lg px-2 h-10"
                 />
               </div>
 
               <div className="w-[48%]">
                 <label className="block text-sm font-medium text-gray-600 mb-2">
-                  LinkedIn Profile
+                LinkedIn profili
                 </label>
                 <input
                   type="text"
-                  placeholder="Enter LinkedIn URL"
+                  placeholder="LinkedIn URL manzilini kiriting"
                   className="w-full border-gray-300 rounded-lg px-2 h-10"
                 />
               </div>
 
               <div className="w-[48%]">
                 <label className="block text-sm font-medium text-gray-600 mb-2">
-                  Location
+                Joylashuv
                 </label>
                 <input
                   name="location"
-                  placeholder="Location"
+                  placeholder="Joylashuvingiz"
                   value={formData.location}
                   onChange={handleChange}
                   required
@@ -167,25 +166,25 @@ function ProjectForm() {
           {/* Project Details Section */}
           <div>
             <h2 className="font-medium text-xl mb-4 text-[57737d]">
-              Project Details
+            Loyiha tafsilotlari
             </h2>
             <div className="flex flex-wrap justify-between items-center gap-y-5">
               <div className="w-[48%]">
                 <label className="block text-sm font-medium text-gray-600 mb-2">
-                  Project Name
+                Loyiha nomi
                 </label>
                 <input
                   type="text"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  placeholder="Enter Project Name"
+                  placeholder="Loyiha nomini kiriting"
                   className="w-full border-gray-300 rounded-lg px-2 h-10"
                 />
               </div>
               <div className="w-[48%]">
                 <label className="block text-sm font-medium text-gray-600 mb-2">
-                  Category
+                  Loyiha turi
                 </label>
                 <select className="w-full bg-transparent border border-gray-300 rounded-md p-2 focus:outline-none">
                   {getCategories
@@ -204,12 +203,12 @@ function ProjectForm() {
 
               <div className="w-[48%]">
                 <label className="block text-sm font-medium text-gray-600 mb-2">
-                  Rendement
+                Samaradorlik
                 </label>
                 <input
                   name="rendement"
                   type="number"
-                  placeholder="Rendement"
+                  placeholder="Samaradorlik"
                   value={formData.rendement}
                   onChange={handleChange}
                   required
@@ -219,11 +218,11 @@ function ProjectForm() {
 
               <div className="w-[48%]">
                 <label className="block text-sm font-medium text-gray-600 mb-2">
-                  Product Price
+                Loyiha narxi
                 </label>
                 <input
                   name="price"
-                  placeholder="Price"
+                  placeholder="Loyiha narxini kiriting"
                   type="number" 
                   value={formData.price}
                   onChange={handleChange}
@@ -238,13 +237,13 @@ function ProjectForm() {
           <div className="flex justify-between items-center">
             <div className="w-[48%]">
               <label className="block text-md font-medium text-gray-600 mb-3">
-                Description
+              Tavsif
               </label>
               <textarea
                 style={{ resize: "none" }}
                 className="w-full outline-none border border-custom-gray rounded-md p-3 h-36"
                 name="description"
-                placeholder="Description"
+                placeholder="Tavsif qo'shing"
                 value={formData.description}
                 onChange={handleChange}
                 required
@@ -253,12 +252,12 @@ function ProjectForm() {
 
             <div className="w-[48%]">
               <label className="block text-md font-medium text-gray-600 mb-3">
-                Additional Information
+              Qo'shimcha ma'lumot
               </label>
               <textarea
                 style={{ resize: "none" }}
                 className="w-full outline-none border border-custom-gray rounded-md p-3 h-36"
-                placeholder="Any additional details"
+                placeholder="Yanada ko'proq ma'lumot qo'shish"
               ></textarea>
             </div>
           </div>
@@ -282,7 +281,7 @@ function ProjectForm() {
             </Button>
             {isError && (
               <p className="text-red-600">
-                Error creating product: {JSON.stringify(error)}
+              Mahsulot yaratishda xatolik yuz berdi: {JSON.stringify(error)}
               </p>
             )}
           </div>

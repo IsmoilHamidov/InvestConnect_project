@@ -7,6 +7,7 @@ import {
 } from "react-icons/fa";
 import logo_text from "../../assets/images/navLogo.png";
 import ProfilePopover from "./ProfilePopover ";
+import { Link } from "react-router-dom";
 
 
 
@@ -38,11 +39,11 @@ const Navbar: React.FC = () => {
           <button className="Blue_button border-0 rounded-3xl p-2 px-3 text-sm bg-[#749BA9]">
             INVEST CONNECT PLATFORM
           </button>
-          <a href="#">Over ons</a>
+          <Link to={'/products'}>Loyihalar</Link>
+          <a href="#">Biz haqimizda</a>
           <a href="#">Blog</a>
-          <a href="#">Podcast</a>
-          <a href="#Project">Projects</a>
-          <a href="#">Contact</a>
+          <a href="#">Podkasting</a>
+          <a href="#">Aloqa</a>
 
           <ProfilePopover />
         </div>
@@ -56,10 +57,10 @@ const Navbar: React.FC = () => {
           
         </div>
         <div className="h-full flex items-center gap-x-7 text-white text-base font-normal">
-          <a href="#">Aanbod</a>
-          <a href="#">Invest Platform</a>
-          <a href="#">Onze diensten</a>
-          <a href="#">Partners</a>
+          <a href="#">Taklif</a>
+          <a href="#">Investitsiya Platformasi</a>
+          <a href="#">Bizning xizmatlar</a>
+          <a href="#">Hamkorlar</a>
         </div>
         <div className="flex items-center gap-x-7 text-white text-base font-light">
           <a href="#">

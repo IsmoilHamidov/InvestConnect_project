@@ -7,26 +7,26 @@ import image4 from "../assets/images/srv-icon-ratina02.png"
 export const ServiceArr = [
     {
         id: 1,
-        title: "Vastgoedplanning",
-        text:"De selectie en structurering van beleggingsvastgoed vereist deskundig advies. Laat u dan ook begeleiden door onze vastgoedcoach. Wij adviseren onze klanten omtrent de meest optimale structuur om de aankoop te realiseren, zowel vanuit financieel (financiering) en fiscaal oogpunt, als naar successieplanning. ",
+        title: "Ishonchli va foydali G‘oyalar sari birgalikda qadam tashlang",
+        text:"Siz muvaffaqiyatli loyihalarga sarmoya kiritishni istayotgan investor bo‘lsangiz, bizning platformamiz siz uchun mukammal maydon. Startap asoschilari bilan bog‘lanib, innovatsion g‘oyalarga sarmoya kiritish orqali kelajakka yo‘l oching. Biz sizga xavfsiz va samarali hamkorlik qilish uchun barcha kerakli vositalarni taqdim etamiz. Onlayn tarzda samarali aloqalar o‘rnating va biznesning yangi darajasini kashf eting!",
         img: image1,
     },
     {
         id: 2,
-        title: "Aan-en Verkoopbemiddeling",
-        text:"U bent geïnteresseerd in een vastgoedinvestering, maar hebt geen tijd om op zoek te gaan naar het ideale pand? Wij nemen deze zorg uit uw handen en gaan voor u op zoek naar het investeringsvastgoed dat aan al uw eisen voldoet. Op basis van uw wensen naar locatie, rendement, type vastgoed en vele andere factoren gaan wij op zoek naar de ideale opbrengsteigendom. ",
+        title: "G‘oyangizni investorlar bilan uchrashtiring",
+        text:"Startapingiz uchun moliyalashtirish izlayapsizmi? Bizning platformamiz orqali dunyo bo‘ylab investorlar bilan bog‘lanib, o‘z g‘oyangizni amalga oshirish imkoniyatiga ega bo‘ling. Samarali hamkorlik vositalari va qo‘llab-quvvatlash xizmati bilan orzularingizni haqiqatga aylantirishga yordam beramiz. Innovatsiyalarni yarating va kelajak uchun katta qadam tashlang – barchasi onlayn!",
         img: image2,
     },
-    {
-        id: 3,
-        title: "Verhuur & Beheer",
-        text:"Een degelijke administratieve, technische en commerciële opvolging blijven de sleutel tot succes van iedere vastgoedinvestering. Daarom bieden wij onze investeerders de mogelijkheid om het verhuren en/of beheren van hun vastgoed zo vlot en zorgeloos mogelijk via Altro Invest te laten verlopen.",
-        img: image3,
-    },
-    {
-        id: 4,
-        title: "Altro Interieur",
-        text:"Het pand die u koopt, is nog niet meteen verhuurbaar. Wij zorgen, indien gewenst, voor een uitgekiende basisinrichting (schilderwerken, verlichting, raamdecoratie). De huurder hoeft alleen nog meubels en huisraad mee te brengen. Ook indien de huurder een technisch probleempje heeft, staan wij voor u klaar.",
-        img: image4,
-    },
+    // {
+    //     id: 3,
+    //     title: "Ijara Va Boshqaruv",
+    //     text:"Ovozli ma'muriy, texnik va tijorat kuzatuvi har qanday ko'chmas mulk sarmoyasi muvaffaqiyatining kaliti bo'lib qolmoqda. Shuning uchun biz investorlarga Altro Invest orqali ko'chmas mulkni iloji boricha muammosiz va beparvo boshqarish va/yoki boshqarish imkoniyatini taklif etamiz.",
+    //     img: image3,
+    // },
+    // {
+    //     id: 4,
+    //     title: "Invest Connect Ichki Qismi",
+    //     text:"Siz sotib olgan mulk darhol ijaraga olinmaydi. Agar so'ralsa, biz murakkab asosiy jihozlarni (rasm, yoritish, deraza bezaklari) taqdim etamiz. Ijarachiga faqat mebel va uy-ro'zg'or buyumlarini olib kelish kerak. Agar ijarachida texnik muammo bo'lsa ham, biz sizga tayyormiz.",
+    //     img: image4,
+    // },
 ];

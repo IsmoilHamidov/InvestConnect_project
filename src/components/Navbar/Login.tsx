@@ -40,10 +40,10 @@ export const LoginModal: React.FC<INavbarStepProps> = () => {
 
   return (
     <div>
-      <h2 className="text-xl font-bold mb-5">Login</h2>
+      <h2 className="text-xl font-bold mb-5">Kirish</h2>
       <form onSubmit={handleLogin} className="mb-3 grid gap-4">
         <div>
-          <label className="block text-gray-700 mb-2">Phone number</label>
+          <label className="block text-gray-700 mb-2">Telefon nomer</label>
           <input
             type="text"
             value={phone}
@@ -55,7 +55,7 @@ export const LoginModal: React.FC<INavbarStepProps> = () => {
           />
         </div>
         <div>
-          <label className="block text-gray-700 mb-2">Password</label>
+          <label className="block text-gray-700 mb-2">Parol</label>
           <div className="relative">
               <input
                 type={showPassword ? "text" : "password"}
@@ -86,13 +86,14 @@ export const LoginModal: React.FC<INavbarStepProps> = () => {
           {isLoading ? "Logging in..." : "Login"}
         </button>
 
-        <p className="mt-3 text-center font-normal text-base">
-          Don't have an account?
+
+        <p className="grid mb-0 mt-3 text-center font-normal text-base">
+          Hali ro'yxatdan o'tganmisiz?
           <span
-            className="text-blue-500 cursor-pointer ms-2"
+            className="text-blue-500 cursor-pointer text-center "
             onClick={() => openModal("registration")}
           >
-            Sign Up
+            Ro'yxatdan o'tish
         </span>
         </p>
       </form>

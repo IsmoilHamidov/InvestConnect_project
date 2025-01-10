@@ -8,7 +8,14 @@ import { useEffect, useState } from 'react';
 import { useToast } from '@/hooks/use-toast'
 
 
-export function ProfileForm() {
+
+interface ProfileFormProps {
+    closeModal: () => void; 
+  }
+
+
+const ProfileForm: React.FC<ProfileFormProps> = ({ closeModal }) => {
+
 
     const { toast } = useToast();
     const { data, error } = useGetUserProfileQuery(null);
@@ -73,14 +80,16 @@ export function ProfileForm() {
             };
     
             await updateProfileDetail({ id: data?.id, data: updatedFormData }).unwrap();
-    
             toast({
                 description: `Saved!`,
                 variant: "success",
-            });
+            })
+            closeModal();
             setTimeout(() => {
-                // window.location.reload();
-            }, 500);
+
+                window.location.reload();
+            }, 800); 
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (err) {
             toast({
                 description: `Failed to update profile!`,
@@ -117,10 +126,24 @@ export function ProfileForm() {
     
 
 
+    
+
     return (
         <Card className="w-full h-full">
             <CardContent className="grid mt-6 ">
-                <h2 className="mb-6 font-semibold text-xl text-center">Profile Details</h2>
+                <h2 className="mb-7 font-semibold text-[21px] text-center">Profil tafsilotlari</h2>
+                    {/* <div className="flex flex-col items-center relative mb-3">
+                    <FaUserCircle   size={'68'} className="text-black mb-2 " />
+                        {error ? (
+                            <>Oh no, there was an error</>
+                        ) : isLoading ? (
+                            <>Loading...</>
+                        ) : data ? (
+                            <h2 className="text-lg font-medium">
+                                {data?.firstname || "Unknown"} {data?.lastname || "User"}
+                            </h2>
+                        ) : null}
+                    </div> */}
 
                 <div className="w-full">
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 w-full">
@@ -180,7 +203,7 @@ export function ProfileForm() {
                                     className="w-full h-10 m-auto font-normal text-base 
                                     bg-[#7497a7] hover:bg-[#7497a7]/90 rounded-3xl"
                                 >
-                                    Save Details
+                                    Saqlash
                                 </Button>
                             </div>
 
@@ -191,3 +214,5 @@ export function ProfileForm() {
         </Card>
     );
 }
+
+export default ProfileForm;

@@ -5,22 +5,22 @@ const analyticsItems = [
   {
     id: 1,
     icon: <HiUsers className="text-[#749BA9] text-3xl mb-4" />,
-    title: "1 Project View",
-    description: "Discover who's viewed your profile",
+    title: "1 Loyiha Ko'rinishi",
+    description: "Loyihalardan qay biri koʻrilganligini bilish",
   },
   {
     id: 2,
     icon: <FaChartBar className="text-[#B29C6F] text-3xl mb-4" />,
-    title: "0 Post Impressions",
-    description: "Start a post to increase engagement",
+    title: "0 Post taassurotlari",
+    description: "Faollikni oshirish uchun postni boshlang",
   },
 ];
 
 export default function AnalyticsBox() {
   return (
     <div className="w-full bg-white shadow-md border-[1px] rounded-[15px] p-6 py-8">
-      <h2 className="text-xl font-bold mb-4 text-custom-gray">Analytics</h2>
-      <div className="text-sm text-gray-500 mb-5">Private to you</div>
+      <h2 className="text-xl font-bold mb-4 text-custom-gray">Analitika</h2>
+      <div className="text-sm text-gray-500 mb-5">Sizga shaxsiy bo'lganlar</div>
       <div className="grid grid-cols-2 gap-4">
         {analyticsItems.map((item) => (
           <div

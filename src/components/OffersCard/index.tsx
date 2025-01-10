@@ -9,14 +9,14 @@ const Offers: React.FC = () => {
 
 
   return (
-    <div className="p-6 w-full mx-auto shadow-xl border-[1px] rounded-[15px]  ">
+    <div className="p-6 w-full mx-auto shadow-lg border-[1px] rounded-[15px]  ">
     <div className="flex flex-row items-center justify-between mb-9 ">
-      <h1 className="text-base font-semibold">Aanbod</h1>
+      <h1 className="text-xl font-semibold">Loyhalaringiz</h1>
         
       <Link to={'/ProjectAdd'}>
           <button className="rounded-full text-[15px] py-[7px] px-5 text-white Blue_button" >
             <i className="fa-solid fa-plus  me-3"></i>
-            Add Project
+           Loyiha qo'shish
           </button>
       </Link>
     </div>
@@ -24,19 +24,19 @@ const Offers: React.FC = () => {
 
       {isLoading && (
         <div className="flex items-center justify-center h-full">
-          <p>Loading projects..</p>
+          <p>Loyihalar yuklanmoqda..</p>
         </div>
       )}
 
       {error && (
         <div className="flex items-center justify-center h-full">
-          <p>Error loading projects... Please try again later.</p>
+          <p>Loyihalarni yuklashda xatolik yuz berdi... Keyinroq qayta urinib ko‘ring.</p>
         </div>
       )}
       
       {data?.length === 0 && (
         <div className="flex items-start justify-start h-full">
-          <p className='italic'>You do not have available projects.</p>
+          <p className='italic text-base'>Sizda hozircha mavjud loyihalar yo'q.</p>
         </div>
       )}
     

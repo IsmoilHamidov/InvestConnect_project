@@ -16,9 +16,9 @@
   import { cn } from "@/lib/utils";
   import { useGetUserProfileQuery } from "@/store/slice/products";
 import { Link } from "react-router-dom";
-import { ProfileForm } from "../profileForms";
 import { useState } from "react";
 import { HiX } from "react-icons/hi";
+import ProfileForm from "../profileForms";
 
 
 
@@ -56,7 +56,7 @@ function SidebarItem({ icon, label, isActive }: SidebarItemProps) {
       localStorage.clear();
       setTimeout(() => {
           window.location.reload();
-      }, 200);
+      }, 100);
       navigate('/');
   };
 
@@ -74,21 +74,32 @@ function SidebarItem({ icon, label, isActive }: SidebarItemProps) {
   
         <div className="flex flex-col items-center border-b p-6">
           
-        
-          <div className="flex items-center justify-center bg-[#B29C6F] text-white p-1
-           w-[70px] h-[70px] rounded-full text-5xl font-normal mb-2 mt-3">
-                    {data?.username?.charAt(0).toUpperCase() || ""}
-                </div>
+        <div
+            className="flex items-center justify-center bg-[#B29C6F] text-white  
+            w-[70px] h-[70px] rounded-full text-5xl font-normal mb-2 mt-3"
+          >
+            {data?.profile_image ? (
+              <img
+                src={data.profile_image}
+                alt="Profile"
+                className="w-full h-full object-cover rounded-full"
+              />
+            ) : (
+              data?.username?.charAt(0).toUpperCase() || ""
+            )}
+          </div>
+
           <div className="text-center mt-2">
 
             {error ? (
-              <>Oh no, there was an error</>
+              <>Yo'q, xatolik yuz berdi</>
             ) : isLoading ? (
-              <>Loading...</>
+              <>Yuklanmoqda...</>
             ) : data ? (
               <>
                 <h2 className="font-semibold text-base text-custom-gray">
                   {data?.firstname || "Unknown"} {data?.lastname || "User"}
+      
                 </h2>
                 <p className="text-base text-[#749BA9]">
                   {data?.role || "Unknown Role"}
@@ -115,7 +126,7 @@ function SidebarItem({ icon, label, isActive }: SidebarItemProps) {
                   >
                     <HiX size={24} />
                   </button>
-                  <ProfileForm />
+                  <ProfileForm closeModal={toggleModal} />
                 </div>
               </div>
             )}
@@ -134,10 +145,12 @@ function SidebarItem({ icon, label, isActive }: SidebarItemProps) {
                         </DialogTrigger>
                         <DialogContent>
                             <DialogHeader>
-                                <DialogTitle>You want to log out of the account?</DialogTitle>
-                                <div className="flex justify-center gap-10 pt-5">
-                                    <DialogTrigger>No</DialogTrigger>
-                                    <Button onClick={handleSignOut}>Yes</Button>
+                                <DialogTitle>Hisobdan chiqmoqchimisiz?</DialogTitle>
+                                <div className="flex justify-center items-center gap-10">
+                                    <DialogTrigger>
+                                        <button className="text-lg font-semibold">Yo'q</button>
+                                    </DialogTrigger>
+                                    <Button className="rounded-2xl text-lg font-normal px-6 py-3 " onClick={handleSignOut}>Ha</Button>
                                 </div>
                             </DialogHeader>
                         </DialogContent>
@@ -150,39 +163,39 @@ function SidebarItem({ icon, label, isActive }: SidebarItemProps) {
           <Link to={'/'}>
             <SidebarItem 
               icon={<Home className="h-4 w-4" />}
-              label="Home"
+              label="Bosh sahifa"
             />
           </Link>
 
           <Link to={'/products'}>
             <SidebarItem 
               icon={<Briefcase  className="h-4 w-4" />}
-              label="Projects"
+              label="Loyihalar"
             />
           </Link>
           <SidebarItem
             icon={<Building2 className="h-4 w-4" />}
-            label="Aanbod"
+            label="Takliflar"
             isActive
           />
           <SidebarItem
             icon={<Calendar className="h-4 w-4" />}
-            label="Kalender"
+            label="Kalendar"
           />
           <SidebarItem
             icon={<Users className="h-4 w-4" />}
-            label="Community"
+            label="Jamiyat"
           />
           <SidebarItem
             icon={<Users className="h-4 w-4" />} // Update icon if incorrect
-            label="Mijncontacten"
+            label="Mening kontaktlarim"
           />
         </div>
   
         <div className="mt-auto border-t p-2">
           <SidebarItem
             icon={<HelpCircle className="h-4 w-4" />}
-            label="Altro Support"
+            label="Boshqa yordamlar"
           />
         </div>
       </div>

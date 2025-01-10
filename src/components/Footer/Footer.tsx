@@ -35,28 +35,27 @@ function Footer() {
 
                     <div className='w-[25%] flex flex-col 
                         gap-y-2 text-[#756E6E] font-medium'>
-                        <h4 className='text-custom-gray text-lg mb-2'>SITEMAP </h4>
-                        <a href='#'>Aanbod</a>
-                        <a>Invest platform</a>
-                        <a href='#'>Onze diensten</a>
-                        <a href='#'>Events</a>
-                        <a href='#'>Partners</a>
+                        <h4 className='text-custom-gray text-lg mb-2'>Sayt Xaritasi </h4>
+                        <a href='#'>Taklif</a>
+                        <a>Investitsiya platformasi</a>
+                        <a href='#'>Bizning xizmatlar</a>
+                        <a href='#'>Tadbirlar</a>
+                        <a href='#'>Hamkorlar</a>
                     </div>
                     <div className='w-[25%] flex flex-col 
                         gap-y-2 text-[#756E6E] font-medium'>
-                        <h4 className='text-custom-gray text-lg mb-2'>COMMUNICATE </h4>
+                        <h4 className='text-custom-gray text-lg mb-2'>Muloqot </h4>
                         <a href='#'>Blog</a>
-                        <a href='#'>Podcasts</a>
-                        <a href='#'>Pers</a>
-                        <a href='#'>Contact</a>
+                        <a href='#'>Podkastlar</a>
+                        <a href='#'>Yangiliklar</a>
+                        <a href='#'>Aloqa</a>
                     </div>
                     <div className='w-[25%] flex flex-col 
                         gap-y-2 text-[#756E6E] font-medium'>
-                        <h4 className='text-custom-gray text-lg mb-2'>LEGAL </h4>
-                        <a href='#'>Algemene voorwaarden</a>
-                        <a href='#'>Privacy policy</a>
-                        <a href='#'>Cookie policy</a>
-                        <a href='#'>Contact</a>
+                        <h4 className='text-custom-gray text-lg mb-2'>Huquqiy</h4>
+                        <a href='#'>Umumiy shartlar</a>
+                        <a href='#'>Maxfiylik siyosati</a>
+                        <a href='#'>Cookie siyosati</a>
                     </div>
 
 
@@ -67,7 +66,7 @@ function Footer() {
         </div>
         
         <div className='w-full bg-custom-blue-gray py-4 relative z-40'>
-            <p className='max-w-7xl m-auto text-white'>Copyright © 2022 Invest Connect All Rights Reserved.</p>
+            <p className='max-w-7xl m-auto text-white'>Mualliflik Huquqi 2022 Invest Connect Barcha Huquqlar Himoyalangan.</p>
         </div>
     </>
   )

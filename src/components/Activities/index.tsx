@@ -59,7 +59,7 @@ const Activities = () => {
              shadow-lg border    ">
                 <div className="flex flex-row justify-between items-center mb-5" >
 
-                    <h2 className="text-xl font-semibold text-gray-800 mb-4">Opened Projects</h2>
+                    <h2 className="text-xl font-semibold text-gray-800 mb-4">Ochilgan loyihalar</h2>
                    
                 </div>
 
