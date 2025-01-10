@@ -74,11 +74,21 @@ function SidebarItem({ icon, label, isActive }: SidebarItemProps) {
   
         <div className="flex flex-col items-center border-b p-6">
           
-        
-          <div className="flex items-center justify-center bg-[#B29C6F] text-white p-1
-           w-[70px] h-[70px] rounded-full text-5xl font-normal mb-2 mt-3">
-                    {data?.username?.charAt(0).toUpperCase() || ""}
-                </div>
+        <div
+            className="flex items-center justify-center bg-[#B29C6F] text-white  
+            w-[70px] h-[70px] rounded-full text-5xl font-normal mb-2 mt-3"
+          >
+            {data?.profile_image ? (
+              <img
+                src={data.profile_image}
+                alt="Profile"
+                className="w-full h-full object-cover rounded-full"
+              />
+            ) : (
+              data?.username?.charAt(0).toUpperCase() || ""
+            )}
+          </div>
+
           <div className="text-center mt-2">
 
             {error ? (
@@ -89,6 +99,7 @@ function SidebarItem({ icon, label, isActive }: SidebarItemProps) {
               <>
                 <h2 className="font-semibold text-base text-custom-gray">
                   {data?.firstname || "Unknown"} {data?.lastname || "User"}
+      
                 </h2>
                 <p className="text-base text-[#749BA9]">
                   {data?.role || "Unknown Role"}
