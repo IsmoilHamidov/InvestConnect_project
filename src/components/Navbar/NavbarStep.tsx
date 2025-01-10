@@ -27,7 +27,7 @@ export const NavbarStep = () => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-      <div className="bg-white px-6 py-7 rounded-lg w-[30%] relative">
+      <div className="bg-white px-6 py-7 rounded-lg  relative">
         <button
           className="absolute top-4 right-4 "
           onClick={closeModal}

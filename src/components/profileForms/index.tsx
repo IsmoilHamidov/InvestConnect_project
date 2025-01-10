@@ -11,7 +11,7 @@ import { useToast } from '@/hooks/use-toast'
 
 interface ProfileFormProps {
     closeModal: () => void; 
-  }
+}
 
 
 const ProfileForm: React.FC<ProfileFormProps> = ({ closeModal }) => {
@@ -54,7 +54,8 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ closeModal }) => {
             closeModal();
             setTimeout(() => {
                 window.location.reload();
-              }, 800); 
+            }, 800); 
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (err) {
             toast({
                 description: `Failed to update profile!`,
@@ -71,6 +72,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ closeModal }) => {
                 variant: "destructive",
             });
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [error]);
 
   
