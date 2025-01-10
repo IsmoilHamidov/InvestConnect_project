@@ -5,7 +5,7 @@ import IntroductionText from "./IntroductionText"
 import InfoCard from "./InfoCard"
 import Projects from "./Projects"
 import Service from "./Service"
-import Vebinar from "./Vebinar"
+// import Vebinar from "./Vebinar"
 import Professionals from "./Professionals"
 import Footer from "../../components/Footer/Footer"
 import { NavbarStep } from "@/components/Navbar/NavbarStep"
@@ -20,11 +20,11 @@ function Home() {
       <NavbarStep />
       <Introduction_Image/>
       <IntroductionText/>
+      <Projects/>
       <About/>
       <AboutImage/>
       <Service/>
-      <Projects/>
-      <Vebinar/>
+      {/* <Vebinar/> */}
       <InfoCard/>
       <Professionals/>
       <Footer/>

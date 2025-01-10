@@ -153,7 +153,7 @@ export const Registration: React.FC<INavbarStepProps> = () => {
 
       {isError && (
         <p className="text-center text-[15px] text-red-500 mt-2">
-          Ro'yxatdan o'tish muvaffaqiyatsiz tugadi: {JSON.stringify(error)}
+         Ro'yxatdan o'tish muvaffaqiyatsiz tugadi: {(error?.data.error)}
         </p>
       )}
       {isSuccess && <p>Muvaffaqiyatli ro'yxatdan o'tdingiz!</p>}
