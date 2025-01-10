@@ -7,26 +7,26 @@ import image4 from "../assets/images/srv-icon-ratina02.png"
 export const ServiceArr = [
     {
         id: 1,
-        title: "Ko'chmas mulkni rejalashtirish",
-        text:"Investitsiya xususiyatlarini tanlash va tuzish mutaxassislarning maslahatini talab qiladi. O'zingizni ko'chmas mulk bo'yicha murabbiyimiz boshqarsin. Biz mijozlarimizga moliyaviy (moliyalashtirish) va soliq nuqtai nazaridan, shuningdek merosni rejalashtirish bo'yicha sotib olishni amalga oshirish uchun eng maqbul tuzilma haqida maslahat beramiz. ",
+        title: "Ishonchli va foydali G‘oyalar sari birgalikda qadam tashlang",
+        text:"Siz muvaffaqiyatli loyihalarga sarmoya kiritishni istayotgan investor bo‘lsangiz, bizning platformamiz siz uchun mukammal maydon. Startap asoschilari bilan bog‘lanib, innovatsion g‘oyalarga sarmoya kiritish orqali kelajakka yo‘l oching. Biz sizga xavfsiz va samarali hamkorlik qilish uchun barcha kerakli vositalarni taqdim etamiz. Onlayn tarzda samarali aloqalar o‘rnating va biznesning yangi darajasini kashf eting!",
         img: image1,
     },
     {
         id: 2,
-        title: "Sotib olish va sotish",
-        text:"Siz ko'chmas mulk investitsiya manfaatdor, lekin ideal mulk uchun qarash uchun vaqt yo'q? Biz sizning qo'lingizdan bu g'amxo'rlik va barcha talablariga javob investitsiya mulkni qarash. Joylashuv, qaytish, mulk turi va boshqa ko'plab omillarga bo'lgan istaklaringiz asosida biz ideal rentabellik xususiyatini qidiramiz. ",
+        title: "G‘oyangizni investorlar bilan uchrashtiring",
+        text:"Startapingiz uchun moliyalashtirish izlayapsizmi? Bizning platformamiz orqali dunyo bo‘ylab investorlar bilan bog‘lanib, o‘z g‘oyangizni amalga oshirish imkoniyatiga ega bo‘ling. Samarali hamkorlik vositalari va qo‘llab-quvvatlash xizmati bilan orzularingizni haqiqatga aylantirishga yordam beramiz. Innovatsiyalarni yarating va kelajak uchun katta qadam tashlang – barchasi onlayn!",
         img: image2,
     },
-    {
-        id: 3,
-        title: "Ijara Va Boshqaruv",
-        text:"Ovozli ma'muriy, texnik va tijorat kuzatuvi har qanday ko'chmas mulk sarmoyasi muvaffaqiyatining kaliti bo'lib qolmoqda. Shuning uchun biz investorlarga Altro Invest orqali ko'chmas mulkni iloji boricha muammosiz va beparvo boshqarish va/yoki boshqarish imkoniyatini taklif etamiz.",
-        img: image3,
-    },
-    {
-        id: 4,
-        title: "Invest Connect Ichki Qismi",
-        text:"Siz sotib olgan mulk darhol ijaraga olinmaydi. Agar so'ralsa, biz murakkab asosiy jihozlarni (rasm, yoritish, deraza bezaklari) taqdim etamiz. Ijarachiga faqat mebel va uy-ro'zg'or buyumlarini olib kelish kerak. Agar ijarachida texnik muammo bo'lsa ham, biz sizga tayyormiz.",
-        img: image4,
-    },
+    // {
+    //     id: 3,
+    //     title: "Ijara Va Boshqaruv",
+    //     text:"Ovozli ma'muriy, texnik va tijorat kuzatuvi har qanday ko'chmas mulk sarmoyasi muvaffaqiyatining kaliti bo'lib qolmoqda. Shuning uchun biz investorlarga Altro Invest orqali ko'chmas mulkni iloji boricha muammosiz va beparvo boshqarish va/yoki boshqarish imkoniyatini taklif etamiz.",
+    //     img: image3,
+    // },
+    // {
+    //     id: 4,
+    //     title: "Invest Connect Ichki Qismi",
+    //     text:"Siz sotib olgan mulk darhol ijaraga olinmaydi. Agar so'ralsa, biz murakkab asosiy jihozlarni (rasm, yoritish, deraza bezaklari) taqdim etamiz. Ijarachiga faqat mebel va uy-ro'zg'or buyumlarini olib kelish kerak. Agar ijarachida texnik muammo bo'lsa ham, biz sizga tayyormiz.",
+    //     img: image4,
+    // },
 ];
