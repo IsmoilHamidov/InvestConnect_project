@@ -6,7 +6,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
 
 const policyText = {
   text: `
@@ -32,7 +31,7 @@ const PrivacyPolicy = () => {
   return (
     <Dialog>
       <DialogTrigger>
-        <span variant="link" className="text-blue-500 lowercase ">
+        <span className="text-blue-500 lowercase ">
           Foydalanish shartlari{" "}
         </span>
       </DialogTrigger>

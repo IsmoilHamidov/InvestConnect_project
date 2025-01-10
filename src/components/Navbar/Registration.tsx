@@ -149,7 +149,9 @@ export const Registration: React.FC<INavbarStepProps> = () => {
             onChange={() => setIsChecked(!isChecked)}
           />
           <PrivacyPolicy />
-          <span className="pl-1">va maxfiylik siyosati bilan tanishib chiqdim</span>
+          <span className="pl-1">
+            va maxfiylik siyosati bilan tanishib chiqdim
+          </span>
         </label>
       </p>
 
@@ -175,7 +177,10 @@ export const Registration: React.FC<INavbarStepProps> = () => {
 
       {isError && (
         <p className="text-center text-[15px] text-red-500 mt-2">
-          Ro'yxatdan o'tish muvaffaqiyatsiz tugadi: {error?.data.error}
+          Ro'yxatdan o'tish muvaffaqiyatsiz tugadi:{" "}
+          {error &&
+            "data" in error &&
+            (error.data as { error?: string })?.error}
         </p>
       )}
       {isSuccess && <p>Muvaffaqiyatli ro'yxatdan o'tdingiz!</p>}
