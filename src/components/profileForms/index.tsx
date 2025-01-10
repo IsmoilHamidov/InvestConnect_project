@@ -46,15 +46,50 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ closeModal }) => {
 
     const onSubmit = async (formData: Record<string, string>) => {
         try {
-            await updateProfileDetail({ id: data?.id, data: formData }).unwrap();
+            let uploadedImageUrl = selectedImage;
+    
+            if (selectedImage && selectedImage.startsWith("blob:")) {
+                const file = await fetch(selectedImage)
+                    .then((res) => res.blob()) // Преобразуем blob в файл
+                    .then(
+                        (blob) =>
+                            new File([blob], "profile_picture.png", { type: "image/png" })
+                    );
+    
+                const formDataImage = new FormData();
+                formDataImage.append("file", file);
+    
+                // Отправляем изображение на сервер
+                const imageResponse = await fetch("/api/upload", {
+                    method: "POST",
+                    body: formDataImage,
+                });
+    
+                if (!imageResponse.ok) {
+                    throw new Error("Failed to upload image");
+                }
+    
+                const imageData = await imageResponse.json();
+                uploadedImageUrl = imageData.url; // Получаем URL изображения
+            }
+    
+            // Добавляем URL изображения в formData перед отправкой
+            const updatedFormData = {
+                ...formData,
+                profile_image: uploadedImageUrl,
+            };
+    
+            await updateProfileDetail({ id: data?.id, data: updatedFormData }).unwrap();
             toast({
                 description: `Saved!`,
                 variant: "success",
             })
             closeModal();
             setTimeout(() => {
+
                 window.location.reload();
-              }, 800); 
+            }, 800); 
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (err) {
             toast({
                 description: `Failed to update profile!`,
@@ -62,6 +97,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ closeModal }) => {
             });
         }
     };
+    
 
     useEffect(() => {
         if (error) {
@@ -78,10 +114,16 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ closeModal }) => {
     
     const handleImagePick = (file: File | null) => {
         if (file) {
-        const imageUrl = URL.createObjectURL(file);
-        setSelectedImage(imageUrl); // Create a preview URL for the image
+            const reader = new FileReader();
+    
+            reader.onloadend = () => {
+                setSelectedImage(reader.result as string); // Преобразуем в base64 строку
+            };
+    
+            reader.readAsDataURL(file); // Читаем файл как base64 строку
         }
     };
+    
 
 
     
