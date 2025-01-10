@@ -8,7 +8,6 @@ import { useParams } from "react-router-dom";
 
 
 export const ProductDetailsPage = () => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { productid } = useParams<{ productid: string | any }>();
   const { data, error, isLoading } = useGetProductQuery(productid);
 
@@ -32,8 +31,8 @@ export const ProductDetailsPage = () => {
       <main className="max-w-7xl mx-auto p-10 pt-32">
         <Tabs defaultValue="free">
           <TabsList>
-            <TabsTrigger value="free">Total information</TabsTrigger>
-            <TabsTrigger value="paid">Private information</TabsTrigger>
+            <TabsTrigger value="free">Umumiy ma'lumot</TabsTrigger>
+            <TabsTrigger value="paid">Shaxsiy ma'lumot</TabsTrigger>
           </TabsList>
           <div className="mt-16 mb-5 flex gap-8 items-center">
             <h1 className="text-4xl font-semibold text-custom-gray">{data?.name}</h1>

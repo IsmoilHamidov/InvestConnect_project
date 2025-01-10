@@ -50,7 +50,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => (
     </div>
 
 
-    <div className="border-2 border-custom-gray grid px-4 py-6 gap-3">
+    <div className="border-2 bg-white  border-custom-gray grid px-4 py-6 gap-3">
       <div className="flex justify-between">
         <span className="title text-2xl text-primary font-semibold">
           {product.name}

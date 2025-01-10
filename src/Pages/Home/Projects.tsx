@@ -1,114 +1,86 @@
-import property1 from "../../assets/images/property.jpg";
-import property2 from "../../assets/images/property (1).jpg";
-import property3 from "../../assets/images/property (2).jpg";
-import star from "../../assets/images/Star 1.png";
-import { Link, useNavigate } from "react-router-dom";
-import { useAuthModalStore } from "@/store/authModalStore";
 
-const cardData = [
-  {
-    id: 1,
-    image: property1,
-    location: "MACHELEN",
-    description: "Shahar Darvozasi",
-    type: "Kvartiralar",
-    rendement: "4,22 %",
-    price: "€ 160 000 dan",
-    label: "Top joylashuv",
-  },
-  {
-    id: 2,
-    image: property2,
-    location: "BRUSSEL",
-    description: "Shahar Markazi",
-    type: "Lofts",
-    rendement: "3,75 %",
-    price: "€ 200 000 dan",
-    label: "Yangi qurilish",
-  },
-  {
-    id: 3,
-    image: property3,
-    location: "ANTWERPEN",
-    description: "Ochiq Osmon Minoralari",
-    type: "Pentxaus",
-    rendement: "5,10 %",
-    price: "€ 300 000 dan",
-    label: "Yuqori Darajadagi",
-  },
-];
+import { Link } from "react-router-dom";
+import { useGetProductsQuery } from "@/store/slice/products";
+import { Star } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal } from "react";
 
 function Projects() {
-  const { openModal } = useAuthModalStore();
-  const navigate = useNavigate()
+  const { data, error, isLoading } = useGetProductsQuery("");
 
-  const checkUser = () => {
-    const user = localStorage.getItem("token")
-    user ? navigate("/products") : openModal("registration")
+  if (isLoading) {
+    return <div className="text-center text-gray-500">Yuklanmoqda...</div>;
   }
 
+  if (error) {
+    return <div className="text-center text-red-500">Yuklanishda xatolin yuz berdi</div>;
+  }
+
+
+  const limitedData = data?.slice(0, 3) || [];
+
   return (
-    <div  className="relative min-h-[60rem] mt-8">
-      <div 
+    <div className="relative min-h-[60rem] mt-8">
+      <div
         className="w-full z-10 h-[45rem] bg-[#443B3A] rounded-br-none py-12"
-        style={{
-          clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 75%)",
-        }}
+        style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 75%)" }}
       ></div>
 
-      <div id="Project" className="flex flex-col justify-center items-center z-20 absolute top-[120px] left-1/2 transform -translate-x-1/2">
+      <div
+        id="Project"
+        className="flex flex-col justify-center items-center z-20 absolute top-[120px] left-1/2 transform -translate-x-1/2"
+      >
         <h3 className="text-center text-[2.5rem] font-light text-white">
-          Top Loyhalar
+           Loyihalar
         </h3>
-        <div className="flex justify-between items-center mt-20 w-[80rem]">
-          {cardData.map((card) => (
-            <div
-              key={card.id}
-              className="relative overflow-visible w-[30%] border border-[#443B3A] shadow-lg mx-4 "
-            >
-              <div className="relative overflow-visible">
+
+        <div className="flex justify-between items-center mt-16 w-[80rem]">
+          {limitedData.map((card: { id: Key | null | undefined; image: string | undefined; name: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined; category: { name: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; }; description: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; price: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; }) => (
+            <div key={card.id} className="product grid px-4 py-6">
+              <div className="relative group">
                 <img
                   src={card.image}
-                  alt={card.location}
-                  className="w-full h-[22rem] "
+                  alt='image'
+                  className="w-[391px] h-[368px] object-cover z-20"
+                  style={{ objectPosition: "center" }}
                 />
-                <div className="absolute top-3 left-3 z-30">
-                  <img src={star} alt="star" />
+                <Link
+                  to={`/product/${card.id}`}
+                  className="absolute inset-0 bg-primary bg-opacity-60 opacity-0 z-20 group-hover:opacity-85 transition-opacity duration-300 flex items-center justify-center"
+                >
+                  <span className="text-white text-lg font-semibold z-40">Подробнее</span>
+                </Link>
+                <div className="px-4 py-2 bg-[#B29C6F] absolute top-3.5 -right-[25px] text-red-50 z-20">
+                  Topligging
                 </div>
+                <Star
+                  role="button"
+                  tabIndex={0}
+                  className="cursor-pointer absolute top-5 left-5 scale-125 fill-white text-[#B29C6F] focus:fill-[#B29C6F] focus:text-gray-800 focus:scale-30 outline-none z-30"
+                />
               </div>
 
-              <div
-                className="absolute top-3 z-20 -right-5
-                          bg-[#B29C6F] text-white text-md px-3 py-1"
-              >
-                {card.label}
-              </div>
-
-              <div className="px-3 py-5 bg-white ">
-                <div className="flex justify-between items-center">
-                  <h2 className="text-xl font-semibold text-custom-blue-gray">
-                    {card.location}
-                  </h2>
-                  <p className="text-2xl font-semibold text-custom-gray">
-                    {card.rendement}
-                  </p>
+              <div className="border-2 bg-white  border-custom-gray grid px-4 py-6 gap-3">
+                <div className="flex justify-between">
+                  <span className="title text-2xl text-primary font-semibold">
+                    {card.name}
+                  </span>
                 </div>
-                <div className="flex justify-between items-center mt-1 mb-2">
-                  <p className="text-md text-custom-gray font-medium">
-                    {card.description}
-                  </p>
-                  <p className="text-xs text-custom-gray">Yalpi Hosildorlik</p>
+                <div className="flex justify-between">
+                  <div className="title">{card.category.name}</div>
                 </div>
-                <p className="text-sm text-custom-gray">{card.type}</p>
-
-                <div className="flex items-center justify-between mt-7">
-                  <p className="text-xl font-medium text-gray-900">
-                    {card.price}
-                  </p>
-                  <Link to={`/product/${card.location}`}>
-                    <button className="Blue_button bg-custom-blue-gray text-white text-sm font-medium py-1 px-4 rounded-2xl">
-                     Ko'proq bilib oling
-                    </button>
+                <div>{card.description}</div>
+                <div className="flex justify-between pt-5">
+                  <div className="text-2xl">{card.price} UZS</div>
+                  <Link
+                    to={`/product/${card.id}`}
+                    onClick={() => {
+                      sessionStorage.setItem("scrollPosition", String(window.scrollY));
+                    }}
+                  >
+                    <Button className="Blue_button border rounded-[40px] px-4 py-2">
+                      Ontdek meer
+                    </Button>
                   </Link>
                 </div>
               </div>
@@ -116,9 +88,15 @@ function Projects() {
           ))}
         </div>
 
-          <button onClick={checkUser} className="Brown_button rounded-3xl p-3 px-12 text-base text-white bg-custom-gray mt-16 ">
-            Bizning taklifimizni ko'ring
-          </button>
+          <Link to={'/products'}>
+              <button
+                className="Brown_button rounded-3xl p-3 px-12
+                 text-base text-white bg-custom-gray mt-5"
+              >
+                Bizning taklifimizni ko'ring
+              </button>
+          </Link>
+
       </div>
     </div>
   );

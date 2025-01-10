@@ -11,7 +11,7 @@ const App: React.FC = () => {
   useEffect(() => {
     const loadingTimeout = setTimeout(() => {
       setIsLoading(false); 
-    }, 2200); 
+    }, 2100); 
 
     return () => clearTimeout(loadingTimeout);
   }, []);

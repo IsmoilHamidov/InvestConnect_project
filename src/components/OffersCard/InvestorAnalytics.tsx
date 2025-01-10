@@ -6,14 +6,14 @@ const analyticsData = [
   {
     id: 1,
     icon: <FaEnvelopeOpen className="text-[#749BA9] text-3xl mb-3" />,
-    title: "0 Ochilgan loyiha",
+    title: "Arxiv loyhalar",
     description: "Barcha ochilgan loyihalarni ko'rish uchun bosing",
   },
   {
     id: 2,
     icon: <AiFillLike className="text-[#B29C6F] text-3xl mb-4" />,
-    title: "0 Yoqtirilgan loyiha",
-    description: "Click to see all liked projects",
+    title: "Yoqtirilgan loyihalar",
+    description: "Barcha yoqtirilgan loyihalarini ko'rish uchun bosing",
   },
 ];
 
