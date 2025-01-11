@@ -78,14 +78,6 @@ export const api = createApi({
     }),
 
 
-    getcreateProduct: builder.mutation({
-      query: (productData) => ({
-        url: 'products/create/',
-        method: 'POST',
-        body: productData,
-      }),
-    }),
-
     updateProfileDetail: builder.mutation({
       query: ({ data }) => ({
         url: `/profile-detail/`,
@@ -108,7 +100,6 @@ export const {
   useGetUserProfileQuery,
   useGetUsersQuery,
   useCreateProductMutation,
-  useGetcreateProductMutation,
   useUpdateProfileDetailMutation,
   useGetUserProductsListQuery
 
