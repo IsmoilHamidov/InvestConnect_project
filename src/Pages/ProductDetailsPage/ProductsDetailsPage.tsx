@@ -1,6 +1,5 @@
 import DonationForm from "@/components/DonationForm";
 import NavbarAdmin from "@/components/navbarAdmin";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useGetProductQuery } from "@/store/slice/products";
 import { EyeOff } from "lucide-react";
 import { useState } from "react";
@@ -30,17 +29,11 @@ export const ProductDetailsPage = () => {
     <>
       <NavbarAdmin />
 
-      <main className="max-w-7xl mx-auto p-10 pt-32">
-        <Tabs defaultValue="free">
-          <TabsList>
-            <TabsTrigger value="free">Umumiy ma'lumot</TabsTrigger>
-            <TabsTrigger value="paid">Shaxsiy ma'lumot</TabsTrigger>
-          </TabsList>
+      <main className="max-w-7xl mx-auto p-10 ">
           <div className="mt-16 mb-5 flex gap-8 items-center">
             <h1 className="text-4xl font-semibold text-custom-gray capitalize">{data?.name}</h1>
             <div className="bg-green-200 py-1 px-4 rounded-xl text-green-700">активный</div>
           </div>
-          <TabsContent value="free">
             {error ? (
               <>Oh no, there was an error</>
             ) : isLoading ? (
@@ -48,14 +41,7 @@ export const ProductDetailsPage = () => {
             ) : data ? (
 
               <div className="p-4 py-8 pl-0 bg-white  flex justify-between">
-             
-                {/* <div className="w-1/2 h-auto border flex flex-row gap-y-3">
-                  <img src={data.image} alt="product image" 
-                  className="h-[22rem] w-full object-cover rounded-xl" />
-                </div> */}
-
                 <ImageSlider/>
-
                 <div className="flex flex-col w-[48%] gap-y-10 justify-between">
                     <div className="w-[70%] p-5 rounded-xl shadow-md border border-gray-200 bg-white">
                       <div className="flex justify-between items-center mb-4">
@@ -121,8 +107,7 @@ export const ProductDetailsPage = () => {
               </div>
             ) : null}
             {data ? <p className="py-5">{data.description}</p> : null}
-          </TabsContent>
-          <TabsContent value="paid">
+
             {!isPaid ? (
               <div className="p-4 bg-red-50 border rounded-md flex items-center justify-between gap-10">
                 <EyeOff size={60} />
@@ -160,8 +145,6 @@ export const ProductDetailsPage = () => {
                 data={isPaid ? sellersData : maskedData(sellersData)} // Меняем данные
               />
             </div>
-          </TabsContent>
-        </Tabs>
       </main>
     </>
   );
