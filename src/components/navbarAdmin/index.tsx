@@ -3,9 +3,13 @@ import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
 import { useNavigate } from "react-router-dom";
 import { useGetUsersQuery } from "@/store/slice/products";
+import { useAuthModalStore } from "@/store/authModalStore";
 
 export default function NavbarAdmin() {
-  const { data } = useGetUsersQuery(undefined);
+
+  const { openModal } = useAuthModalStore();
+  const { data, error } = useGetUsersQuery(undefined);
+  const username = data?.username || null;
   const navigate = useNavigate();
 
   const initials = data?.username?.charAt(0).toUpperCase() || "";
@@ -54,12 +58,23 @@ export default function NavbarAdmin() {
             2
           </Badge>
         </div>
-        <button
-          onClick={handelNavigateProfile}
-          className="flex items-center justify-center bg-[#B29C6F] text-white p-1 w-[35px] h-[33px] rounded-full text-lg font-medium"
-        >
-          {initials}
-        </button>
+
+          {error || !username ? (
+            <button
+              className="Brown_button bg-[#749BA9] text-white p-2 px-5 mx-5 rounded-2xl font-normal text-md"
+              onClick={() => openModal("registration")}
+            >
+              Kirish
+            </button>
+          ) : (
+            <button
+              onClick={handelNavigateProfile}
+              className="flex items-center justify-center bg-[#B29C6F] text-white p-1 w-[35px] h-[33px] rounded-full text-lg font-medium"
+            >
+              {initials}
+            </button>
+          )}
+        
       </div>
     </nav>
   );
