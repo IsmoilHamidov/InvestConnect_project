@@ -26,15 +26,15 @@ export const router = createBrowserRouter([
   },
   {
     path: "/profile",         
-    element: auth ? <Profile /> : <Home />,
+    element: auth ? <Profile /> : <Home/>,
   },
   {
     path: "/investorProfile", 
-    element: auth ? <InvesterProfile /> : <Home />,
+    element: auth ? <InvesterProfile /> : <Home/>,
   },
   {
     path: "/ProjectAdd", 
-    element: <ProjectAdd/>
+    element: <ProjectAdd/>,
   },
   {
     path: "/temp", 
