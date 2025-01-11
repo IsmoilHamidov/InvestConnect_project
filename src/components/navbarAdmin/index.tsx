@@ -4,6 +4,7 @@ import { Badge } from "../ui/badge";
 import { useNavigate } from "react-router-dom";
 import { useGetUsersQuery } from "@/store/slice/products";
 import { useAuthModalStore } from "@/store/authModalStore";
+import { NavbarStep } from "../Navbar/NavbarStep";
 
 export default function NavbarAdmin() {
 
@@ -23,14 +24,15 @@ export default function NavbarAdmin() {
   };
 
   return (
-    <nav className="flex fixed z-50 w-full items-center justify-between px-4 py-2 bg-[#7497a7] text-white">
+    <nav className="flex fixed z-50 w-full items-center justify-between px-4 py-2 bg-[#7497a7]">
+      <NavbarStep />
       <div className="flex items-center gap-2">
         <Button
           variant="ghost"
           size="icon"
           className="lg:hidden hover:bg-white/10"
         >
-          <Menu className="h-5 w-5" />
+          <Menu className="h-5 w-5 text-white" />
           <span className="sr-only">Toggle menu</span>
         </Button>
       </div>
@@ -39,17 +41,17 @@ export default function NavbarAdmin() {
         <Button
           variant="ghost"
           size="icon"
-          className="hover:bg-white/10"
+          className="hover:bg-white/10 text-white"
           aria-label="Messages"
         >
-          <Mail className="h-5 w-5" />
+          <Mail className="h-5 w-5 " />
         </Button>
 
         <div className="relative">
           <Button
             variant="ghost"
             size="icon"
-            className="hover:bg-white/10"
+            className="hover:bg-white/10 text-white"
             aria-label="Notifications"
           >
             <Bell className="h-5 w-5" />
@@ -61,7 +63,7 @@ export default function NavbarAdmin() {
 
           {error || !username ? (
             <button
-              className="Brown_button bg-[#749BA9] text-white p-2 px-5 mx-5 rounded-2xl font-normal text-md"
+              className=" border border-white text-white p-2 px-5 mx-5 rounded-2xl font-normal text-md"
               onClick={() => openModal("registration")}
             >
               Kirish
