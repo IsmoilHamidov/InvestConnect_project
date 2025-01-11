@@ -7,7 +7,7 @@ import ProjectAdd from "@/components/OffersCard/ProjectAdd";
 import { createBrowserRouter } from "react-router-dom";
 
 
-
+const auth = localStorage.getItem("token")
 
 export const router = createBrowserRouter([
   {
@@ -21,15 +21,15 @@ export const router = createBrowserRouter([
   },
   {
     path: "/product/:productid", 
-    element: <ProductDetailsPage />,
+    element:  <ProductDetailsPage />,
   },
   {
     path: "/profile",         
-    element: <Profile />,
+    element: auth ? <Profile /> : <Home />,
   },
   {
     path: "/investorProfile", 
-    element: <InvesterProfile />,
+    element: auth ? <InvesterProfile /> : <Home />,
   },
   {
     path: "/ProjectAdd", 
