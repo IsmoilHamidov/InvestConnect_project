@@ -37,13 +37,11 @@ const Navbar: React.FC = () => {
         {/* Navbar Content */}
         <div className="flex gap-x-7 items-center text-white text-base font-normal">
           <button className="Blue_button border-0 rounded-3xl p-2 px-3 text-sm bg-[#749BA9]">
-            INVEST CONNECT PLATFORM
+            Shartlar bilan tanishish
           </button>
-          <Link to={'/products'}>Loyihalar</Link>
-          <a href="#">Biz haqimizda</a>
-          <a href="#">Blog</a>
-          <a href="#">Podkasting</a>
-          <a href="#">Aloqa</a>
+          <Link to={'/products'} className="nav_link"> Loyihalar</Link>
+          <a href="#about_us" className="nav_link"> Biz haqimizda</a>
+          <a href="#our_service" className="nav_link"> Bizning Xizmatlar</a>
 
           <ProfilePopover />
         </div>
@@ -57,10 +55,9 @@ const Navbar: React.FC = () => {
           
         </div>
         <div className="h-full flex items-center gap-x-7 text-white text-base font-normal">
-          <a href="#">Taklif</a>
-          <a href="#">Investitsiya Platformasi</a>
-          <a href="#">Bizning xizmatlar</a>
-          <a href="#">Hamkorlar</a>
+          <a href="#" className="nav_link">Taklif</a>
+          <a href="#" className="nav_link">Investitsiya Platformasi</a>
+          <a href="#" className="nav_link">Hamkorlar</a>
         </div>
         <div className="flex items-center gap-x-7 text-white text-base font-light">
           <a href="#">
