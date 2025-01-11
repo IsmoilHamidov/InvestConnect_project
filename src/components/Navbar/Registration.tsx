@@ -5,6 +5,8 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"; // Import React Icons for the eye toggle
 import { INavbarStepProps } from "./NavbarStep";
+import PrivacyPolicy from "../PrivacyPolicy";
+import { Button } from "../ui/button";
 
 interface RegistrationFormValues {
   username: string;
@@ -18,6 +20,7 @@ export const Registration: React.FC<INavbarStepProps> = () => {
   const { toast } = useToast();
 
   const [showPassword, setShowPassword] = useState(false); // State for toggling password visibility
+  const [isChecked, setIsChecked] = useState(false); // State for checkbox
 
   const {
     register,
@@ -28,6 +31,8 @@ export const Registration: React.FC<INavbarStepProps> = () => {
     useRegisterUserMutation();
 
   const onSubmit = async (data: RegistrationFormValues) => {
+    if (!isChecked) return;
+
     try {
       const response = await registerUser(data).unwrap();
 
@@ -64,7 +69,9 @@ export const Registration: React.FC<INavbarStepProps> = () => {
       )}
 
       <div className="mt-4">
-        <label className="block text-custom-gray mb-2">Foydalanuvchi nomi</label>
+        <label className="block text-custom-gray mb-2">
+          Foydalanuvchi nomi
+        </label>
         <input
           placeholder="UserName"
           className="w-full border border-gray-300 focus:border-2 
@@ -133,13 +140,30 @@ export const Registration: React.FC<INavbarStepProps> = () => {
         </div>
       </div>
 
-      <button
+      <p className="mt-4 text-center font-normal text-base mb-5">
+        <label className="flex items-center">
+          <input
+            type="checkbox"
+            className="mr-2"
+            checked={isChecked}
+            onChange={() => setIsChecked(!isChecked)}
+          />
+          <PrivacyPolicy />
+          <span className="pl-1">
+            va maxfiylik siyosati bilan tanishib chiqdim
+          </span>
+        </label>
+      </p>
+
+      <Button
         type="submit"
-        disabled={isLoading}
-        className="Blue_button font-semibold w-full bg-[#749BA9] text-white p-2 rounded-2xl"
+        disabled={isLoading || !isChecked}
+        className={`Blue_button font-semibold w-full bg-[#749BA9] text-white p-2 rounded-2xl ${
+          !isChecked ? "opacity-50 cursor-not-allowed" : ""
+        }`}
       >
-       Ro'yxatdan o'tish
-      </button>
+        Ro'yxatdan o'tish
+      </Button>
 
       <p className="mt-4 text-center font-normal text-base">
         Allaqachon ro'yxatdan o'tganmisiz?
@@ -147,13 +171,16 @@ export const Registration: React.FC<INavbarStepProps> = () => {
           className="text-blue-500 ms-2 cursor-pointer"
           onClick={() => openModal("login")}
         >
-         Kirish
+          Kirish
         </span>
       </p>
 
       {isError && (
         <p className="text-center text-[15px] text-red-500 mt-2">
-         Ro'yxatdan o'tish muvaffaqiyatsiz tugadi: {(error?.data.error)}
+          Ro'yxatdan o'tish muvaffaqiyatsiz tugadi:{" "}
+          {error &&
+            "data" in error &&
+            (error.data as { error?: string })?.error}
         </p>
       )}
       {isSuccess && <p>Muvaffaqiyatli ro'yxatdan o'tdingiz!</p>}
