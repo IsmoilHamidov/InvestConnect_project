@@ -10,7 +10,7 @@ import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useToast } from "@/hooks/use-toast";
-import { usePaymentAndCheckMutation } from "@/store/slice/products";
+import { usePaymentAndcheckMutation } from "@/store/slice/products";
 
 const paymentMethods = [
   { id: "uzcard", name: "Uzcard" },
@@ -27,18 +27,16 @@ interface DonationFormProps {
 
 interface DonatFormData {
   amount: number;
-  product_id: number | null;
   cardNumber: string;
   expiryDate: string;
   message?: string;
-  paymentMethod: string;
 }
 
 // Схема валидации с Yup
 const schema = yup.object({
   amount: yup
     .number()
-    .min(10, "Минимальная сумма — $10")
+    .min(5000, "Минимальная сумма — 5000")
     .required("Сумма обязательна"),
   message: yup.string().max(200, "Сообщение не должно превышать 200 символов"),
   cardNumber: yup
@@ -55,24 +53,22 @@ const schema = yup.object({
 const DonationForm: React.FC<DonationFormProps> = ({
   price,
   id,
-  onPaymentSuccess,
+  ,
 }) => {
-  const [paymentAndCheck] = usePaymentAndCheckMutation();
   const { toast } = useToast();
+  const [createPaymentCheck, { isLoading, isError, isSuccess, error }] =
+    usePaymentAndcheckMutation();
 
   const {
     control,
     handleSubmit,
     setValue,
     watch,
-    reset,
     formState: { errors },
-  } = useForm<DonatFormData>({
+  } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
-      amount: 10,
-      product_id: id || null,
-      message: "",
+      amount: price, // Фиксированная сумма      message: "",
       cardNumber: "",
       expiryDate: "",
       paymentMethod: "uzcard",
@@ -83,28 +79,26 @@ const DonationForm: React.FC<DonationFormProps> = ({
 
   const onSubmit = async (data: DonatFormData) => {
     try {
-      const response = await paymentAndCheck({
-        data: {
-          product_id: data.product_id,
-          amount: data.amount,
-        },
+      const response = await createPaymentCheck({
+        product_id: id,
+        amount: price,
       }).unwrap();
-
-      toast({
-        title: "Оплата прошла успешно!",
-        description: `Вы перевели ${data.amount} USD`,
-        variant: "success",
-      });
-      reset(); // Сбрасываем форму после успешной оплаты
-      onPaymentSuccess();
+      console.log("Success:", response);
+      if (isSuccess) {
+        toast({
+          title: "Оплата прошла успешно!",
+          description: `Вы перевели ${data.amount} UZS`,
+          variant: "success",
+        });
+      }
     } catch (err) {
-      console.error("Ошибка:", err);
-      toast({
-        title: "Ошибка оплаты",
-        description: "Произошла ошибка при обработке оплаты. Попробуйте позже.",
-        variant: "destructive",
-      });
+      if (isError) {
+        console.error("Error:", err);
+      }
     }
+
+    // Задержка и перенаправление
+    onPaymentSuccess();
   };
 
   return (
@@ -117,27 +111,28 @@ const DonationForm: React.FC<DonationFormProps> = ({
 
       <DialogContent className="sm:max-w-md">
         <DialogTitle>Оплатить</DialogTitle>
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-          {/* Сумма */}
+        <form
+          onSubmit={() => {
+            handleSubmit(onSubmit);
+            event.preventDefault();
+          }}
+          className="space-y-4"
+        >
+          {/* Фиксированная Сумма */}
           <div>
-            <label className="block text-sm font-medium mb-1">Сумма ($)</label>
+            <label className="block text-sm font-medium mb-1">Сумма</label>
             <Controller
               name="amount"
               control={control}
-              render={({ field }) => (
+              render={() => (
                 <input
                   type="number"
-                  min="10"
-                  step="0.01"
-                  placeholder="Введите сумму"
-                  {...field}
-                  className="w-full px-3 py-2 border rounded-lg"
+                  value={price}
+                  disabled // Поле нельзя редактировать
+                  className="w-full px-3 py-2 border rounded-lg bg-gray-100 cursor-not-allowed"
                 />
               )}
             />
-            {errors.amount && (
-              <p className="text-red-500 text-sm">{errors.amount.message}</p>
-            )}
           </div>
 
           {/* Сообщение */}
@@ -243,9 +238,10 @@ const DonationForm: React.FC<DonationFormProps> = ({
           <div>
             <button
               type="submit"
+              disabled={isLoading}
               className="w-full bg-primary text-white font-bold py-2 rounded-lg hover:bg-primary"
             >
-              Оплатить
+              {isLoading ? "loading" : "Оплатить"}
             </button>
           </div>
         </form>
