@@ -6,11 +6,9 @@ import { useGetUserProfileQuery, useUpdateProfileDetailMutation } from "@/store/
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from 'react';
 import { useToast } from '@/hooks/use-toast'
-
 interface ProfileFormProps {
     closeModal: () => void;
 }
-
 const ProfileForm: React.FC<ProfileFormProps> = ({ closeModal }) => {
     const { toast } = useToast();
     const { data, error } = useGetUserProfileQuery(null);
