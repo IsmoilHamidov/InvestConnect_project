@@ -8,10 +8,18 @@ import {
 import logo_text from "../../assets/images/navLogo.png";
 import ProfilePopover from "./ProfilePopover ";
 import { Link } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
 
 
 
 const Navbar: React.FC = () => {
+  const {toast} = useToast()
+  const inProcces = () => {
+    toast({
+      description: "jarayonda",
+      variant: "success",
+    });
+  }
   return (
     <nav className="max-w-7xl m-auto Nav_links">
       <div className="py-2 flex justify-between">
@@ -41,9 +49,6 @@ const Navbar: React.FC = () => {
           </button>
           <Link to={'/products'}>Loyihalar</Link>
           <a href="#">Biz haqimizda</a>
-          <a href="#">Blog</a>
-          <a href="#">Podkasting</a>
-          <a href="#">Aloqa</a>
 
           <ProfilePopover />
         </div>
@@ -57,10 +62,10 @@ const Navbar: React.FC = () => {
           
         </div>
         <div className="h-full flex items-center gap-x-7 text-white text-base font-normal">
-          <a href="#">Taklif</a>
-          <a href="#">Investitsiya Platformasi</a>
-          <a href="#">Bizning xizmatlar</a>
-          <a href="#">Hamkorlar</a>
+          <a onClick={inProcces} href="#">Taklif</a>
+          <a onClick={inProcces} href="#">Investitsiya Platformasi</a>
+          <a onClick={inProcces} href="#">Bizning xizmatlar</a>
+          <a onClick={inProcces} href="#">Hamkorlar</a>
         </div>
         <div className="flex items-center gap-x-7 text-white text-base font-light">
           <a href="#">

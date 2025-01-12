@@ -4,7 +4,6 @@ import ProductListPage from "@/Pages/ProductListPage/ProductListPage";
 import Profile from "@/Pages/profile";
 import InvesterProfile from "@/Pages/profile/InvesterProfile";
 import ProjectAdd from "@/components/OffersCard/ProjectAdd";
-import CreateProductForm from "@/temp/CreateProductForm";
 import { createBrowserRouter } from "react-router-dom";
 
 
@@ -26,19 +25,15 @@ export const router = createBrowserRouter([
   },
   {
     path: "/profile",         
-    element: auth ? <Profile /> : <Home />,
+    element: auth ? <Profile /> : <Home/>,
   },
   {
     path: "/investorProfile", 
-    element: auth ? <InvesterProfile /> : <Home />,
+    element: auth ? <InvesterProfile /> : <Home/>,
   },
   {
     path: "/ProjectAdd", 
-    element: <ProjectAdd/>
-  },
-  {
-    path: "/temp", 
-    element: <CreateProductForm/>
+    element: <ProjectAdd/>,
   },
 
 ]);

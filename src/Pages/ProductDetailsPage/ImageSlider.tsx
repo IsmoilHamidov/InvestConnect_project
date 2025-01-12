@@ -2,6 +2,9 @@ import { useGetProductQuery } from "@/store/slice/products";
 import  { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
+const imageBasicUrl = "https://bakirali007.pythonanywhere.com/"
+
+
 const ImageSlider = () => {
   const { productid } = useParams<{ productid: string | any }>();
   const { data, error, isLoading } = useGetProductQuery(productid);
@@ -24,7 +27,7 @@ const ImageSlider = () => {
     <div className="flex flex-col justify-between w-[47%]">
       <div className="w-full h-auto">
         <img
-          src={selectedImage}
+          src={imageBasicUrl + selectedImage}
           alt="Selected"
           className="h-[23rem] w-full object-cover rounded-xl"
         />
@@ -40,7 +43,7 @@ const ImageSlider = () => {
             onClick={() => setSelectedImage(image)}
           >
             <img
-              src={image}
+              src={imageBasicUrl + image}
               alt={`Thumbnail ${index + 1}`}
               className="h-16 w-20 object-cover rounded-lg"
             />

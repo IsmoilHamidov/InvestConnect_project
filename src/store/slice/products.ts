@@ -30,13 +30,13 @@ export const api = createApi({
       }),
     }),
     
-    // createProduct: builder.mutation<void, CreateProductRequest>({
-    //   query: (data) => ({
-    //     url: '/products/create/',
-    //     method: 'POST',
-    //     body: data,
-    //   }),
-    // }),
+    paymentAndcheck: builder.mutation({
+      query: (data) => ({
+        url: '/payment-and-check/',
+        method: 'POST',
+        body: data,
+      }),
+    }),
 
     createProduct: builder.mutation<void, FormData>({
       query: (data) => ({
@@ -101,8 +101,8 @@ export const {
   useGetUsersQuery,
   useCreateProductMutation,
   useUpdateProfileDetailMutation,
-  useGetUserProductsListQuery
-
+  useGetUserProductsListQuery,
+  usePaymentAndcheckMutation
 } = api;
 
 export interface ProductInformation {
