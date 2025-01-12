@@ -55,6 +55,26 @@ export const userApi = createApi({
       }),
     }),
 
+    // getInvestorProducts: builder.query<ProfileDetail, void>({
+    //   query: () => ({
+    //     url: "/investor-products/",
+    //     method: "GET",
+    //     headers: {
+    //       Authorization: `Bearer ${localStorage.getItem("token")}`,
+    //     },
+    //   }),
+    // }),
+    getInvestorProducts: builder.query({
+      query: () => ({
+        url: "/investor-products/",
+        method: "GET",
+        headers: {
+          Authorization: `Token ${localStorage.getItem("token") || ""}`,
+        },
+      }),
+    }),
+
+
     
     // startup profile uchun
     getUserProductsList: builder.query<any, void>({
@@ -80,4 +100,5 @@ export const {
   useLoginUserMutation,
   useGetUserProfileQuery,
   useGetUserProductsListQuery, 
+  useGetInvestorProductsQuery
 } = userApi;

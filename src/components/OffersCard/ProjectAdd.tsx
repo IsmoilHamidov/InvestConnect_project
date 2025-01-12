@@ -154,6 +154,7 @@ function ProjectForm() {
       console.error("Xatolik yuz berdi:", error);
     }
   };
+  
   return (
     <div className="min-h-[100vh] py-14 bg-gray-100">
       <div className="max-w-7xl m-auto">
