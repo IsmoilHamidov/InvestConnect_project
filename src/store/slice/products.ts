@@ -1,12 +1,15 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const api = createApi({
-  reducerPath: 'api',
+  reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://bakirali007.pythonanywhere.com/api/v1/app',
+    baseUrl: "https://bakirali007.pythonanywhere.com/api/v1/app",
     prepareHeaders: (headers) => {
-      headers.set('accept', 'application/json');
-      
-      headers.set('X-CSRFToken', 'NsBgsgNCHjopnvKGkTMzJPkz3vH99oGYyU7SeHFc9iA6seh2MCrnQff7JrLffxvI'); // CSRF токен
+      headers.set("accept", "application/json");
+
+      headers.set(
+        "X-CSRFToken",
+        "NsBgsgNCHjopnvKGkTMzJPkz3vH99oGYyU7SeHFc9iA6seh2MCrnQff7JrLffxvI"
+      ); // CSRF токен
       return headers;
     },
   }),
@@ -25,26 +28,26 @@ export const api = createApi({
       { key?: string; value?: string; search?: string } // Параметры запроса
     >({
       query: (params) => ({
-        url: '/products/information-list/',
+        url: "/products/information-list/",
         params,
       }),
     }),
-    
+
     paymentAndcheck: builder.mutation({
       query: (data) => ({
-        url: '/payment-and-check/',
-        method: 'POST',
+        url: "/payment-and-check/",
+        method: "POST",
         body: data,
         headers: {
-          "Authorization": `Token ${localStorage.getItem("token") || ""}`
+          Authorization: `Token ${localStorage.getItem("token") || ""}`,
         },
       }),
     }),
 
     createProduct: builder.mutation<void, FormData>({
       query: (data) => ({
-        url: '/products/create/',
-        method: 'POST',
+        url: "/products/create/",
+        method: "POST",
         body: data,
         headers: {
           "Authorization": `Token ${localStorage.getItem("token") || ""}`,
@@ -57,7 +60,16 @@ export const api = createApi({
         url: "/profile-detail/",
         method: "GET",
         headers: {
-          "Authorization": `Token ${localStorage.getItem("token") || ""}`,
+          Authorization: `Token ${localStorage.getItem("token") || ""}`,
+        },
+      }),
+    }),
+    getPrivateInfo: builder.query({
+      query: (id) => ({
+        url: `/products/information-detail/${id}`,
+        method: "GET",
+        headers: {
+          Authorization: `Token ${localStorage.getItem("token") || ""}`,
         },
       }),
     }),
@@ -66,23 +78,20 @@ export const api = createApi({
         url: "/users/profile/",
         method: "GET",
         headers: {
-          "Authorization": `Token ${localStorage.getItem("token") || ""}`,
+          Authorization: `Token ${localStorage.getItem("token") || ""}`,
         },
       }),
-      
     }),
 
-    
     getUserProductsList: builder.query({
       query: () => ({
         url: "/users/products/list",
         method: "GET",
         headers: {
-          "Authorization": `Token ${localStorage.getItem("token") || ""}`,
+          Authorization: `Token ${localStorage.getItem("token") || ""}`,
         },
-      }),     
+      }),
     }),
-
 
     updateProfileDetail: builder.mutation({
       query: ({ data }) => ({
@@ -90,17 +99,16 @@ export const api = createApi({
         method: "PATCH",
         body: data,
         headers: {
-          "Authorization": `Token ${localStorage.getItem("token") || ""}`
+          Authorization: `Token ${localStorage.getItem("token") || ""}`,
         },
       }),
     }),
-      
   }),
 });
 
-export const { 
-  useGetProductsQuery, 
-  useGetProductQuery, 
+export const {
+  useGetProductsQuery,
+  useGetProductQuery,
   useGetCategoriesQuery,
   useGetProductsInformationListQuery,
   useGetUserProfileQuery,
@@ -109,6 +117,7 @@ export const {
   useUpdateProfileDetailMutation,
   useGetUserProductsListQuery,
   usePaymentAndcheckMutation,
+  useGetPrivateInfoQuery,
 } = api;
 
 export interface ProductInformation {
