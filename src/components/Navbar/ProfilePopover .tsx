@@ -82,7 +82,7 @@ const ProfilePopover: React.FC = () => {
       {showPopover && username && (
         <div
           ref={popoverRef}
-          className="overflow-hidden absolute right-0 mt-2
+          className="overflow-hidden absolute right-0 mt-3
            bg-white rounded-lg shadow-lg w-40 z-50"
         >
           <button

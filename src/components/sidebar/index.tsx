@@ -101,7 +101,6 @@ export default function Sidebar() {
                 {data?.firstname || "Unknown"} {data?.lastname || "User"}
               </h2>
               {console.log(data)}
-              <img src={data.profile_image} alt="dont aaaaaaaaaaaaaaaaa" />
               <p className="text-base text-[#749BA9]">
                 {data?.role || "Unknown Role"}
               </p>

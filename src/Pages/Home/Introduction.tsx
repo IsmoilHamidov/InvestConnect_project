@@ -28,8 +28,9 @@ const Introduction_Image: React.FC = () => {
         }}
       />
       
-      <Navbar />
-      
+       <Navbar />
+       
+
       <div
         style={{
           position: "absolute",

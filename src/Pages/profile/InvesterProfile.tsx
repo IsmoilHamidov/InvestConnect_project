@@ -1,9 +1,9 @@
 import NavbarAdmin from "@/components/navbarAdmin";
 import Sidebar from "@/components/sidebar";
 // import TimeCount from "../../components/timeCount";
+// import BankCardBalance from "@/components/timeCount/Balance";
 import Activities from "../../components/Activities";
 import InvestorAnalytics from "@/components/OffersCard/InvestorAnalytics";
-import BankCardBalance from "@/components/timeCount/Balance";
 
 
 function InvesterProfile() {
@@ -26,10 +26,10 @@ function InvesterProfile() {
                     <InvestorAnalytics/>
                 </div>
 
-                  <div className="w-1/2">
-                    {/* <TimeCount /> */}
+                  {/* <div className="w-1/2">
+                    <TimeCount />
                     <BankCardBalance/>
-                  </div>
+                  </div> */}
               </div>
 
               <div className="w-full">

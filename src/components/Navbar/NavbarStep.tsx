@@ -23,29 +23,26 @@ export const NavbarStep = () => {
         return null;
     }
   };
+  
 
   return (
-    <div
-      className=" fixed inset-0 flex items-center justify-center
-     bg-black bg-opacity-50 z-50"
-    >
-      <div
-        className="w-[30.5rem]  bg-white px-7 py-7
-       rounded-xl relative h-auto"
-      >
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-          <div className="bg-white px-6 py-7 rounded-lg  relative">
-            <button className="absolute top-4 right-4 " onClick={closeModal}>
-              <HiX size={24} />
-            </button>
-            {renderStep()}
-          </div>
-        </div>
+    <div className=" fixed inset-0 flex items-center justify-center
+     bg-black bg-opacity-70 z-50">
+      <div className="w-[30.5rem]  bg-white px-7 py-7
+       rounded-xl relative h-auto">
+        <button
+          className="absolute top-4 right-4 "
+          onClick={closeModal}
+        >
+          <HiX size={24} />
+        </button>
+        {renderStep()}
       </div>
     </div>
   );
 };
 
+
 export interface INavbarStepProps {
-  onNext: () => void; // Define onNext prop
+  onNext: () => void;  // Define onNext prop
 }
