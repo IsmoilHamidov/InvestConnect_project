@@ -1,9 +1,10 @@
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { useGetInvestorProductsQuery } from "@/store/slice/apiSlice";
 import { RefreshCcw } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
-const ActivityCard: React.FC<{ name: string; price: string; month: string; image: string }> = ({ name, price, month, image }) => {
+const ActivityCard: React.FC<{id: any, name: string; price: string; month: string; image: string }> = ({id, name, price, month, image }) => {
     return (
         <Card className="flex w-full justify-between items-center bg-gray-100 rounded-lg px-4 py-1">
             <Card className="border-none bg-transparent shadow-none">
@@ -15,7 +16,9 @@ const ActivityCard: React.FC<{ name: string; price: string; month: string; image
                     />
                     <CardHeader>
                         <p className="text-sm text-custom-gray uppercase">{month}</p>
-                        <CardTitle className="text-lg font-medium text-custom-gray">{name}</CardTitle>
+                        <Link to={`/product/${id}`}>
+                            <CardTitle className="text-lg font-medium text-custom-gray">{name}</CardTitle>
+                        </Link>
                     </CardHeader>
                 </div>
             </Card>
@@ -37,11 +40,6 @@ const Activities = () => {
         setReloading(false); 
     };
 
-    useEffect(() => {
-        if (isLoading) {
-        }
-    }, [isLoading]); 
-
     return (
         <div className="w-full mx-auto bg-white py-7 px-7 rounded-2xl mt-7 shadow-lg border">
             <div className="flex flex-row justify-between items-center mb-4">
@@ -52,7 +50,7 @@ const Activities = () => {
                     disabled={isLoading || reloading} 
                 >
                     {reloading ? (
-                      <span
+                    <span
                         className="animate-spin"
                         style={{
                             transition: 'transform .3s ease-in-out' 
@@ -96,6 +94,7 @@ const Activities = () => {
                         <ActivityCard
                             key={activity.id || index}
                             name={activity.name}
+                            id={activity.id}
                             price={activity.price}
                             month={activity.month}
                             image={activity.image || "/path/to/default/image.jpg"}
