@@ -27,7 +27,7 @@ interface DonationFormProps {
 
 interface DonatFormData {
   amount: number;
-  product_id: number;
+  product_id: number | null;
   cardNumber: string;
   expiryDate: string;
   message?: string;
@@ -53,11 +53,11 @@ const schema = yup.object({
 });
 
 const DonationForm: React.FC<DonationFormProps> = ({
+  price,
   id,
   onPaymentSuccess,
 }) => {
-  const [paymentAndCheck] =
-    usePaymentAndCheckMutation();
+  const [paymentAndCheck] = usePaymentAndCheckMutation();
   const { toast } = useToast();
 
   const {
@@ -65,12 +65,13 @@ const DonationForm: React.FC<DonationFormProps> = ({
     handleSubmit,
     setValue,
     watch,
+    reset,
     formState: { errors },
-  } = useForm({
+  } = useForm<DonatFormData>({
     resolver: yupResolver(schema),
     defaultValues: {
       amount: 10,
-      product_id: id,
+      product_id: id || null,
       message: "",
       cardNumber: "",
       expiryDate: "",
@@ -81,26 +82,29 @@ const DonationForm: React.FC<DonationFormProps> = ({
   const paymentMethod = watch("paymentMethod");
 
   const onSubmit = async (data: DonatFormData) => {
-    console.log("id", id);
     try {
       const response = await paymentAndCheck({
         data: {
-          product_id: +id,
-          amount: 10,
+          product_id: data.product_id,
+          amount: data.amount,
         },
-      }).unwrap(); // unwrap позволяет получить данные без try-catch для RTK Query
-      console.log("Успех:", response);
+      }).unwrap();
+
       toast({
         title: "Оплата прошла успешно!",
         description: `Вы перевели ${data.amount} USD`,
         variant: "success",
       });
+      reset(); // Сбрасываем форму после успешной оплаты
+      onPaymentSuccess();
     } catch (err) {
       console.error("Ошибка:", err);
-      alert("Произошла ошибка при оплате.");
+      toast({
+        title: "Ошибка оплаты",
+        description: "Произошла ошибка при обработке оплаты. Попробуйте позже.",
+        variant: "destructive",
+      });
     }
-
-    onPaymentSuccess();
   };
 
   return (

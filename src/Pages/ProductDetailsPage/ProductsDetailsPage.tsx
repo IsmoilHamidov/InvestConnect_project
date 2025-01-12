@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import ImageSlider from "./ImageSlider";
 
+const imageBasicUrl = "https://bakirali007.pythonanywhere.com/"
 
 export const ProductDetailsPage = () => {
   const { productid } = useParams<{ productid: string | any }>();
@@ -128,11 +129,11 @@ export const ProductDetailsPage = () => {
                 <p className="text-sm text-gray-600">
                   Для просмотра данных необходимо произвести оплату.
                 </p>
-                <DonationForm
+                {/* <DonationForm
                   price={10}
                   id={productid}
                   onPaymentSuccess={() => setIsPaid(true)} // Обновляем состояние
-                />
+                /> */}
               </div>
             ) : null}
             <div>
