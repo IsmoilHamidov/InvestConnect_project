@@ -35,6 +35,9 @@ export const api = createApi({
         url: '/payment-and-check/',
         method: 'POST',
         body: data,
+        headers: {
+          "Authorization": `Token ${localStorage.getItem("token") || ""}`
+        },
       }),
     }),
 
@@ -102,7 +105,7 @@ export const {
   useCreateProductMutation,
   useUpdateProfileDetailMutation,
   useGetUserProductsListQuery,
-  usePaymentAndcheckMutation
+  usePaymentAndcheckMutation,
 } = api;
 
 export interface ProductInformation {
