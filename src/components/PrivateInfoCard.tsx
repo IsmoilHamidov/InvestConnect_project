@@ -22,8 +22,11 @@ const PrivateInfoCard = (productId: any) => {
 
   useEffect(() => {
     if (getPrivateInfo) {
+      console.log(getPrivateInfo);
+      
       setInfo({ ...getPrivateInfo.private_info });
     }
+    
   }, [isSuccess]);
 
   return (

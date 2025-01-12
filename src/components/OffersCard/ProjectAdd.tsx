@@ -34,12 +34,15 @@ function ProjectForm() {
     description: "",
     price: "",
     category: "",
-    product_file: "null",
-    kampanya_egasi: "",
-    kontact: "",
-    campany_name: "",
-    oylik_daromadi: "",
-    soff_foydasi: "",
+    product_file: null,
+    image: null,
+    private_information: {
+      kampanya_egasi: "",
+      kontact: "",
+      campany_name: "",
+      oylik_daromadi: "",
+      soff_foydasi: "",
+    },
   });
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const { toast } = useToast();
