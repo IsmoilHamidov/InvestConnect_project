@@ -121,7 +121,7 @@ function ProjectForm() {
         >
 
           <div>
-            <div className="flex flex-wrap justify-between items-center gap-y-5">
+            <div className="flex flex-wrap justify-between items-center gap-y-7">
             <div className="w-[48%]">
                 <label className="block text-sm font-medium text-gray-600 mb-2">
                   kontakt
@@ -184,7 +184,7 @@ function ProjectForm() {
                   Oylik daromadi
                 </label>
                 <input
-                  name="oylik_daromadi  "
+                  name="oylik_daromadi"
                   placeholder="Loyiha narxini kiriting"
                   type="number" 
                   value={formData. oylik_daromadi}
@@ -243,12 +243,7 @@ function ProjectForm() {
                   className="w-full border-gray-300 rounded-lg px-2 h-10"
                 />
               </div>
-            </div>
-          </div>
-
-
-          <div>
-            <div className="flex flex-wrap justify-between items-center gap-y-5">
+      
               <div className="w-[48%]">
                 <label className="block text-sm font-medium text-gray-600 mb-2">
                 Joylashuv
@@ -262,13 +257,20 @@ function ProjectForm() {
                   className="w-full border-gray-300 rounded-lg px-2 h-10"
                 />
               </div>
+                  
+                <div className="w-[48%]">
+                  <input
+                  type="file"
+                  name="image"
+                  accept="image/*"
+                  onChange={handleFileChange}
+                  required
+                />
+                </div>
 
-            
             </div>
           </div>
-          
 
-          {/* Description Section */}
           <div className="flex justify-between items-center">
             <div className="w-[48%]">
               <label className="block text-md font-medium text-gray-600 mb-3">
@@ -285,29 +287,14 @@ function ProjectForm() {
               ></textarea>
             </div>
 
-            <div className="w-[48%]">
-              <label className="block text-md font-medium text-gray-600 mb-3">
-              Qo'shimcha ma'lumot
-              </label>
-              <textarea
-                style={{ resize: "none" }}
-                className="w-full outline-none border border-custom-gray rounded-md p-3 h-36"
-                placeholder="Yanada ko'proq ma'lumot qo'shish"
-              ></textarea>
-            </div>
+          
           </div>
 
           {/* <div>
               <ImageUpload/>
           </div> */}
 
-          <input
-            type="file"
-            name="image"
-            accept="image/*"
-            onChange={handleFileChange}
-            required
-          />
+       
 
           {/* Submit Button */}
           <div className="flex items-center justify-between ">
