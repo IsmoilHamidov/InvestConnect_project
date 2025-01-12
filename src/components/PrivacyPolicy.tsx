@@ -32,15 +32,18 @@ const PrivacyPolicy = () => {
     <Dialog>
       <DialogTrigger>
         <span className="text-blue-500 lowercase ">
-          Foydalanish shartlari{" "}
+           shart va qoidalarni{" "}
         </span>
       </DialogTrigger>
       <DialogContent className="max-w-2xl animate-fade-in">
         <DialogHeader>
-          <DialogTitle className="text-xl font-semibold text-gray-800">
+          <DialogTitle className="text-xl text-center font-semibold text-custom-blue-gray">
             FOYDALANUVCHILAR VA FOYDALANISH SHARTNOMASI
           </DialogTitle>
-          <DialogDescription className="mt-4 max-h-96 overflow-y-auto text-lg leading-8 text-black whitespace-pre-line scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200">
+          <DialogDescription 
+            className="mb-4 max-h-[26rem] overflow-y-auto text-lg leading-8 text-black 
+                      whitespace-pre-line scrollbar-thin scrollbar-thumb-gray-400 
+                      scrollbar-track-gray-200 pe-4">
             {policyText.text}
           </DialogDescription>
         </DialogHeader>

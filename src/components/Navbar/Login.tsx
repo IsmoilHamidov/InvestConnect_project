@@ -40,7 +40,7 @@ export const LoginModal: React.FC<INavbarStepProps> = () => {
 
   return (
     <div>
-      <h2 className="text-xl font-bold mb-5">Kirish</h2>
+      <h2 className="text-xl font-semibold mb-6 ">Kirish</h2>
       <form onSubmit={handleLogin} className="mb-3 grid gap-4">
         <div>
           <label className="block text-gray-700 mb-2">Telefon nomer</label>
@@ -87,10 +87,10 @@ export const LoginModal: React.FC<INavbarStepProps> = () => {
         </button>
 
 
-        <p className="grid mb-0 mt-3 text-center font-normal text-base">
+        <p className="flex justify-center flex-wrap mb-0 mt-3 text-center font-normal text-base">
           Hali ro'yxatdan o'tganmisiz?
           <span
-            className="text-blue-500 cursor-pointer text-center "
+            className="text-[#ce8f11] ms-2 text-base font-medium cursor-pointer text-center "
             onClick={() => openModal("registration")}
           >
             Ro'yxatdan o'tish

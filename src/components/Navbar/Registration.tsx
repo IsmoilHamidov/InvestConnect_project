@@ -59,8 +59,8 @@ export const Registration: React.FC<INavbarStepProps> = () => {
   const hasErrors = Object.keys(errors).length > 0;
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="mb-3">
-      <h2 className="text-xl font-bold mb-6">Ro'yxatdan O'tish</h2>
+    <form onSubmit={handleSubmit(onSubmit)} >
+      <h2 className="text-xl font-semibold mb-6">Ro'yxatdan O'tish</h2>
 
       {hasErrors && (
         <p className="text-red-500 text-[15px] mb-4">
@@ -115,7 +115,7 @@ export const Registration: React.FC<INavbarStepProps> = () => {
         </div>
       </div>
 
-      <div className="flex gap-x-7 my-6">
+      <div className="flex gap-x-7 mt-8">
         <div>
           <label className="flex items-center">
             <input
@@ -140,35 +140,36 @@ export const Registration: React.FC<INavbarStepProps> = () => {
         </div>
       </div>
 
-      <p className="mt-4 text-center font-normal text-base mb-5">
-        <label className="flex items-center">
-          <input
-            type="checkbox"
-            className="mr-2"
-            checked={isChecked}
-            onChange={() => setIsChecked(!isChecked)}
-          />
-          <PrivacyPolicy />
-          <span className="pl-1">
-            va maxfiylik siyosati bilan tanishib chiqdim
-          </span>
-        </label>
-      </p>
+      <div className="mt-6 mb-8 font-normal text-base ">
+            <div className="flex items-center">
+                <input
+                  style={{width: '17px', height:"17px", borderRadius:"0px"}}
+                  type="checkbox"
+                  className="mr-2"
+                  checked={isChecked}
+                  onChange={() => setIsChecked(!isChecked)}
+                />
+                <span className="text-start text-custom-gray">
+                  Men <PrivacyPolicy /> qabul qilaman
+                </span>
+            </div>
+      </div>
 
       <Button
         type="submit"
         disabled={isLoading || !isChecked}
-        className={`Blue_button font-semibold w-full bg-[#749BA9] text-white p-2 rounded-2xl ${
-          !isChecked ? "opacity-50 cursor-not-allowed" : ""
+        className={`Blue_button font-semibold w-full bg-[#749BA9] text-white 
+        py-5 rounded-2xl text-base ${
+          !isChecked ? "opacity-70 cursor-not-allowed" : ""
         }`}
       >
         Ro'yxatdan o'tish
       </Button>
 
-      <p className="mt-4 text-center font-normal text-base">
+      <p className="mt-5 mb-2 text-center font-normal text-base">
         Allaqachon ro'yxatdan o'tganmisiz?
         <span
-          className="text-blue-500 ms-2 cursor-pointer"
+          className="text-[#ce8f11] text-base font-medium ms-2 cursor-pointer"
           onClick={() => openModal("login")}
         >
           Kirish

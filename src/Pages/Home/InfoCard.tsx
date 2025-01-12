@@ -27,9 +27,9 @@ const cardData = [
   
 function InfoCard() {
   return (
-    <div className="bg-[#88A8B5]  pb-40 pt-[18rem] relative">
+    <div className="bg-[#88A8B5]  pb-40 pt-[18rem] relative -z-10">
 
-      <div className="max-w-7xl mx-auto px-4 z-50 relative">
+      <div className="max-w-7xl mx-auto px-4 z-20 relative">
         <div className="flex flex-col  md:flex-row justify-between items-center mb-8">
           <div className="w-full md:w-1/4 ">
             <h2 className="text-white text-[42px] font-semibold leading-[50px] mb-4">Investitsion yangiliklar<span className='text-[#CED6D9]'>& artikilar</span></h2>
@@ -67,7 +67,7 @@ function InfoCard() {
         </div>
       </div>
 
-        <div className='absolute bottom-32 right-20 z-20'>
+        <div className='absolute bottom-32 right-20 '>
               <img src={AltroLogo} alt="" />
         </div>
     </div>

@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useGetUsersQuery } from "@/store/slice/products";
 import { useAuthModalStore } from "@/store/authModalStore";
 import { NavbarStep } from "../Navbar/NavbarStep";
+import { FiLogIn } from "react-icons/fi";
 
 export default function NavbarAdmin() {
 
@@ -63,15 +64,18 @@ export default function NavbarAdmin() {
 
           {error || !username ? (
             <button
-              className=" border border-white text-white p-2 px-5 mx-5 rounded-2xl font-normal text-md"
-              onClick={() => openModal("registration")}
+              className="flex justify-center items-center gap-x-2  
+              border-2 text-white py-1 px-4 mx-2 rounded-lg  
+              font-medium text-md hover:bg-[#749BA9] "
+              onClick={() => openModal("login")}
             >
               Kirish
+             <FiLogIn size={17}/>
             </button>
           ) : (
             <button
               onClick={handelNavigateProfile}
-              className="flex items-center justify-center bg-[#B29C6F] text-white p-1 w-[35px] h-[33px] rounded-full text-lg font-medium"
+              className="flex items-center mx-2 justify-center bg-[#B29C6F] text-white p-1 w-[35px] h-[33px] rounded-full text-lg font-medium"
             >
               {initials}
             </button>

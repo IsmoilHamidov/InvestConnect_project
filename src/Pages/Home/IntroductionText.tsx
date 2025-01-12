@@ -2,7 +2,7 @@ import TextImage from "../../assets/images/Group 524.png"
 
 function IntroductionText() {
   return (
-    <div className='relative min-h-[64rem]'>
+    <div className='relative min-h-[64rem] -z-10'>
         <div className='w-full h-[55rem] bg-custom-blue-gray rounded-br-none py-12'
             style={{
                 clipPath: 'polygon(0 0, 100% 0, 100% 75%, 0% 100%)'

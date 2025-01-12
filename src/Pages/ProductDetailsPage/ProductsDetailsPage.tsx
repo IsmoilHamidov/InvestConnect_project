@@ -58,7 +58,7 @@ export const ProductDetailsPage = () => {
 
                       <div className="flex justify-between items-center mb-4">
                         <span className="text-custom-gray text-base font-medium">Samaradorlik:</span>
-                        <p className="0 font-semibold">{data.rendement}</p>
+                        <p className="0 font-semibold">{data.rendement}%</p>
                       </div>
 
                       <div className="flex justify-between items-center mb-4">

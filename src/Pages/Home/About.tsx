@@ -2,8 +2,8 @@ import about_image from "../../assets/images/img01.jpg"
 
 function About() {
   return (
-    <div className='bg-white w-full mt-20 '>
-        <div className='max-w-7xl m-auto flex justify-between'>
+    <div className='bg-white w-full mt-20'>
+        <div className='max-w-7xl m-auto flex justify-between' id="about_us">
             <div className='w-[57%]'>
                 <h2 className='text-[2.85rem] leading-[65px] font-normal text-custom-gray'>Nima uchun Invest Connect ni tanlashingiz kerak? </h2>
                 <p className='my-8 leading-7 text-custom-gray'>Invest Connect kompaniyasini tashkil etishning markazida turar joy ko'chmas mulkiga sarmoya kiritish bo'yicha xizmatlar yaxshilanishi va yaxshilanishi kerakligiga ishonchimiz komil. Parchalangan maslahat yo'q, lekin Flandriya va Bryussel bo'ylab mustaqil kompleks yondashuv. </p>

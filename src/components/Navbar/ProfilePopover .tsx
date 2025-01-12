@@ -64,10 +64,10 @@ const ProfilePopover: React.FC = () => {
     <div className="relative">
       {error || !username ? (
         <button
-          className="Blue_button bg-[#749BA9] text-white p-2 px-4 rounded-2xl font-normal"
-          onClick={() => openModal("registration")}
+          className="Blue_button text-md bg-[#749BA9] text-white p-2 px-5 rounded-2xl font-medium"
+          onClick={() => openModal("login")}
         >
-          Ro'yxatdan O'tish
+          Kirish
         </button>
       ) : (
         <button
