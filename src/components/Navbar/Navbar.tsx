@@ -32,8 +32,6 @@ const Navbar: React.FC = () => {
     };
   }, []);
 
-
-const Navbar: React.FC = () => {
   const {toast} = useToast()
   const inProcces = () => {
     toast({
@@ -63,7 +61,6 @@ const Navbar: React.FC = () => {
             <a href="#"><FaTwitter /></a>
           </div>
 
-
           {/* Navbar Content */}
           <div className="flex gap-x-7 items-center text-white text-base font-normal">
             <button className="Blue_button border-0 rounded-3xl p-2 px-3 text-sm bg-[#749BA9]">
@@ -72,7 +69,7 @@ const Navbar: React.FC = () => {
             <Link to={"/products"}>Loyihalar</Link>
             <a href="#about_us">Biz haqimizda</a>
             <a href="#our_service">Bizning Xizmatlar</a>
-
+          </div>
         {/* Navbar Content */}
         <div className="flex gap-x-7 items-center text-white text-base font-normal">
           <button className="Blue_button border-0 rounded-3xl p-2 px-3 text-sm bg-[#749BA9]">
