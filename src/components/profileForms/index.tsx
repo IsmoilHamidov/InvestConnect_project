@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 import { useToast } from '@/hooks/use-toast'
 
 interface ProfileFormProps {
-    closeModal: () => void;
+    closeModal: () => void; 
 }
 
 const ProfileForm: React.FC<ProfileFormProps> = ({ closeModal }) => {
@@ -87,6 +87,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ closeModal }) => {
                 variant: "destructive",
             });
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [error]);
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
 

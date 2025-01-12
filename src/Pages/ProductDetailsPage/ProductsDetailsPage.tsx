@@ -6,12 +6,12 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import ImageSlider from "./ImageSlider";
 
+const imageBasicUrl = "https://bakirali007.pythonanywhere.com/"
 
 export const ProductDetailsPage = () => {
   const { productid } = useParams<{ productid: string | any }>();
   const { data, error, isLoading } = useGetProductQuery(productid);
 
-   console.log(data)
   const [isPaid, setIsPaid] = useState(false);
 
   const salesData = [
@@ -41,6 +41,13 @@ export const ProductDetailsPage = () => {
             ) : data ? (
 
               <div className="p-4 py-8 pl-0 bg-white  flex justify-between">
+              
+                {/* <div className="w-1/2 h-auto border flex flex-row gap-y-3">
+                  <img src={data.image} alt="product image" 
+                  className="h-[22rem] w-full object-cover rounded-xl" />
+                </div> */}
+
+
                 <ImageSlider/>
                 <div className="flex flex-col w-[48%] gap-y-10 justify-between">
                     <div className="w-[70%] p-5 rounded-xl shadow-md border border-gray-200 bg-white">
@@ -114,11 +121,11 @@ export const ProductDetailsPage = () => {
                 <p className="text-sm text-gray-600">
                   Для просмотра данных необходимо произвести оплату.
                 </p>
-                <DonationForm
-                  price={100000}
-                  id={data?.id}
+                {/* <DonationForm
+                  price={10}
+                  id={productid}
                   onPaymentSuccess={() => setIsPaid(true)} // Обновляем состояние
-                />
+                /> */}
               </div>
             ) : null}
             <div>
