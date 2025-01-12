@@ -10,8 +10,7 @@ import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useToast } from "@/hooks/use-toast";
-
-
+import { usePaymentAndCheckMutation } from "@/store/slice/products";
 
 const paymentMethods = [
   { id: "uzcard", name: "Uzcard" },
@@ -28,6 +27,7 @@ interface DonationFormProps {
 
 interface DonatFormData {
   amount: number;
+  product_id: number;
   cardNumber: string;
   expiryDate: string;
   message?: string;
@@ -38,7 +38,7 @@ interface DonatFormData {
 const schema = yup.object({
   amount: yup
     .number()
-    .min(5000, "Минимальная сумма — 5000")
+    .min(10, "Минимальная сумма — $10")
     .required("Сумма обязательна"),
   message: yup.string().max(200, "Сообщение не должно превышать 200 символов"),
   cardNumber: yup
@@ -52,10 +52,13 @@ const schema = yup.object({
   paymentMethod: yup.string().required("Выберите способ оплаты"),
 });
 
-const DonationForm: React.FC<DonationFormProps> = ({ price, id, onPaymentSuccess }) => {
+const DonationForm: React.FC<DonationFormProps> = ({
+  id,
+  onPaymentSuccess,
+}) => {
+  const [paymentAndCheck] =
+    usePaymentAndCheckMutation();
   const { toast } = useToast();
-  console.log(id);
-  
 
   const {
     control,
@@ -66,7 +69,9 @@ const DonationForm: React.FC<DonationFormProps> = ({ price, id, onPaymentSuccess
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
-      amount: price, // Фиксированная сумма      message: "",
+      amount: 10,
+      product_id: id,
+      message: "",
       cardNumber: "",
       expiryDate: "",
       paymentMethod: "uzcard",
@@ -75,46 +80,60 @@ const DonationForm: React.FC<DonationFormProps> = ({ price, id, onPaymentSuccess
 
   const paymentMethod = watch("paymentMethod");
 
-  const onSubmit = (data: DonatFormData) => {
-    toast({
-      title: "Оплата прошла успешно!",
-      description: `Вы перевели ${data.amount} UZS`,
-      variant: "success",
-    });
+  const onSubmit = async (data: DonatFormData) => {
+    console.log("id", id);
+    try {
+      const response = await paymentAndCheck({
+        data: {
+          product_id: +id,
+          amount: 10,
+        },
+      }).unwrap(); // unwrap позволяет получить данные без try-catch для RTK Query
+      console.log("Успех:", response);
+      toast({
+        title: "Оплата прошла успешно!",
+        description: `Вы перевели ${data.amount} USD`,
+        variant: "success",
+      });
+    } catch (err) {
+      console.error("Ошибка:", err);
+      alert("Произошла ошибка при оплате.");
+    }
 
-    // Задержка и перенаправление
-    onPaymentSuccess()
+    onPaymentSuccess();
   };
 
   return (
     <Dialog>
-
-  
-
-        <DialogTrigger asChild>
-          <Button className="border rounded-[40px] px-4 py-2">Получить данные</Button>
-        </DialogTrigger>
-    
-
+      <DialogTrigger asChild>
+        <Button className="border rounded-[40px] px-4 py-2">
+          Получить данные
+        </Button>
+      </DialogTrigger>
 
       <DialogContent className="sm:max-w-md">
         <DialogTitle>Оплатить</DialogTitle>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-          {/* Фиксированная Сумма */}
+          {/* Сумма */}
           <div>
-            <label className="block text-sm font-medium mb-1">Сумма</label>
+            <label className="block text-sm font-medium mb-1">Сумма ($)</label>
             <Controller
               name="amount"
               control={control}
-              render={() => (
+              render={({ field }) => (
                 <input
                   type="number"
-                  value={price}
-                  disabled // Поле нельзя редактировать
-                  className="w-full px-3 py-2 border rounded-lg bg-gray-100 cursor-not-allowed"
+                  min="10"
+                  step="0.01"
+                  placeholder="Введите сумму"
+                  {...field}
+                  className="w-full px-3 py-2 border rounded-lg"
                 />
               )}
             />
+            {errors.amount && (
+              <p className="text-red-500 text-sm">{errors.amount.message}</p>
+            )}
           </div>
 
           {/* Сообщение */}

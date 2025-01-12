@@ -12,7 +12,6 @@ export const ProductDetailsPage = () => {
   const { productid } = useParams<{ productid: string | any }>();
   const { data, error, isLoading } = useGetProductQuery(productid);
 
-   console.log(data)
   const [isPaid, setIsPaid] = useState(false);
 
   const salesData = [
@@ -48,7 +47,7 @@ export const ProductDetailsPage = () => {
             ) : data ? (
 
               <div className="p-4 py-8 pl-0 bg-white  flex justify-between">
-             
+              
                 {/* <div className="w-1/2 h-auto border flex flex-row gap-y-3">
                   <img src={data.image} alt="product image" 
                   className="h-[22rem] w-full object-cover rounded-xl" />
@@ -130,8 +129,8 @@ export const ProductDetailsPage = () => {
                   Для просмотра данных необходимо произвести оплату.
                 </p>
                 <DonationForm
-                  price={100000}
-                  id={data?.id}
+                  price={10}
+                  id={productid}
                   onPaymentSuccess={() => setIsPaid(true)} // Обновляем состояние
                 />
               </div>
