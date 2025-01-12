@@ -12,7 +12,7 @@ import { CategoryType } from "../Category";
 function ProjectForm() {
   const [createProduct, { isLoading, isError, isSuccess, error }] =
     useCreateProductMutation();
-  
+
   const { data: getUserId } = useGetUsersQuery(undefined);
 
   const { data: getCategories } = useGetCategoriesQuery(undefined);
@@ -21,12 +21,11 @@ function ProjectForm() {
   useEffect(() => {
     if (isSuccess) {
       setTimeout(() => {
-        navigate("/profile");     
+        navigate("/profile");
       });
     }
   }, [isSuccess, navigate]);
 
-  
   const [formData, setFormData] = useState({
     user: getUserId?.id,
     name: "",
@@ -35,13 +34,12 @@ function ProjectForm() {
     description: "",
     price: "",
     category: "",
-    product_file:"null",
-    kampanya_egasi:"",
+    product_file: "null",
+    kampanya_egasi: "",
     kontact: "",
     campany_name: "",
-    oylik_daromadi:"",
-    soff_foydasi:""
-
+    oylik_daromadi: "",
+    soff_foydasi: "",
   });
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const { toast } = useToast();
@@ -62,6 +60,7 @@ function ProjectForm() {
   };
 
   const debugFormData = (formData: FormData) => {
+    // eslint-disable-next-line prefer-const
     for (let pair of formData.entries()) {
       console.log(`${pair[0]}: ${pair[1]}`);
     }
@@ -88,7 +87,7 @@ function ProjectForm() {
       payload.append("image", selectedFile);
     }
 
-    debugFormData(payload); 
+    debugFormData(payload);
 
     try {
       const result = await createProduct(payload).unwrap();
@@ -112,25 +111,23 @@ function ProjectForm() {
     <div className="min-h-[100vh] py-14 bg-gray-100">
       <div className="max-w-7xl m-auto ">
         <h1 className="text-2xl font-bold mb-8 text-custom-gray">
-        Yangi loyiha qo'shish
+          Yangi loyiha qo'shish
         </h1>
         <form
           onSubmit={handleSubmit}
           encType="multipart/form-data"
           className="space-y-12"
         >
-
-          <div>
-            <div className="flex flex-wrap justify-between items-center gap-y-7">
-            <div className="w-[48%]">
+            <div className="flex flex-wrap justify-between items-center gap-y-5">
+              <div className="w-[48%]">
                 <label className="block text-sm font-medium text-gray-600 mb-2">
                   kontakt
                 </label>
                 <input
                   name="kontact"
                   placeholder="kontact"
-                  type="text" 
-                  value={formData. kontact}
+                  type="text"
+                  value={formData.kontact}
                   onChange={handleChange}
                   required
                   className="w-full border-gray-300 rounded-lg px-2 h-10"
@@ -139,7 +136,7 @@ function ProjectForm() {
 
               <div className="w-[48%]">
                 <label className="block text-sm font-medium text-gray-600 mb-2">
-                Kampanya Egasi
+                  Kampanya Egasi
                 </label>
                 <input
                   type="text"
@@ -153,7 +150,7 @@ function ProjectForm() {
 
               <div className="w-[48%]">
                 <label className="block text-sm font-medium text-gray-600 mb-2">
-                Kompaniya 
+                  Kompaniya
                 </label>
                 <input
                   type="text"
@@ -167,7 +164,7 @@ function ProjectForm() {
 
               <div className="w-[48%]">
                 <label className="block text-sm font-medium text-gray-600 mb-2">
-                Loyiha nomi
+                  Loyiha nomi
                 </label>
                 <input
                   type="text"
@@ -186,15 +183,13 @@ function ProjectForm() {
                 <input
                   name="oylik_daromadi"
                   placeholder="Loyiha narxini kiriting"
-                  type="number" 
-                  value={formData. oylik_daromadi}
+                  type="number"
+                  value={formData.oylik_daromadi}
                   onChange={handleChange}
-                  required
                   className="w-full border-gray-300 rounded-lg px-2 h-10"
                 />
               </div>
 
-              
               <div className="w-[48%]">
                 <label className="block text-sm font-medium text-gray-600 mb-2">
                   Loyiha turi
@@ -213,10 +208,9 @@ function ProjectForm() {
                     : null}
                 </select>
               </div>
-
               <div className="w-[48%]">
                 <label className="block text-sm font-medium text-gray-600 mb-2">
-                Samaradorlik
+                  Samaradorlik
                 </label>
                 <input
                   name="rendement"
@@ -231,22 +225,21 @@ function ProjectForm() {
 
               <div className="w-[48%]">
                 <label className="block text-sm font-medium text-gray-600 mb-2">
-                Loyiha narxi
+                  Loyiha narxi
                 </label>
                 <input
                   name="price"
                   placeholder="Loyiha narxini kiriting"
-                  type="number" 
+                  type="number"
                   value={formData.price}
                   onChange={handleChange}
                   required
                   className="w-full border-gray-300 rounded-lg px-2 h-10"
                 />
               </div>
-      
               <div className="w-[48%]">
                 <label className="block text-sm font-medium text-gray-600 mb-2">
-                Joylashuv
+                  Joylashuv
                 </label>
                 <input
                   name="location"
@@ -257,24 +250,13 @@ function ProjectForm() {
                   className="w-full border-gray-300 rounded-lg px-2 h-10"
                 />
               </div>
-                  
-                <div className="w-[48%]">
-                  <input
-                  type="file"
-                  name="image"
-                  accept="image/*"
-                  onChange={handleFileChange}
-                  required
-                />
-                </div>
-
             </div>
-          </div>
 
+          {/* Description Section */}
           <div className="flex justify-between items-center">
             <div className="w-[48%]">
               <label className="block text-md font-medium text-gray-600 mb-3">
-              Tavsif
+                Tavsif
               </label>
               <textarea
                 style={{ resize: "none" }}
@@ -287,14 +269,29 @@ function ProjectForm() {
               ></textarea>
             </div>
 
-          
+            <div className="w-[48%]">
+              <label className="block text-md font-medium text-gray-600 mb-3">
+                Qo'shimcha ma'lumot
+              </label>
+              <textarea
+                style={{ resize: "none" }}
+                className="w-full outline-none border border-custom-gray rounded-md p-3 h-36"
+                placeholder="Yanada ko'proq ma'lumot qo'shish"
+              ></textarea>
+            </div>
           </div>
 
           {/* <div>
               <ImageUpload/>
           </div> */}
 
-       
+          <input
+            type="file"
+            name="image"
+            accept="image/*"
+            onChange={handleFileChange}
+            required
+          />
 
           {/* Submit Button */}
           <div className="flex items-center justify-between ">
@@ -303,14 +300,12 @@ function ProjectForm() {
             </Button>
             {isError && (
               <p className="text-red-600">
-              Mahsulot yaratishda xatolik yuz berdi: {JSON.stringify(error)}
+                Mahsulot yaratishda xatolik yuz berdi: {JSON.stringify(error)}
               </p>
             )}
           </div>
         </form>
       </div>
-    </div>
-  );
+    </div> );
 }
-
 export default ProjectForm;
