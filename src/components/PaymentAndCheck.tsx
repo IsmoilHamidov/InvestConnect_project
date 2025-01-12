@@ -7,6 +7,7 @@ import { Button } from "./ui/button";
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { usePrivateInfoStore } from "@/store/privateInfoData";
+import { useAuthModalStore } from "@/store/authModalStore";
 
 interface PaymentFormData {
   message: string;
@@ -45,6 +46,7 @@ const PaymentAndCheck: React.FC<PaymentAndCheckProps> = ({ productId, amount }) 
 
   const triggerRef = useRef<HTMLButtonElement>(null);
 
+  const auth = localStorage.getItem("token")
 
   const handlePaymentCheck = async (data: PaymentFormData) => {
     try {
@@ -74,12 +76,32 @@ const PaymentAndCheck: React.FC<PaymentAndCheckProps> = ({ productId, amount }) 
         description: "Что-то пошло не так",
         variant: "destructive",
       });
+
     }
   };
+  const { openModal } = useAuthModalStore();
+
+  const checkAuth = () => {
+    if (!auth) {
+      if (triggerRef.current) {
+        triggerRef.current.click();
+      } else {
+        console.error("triggerRef is null. Ensure the button is rendered correctly.");
+      }
+      openModal('login')
+      return toast({
+        title: "Xatolik",
+        description: "Siz tizimga kirmagansiz",
+        variant: "destructive",
+      });
+    }
+  };
+  
+  
 
   return (
     <Dialog>
-      <DialogTrigger asChild>
+      <DialogTrigger asChild onClick={checkAuth}>
         <Button ref={triggerRef} className="border rounded-[40px] px-4 py-2">Payment</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">

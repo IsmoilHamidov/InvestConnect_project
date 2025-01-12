@@ -149,7 +149,7 @@ export const Registration: React.FC<INavbarStepProps> = () => {
                   checked={isChecked}
                   onChange={() => setIsChecked(!isChecked)}
                 />
-                <span className="text-start text-custom-gray">
+                <span className="text-start text-blue-500">
                   Men <PrivacyPolicy /> qabul qilaman
                 </span>
             </div>

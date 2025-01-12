@@ -31,7 +31,7 @@ const PrivacyPolicy = () => {
   return (
     <Dialog>
       <DialogTrigger>
-        <span className="text-blue-500 lowercase ">
+        <span className="lowercase ">
            shart va qoidalarni{" "}
         </span>
       </DialogTrigger>
