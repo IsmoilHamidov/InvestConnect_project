@@ -107,7 +107,7 @@ const PaymentAndCheck: React.FC<PaymentAndCheckProps> = ({ productId, amount }) 
       <DialogContent className="sm:max-w-md">
         <h1 className="text-xl font-bold mb-4">Payment and Check</h1>
         <span className="bg-[#1212] py-2 text-center rounded-md">
-          Bu mahsulotni korish narxi : {amount}
+          Bu mahsulotni korish narxi : {amount} $
         </span>
         <form className="space-y-4" onSubmit={handleSubmit(handlePaymentCheck)}>
 
