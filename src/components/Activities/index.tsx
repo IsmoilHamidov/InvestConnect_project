@@ -1,39 +1,78 @@
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { useGetInvestorProductsQuery } from "@/store/slice/apiSlice";
-import { Key } from "react";
+import { RefreshCcw } from "lucide-react";
+import { useEffect, useState } from "react";
 
-const ActivityCard: React.FC<{ title: string; price: string; month: string; image: string }> = ({ title, price, month, image }) => {
+const ActivityCard: React.FC<{ name: string; price: string; month: string; image: string }> = ({ name, price, month, image }) => {
     return (
         <Card className="flex w-full justify-between items-center bg-gray-100 rounded-lg px-4 py-1">
             <Card className="border-none bg-transparent shadow-none">
                 <div className="flex items-center gap-x-2">
                     <img
                         src={image}
-                        alt={title}
+                        alt={name}
                         className="w-28 h-20 rounded-md object-cover shadow-sm"
                     />
                     <CardHeader>
                         <p className="text-sm text-custom-gray uppercase">{month}</p>
-                        <CardTitle className="text-lg font-medium text-custom-gray">{title}</CardTitle>
+                        <CardTitle className="text-lg font-medium text-custom-gray">{name}</CardTitle>
                     </CardHeader>
                 </div>
             </Card>
-            <div className="flex px-3 min-w-48 h-auto min-h-16 items-center justify-center font-normal bg-gray-800 text-white rounded-xl">
-                <span className="text-xl font-normal">{price}</span>
+            <div className="flex px-3 min-w-52 py-3 items-center 
+            justify-center gap-x-4 font-normal bg-gray-700 text-white rounded-xl">
+                <span className="text-[22px] font-normal tracking-wide">$ {price}</span>
             </div>
         </Card>
     );
 };
 
 const Activities = () => {
-    const { data, error, isLoading } = useGetInvestorProductsQuery(undefined);
+    const [reloading, setReloading] = useState(false); // Track reloading state
+    const { data, error, isLoading, refetch } = useGetInvestorProductsQuery(undefined);
+
+    const handleRefresh = async () => {
+        setReloading(true); 
+        await refetch();   
+        setReloading(false); 
+    };
+
+    useEffect(() => {
+        if (isLoading) {
+        }
+    }, [isLoading]); 
 
     return (
         <div className="w-full mx-auto bg-white py-7 px-7 rounded-2xl mt-7 shadow-lg border">
             <div className="flex flex-row justify-between items-center mb-4">
-                <h2 className="text-xl font-semibold text-gray-800 mb-4">Ochilgan loyihalar</h2>
+                <h2 className="text-xl font-semibold text-gray-800 mb-5">Ochilgan loyihalar</h2>
+                <button
+                    className={`flex items-center gap-x-2 p-2 rounded-full  ${reloading ? 'animate-spin' : 'bg-transparent'}`}
+                    onClick={handleRefresh} 
+                    disabled={isLoading || reloading} 
+                >
+                    {reloading ? (
+                      <span
+                        className="animate-spin"
+                        style={{
+                            transition: 'transform .3s ease-in-out' 
+                        }}
+                        >
+                        <RefreshCcw size={22} />
+                        </span>
+                    
+                    ) : (
+                        <>
+                            <span className="text-base font-medium"> 
+                                Yangilash
+                            </span>
+                            <RefreshCcw size={22} />
+                        </>
+                    )}
+                </button>
             </div>
-            {isLoading && (
+
+            {isLoading && !reloading && (
                 <div className="flex items-center justify-center h-full text-base">
                     <p>Loyihalar yuklanmoqda...</p>
                 </div>
@@ -47,25 +86,22 @@ const Activities = () => {
 
             {data?.length === 0 && (
                 <div className="flex items-start justify-start h-full">
-                    <p className="italic text-[17px]">Sizda xarid qiligan loyihalar mavjud emas.</p>
+                    <p className="italic text-[17px]">Sizda xarid qilgan loyihalar mavjud emas.</p>
                 </div>
             )}
 
-
             {data?.length > 0 && (
-                <>
-                    <div className="flex flex-col gap-[15px]">
-                        {data.map((activity: { id: any; title: string; price: string; month: string; image: any; }, index: any) => (
-                            <ActivityCard
-                                key={activity.id || index} 
-                                title={activity.title}
-                                price={activity.price}
-                                month={activity.month}
-                                image={activity.image || "/path/to/default/image.jpg"} 
-                            />
-                        ))}
-                    </div>
-                </>
+                <div className="flex flex-col gap-[15px]">
+                    {data.map((activity: { id: any; name: string; price: string; month: string; image: any; }, index: any) => (
+                        <ActivityCard
+                            key={activity.id || index}
+                            name={activity.name}
+                            price={activity.price}
+                            month={activity.month}
+                            image={activity.image || "/path/to/default/image.jpg"}
+                        />
+                    ))}
+                </div>
             )}
         </div>
     );

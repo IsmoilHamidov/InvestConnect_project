@@ -13,14 +13,14 @@ function Projects() {
   }
 
   if (error) {
-    return <div className="text-center text-red-500">Yuklanishda xatolin yuz berdi</div>;
+    return <div className="text-center text-red-500"></div>;
   }
 
 
   const limitedData = data?.slice(0, 3) || [];
 
   return (
-    <div className="relative min-h-[60rem] mt-8 -z-10">
+    <div className="relative min-h-[60rem] mt-8 ">
       <div
         className="w-full z-10 h-[45rem] bg-[#443B3A] rounded-br-none py-12"
         style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 75%)" }}
@@ -28,7 +28,7 @@ function Projects() {
 
       <div
         id="Project"
-        className="flex flex-col justify-center items-center z-20 absolute top-[120px] left-1/2 transform -translate-x-1/2"
+        className="flex flex-col justify-center items-center  absolute top-[120px] left-1/2 transform -translate-x-1/2"
       >
         <h3 className="text-center text-[2.5rem] font-light text-white">
            Loyihalar
@@ -88,7 +88,7 @@ function Projects() {
           ))}
         </div>
 
-          <Link to={'/products'}>
+          <Link to={'/products'} >
               <button
                 className="Brown_button rounded-3xl p-3 px-12
                  text-base text-white bg-custom-gray mt-5"
