@@ -46,6 +46,9 @@ export const api = createApi({
         url: '/products/create/',
         method: 'POST',
         body: data,
+        headers: {
+          "Authorization": `Token ${localStorage.getItem("token") || ""}`,
+        },
       }),
     }),
 
