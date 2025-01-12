@@ -10,6 +10,7 @@ import logo_text from "../../assets/images/navLogo.png";
 import { Link } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import ProfilePopover from "./ProfilePopover ";
+import PrivacyPolicy from "../PrivacyPolicy";
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -70,8 +71,9 @@ const Navbar: React.FC = () => {
 
             {/* Navbar Content */}
             <div className="flex gap-x-9 items-center text-white text-base font-normal">
-              <button className="Blue_button border-0 rounded-3xl p-2 px-3 text-sm bg-[#749BA9]">
-                Shartlar bilan tanishish
+              <button 
+              className="Blue_button text-white border-0 rounded-3xl p-2 px-3 text-sm bg-[#749BA9]">
+                <PrivacyPolicy />
               </button>
               <Link to={"/products"}>Loyihalar</Link>
               <a href="#about_us">Biz haqimizda</a>

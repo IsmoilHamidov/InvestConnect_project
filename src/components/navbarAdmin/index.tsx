@@ -65,7 +65,7 @@ export default function NavbarAdmin() {
           {error || !username ? (
             <button
               className="flex justify-center items-center gap-x-2  
-              border-2 text-white py-1 px-4 mx-2 rounded-lg  
+              border-2 text-white py-1 px-4 mx-3 rounded-lg  
               font-medium text-md hover:bg-[#749BA9] "
               onClick={() => openModal("login")}
             >
@@ -75,7 +75,7 @@ export default function NavbarAdmin() {
           ) : (
             <button
               onClick={handelNavigateProfile}
-              className="flex items-center mx-2 justify-center bg-[#B29C6F] text-white p-1 w-[35px] h-[33px] rounded-full text-lg font-medium"
+              className="flex items-center mx-3 justify-center bg-[#B29C6F] text-white p-1 w-[35px] h-[33px] rounded-full text-lg font-medium"
             >
               {initials}
             </button>

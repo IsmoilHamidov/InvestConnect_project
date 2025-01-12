@@ -3,6 +3,7 @@ import Sidebar from "@/components/sidebar";
 // import { ProfileForm } from "@/components/profileForms";
 import Offers from "../../components/OffersCard";
 import AnalyticsBox from "@/components/OffersCard/AnalyticsBox";
+import Activities from "@/components/Activities";
 
 
 
@@ -23,17 +24,20 @@ const Profile = () => {
             </div> */}
 
             <div className="flex flex-row w-full justify-between gap-y-7 ">
-              <div className="w-2/5">
-                <AnalyticsBox/>
-              </div>
-              
               
               <div className="w-[55%]">
                 <Offers />
               </div>
-         
+              
+              <div className="w-2/5">
+                <AnalyticsBox/>
+              </div>
+              
             </div>
           </div>
+            <div className="w-full">
+                <Activities />
+            </div>
         </main>
       </div>
     </div>
