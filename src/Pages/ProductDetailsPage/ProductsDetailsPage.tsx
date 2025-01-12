@@ -1,17 +1,13 @@
 import NavbarAdmin from "@/components/navbarAdmin";
 import { useGetProductQuery } from "@/store/slice/products";
-import { EyeOff } from "lucide-react";
-import { useState } from "react";
 import { useParams } from "react-router-dom";
 import ImageSlider from "./ImageSlider";
-import PaymentAndCheck from "@/components/PaymentAndCheck";
+import PrivateInfoCard from "@/components/PrivateInfoCard";
 
 export const ProductDetailsPage = () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { productid } = useParams<{ productid: string | any }>();
   const { data, error, isLoading } = useGetProductQuery(productid);
-
-  const [isPaid] = useState(false);
 
   return (
     <>
@@ -108,22 +104,7 @@ export const ProductDetailsPage = () => {
             </div>
           </div>
         ) : null}
-        {data ? <p className="py-5">{data.description}</p> : null}
-
-        {!isPaid ? (
-          <div className="p-4 bg-red-50 border rounded-md flex items-center justify-between gap-10">
-            <EyeOff size={60} />
-            <p className="text-sm text-gray-600">
-              Для просмотра данных необходимо произвести оплату.
-            </p>
-            {/* <DonationForm
-              price={10}
-              id={productid}
-              onPaymentSuccess={() => setIsPaid(true)} // Обновляем состояние
-            /> */}
-            <PaymentAndCheck productId={productid} amount={10} />
-          </div>
-        ) : null}
+        <PrivateInfoCard productId={productid} />
       </main>
     </>
   );

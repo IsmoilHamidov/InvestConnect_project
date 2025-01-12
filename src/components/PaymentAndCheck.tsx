@@ -6,6 +6,7 @@ import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
 import { Button } from "./ui/button";
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { usePrivateInfoStore } from "@/store/privateInfoData";
 
 interface PaymentFormData {
   message: string;
@@ -21,6 +22,7 @@ interface PaymentAndCheckProps {
 const PaymentAndCheck: React.FC<PaymentAndCheckProps> = ({ productId, amount }) => {
   const { toast } = useToast();
   const [createPaymentCheck, { isLoading, isError, error }] = usePaymentAndcheckMutation();
+  const setPrivateInfoData = usePrivateInfoStore((state) => state.setPrivateInfo);
 
   const {
     control,
@@ -53,7 +55,7 @@ const PaymentAndCheck: React.FC<PaymentAndCheckProps> = ({ productId, amount }) 
         cardNumber: data.cardNumber,
         expiryDate: data.expiryDate,
       }).unwrap();
-
+      setPrivateInfoData(response.private_info)
       console.log("Success:", response);
       toast({
         title: "Оплата прошла успешно!",
@@ -62,7 +64,9 @@ const PaymentAndCheck: React.FC<PaymentAndCheckProps> = ({ productId, amount }) 
       });
       if (triggerRef.current) {
         triggerRef.current.click();
+        window.location.reload()
       }
+
     } catch (err) {
       console.error("Error:", err);
       toast({
