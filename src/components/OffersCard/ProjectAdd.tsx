@@ -8,372 +8,315 @@ import React, { useEffect, useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
 import { CategoryType } from "../Category";
-import { MdOutlineFileUpload } from "react-icons/md";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
-
-// Interfeyslarni aniqlash
-interface PrivateInformation {
-  kampanya_egasi: string;
-  kontact: string;
-  campany_name: string;
-  oylik_daromadi: string;
-  soff_foydasi: string;
-}
-
-interface FormData {
-  user: number;
-  name: string;
-  rendement: string;
-  location: string;
-  image?: string;
-  description: string;
-  category: number;
-  price: string;
-  product_file?: string;
-  private_information: PrivateInformation;
-}
 
 function ProjectForm() {
-  const [formData, setFormData] = useState<FormData>({
-    user: 42,
-    name: "real",
-    rendement: "23",
-    location: "dsfsdfsfs",
-    image: "",
-    description: "sdsfsf",
-    category: 1,
-    price: "1234545.00",
-    product_file: "",
-    private_information: {
-        kampanya_egasi: "asdasda",
-        kontact: "sds",
-        campany_name: "sdfsadf",
-        oylik_daromadi: "1234567.00",
-        soff_foydasi: "12345677.00"
-    }
-});
-
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-
+  const [createProduct, { isLoading, isError, isSuccess, error }] =
+    useCreateProductMutation();
+  
   const { data: getUserId } = useGetUsersQuery(undefined);
+
   const { data: getCategories } = useGetCategoriesQuery(undefined);
-  const [createProduct, { isLoading, isSuccess, isError }] = useCreateProductMutation();
+
   const navigate = useNavigate();
-  const { toast } = useToast();
-
-  // Foydalanuvchi ma'lumotlarini o'rnatish
-  useEffect(() => {
-    if (getUserId) {
-      setFormData((prev) => ({ ...prev, user: getUserId.id || 0 }));
-    }
-  }, [getUserId]);
-
-  // Toifani birinchi qiymat sifatida tanlash
-  useEffect(() => {
-    if (getCategories?.length) {
-      setFormData((prev) => ({ ...prev, category: getCategories[0].id || 0 }));
-    }
-  }, [getCategories]);
-
-  // Muvaffaqiyatli yoki muvaffaqiyatsiz xabarlarni ko'rsatish
   useEffect(() => {
     if (isSuccess) {
-      toast({ description: "Loyiha muvaffaqiyatli qo'shildi!", variant: "success" });
-      navigate("/profile");
-    } else if (isError) {
-      toast({ description: "Loyihani yaratishda xatolik yuz berdi.", variant: "destructive" });
+      setTimeout(() => {
+        navigate("/profile");     
+      });
     }
-  }, [isSuccess, isError, navigate, toast]);
+  }, [isSuccess, navigate]);
 
-  // Ma'lumotlarni o'zgartirishni boshqarish
+  
+  const [formData, setFormData] = useState({
+    user: getUserId?.id,
+    name: "",
+    rendement: "",
+    location: "",
+    description: "",
+    price: "",
+    category: "",
+    product_file:"null",
+    kampanya_egasi:"",
+    kontact: "",
+    campany_name: "",
+    oylik_daromadi:"",
+    soff_foydasi:""
+
+  });
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const { toast } = useToast();
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    const { name, value } = e.target;
-    if (name in formData.private_information) {
-      setFormData((prev) => ({
-        ...prev,
-        private_information: {
-          ...prev.private_information,
-          [name]: value,
-        },
-      }));
-    } else {
-      setFormData((prev) => ({ ...prev, [name]: value }));
-    }
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
   };
 
-  // Faylni tanlashni boshqarish
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      if (file.size > 2 * 1024 * 1024) {
-        toast({ description: "Fayl hajmi 2 MB dan oshmasligi kerak.", variant: "destructive" });
-        return;
-      }
-      if (!["image/jpeg", "image/png"].includes(file.type)) {
-        toast({ description: "Faqat JPEG yoki PNG formatdagi fayllar qabul qilinadi.", variant: "destructive" });
-        return;
-      }
-      setSelectedFile(file);
+    if (e.target.files && e.target.files[0]) {
+      setSelectedFile(e.target.files[0]);
     }
   };
 
-  // Formani yuborish
+  const debugFormData = (formData: FormData) => {
+    for (let pair of formData.entries()) {
+      console.log(`${pair[0]}: ${pair[1]}`);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
+    setFormData((prev) => ({ ...prev, user: getUserId }));
     e.preventDefault();
 
-    // Majburiy maydonlarni tekshirish
-    if (!formData.name || !formData.price || !formData.category) {
-      toast({ description: "Barcha majburiy maydonlarni to'ldiring.", variant: "destructive" });
-      return;
-    }
-
-    // FormData obyekti bilan ma'lumotlarni tayyorlash
     const payload = new FormData();
-    Object.entries(formData).forEach(([key, value]) => {
-      if (key === "private_information") {
-        Object.entries(value as PrivateInformation).forEach(([subKey, subValue]) => {
-          payload.append(`private_information[${subKey}]`, subValue);
-        });
-      } else {
-        payload.append(key, value as string);
-      }
-    });
+    payload.append("user", formData.user);
+    payload.append("name", formData.name);
+    payload.append("rendement", formData.rendement);
+    payload.append("location", formData.location);
+    payload.append("description", formData.description);
+    payload.append("category", formData.category);
+    payload.append("price", formData.price);
+    payload.append("kampanya_egasi", formData.kampanya_egasi);
+    payload.append("campany_name", formData.campany_name);
+    payload.append("oylik_daromadi", formData.oylik_daromadi);
+    payload.append("soff_foydasi", formData.soff_foydasi);
 
     if (selectedFile) {
       payload.append("image", selectedFile);
     }
 
+    debugFormData(payload); 
+
     try {
-      await createProduct(payload).unwrap();
-    } catch (error) {
-      console.error("Xatolik yuz berdi:", error);
+      const result = await createProduct(payload).unwrap();
+      console.log("Mahsulot qo'shildi:", result);
+      // onClose();
+      toast({
+        description: "Loyiha muvaffaqiyatli yaratildi!",
+        variant: "success",
+        duration: 3000,
+      });
+    } catch (err) {
+      console.error("Failed to create product:", err);
+      toast({
+        description: "Mahsulot yaratilmadi. Iltimos, qayta urinib ko'ring.",
+        variant: "destructive",
+      });
     }
   };
+
   return (
     <div className="min-h-[100vh] py-14 bg-gray-100">
-      <div className="max-w-7xl m-auto">
+      <div className="max-w-7xl m-auto ">
         <h1 className="text-2xl font-bold mb-8 text-custom-gray">
-          Yangi loyiha qo'shish
+        Yangi loyiha qo'shish
         </h1>
         <form
           onSubmit={handleSubmit}
           encType="multipart/form-data"
           className="space-y-12"
         >
+
           <div>
-            <h2 className="font-medium text-xl mb-4">Shaxsiy ma'lumotlar</h2>
-            <div className="grid gap-4 sm:grid-cols-2">
-              <div>
-                <Label htmlFor="kampanya_egasi" className="text-sm font-medium">
-                  Kampanya egasi
-                </Label>
-                <Input
-                  id="kampanya_egasi"
-                  name="kampanya_egasi"
-                  value={formData.private_information.kampanya_egasi}
-                  onChange={handleChange}
-                  placeholder="Kampanya egasi ismi"
-                  className="mt-3"
-                />
-              </div>
-              <div>
-                <Label htmlFor="kontact" className="text-sm font-medium">
-                  Kontakt ma'lumotlari
-                </Label>
-                <Input
-                  id="kontact"
+            <div className="flex flex-wrap justify-between items-center gap-y-5">
+            <div className="w-[48%]">
+                <label className="block text-sm font-medium text-gray-600 mb-2">
+                  kontakt
+                </label>
+                <input
                   name="kontact"
-                  value={formData.private_information.kontact}
+                  placeholder="kontact"
+                  type="text" 
+                  value={formData. kontact}
                   onChange={handleChange}
-                  placeholder="Kontakt ma'lumotlarini kiriting"
-                  className="mt-3"
+                  required
+                  className="w-full border-gray-300 rounded-lg px-2 h-10"
                 />
               </div>
-              <div>
-                <Label htmlFor="campany_name" className="text-sm font-medium">
-                  Kampanya nomi
-                </Label>
-                <Input
-                  id="campany_name"
+
+              <div className="w-[48%]">
+                <label className="block text-sm font-medium text-gray-600 mb-2">
+                Kampanya Egasi
+                </label>
+                <input
+                  type="text"
+                  name="kampanya_egasi"
+                  value={formData.kampanya_egasi}
+                  onChange={handleChange}
+                  placeholder="Loyiha nomini kiriting"
+                  className="w-full border-gray-300 rounded-lg px-2 h-10"
+                />
+              </div>
+
+              <div className="w-[48%]">
+                <label className="block text-sm font-medium text-gray-600 mb-2">
+                Kompaniya 
+                </label>
+                <input
+                  type="text"
                   name="campany_name"
-                  value={formData.private_information.campany_name}
+                  value={formData.campany_name}
                   onChange={handleChange}
-                  placeholder="Kampanya nomini kiriting"
-                  className="mt-3"
+                  placeholder="Kompaniyani kiriting"
+                  className="w-full border-gray-300 rounded-lg px-2 h-10"
                 />
               </div>
-              <div>
-                <Label htmlFor="oylik_daromadi" className="text-sm font-medium">
-                  Oylik daromadi
-                </Label>
-                <Input
-                  id="oylik_daromadi"
-                  name="oylik_daromadi"
-                  value={formData.private_information.oylik_daromadi}
-                  onChange={handleChange}
-                  placeholder="Oylik daromadini kiriting"
-                  className="mt-3"
-                  type="number"
-                />
-              </div>
-              <div>
-                <Label htmlFor="soff_foydasi" className="text-sm font-medium">
-                  Kompaniya foydasi
-                </Label>
-                <Input
-                  id="soff_foydasi"
-                  name="soff_foydasi"
-                  value={formData.private_information.soff_foydasi}
-                  onChange={handleChange}
-                  placeholder="Soff foydasini kiriting"
-                  className="mt-3"
-                  type="number"
-                />
-              </div>
-            </div>
-          </div>
-          <div>
-            <h2 className="font-medium text-xl mb-4 text-[57737d]">
-              Loyiha tafsilotlari
-            </h2>
-            <div className="grid gap-4 sm:grid-cols-2">
-              <div>
-                <Label htmlFor="projectName" className="text-sm font-medium">
-                  Loyiha nomi
-                </Label>
-                <Input
-                  id="projectName"
+
+              <div className="w-[48%]">
+                <label className="block text-sm font-medium text-gray-600 mb-2">
+                Loyiha nomi
+                </label>
+                <input
+                  type="text"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
                   placeholder="Loyiha nomini kiriting"
-                  className="mt-3"
+                  className="w-full border-gray-300 rounded-lg px-2 h-10"
                 />
               </div>
-              <div>
-                <Label htmlFor="projectType" className="text-sm font-medium">
-                  Loyiha turi
-                </Label>
-                <Select
-                  onValueChange={(value) =>
-                    setFormData({ ...formData, category: Number(value) }) // Convert value to number
-                  }
-                >
-                  <SelectTrigger className="mt-3">
-                    <SelectValue placeholder="Tanlang" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {getCategories &&
-                      getCategories.map((category: CategoryType) => (
-                        <SelectItem key={category.id} value={category.id.toString()}>
-                          {category.name}
-                        </SelectItem>
-                      ))}
-                  </SelectContent>
-                </Select>
 
+              <div className="w-[48%]">
+                <label className="block text-sm font-medium text-gray-600 mb-2">
+                  Oylik daromadi
+                </label>
+                <input
+                  name="oylik_daromadi  "
+                  placeholder="Loyiha narxini kiriting"
+                  type="number" 
+                  value={formData. oylik_daromadi}
+                  onChange={handleChange}
+                  required
+                  className="w-full border-gray-300 rounded-lg px-2 h-10"
+                />
               </div>
-              <div>
-                <Label htmlFor="rendement" className="text-sm font-medium">
-                  Samaradorlik
-                </Label>
-                <Input
-                  id="rendement"
+
+              
+              <div className="w-[48%]">
+                <label className="block text-sm font-medium text-gray-600 mb-2">
+                  Loyiha turi
+                </label>
+                <select className="w-full bg-transparent border border-gray-300 rounded-md p-2 focus:outline-none">
+                  {getCategories
+                    ? getCategories?.map((category: CategoryType) => (
+                        <option
+                          value={category.id}
+                          key={category.id}
+                          className="flex items-center space-x-4 cursor-pointer hover:bg-gray-100 p-2 rounded"
+                        >
+                          <span>{category.name}</span>
+                        </option>
+                      ))
+                    : null}
+                </select>
+              </div>
+
+              <div className="w-[48%]">
+                <label className="block text-sm font-medium text-gray-600 mb-2">
+                Samaradorlik
+                </label>
+                <input
                   name="rendement"
                   type="number"
+                  placeholder="Samaradorlik"
                   value={formData.rendement}
                   onChange={handleChange}
-                  placeholder="Samaradorlik"
-                  className="mt-3"
-                  maxLength={5}
-                  minLength={1}
+                  required
+                  className="w-full border-gray-300 rounded-lg px-2 h-10"
                 />
               </div>
-              <div>
-                <Label htmlFor="price" className="text-sm font-medium">
-                  Loyiha narxi
-                </Label>
-                <Input
-                  id="price"
+
+              <div className="w-[48%]">
+                <label className="block text-sm font-medium text-gray-600 mb-2">
+                Loyiha narxi
+                </label>
+                <input
                   name="price"
-                  type="number"
+                  placeholder="Loyiha narxini kiriting"
+                  type="number" 
                   value={formData.price}
                   onChange={handleChange}
-                  placeholder="Loyiha narxini kiriting"
-
-                  className="mt-3"
+                  required
+                  className="w-full border-gray-300 rounded-lg px-2 h-10"
                 />
-              </div>
-              <div>
-                <Label htmlFor="location" className="text-sm font-medium">
-                  Joylashuv
-                </Label>
-                <Input
-                  id="location"
-                  name="location"
-                  value={formData.location}
-                  onChange={handleChange}
-                  placeholder="Joylashuvni kiriting"
-                  className="mt-3"
-                />
-              </div>
-              <div>
-                <Label htmlFor="description" className="text-sm font-medium">
-                  Loyihaning qisqacha tavsifi
-                </Label>
-                <Textarea
-                  id="description"
-                  name="description"
-                  value={formData.description}
-                  onChange={handleChange}
-                  placeholder="Loyihaning qisqacha tavsifini kiriting"
-                  className="mt-3"
-                />
-              </div>
-              <div>
-                <Label htmlFor="image" className="text-sm font-medium">
-                  Loyiha rasmi
-                </Label>
-                <div className="flex items-center mt-3">
-                  <input
-                    id="image"
-                    type="file"
-                    accept="image/*"
-                    onChange={handleFileChange}
-                    className="hidden"
-                  />
-                  <label
-                    htmlFor="image"
-                    className="flex items-center px-4 py-2 bg-[#749BA9] hover:bg-[#81a9b8] text-white text-sm font-medium rounded cursor-pointer"
-                  >
-                    <MdOutlineFileUpload className="mr-2" />
-                    Rasm yuklash
-                  </label>
-                </div>
-                {selectedFile && (
-                  <p className="mt-2 text-sm text-green-600">
-                    {selectedFile.name} tanlandi
-                  </p>
-                )}
               </div>
             </div>
           </div>
+
+
           <div>
-            <Button
-              type="submit"
-              className="w-full sm:w-auto bg-[#749BA9] hover:bg-[#81a9b8] text-white py-2 px-4 rounded"
-              disabled={isLoading}
-            >
-              {isLoading ? "Yuklanmoqda..." : "Loyihani qo'shish"}
+            <div className="flex flex-wrap justify-between items-center gap-y-5">
+              <div className="w-[48%]">
+                <label className="block text-sm font-medium text-gray-600 mb-2">
+                Joylashuv
+                </label>
+                <input
+                  name="location"
+                  placeholder="Joylashuvingiz"
+                  value={formData.location}
+                  onChange={handleChange}
+                  required
+                  className="w-full border-gray-300 rounded-lg px-2 h-10"
+                />
+              </div>
+
+            
+            </div>
+          </div>
+          
+
+          {/* Description Section */}
+          <div className="flex justify-between items-center">
+            <div className="w-[48%]">
+              <label className="block text-md font-medium text-gray-600 mb-3">
+              Tavsif
+              </label>
+              <textarea
+                style={{ resize: "none" }}
+                className="w-full outline-none border border-custom-gray rounded-md p-3 h-36"
+                name="description"
+                placeholder="Tavsif qo'shing"
+                value={formData.description}
+                onChange={handleChange}
+                required
+              ></textarea>
+            </div>
+
+            <div className="w-[48%]">
+              <label className="block text-md font-medium text-gray-600 mb-3">
+              Qo'shimcha ma'lumot
+              </label>
+              <textarea
+                style={{ resize: "none" }}
+                className="w-full outline-none border border-custom-gray rounded-md p-3 h-36"
+                placeholder="Yanada ko'proq ma'lumot qo'shish"
+              ></textarea>
+            </div>
+          </div>
+
+          {/* <div>
+              <ImageUpload/>
+          </div> */}
+
+          <input
+            type="file"
+            name="image"
+            accept="image/*"
+            onChange={handleFileChange}
+            required
+          />
+
+          {/* Submit Button */}
+          <div className="flex items-center justify-between ">
+            <Button type="submit" className="Brown_button" disabled={isLoading}>
+              {isLoading ? "Creating..." : "Create Product"}
             </Button>
             {isError && (
-              <p className="mt-4 text-sm text-red-600">
-                Xatolik yuz berdi. Iltimos, qayta urinib ko'ring.
+              <p className="text-red-600">
+              Mahsulot yaratishda xatolik yuz berdi: {JSON.stringify(error)}
               </p>
             )}
           </div>
