@@ -41,7 +41,7 @@ const Activities = () => {
     };
 
     return (
-        <div className="w-full mx-auto bg-white py-7 px-7 rounded-2xl mt-7 shadow-lg border">
+        <div className="w-full mx-auto bg-white py-7 px-7 rounded-2xl mt-9 shadow-lg border">
             <div className="flex flex-row justify-between items-center mb-4">
                 <h2 className="text-xl font-semibold text-gray-800 mb-5">Ochilgan loyihalar</h2>
                 <button

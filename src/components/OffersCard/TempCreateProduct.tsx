@@ -1,9 +1,18 @@
 import { useForm } from 'react-hook-form';
 import { useCreateProductMutation } from '@/store/slice/products';
+import { useState } from 'react';
 
 const ProductForm = () => {
   const { register, handleSubmit, reset } = useForm();
   const [createProduct, { isLoading, isSuccess, isError }] = useCreateProductMutation();
+
+  const [selectedFile, setSelectedFile] = useState<{}>(null);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files[0]) {
+      setSelectedFile(e.target.files[0]);
+    }
+  };
 
   const fields = [
     { name: 'name', label: 'Name', type: 'text' },
@@ -22,37 +31,45 @@ const ProductForm = () => {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = async (data: any) => {
-    const payload = {
-      name: data.name,
-      description: data.description,
-      location: data.location,
-      user: parseInt(data.user, 10),
-      category: parseInt(data.category, 10),
-      rendement: `${data.rendement}%`,
-      image: null,
-      price: parseFloat(data.price).toFixed(2),
-      product_file: null,
-      private_information: {
-        kampanya_egasi: data.kampanya_egasi,
-        kontact: data.kontact,
-        campany_name: data.campany_name,
-        oylik_daromadi: parseFloat(data.oylik_daromadi).toFixed(2),
-        soff_foydasi: parseFloat(data.soff_foydasi).toFixed(2),
-      },
+    const formData = new FormData();
+
+    // Add all text fields to FormData
+    formData.append('name', data.name);
+    formData.append('description', data.description);
+    formData.append('location', data.location);
+    formData.append('user', data.user);
+    formData.append('category', data.category);
+    formData.append('rendement', `${data.rendement}%`);
+    formData.append('price', parseFloat(data.price).toFixed(2));
+
+    // Add private_information as JSON string
+    const privateInformation = {
+      kampanya_egasi: data.kampanya_egasi,
+      kontact: data.kontact,
+      campany_name: data.campany_name,
+      oylik_daromadi: parseFloat(data.oylik_daromadi).toFixed(2),
+      soff_foydasi: parseFloat(data.soff_foydasi).toFixed(2),
     };
+    formData.append('private_information', JSON.stringify(privateInformation));
+
+    // Add the file
+    if (selectedFile) {
+      formData.append('image', selectedFile);
+    }
 
     try {
-      await createProduct(payload).unwrap();
+      await createProduct(formData).unwrap();
       reset();
     } catch (error) {
       console.error('Error creating product:', error);
     }
   };
 
+
   return (
     <div className="max-w-2xl mx-auto p-6 bg-white shadow-md rounded-lg">
       <h2 className="text-2xl font-bold mb-4">Create Product</h2>
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      <form encType="multipart/form-data" onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         {fields.map((field) => (
           <div key={field.name}>
             <label className="block text-sm font-medium">{field.label}</label>
@@ -71,11 +88,13 @@ const ProductForm = () => {
             )}
           </div>
         ))}
+
+        <input type="file" name="image" accept="image/*" onChange={handleFileChange} />
+
         <button
           type="submit"
-          className={`w-full py-2 px-4 text-white font-medium rounded-md shadow-sm ${
-            isLoading ? 'bg-gray-400' : 'bg-blue-600 hover:bg-blue-700'
-          }`}
+          className={`w-full py-2 px-4 text-white font-medium rounded-md shadow-sm ${isLoading ? 'bg-gray-400' : 'bg-blue-600 hover:bg-blue-700'
+            }`}
           disabled={isLoading}
         >
           {isLoading ? 'Submitting...' : 'Submit'}

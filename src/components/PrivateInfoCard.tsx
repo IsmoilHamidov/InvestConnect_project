@@ -32,65 +32,68 @@ const PrivateInfoCard = (productId: any) => {
   return (
     <div>
       {isInfo.company_name === "***" ? (
-        <div className="mt-6 p-4 bg-red-50 border rounded-md flex items-center justify-between gap-10">
+        <div className="mt-11 p-4 bg-red-50 border rounded-md flex items-center justify-between gap-10">
           <EyeOff size={50} />
           <p className="text-sm font-semibold text-gray-600">
-            Для просмотра данных необходимо произвести оплату.
+            Ma'lumotlarni ko'rish uchun siz to'lashingiz kerak. 
           </p>
           <PaymentAndCheck productId={productId.productId} amount={10} />
         </div>
       ) : (
-        <div className="mt-7 border p-6 max-w-sm bg-white rounded-lg shadow-lg">
-          <>
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="text-xl font-semibold text-muted-foreground">
-                {company_name}
-              </h3>
-              <Badge
-                variant="outline"
-                className={cn(
-                  status === "aktiv"
-                    ? "bg-green-500 text-white"
-                    : "bg-red-500 text-white"
-                )}
-              >
-                {status}
-              </Badge>
-            </div>
+        <div className="border border-red-600 w-full ">
+            <div className="mt-11 border p-6 max-w-sm bg-white rounded-lg shadow-lg">
+              <>
+                <div className="flex justify-between items-center mb-4">
+                  <h3 className="text-xl font-semibold text-muted-foreground">
+                    {company_name}
+                  </h3>
+                  <Badge
+                    variant="outline"
+                    className={cn(
+                      status === "aktiv"
+                        ? "bg-green-500 text-white"
+                        : "bg-red-500 text-white"
+                    )}
+                  >
+                    {status}
+                  </Badge>
+                </div>
 
-            <div className="mb-5">
-              <p className="text-sm text-muted-foreground">
-                Owner: <span className="font-semibold">{kampanya_egasi}</span>
-              </p>
-              <p className="text-sm text-muted-foreground">
-                Contact: <span className="font-semibold">{kontact}</span>
-              </p>
-            </div>
+                <div className="mb-5">
+                  <p className="text-sm text-muted-foreground">
+                    Owner: <span className="font-semibold">{kampanya_egasi}</span>
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    Contact: <span className="font-semibold">{kontact}</span>
+                  </p>
+                </div>
 
-            <div className="flex justify-between mb-5">
-              <div>
-                <p className="text-sm text-muted-foreground">Monthly Income</p>
-                <p className="text-lg font-semibold text-primary">
-                  ${oylik_daromadi}
-                </p>
-              </div>
-              <div>
-                <p className="text-sm text-muted-foreground">Software Usage</p>
-                <p className="text-lg font-semibold text-primary">
-                  {soff_foydasi} GB
-                </p>
-              </div>
-            </div>
+                <div className="flex justify-between mb-5">
+                  <div>
+                    <p className="text-sm text-muted-foreground">Monthly Income</p>
+                    <p className="text-lg font-semibold text-primary">
+                      ${oylik_daromadi}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-muted-foreground">Software Usage</p>
+                    <p className="text-lg font-semibold text-primary">
+                      {soff_foydasi} GB
+                    </p>
+                  </div>
+                </div>
 
-            <div className="text-center mt-5">
-              <button className="Blue_button w-full flex justify-center items-center gap-x-4 py-2  text-white rounded-lg transition">
-                Faylni yuklab olish
-                <Download size={18}/>
-              </button>
+                <div className="text-center mt-5">
+                  <button className="Blue_button w-full flex justify-center items-center gap-x-4 py-2  text-white rounded-lg transition">
+                    Faylni yuklab olish
+                    <Download size={18}/>
+                  </button>
+                </div>
+              </>
             </div>
-          </>
         </div>
       )}
+
     </div>
   );
 };

@@ -102,7 +102,7 @@ const PaymentAndCheck: React.FC<PaymentAndCheckProps> = ({ productId, amount }) 
   return (
     <Dialog>
       <DialogTrigger asChild onClick={checkAuth}>
-        <Button ref={triggerRef} className="border rounded-[40px] px-4 py-2">Payment</Button>
+        <Button ref={triggerRef} className="border rounded-[40px] px-5 py-2">To'lov qilish</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <h1 className="text-xl font-bold mb-4">Payment and Check</h1>
