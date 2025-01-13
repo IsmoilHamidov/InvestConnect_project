@@ -1,7 +1,13 @@
 import { Button } from "@/components/ui/button";
-import ivestIcon from "../../assets/images/invest-icon.png"
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog';
-import { useNavigate } from 'react-router-dom';
+import ivestIcon from "../../assets/images/invest-icon.png";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "../ui/dialog";
+import { useNavigate } from "react-router-dom";
 
 import {
   Home,
@@ -20,13 +26,7 @@ import { useState } from "react";
 import { HiX } from "react-icons/hi";
 import ProfileForm from "../profileForms";
 
-
-
-
 function SidebarItem({ icon, label, isActive }: SidebarItemProps) {
-
-
-
   return (
     <Button
       variant="ghost"
@@ -39,16 +39,11 @@ function SidebarItem({ icon, label, isActive }: SidebarItemProps) {
 }
 
 export default function Sidebar() {
-
   const [isModalOpen, setIsModalOpen] = useState(false);
-
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
   };
-
-
-
 
   const navigate = useNavigate();
   const { data, error, isLoading } = useGetUserProfileQuery(undefined);
@@ -57,23 +52,16 @@ export default function Sidebar() {
     setTimeout(() => {
       window.location.reload();
     }, 100);
-    navigate('/');
+    navigate("/");
   };
-
-
 
   return (
     <div className="flex fixed z-50 flex-col left-0 items-center w-[270px] min-h-screen border-r bg-white">
       <Link to={"/"} className="pt-4">
-        <img
-          src={ivestIcon}
-          alt="Altro"
-          className="h-8 pl-3"
-        />
+        <img src={ivestIcon} alt="Altro" className="h-8 pl-3" />
       </Link>
 
       <div className="flex flex-col items-center border-b p-6">
-
         <div
           className="flex items-center justify-center bg-[#B29C6F] text-white  
             w-[70px] h-[70px] rounded-full text-5xl font-normal mb-2 mt-3"
@@ -90,7 +78,6 @@ export default function Sidebar() {
         </div>
 
         <div className="text-center mt-2">
-
           {error ? (
             <>Yo'q, xatolik yuz berdi</>
           ) : isLoading ? (
@@ -100,7 +87,6 @@ export default function Sidebar() {
               <h2 className="font-semibold text-base text-custom-gray">
                 {data?.firstname || "Unknown"} {data?.lastname || "User"}
               </h2>
-              {console.log(data)}
               <p className="text-base text-[#749BA9]">
                 {data?.role || "Unknown Role"}
               </p>
@@ -108,14 +94,12 @@ export default function Sidebar() {
           ) : null}
         </div>
         <div className="flex gap-2 mt-4 mb-8">
-
           <Button variant="ghost" size="icon" onClick={toggleModal}>
-            <Pencil style={{ width: '17px', height: '17px' }} />
+            <Pencil style={{ width: "17px", height: "17px" }} />
           </Button>
 
           {isModalOpen && (
-            <div
-              className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
               <div
                 className="bg-white rounded-xl p-6 w-[31%] h-[auto] relative"
                 onClick={(e) => e.stopPropagation()}
@@ -131,17 +115,19 @@ export default function Sidebar() {
             </div>
           )}
 
-
-          <Link to={'/products'}>
+          <Link to={"/products"}>
             <Button variant="ghost" size="icon">
-              <Briefcase style={{ width: '17px', height: '17px' }} />
+              <Briefcase style={{ width: "17px", height: "17px" }} />
             </Button>
           </Link>
 
           <Button variant="ghost" size="icon">
             <Dialog>
               <DialogTrigger>
-                <LogOut style={{ width: '17px', height: '17px' }} className="hover:text-custom-blue-gray ease-in" />
+                <LogOut
+                  style={{ width: "17px", height: "17px" }}
+                  className="hover:text-custom-blue-gray ease-in"
+                />
               </DialogTrigger>
               <DialogContent>
                 <DialogHeader>
@@ -150,7 +136,12 @@ export default function Sidebar() {
                     <DialogTrigger>
                       <button className="text-lg font-semibold">Yo'q</button>
                     </DialogTrigger>
-                    <Button className="rounded-2xl text-lg font-normal px-6 py-3 " onClick={handleSignOut}>Ha</Button>
+                    <Button
+                      className="rounded-2xl text-lg font-normal px-6 py-3 "
+                      onClick={handleSignOut}
+                    >
+                      Ha
+                    </Button>
                   </div>
                 </DialogHeader>
               </DialogContent>
@@ -160,14 +151,14 @@ export default function Sidebar() {
       </div>
 
       <div className="flex-1 space-y-2 p-2">
-        <Link to={'/'}>
+        <Link to={"/"}>
           <SidebarItem
             icon={<Home className="h-4 w-4" />}
             label="Bosh sahifa"
           />
         </Link>
 
-        <Link to={'/products'}>
+        <Link to={"/products"}>
           <SidebarItem
             icon={<Briefcase className="h-4 w-4" />}
             label="Loyihalar"
@@ -178,14 +169,8 @@ export default function Sidebar() {
           label="Takliflar"
           isActive
         />
-        <SidebarItem
-          icon={<Calendar className="h-4 w-4" />}
-          label="Kalendar"
-        />
-        <SidebarItem
-          icon={<Users className="h-4 w-4" />}
-          label="Jamiyat"
-        />
+        <SidebarItem icon={<Calendar className="h-4 w-4" />} label="Kalendar" />
+        <SidebarItem icon={<Users className="h-4 w-4" />} label="Jamiyat" />
         <SidebarItem
           icon={<Users className="h-4 w-4" />} // Update icon if incorrect
           label="Mening kontaktlarim"
@@ -201,7 +186,6 @@ export default function Sidebar() {
     </div>
   );
 }
-
 
 export interface SidebarItemProps {
   icon: React.ReactNode; // Accepts any React element

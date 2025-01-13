@@ -1,7 +1,7 @@
 import image1 from "../assets/images/srv-icon-ratina04.png"
 import image2 from "../assets/images/srv-icon-ratina03.png"
-import image3 from "../assets/images/srv-icon-ratina01 (1).png"
-import image4 from "../assets/images/srv-icon-ratina02.png"
+// import image3 from "../assets/images/srv-icon-ratina01 (1).png"
+// import image4 from "../assets/images/srv-icon-ratina02.png"
 
 
 export const ServiceArr = [

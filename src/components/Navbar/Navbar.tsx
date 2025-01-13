@@ -8,7 +8,6 @@ import {
 } from "react-icons/fa";
 import logo_text from "../../assets/images/navLogo.png";
 import { Link } from "react-router-dom";
-import { useToast } from "@/hooks/use-toast";
 import ProfilePopover from "./ProfilePopover ";
 import PrivacyPolicy from "../PrivacyPolicy";
 
@@ -37,14 +36,6 @@ const Navbar: React.FC = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
-  const { toast } = useToast();
-  const inProcces = () => {
-    toast({
-      description: "jarayonda",
-      variant: "success",
-    });
-  };
 
   return (
     <div>
