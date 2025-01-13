@@ -10,7 +10,7 @@ import { usePrivateInfoStore } from "@/store/privateInfoData";
 import { useAuthModalStore } from "@/store/authModalStore";
 
 interface PaymentFormData {
-  message: string;
+  message?: string;
   cardNumber: string;
   expiryDate: string;
 }
@@ -19,6 +19,8 @@ interface PaymentAndCheckProps {
   productId: number;
   amount: number;
 }
+
+
 
 const PaymentAndCheck: React.FC<PaymentAndCheckProps> = ({ productId, amount }) => {
   const { toast } = useToast();
@@ -71,6 +73,7 @@ const PaymentAndCheck: React.FC<PaymentAndCheckProps> = ({ productId, amount }) 
 
     } catch (err) {
       console.error("Error:", err);
+      console.error("Error:", error);
       toast({
         title: "Ошибка",
         description: "Что-то пошло не так",
@@ -183,7 +186,8 @@ const PaymentAndCheck: React.FC<PaymentAndCheckProps> = ({ productId, amount }) 
 
         {isError && (
           <p className="text-red-500 mt-2">
-            Error occurred: {error?.data?.error || "Unknown error"}
+            Internet sekin ishlaboti 
+            {/* {error?.data.error || "Unknown error"} */}
           </p>
         )}
       </DialogContent>

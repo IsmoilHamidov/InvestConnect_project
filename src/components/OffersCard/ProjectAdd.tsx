@@ -35,6 +35,7 @@ const ProductForm = () => {
     { name: 'soff_foydasi', label: 'Net Profit', type: 'number', step: '0.01' },
   ];
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = async (data: any) => {
     const formData = new FormData();
 
