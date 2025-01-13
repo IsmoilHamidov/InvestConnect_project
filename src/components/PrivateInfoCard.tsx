@@ -5,6 +5,7 @@ import { useGetPrivateInfoQuery } from "@/store/slice/products";
 import { useEffect, useState } from "react";
 import { Download, EyeOff } from "lucide-react";
 import PaymentAndCheck from "./PaymentAndCheck";
+import { FaStar } from "react-icons/fa";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const PrivateInfoCard = (productId: any) => {
@@ -39,59 +40,76 @@ const PrivateInfoCard = (productId: any) => {
           </p>
           <PaymentAndCheck productId={productId.productId} amount={10} />
         </div>
-      ) : (
-        <div className="border border-red-600 w-full ">
-            <div className="mt-11 border p-6 max-w-sm bg-white rounded-lg shadow-lg">
+      ) 
+      : (
+          <div className="w-full mt-14">
+            <div className="mx-auto bg-white rounded-xl shadow-xl p-8 pb-9 border border-gray-200">
               <>
-                <div className="flex justify-between items-center mb-4">
-                  <h3 className="text-xl font-semibold text-muted-foreground">
-                    {company_name}
-                  </h3>
+                <div className="flex justify-between items-center">
+                  <div className="flex text-xl gap-x-1 text-[#B29C6F]">
+                    <FaStar />
+                    <FaStar />
+                    <FaStar />
+                  </div>
+
                   <Badge
                     variant="outline"
                     className={cn(
                       status === "aktiv"
-                        ? "bg-green-500 text-white"
-                        : "bg-red-500 text-white"
+                        ? "bg-custom-blue-gray text-white px-6 py-1 rounded-full shadow-sm"
+                        : "bg-red-600 text-white px-3 py-1 rounded-full shadow-sm"
                     )}
                   >
                     {status}
                   </Badge>
                 </div>
+                <h3 className="text-[21px] text-center font-semibold text-custom-gray tracking-wide mb-8 mt-5">
+                  Loyihaga oid shaxsiy ma'lumotlar
+                </h3>
 
-                <div className="mb-5">
-                  <p className="text-sm text-muted-foreground">
-                    Owner: <span className="font-semibold">{kampanya_egasi}</span>
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    Contact: <span className="font-semibold">{kontact}</span>
-                  </p>
+                <div className="grid grid-cols-3 gap-5 gap-x-10 mb-5">
+                  {[
+                    { label: "Loyiha egasi", value: kampanya_egasi || "Default Owner" },
+                    { label: "Kontakt", value: kontact || "Default Contact" },
+                    { label: "Linked In", value: '' || "Default User" },
+                    { label: "Kompaniya", value: company_name || "Default Company" },
+                    { label: "Kompaniya", value: company_name || "Default Company" },
+                    { label: "Kompaniya", value: company_name || "Default Company" },
+                  ].map((item, index) => (
+                    <div key={index} className="bg-gray-100 rounded-lg w-full p-4">
+                      <span className="font-medium text-gray-700">{item.label}:</span> {item.value}
+                    </div>
+                  ))}
                 </div>
 
-                <div className="flex justify-between mb-5">
-                  <div>
-                    <p className="text-sm text-muted-foreground">Monthly Income</p>
-                    <p className="text-lg font-semibold text-primary">
-                      ${oylik_daromadi}
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">Software Usage</p>
-                    <p className="text-lg font-semibold text-primary">
-                      {soff_foydasi} GB
-                    </p>
-                  </div>
+                <div className="grid grid-cols-3 gap-x-10">
+                  {[
+                    { label: "Oylik daromadi", value: `$${oylik_daromadi}`, colorClass: "text-[#B29C6F]" },
+                    { label: "Soff foydasi", value: `$${soff_foydasi}`, colorClass: "text-[#443B3A]" },
+                    { label: "Soff foydasi", value: `$${soff_foydasi}`, colorClass: "text-[#B29C6F]" },
+                  ].map((item, index) => (
+                    <div key={index} className="bg-gray-100 rounded-lg p-4 text-center">
+                      <p className="text-sm text-custom-gray">{item.label}</p>
+                      <p className={`leading-10 text-2xl font-semibold ${item.colorClass}`}>{item.value}</p>
+                    </div>
+                  ))}
                 </div>
 
-                <div className="text-center mt-5">
-                  <button className="Blue_button w-full flex justify-center items-center gap-x-4 py-2  text-white rounded-lg transition">
-                    Faylni yuklab olish
-                    <Download size={18}/>
-                  </button>
-                </div>
+
+                <button
+                  className="mt-11 m-auto px-8 py-3 bg-gradient-to-r
+                            from-[#749BA9] to-[#5d717e] 
+                            hover:from-[#627D8A] hover:to-[#3A4D56] 
+                            text-white font-semibold text-base rounded-3xl 
+                            flex justify-center items-center gap-x-5 
+                            shadow-lg duration-200 ease-in-out"
+                >
+                  To‘liq ma’lumotlarni yuklab olish
+                  <Download size={20} />
+                </button>
               </>
             </div>
-        </div>
+          </div>
       )}
 
     </div>
