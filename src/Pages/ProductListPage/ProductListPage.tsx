@@ -1,6 +1,7 @@
 import Banner from "@/components/Banner";
 import CategoriesModal from "@/components/Category";
 import NavbarAdmin from "@/components/navbarAdmin";
+import ProductForm from "@/components/OffersCard/TempCreateProduct";
 import { Button } from "@/components/ui/button";
 import { Product, ProductCard } from "@/components/ui/ProductCard";
 import { useGetProductsQuery } from "@/store/slice/products";
@@ -84,6 +85,7 @@ const ProductListPage = () => {
             </>
           ) : null}
         </div>
+        <ProductForm />
       </main>
     </>
   );
