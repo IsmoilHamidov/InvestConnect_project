@@ -1,7 +1,6 @@
 import Banner from "@/components/Banner";
 import CategoriesModal from "@/components/Category";
 import NavbarAdmin from "@/components/navbarAdmin";
-import ProductForm from "@/components/OffersCard/TempCreateProduct";
 import { Button } from "@/components/ui/button";
 import { Product, ProductCard } from "@/components/ui/ProductCard";
 import { useGetProductsQuery } from "@/store/slice/products";
@@ -32,10 +31,10 @@ const ProductListPage = () => {
   return (
     <>
       <NavbarAdmin />
-      <main >
+      <main className="pb-4">
         <Banner>
           <div>
-            <div className="flex gap-5 pt-36 pb-28 justify-center items-center">
+            <div className=" flex gap-5 pt-36 pb-32  justify-center items-center">
               <Button
                 variant="secondary"
                 onClick={() => setModalOpen(true)}
@@ -72,7 +71,7 @@ const ProductListPage = () => {
             </div>
           </div>
         </Banner>
-        <div className="products grid grid-cols-3 pt-48 pr-5 max-w-7xl m-auto">
+        <div className="products grid grid-cols-3 pt-48  max-w-7xl m-auto">
           {error ? (
             <>Oh no, there was an error</>
           ) : isLoading ? (
@@ -85,7 +84,6 @@ const ProductListPage = () => {
             </>
           ) : null}
         </div>
-        <ProductForm />
       </main>
     </>
   );
