@@ -41,7 +41,7 @@ const Offers: React.FC = () => {
 
       {data?.length === 0 && (
         <div className="flex flex-col items-center justify-start h-full gap-y-5">
-          <p className="italic text-[17px]">Sizda yuklangan loyhalar mavjud emas.</p>
+          <p className="italic text-[17px]">Sizda yuklangan loyihalar mavjud emas.</p>
           <img  className='h-24 object-contain'  src={emty_box} alt="emty_box" />
         </div>
       )}

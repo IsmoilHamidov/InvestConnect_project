@@ -1,4 +1,4 @@
-import { Bell, Mail, Menu } from "lucide-react";
+import { Bell, Home, Mail, Menu } from "lucide-react";
 import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
 import { useNavigate } from "react-router-dom";
@@ -6,6 +6,7 @@ import { useGetUsersQuery } from "@/store/slice/products";
 import { useAuthModalStore } from "@/store/authModalStore";
 import { NavbarStep } from "../Navbar/NavbarStep";
 import { FiLogIn } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 export default function NavbarAdmin() {
 
@@ -38,7 +39,18 @@ export default function NavbarAdmin() {
         </Button>
       </div>
 
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-3">
+        <Link to={"/"}> 
+            <Button
+              variant="ghost"
+              size="icon"
+              className="hover:bg-white/10 text-white"
+              aria-label="Messages"
+            >
+              <Home className="h-5 w-5 " />
+            </Button>
+        </Link>
+
         <Button
           variant="ghost"
           size="icon"
@@ -47,6 +59,7 @@ export default function NavbarAdmin() {
         >
           <Mail className="h-5 w-5 " />
         </Button>
+
 
         <div className="relative">
           <Button
@@ -64,7 +77,7 @@ export default function NavbarAdmin() {
 
           {error || !username ? (
             <button
-              className="flex justify-center items-center gap-x-2  
+              className="flex justify-center items-center gap-x-4  
               border-2 text-white py-1 px-4 mx-3 rounded-lg  
               font-medium text-md hover:bg-[#749BA9] "
               onClick={() => openModal("login")}
@@ -75,7 +88,7 @@ export default function NavbarAdmin() {
           ) : (
             <button
               onClick={handelNavigateProfile}
-              className="flex items-center mx-3 justify-center bg-[#B29C6F] text-white p-1 w-[35px] h-[33px] rounded-full text-lg font-medium"
+              className="flex items-center ms-4 me-3 justify-center bg-[#B29C6F] text-white p-1 w-[35px] h-[33px] rounded-full text-lg font-medium"
             >
               {initials}
             </button>
