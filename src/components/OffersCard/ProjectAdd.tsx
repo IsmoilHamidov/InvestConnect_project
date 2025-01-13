@@ -13,21 +13,30 @@ function ProjectForm() {
   const [createProduct, { isLoading, isError, isSuccess, error }] =
     useCreateProductMutation();
 
-  const { data: getUserId } = useGetUsersQuery(undefined);
+    const { data: getUserId } = useGetUsersQuery(undefined);
+    
 
   const { data: getCategories } = useGetCategoriesQuery(undefined);
 
   const navigate = useNavigate();
   useEffect(() => {
-    if (isSuccess) {
-      setTimeout(() => {
-        navigate("/profile");
-      });
-    }
+    // if (isSuccess) {
+    //   setTimeout(() => {
+    //     navigate("/profile");
+    //   });
+    // }
   }, [isSuccess, navigate]);
 
+  const [formDataPrivate, setFormDataPrivate] = useState({
+    kampanya_egasi: "",
+    kontact: "",
+    campany_name: "",
+    oylik_daromadi: "",
+    soff_foydasi: "",
+  })
+  
   const [formData, setFormData] = useState({
-    user: getUserId?.id,
+    user: getUserId?.id || "", 
     name: "",
     rendement: "",
     location: "",
@@ -36,25 +45,38 @@ function ProjectForm() {
     category: "",
     product_file: null,
     image: null,
-    private_information: {
-      kampanya_egasi: "",
-      kontact: "",
-      campany_name: "",
-      oylik_daromadi: "",
-      soff_foydasi: "",
-    },
+    private_information: formDataPrivate  
   });
+
+  useEffect(() => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      private_information: formDataPrivate,
+    }));
+  }, [formDataPrivate]);
+  
+
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const { toast } = useToast();
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    setFormData({
-      ...formData,
+    setFormData((prevFormData) => ({
+      ...prevFormData,
       [e.target.name]: e.target.value,
-    });
+    }));
+  };  
+
+  const handlePrivateChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormDataPrivate((prevFormDataPrivate) => ({
+      ...prevFormDataPrivate,
+      [e.target.name]: e.target.value,
+    }));
   };
+  
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -70,32 +92,38 @@ function ProjectForm() {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    setFormData((prev) => ({ ...prev, user: getUserId }));
     e.preventDefault();
-
+  
+    if (!getUserId?.id) {
+      toast({
+        description: "Foydalanuvchi identifikatori topilmadi.",
+        variant: "destructive",
+      });
+      return;
+    }
+  
     const payload = new FormData();
-    payload.append("user", formData.user);
+    payload.append("user", String(getUserId.id)); 
     payload.append("name", formData.name);
     payload.append("rendement", formData.rendement);
     payload.append("location", formData.location);
     payload.append("description", formData.description);
-    payload.append("category", formData.category);
+    payload.append("category", formData.category || "");
     payload.append("price", formData.price);
-    payload.append("kampanya_egasi", formData.kampanya_egasi);
-    payload.append("campany_name", formData.campany_name);
-    payload.append("oylik_daromadi", formData.oylik_daromadi);
-    payload.append("soff_foydasi", formData.soff_foydasi);
-
+    payload.append("kampanya_egasi", formData.private_information.kampanya_egasi);
+    payload.append("campany_name", formData.private_information.campany_name);
+    payload.append("oylik_daromadi", formData.private_information.oylik_daromadi);
+    payload.append("soff_foydasi", formData.private_information.soff_foydasi);
+  
     if (selectedFile) {
       payload.append("image", selectedFile);
     }
-
+  
     debugFormData(payload);
-
+  
     try {
       const result = await createProduct(payload).unwrap();
       console.log("Mahsulot qo'shildi:", result);
-      // onClose();
       toast({
         description: "Loyiha muvaffaqiyatli yaratildi!",
         variant: "success",
@@ -109,7 +137,7 @@ function ProjectForm() {
       });
     }
   };
-
+  
   return (
     <div className="min-h-[100vh] py-14 bg-gray-100">
       <div className="max-w-7xl m-auto ">
@@ -124,14 +152,14 @@ function ProjectForm() {
             <div className="flex flex-wrap justify-between items-center gap-y-5">
               <div className="w-[48%]">
                 <label className="block text-sm font-medium text-gray-600 mb-2">
-                  kontakt
+                  Kontakt
                 </label>
                 <input
-                  name="kontact"
-                  placeholder="kontact"
+                  placeholder="Kontakt"
                   type="text"
-                  value={formData.kontact}
-                  onChange={handleChange}
+                  name="kontact"
+                  value={formDataPrivate.kontact}
+                  onChange={handlePrivateChange}
                   required
                   className="w-full border-gray-300 rounded-lg px-2 h-10"
                 />
@@ -144,9 +172,9 @@ function ProjectForm() {
                 <input
                   type="text"
                   name="kampanya_egasi"
-                  value={formData.kampanya_egasi}
-                  onChange={handleChange}
-                  placeholder="Loyiha nomini kiriting"
+                  value={formDataPrivate.kampanya_egasi}
+                  onChange={handlePrivateChange}
+                  placeholder="Loyiha egasini kiriting"
                   className="w-full border-gray-300 rounded-lg px-2 h-10"
                 />
               </div>
@@ -158,8 +186,8 @@ function ProjectForm() {
                 <input
                   type="text"
                   name="campany_name"
-                  value={formData.campany_name}
-                  onChange={handleChange}
+                  value={formDataPrivate.campany_name}
+                  onChange={handlePrivateChange}
                   placeholder="Kompaniyani kiriting"
                   className="w-full border-gray-300 rounded-lg px-2 h-10"
                 />
@@ -184,11 +212,25 @@ function ProjectForm() {
                   Oylik daromadi
                 </label>
                 <input
-                  name="oylik_daromadi"
-                  placeholder="Loyiha narxini kiriting"
+                  placeholder="Oylik daromadini kiriting"
                   type="number"
-                  value={formData.oylik_daromadi}
-                  onChange={handleChange}
+                  name="oylik_daromadi"
+                  value={formDataPrivate.oylik_daromadi}
+                  onChange={handlePrivateChange}
+                  className="w-full border-gray-300 rounded-lg px-2 h-10"
+                />
+              </div>
+
+              <div className="w-[48%]">
+                <label className="block text-sm font-medium text-gray-600 mb-2">
+                 Soff foydasi
+                </label>
+                <input
+                  placeholder="Soff foydasini kiriting"
+                  type="number"
+                  name="soff_foydasi"
+                  value={formDataPrivate.soff_foydasi}
+                  onChange={handlePrivateChange}
                   className="w-full border-gray-300 rounded-lg px-2 h-10"
                 />
               </div>
@@ -211,15 +253,14 @@ function ProjectForm() {
                     : null}
                 </select>
               </div>
-
               <div className="w-[48%]">
                 <label className="block text-sm font-medium text-gray-600 mb-2">
                   Samaradorlik
                 </label>
                 <input
-                  name="rendement"
                   type="number"
                   placeholder="Samaradorlik"
+                  name="rendement"
                   value={formData.rendement}
                   onChange={handleChange}
                   required
@@ -232,9 +273,9 @@ function ProjectForm() {
                   Loyiha narxi
                 </label>
                 <input
-                  name="price"
                   placeholder="Loyiha narxini kiriting"
                   type="number"
+                  name="price"
                   value={formData.price}
                   onChange={handleChange}
                   required
@@ -246,8 +287,8 @@ function ProjectForm() {
                   Joylashuv
                 </label>
                 <input
-                  name="location"
                   placeholder="Joylashuvingiz"
+                  name="location"
                   value={formData.location}
                   onChange={handleChange}
                   required
@@ -265,8 +306,8 @@ function ProjectForm() {
               <textarea
                 style={{ resize: "none" }}
                 className="w-full outline-none border border-custom-gray rounded-md p-3 h-36"
-                name="description"
                 placeholder="Tavsif qo'shing"
+                name="description"
                 value={formData.description}
                 onChange={handleChange}
                 required
@@ -310,8 +351,6 @@ function ProjectForm() {
           </div>
         </form>
       </div>
-    </div>
-  );
+    </div> );
 }
-
 export default ProjectForm;

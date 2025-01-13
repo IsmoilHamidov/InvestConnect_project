@@ -38,7 +38,7 @@ type ProperyCardProps = {
 
         <div className="flex-1">
             <CardHeader className="p-0">
-            <CardTitle className="text-lg font-bold text-[#749BA9] uppercase">
+            <CardTitle className="text-lg font-semibold text-[#749BA9] capitalize">
                 {title}
             </CardTitle>
             </CardHeader>
