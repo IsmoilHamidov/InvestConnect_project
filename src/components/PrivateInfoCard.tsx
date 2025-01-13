@@ -77,7 +77,7 @@ const PrivateInfoCard = (productId: any) => {
                     { label: "Kompaniya", value: company_name || "Default Company" },
                   ].map((item, index) => (
                     <div key={index} className="bg-gray-100 rounded-lg w-full p-4">
-                      <span className="font-medium text-gray-700">{item.label}:</span> {item.value}
+                      <span className="font-medium text-gray-700 me-1">{item.label}:</span> {item.value}
                     </div>
                   ))}
                 </div>
@@ -85,7 +85,7 @@ const PrivateInfoCard = (productId: any) => {
                 <div className="grid grid-cols-3 gap-x-10">
                   {[
                     { label: "Oylik daromadi", value: `$${oylik_daromadi}`, colorClass: "text-[#B29C6F]" },
-                    { label: "Soff foydasi", value: `$${soff_foydasi}`, colorClass: "text-[#443B3A]" },
+                    { label: "Soff foydasi", value: `$${soff_foydasi}`, colorClass: "text-[#B29C6F]" },
                     { label: "Soff foydasi", value: `$${soff_foydasi}`, colorClass: "text-[#B29C6F]" },
                   ].map((item, index) => (
                     <div key={index} className="bg-gray-100 rounded-lg p-4 text-center">

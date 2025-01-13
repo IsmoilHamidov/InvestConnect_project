@@ -29,7 +29,7 @@ const ImageSlider = () => {
         <img
           src={imageBasicUrl + selectedImage}
           alt="Selected"
-          className="h-[23rem] w-full object-cover rounded-xl"
+          className="border h-[23rem] w-full object-cover rounded-xl"
         />
       </div>
 
