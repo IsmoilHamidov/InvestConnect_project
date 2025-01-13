@@ -1,82 +1,12 @@
-import { Button } from "../ui/button";
-import {
-  useCreateProductMutation,
-  useGetCategoriesQuery,
-  useGetUsersQuery,
-} from "@/store/slice/products";
-import React, { useEffect, useState } from "react";
-import { useToast } from "@/hooks/use-toast";
-import { useNavigate } from "react-router-dom";
-import { CategoryType } from "../Category";
+import { useForm } from 'react-hook-form';
+import { useCreateProductMutation } from '@/store/slice/products';
+import { useState } from 'react';
 
-function ProjectForm() {
-  const [createProduct, { isLoading, isError, isSuccess, error }] =
-    useCreateProductMutation();
-
-    const { data: getUserId } = useGetUsersQuery(undefined);
-    
-
-  const { data: getCategories } = useGetCategoriesQuery(undefined);
-
-  const navigate = useNavigate();
-  useEffect(() => {
-    // if (isSuccess) {
-    //   setTimeout(() => {
-    //     navigate("/profile");
-    //   });
-    // }
-  }, [isSuccess, navigate]);
-
-  const [formDataPrivate, setFormDataPrivate] = useState({
-    kampanya_egasi: "",
-    kontact: "",
-    campany_name: "",
-    oylik_daromadi: "",
-    soff_foydasi: "",
-  })
-  
-  const [formData, setFormData] = useState({
-    user: getUserId?.id || "", 
-    name: "",
-    rendement: "",
-    location: "",
-    description: "",
-    price: "",
-    category: "",
-    product_file: null,
-    image: null,
-    private_information: formDataPrivate  
-  });
-
-  useEffect(() => {
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      private_information: formDataPrivate,
-    }));
-  }, [formDataPrivate]);
-  
-
+const ProductForm = () => {
+  const { register, handleSubmit, reset } = useForm();
+  const [createProduct, { isLoading, isSuccess, isError }] = useCreateProductMutation();
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const { toast } = useToast();
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [e.target.name]: e.target.value,
-    }));
-  };  
-
-  const handlePrivateChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setFormDataPrivate((prevFormDataPrivate) => ({
-      ...prevFormDataPrivate,
-      [e.target.name]: e.target.value,
-    }));
-  };
-  
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -84,273 +14,114 @@ function ProjectForm() {
     }
   };
 
-  const debugFormData = (formData: FormData) => {
-    // eslint-disable-next-line prefer-const
-    for (let pair of formData.entries()) {
-      console.log(`${pair[0]}: ${pair[1]}`);
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setSelectedImage(e.target.files[0]);
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-  
-    if (!getUserId?.id) {
-      toast({
-        description: "Foydalanuvchi identifikatori topilmadi.",
-        variant: "destructive",
-      });
-      return;
+  const fields = [
+    { name: 'name', label: 'Name', type: 'text' },
+    { name: 'description', label: 'Description', type: 'textarea' },
+    { name: 'location', label: 'Location', type: 'text' },
+    { name: 'user', label: 'User ID', type: 'number' },
+    { name: 'category', label: 'Category', type: 'number' },
+    { name: 'rendement', label: 'Rendement (%)', type: 'number' },
+    { name: 'price', label: 'Price', type: 'number', step: '0.01' },
+    { name: 'kampanya_egasi', label: 'Company Owner', type: 'text' },
+    { name: 'kontact', label: 'Contact', type: 'text' },
+    { name: 'campany_name', label: 'Company Name', type: 'text' },
+    { name: 'oylik_daromadi', label: 'Monthly Revenue', type: 'number', step: '0.01' },
+    { name: 'soff_foydasi', label: 'Net Profit', type: 'number', step: '0.01' },
+  ];
+
+  const onSubmit = async (data: any) => {
+    const formData = new FormData();
+
+    // Append form data
+    formData.append('name', data.name);
+    formData.append('description', data.description);
+    formData.append('location', data.location);
+    formData.append('user', data.user);
+    formData.append('category', data.category);
+    formData.append('rendement', `${data.rendement}%`);
+    formData.append('price', parseFloat(data.price).toFixed(2));
+    formData.append('kampanya_egasi', data.kampanya_egasi);
+    formData.append('kontact', data.kontact);
+    formData.append('campany_name', data.campany_name);
+    formData.append('oylik_daromadi', parseFloat(data.oylik_daromadi).toFixed(2));
+    formData.append('soff_foydasi', parseFloat(data.soff_foydasi).toFixed(2));
+
+    // Append the selected image and product file
+    if (selectedImage) {
+      formData.append('image', selectedImage);
     }
-  
-    const payload = new FormData();
-    payload.append("user", String(getUserId.id)); 
-    payload.append("name", formData.name);
-    payload.append("rendement", formData.rendement);
-    payload.append("location", formData.location);
-    payload.append("description", formData.description);
-    payload.append("category", formData.category || "");
-    payload.append("price", formData.price);
-    payload.append("kampanya_egasi", formData.private_information.kampanya_egasi);
-    payload.append("campany_name", formData.private_information.campany_name);
-    payload.append("oylik_daromadi", formData.private_information.oylik_daromadi);
-    payload.append("soff_foydasi", formData.private_information.soff_foydasi);
-  
     if (selectedFile) {
-      payload.append("image", selectedFile);
+      formData.append('product_file', selectedFile);
     }
-  
-    debugFormData(payload);
-  
+
     try {
-      const result = await createProduct(payload).unwrap();
-      console.log("Mahsulot qo'shildi:", result);
-      toast({
-        description: "Loyiha muvaffaqiyatli yaratildi!",
-        variant: "success",
-        duration: 3000,
-      });
-    } catch (err) {
-      console.error("Failed to create product:", err);
-      toast({
-        description: "Mahsulot yaratilmadi. Iltimos, qayta urinib ko'ring.",
-        variant: "destructive",
-      });
+      await createProduct(formData).unwrap();
+      reset();
+      setSelectedImage(null);
+      setSelectedFile(null);
+    } catch (error) {
+      console.error('Error creating product:', error);
     }
   };
-  
+
   return (
-    <div className="min-h-[100vh] py-14 bg-gray-100">
-      <div className="max-w-7xl m-auto ">
-        <h1 className="text-2xl font-bold mb-8 text-custom-gray">
-          Yangi loyiha qo'shish
-        </h1>
-        <form
-          onSubmit={handleSubmit}
-          encType="multipart/form-data"
-          className="space-y-12"
-        >
-            <div className="flex flex-wrap justify-between items-center gap-y-5">
-              <div className="w-[48%]">
-                <label className="block text-sm font-medium text-gray-600 mb-2">
-                  Kontakt
-                </label>
-                <input
-                  placeholder="Kontakt"
-                  type="text"
-                  name="kontact"
-                  value={formDataPrivate.kontact}
-                  onChange={handlePrivateChange}
-                  required
-                  className="w-full border-gray-300 rounded-lg px-2 h-10"
-                />
-              </div>
-
-              <div className="w-[48%]">
-                <label className="block text-sm font-medium text-gray-600 mb-2">
-                  Kampanya Egasi
-                </label>
-                <input
-                  type="text"
-                  name="kampanya_egasi"
-                  value={formDataPrivate.kampanya_egasi}
-                  onChange={handlePrivateChange}
-                  placeholder="Loyiha egasini kiriting"
-                  className="w-full border-gray-300 rounded-lg px-2 h-10"
-                />
-              </div>
-
-              <div className="w-[48%]">
-                <label className="block text-sm font-medium text-gray-600 mb-2">
-                  Kompaniya
-                </label>
-                <input
-                  type="text"
-                  name="campany_name"
-                  value={formDataPrivate.campany_name}
-                  onChange={handlePrivateChange}
-                  placeholder="Kompaniyani kiriting"
-                  className="w-full border-gray-300 rounded-lg px-2 h-10"
-                />
-              </div>
-
-              <div className="w-[48%]">
-                <label className="block text-sm font-medium text-gray-600 mb-2">
-                  Loyiha nomi
-                </label>
-                <input
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  placeholder="Loyiha nomini kiriting"
-                  className="w-full border-gray-300 rounded-lg px-2 h-10"
-                />
-              </div>
-
-              <div className="w-[48%]">
-                <label className="block text-sm font-medium text-gray-600 mb-2">
-                  Oylik daromadi
-                </label>
-                <input
-                  placeholder="Oylik daromadini kiriting"
-                  type="number"
-                  name="oylik_daromadi"
-                  value={formDataPrivate.oylik_daromadi}
-                  onChange={handlePrivateChange}
-                  className="w-full border-gray-300 rounded-lg px-2 h-10"
-                />
-              </div>
-
-              <div className="w-[48%]">
-                <label className="block text-sm font-medium text-gray-600 mb-2">
-                 Soff foydasi
-                </label>
-                <input
-                  placeholder="Soff foydasini kiriting"
-                  type="number"
-                  name="soff_foydasi"
-                  value={formDataPrivate.soff_foydasi}
-                  onChange={handlePrivateChange}
-                  className="w-full border-gray-300 rounded-lg px-2 h-10"
-                />
-              </div>
-
-              <div className="w-[48%]">
-                <label className="block text-sm font-medium text-gray-600 mb-2">
-                  Loyiha turi
-                </label>
-                <select className="w-full bg-transparent border border-gray-300 rounded-md p-2 focus:outline-none">
-                  {getCategories
-                    ? getCategories?.map((category: CategoryType) => (
-                        <option
-                          value={category.id}
-                          key={category.id}
-                          className="flex items-center space-x-4 cursor-pointer hover:bg-gray-100 p-2 rounded"
-                        >
-                          <span>{category.name}</span>
-                        </option>
-                      ))
-                    : null}
-                </select>
-              </div>
-              <div className="w-[48%]">
-                <label className="block text-sm font-medium text-gray-600 mb-2">
-                  Samaradorlik
-                </label>
-                <input
-                  type="number"
-                  placeholder="Samaradorlik"
-                  name="rendement"
-                  value={formData.rendement}
-                  onChange={handleChange}
-                  required
-                  className="w-full border-gray-300 rounded-lg px-2 h-10"
-                />
-              </div>
-
-              <div className="w-[48%]">
-                <label className="block text-sm font-medium text-gray-600 mb-2">
-                  Loyiha narxi
-                </label>
-                <input
-                  placeholder="Loyiha narxini kiriting"
-                  type="number"
-                  name="price"
-                  value={formData.price}
-                  onChange={handleChange}
-                  required
-                  className="w-full border-gray-300 rounded-lg px-2 h-10"
-                />
-              </div>
-              <div className="w-[48%]">
-                <label className="block text-sm font-medium text-gray-600 mb-2">
-                  Joylashuv
-                </label>
-                <input
-                  placeholder="Joylashuvingiz"
-                  name="location"
-                  value={formData.location}
-                  onChange={handleChange}
-                  required
-                  className="w-full border-gray-300 rounded-lg px-2 h-10"
-                />
-              </div>
-            </div>
-
-          {/* Description Section */}
-          <div className="flex justify-between items-center">
-            <div className="w-[48%]">
-              <label className="block text-md font-medium text-gray-600 mb-3">
-                Tavsif
-              </label>
+    <div className="max-w-2xl mx-auto p-6 bg-white shadow-md rounded-lg">
+      <h2 className="text-2xl font-bold mb-4">Create Product</h2>
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        {fields.map((field) => (
+          <div key={field.name}>
+            <label className="block text-sm font-medium">{field.label}</label>
+            {field.type === 'textarea' ? (
               <textarea
-                style={{ resize: "none" }}
-                className="w-full outline-none border border-custom-gray rounded-md p-3 h-36"
-                placeholder="Tavsif qo'shing"
-                name="description"
-                value={formData.description}
-                onChange={handleChange}
-                required
-              ></textarea>
-            </div>
-
-            <div className="w-[48%]">
-              <label className="block text-md font-medium text-gray-600 mb-3">
-                Qo'shimcha ma'lumot
-              </label>
-              <textarea
-                style={{ resize: "none" }}
-                className="w-full outline-none border border-custom-gray rounded-md p-3 h-36"
-                placeholder="Yanada ko'proq ma'lumot qo'shish"
-              ></textarea>
-            </div>
-          </div>
-
-          {/* <div>
-              <ImageUpload/>
-          </div> */}
-
-          <input
-            type="file"
-            name="image"
-            accept="image/*"
-            onChange={handleFileChange}
-            required
-          />
-
-          {/* Submit Button */}
-          <div className="flex items-center justify-between ">
-            <Button type="submit" className="Brown_button" disabled={isLoading}>
-              {isLoading ? "Creating..." : "Create Product"}
-            </Button>
-            {isError && (
-              <p className="text-red-600">
-                Mahsulot yaratishda xatolik yuz berdi: {JSON.stringify(error)}
-              </p>
+                {...register(field.name, { required: true })}
+                className="w-full mt-1 border-gray-300 rounded-md shadow-sm"
+              />
+            ) : (
+              <input
+                type={field.type}
+                step={field.step || undefined}
+                {...register(field.name, { required: true })}
+                className="w-full mt-1 border-gray-300 rounded-md shadow-sm"
+              />
             )}
           </div>
-        </form>
-      </div>
-    </div> );
-}
-export default ProjectForm;
+        ))}
+        <div>
+          <label className="block text-sm font-medium">Image</label>
+          <input
+            type="file"
+            onChange={handleImageChange}
+            className="w-full mt-1 border-gray-300 rounded-md shadow-sm"
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium">Product File</label>
+          <input
+            type="file"
+            onChange={handleFileChange}
+            className="w-full mt-1 border-gray-300 rounded-md shadow-sm"
+          />
+        </div>
+        <button
+          type="submit"
+          className={`w-full py-2 px-4 text-white font-medium rounded-md shadow-sm ${
+            isLoading ? 'bg-gray-400' : 'bg-blue-600 hover:bg-blue-700'
+          }`}
+          disabled={isLoading}
+        >
+          {isLoading ? 'Submitting...' : 'Submit'}
+        </button>
+        {isSuccess && <p className="text-green-600 mt-2">Product created successfully!</p>}
+        {isError && <p className="text-red-600 mt-2">Failed to create product.</p>}
+      </form>
+    </div>
+  );
+};
+
+export default ProductForm;
