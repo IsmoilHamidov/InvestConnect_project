@@ -46,7 +46,7 @@ export const api = createApi({
 
     createProduct: builder.mutation<void, FormData>({
       query: (data) => ({
-        url: "/products/create/",
+        url: "/create-product_1/",
         method: "POST",
         body: data,
         headers: {
