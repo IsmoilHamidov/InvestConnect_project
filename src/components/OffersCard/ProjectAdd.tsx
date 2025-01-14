@@ -5,18 +5,18 @@ import { useState } from 'react';
 const ProductForm = () => {
   const { register, handleSubmit, reset } = useForm();
   const [createProduct, { isLoading, isSuccess, isError }] = useCreateProductMutation();
-  const [selectedImage, setSelectedImage] = useState<File | null>(null);
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+
+  const [selectedFile, setSelectedFile] = useState<{}>(null);
+  const [selectedDoc, setSelectedDoc] = useState<{}>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
+    if (e.target.files[0]) {
       setSelectedFile(e.target.files[0]);
     }
   };
-
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setSelectedImage(e.target.files[0]);
+  const handleDocChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files[0]) {
+      setSelectedDoc(e.target.files[0]);
     }
   };
 
@@ -31,6 +31,18 @@ const ProductForm = () => {
     { name: 'kampanya_egasi', label: 'Company Owner', type: 'text' },
     { name: 'kontact', label: 'Contact', type: 'text' },
     { name: 'campany_name', label: 'Company Name', type: 'text' },
+
+    { name: 'short_description', label: 'Company short_description', type: 'text' },
+    { name: 'investment_range', label: 'investment_range', type: 'text' },
+    { name: 'team_info', label: 'team_info Name', type: 'text' },
+    { name: 'business_plan', label: 'business_plan Name', type: 'text' },
+    { name: 'use_of_investment', label: 'use_of_investment Name', type: 'text' },
+    { name: 'financial_forecasts', label: 'financial_forecasts Name', type: 'text' },
+    { name: 'team_detaill', label: 'team_detaill Name', type: 'text' },
+    { name: 'market_analysis', label: 'market_analysis Name', type: 'text' },
+    { name: 'legal_documents', label: 'legal_documents Name', type: 'file' },
+    { name: 'contact_info', label: 'Company contact_info	null', type: 'text' },
+
     { name: 'oylik_daromadi', label: 'Monthly Revenue', type: 'number', step: '0.01' },
     { name: 'soff_foydasi', label: 'Net Profit', type: 'number', step: '0.01' },
   ];
@@ -39,42 +51,47 @@ const ProductForm = () => {
   const onSubmit = async (data: any) => {
     const formData = new FormData();
 
-    // Append form data
+    // Add all text fields to FormData
     formData.append('name', data.name);
     formData.append('description', data.description);
     formData.append('location', data.location);
     formData.append('user', data.user);
     formData.append('category', data.category);
-    formData.append('rendement', `${data.rendement}%`);
-    formData.append('price', parseFloat(data.price).toFixed(2));
-    formData.append('kampanya_egasi', data.kampanya_egasi);
-    formData.append('kontact', data.kontact);
-    formData.append('campany_name', data.campany_name);
-    formData.append('oylik_daromadi', parseFloat(data.oylik_daromadi).toFixed(2));
-    formData.append('soff_foydasi', parseFloat(data.soff_foydasi).toFixed(2));
 
-    // Append the selected image and product file
-    if (selectedImage) {
-      formData.append('image', selectedImage);
-    }
+    formData.append('short_description', data.short_description);
+    formData.append('investment_range', data.investment_range);
+    formData.append('team_info', data.team_info);
+    formData.append('business_plan', data.business_plan);
+    formData.append('use_of_investment', data.use_of_investment);
+    formData.append('financial_forecasts', data.financial_forecasts);
+    formData.append('team_detaill', data.team_detaill);
+    formData.append('market_analysis', data.market_analysis);
+    formData.append('contact_info', data.contact_info);
+    formData.append('rendement', `${data.rendement}%`);
+
+    formData.append('price', parseFloat(data.price).toFixed(2));
+
+    // Add the file
     if (selectedFile) {
-      formData.append('product_file', selectedFile);
+      formData.append('image', selectedFile);
+    }
+    if (selectedDoc) {
+      formData.append('legal_documents', selectedDoc);
     }
 
     try {
       await createProduct(formData).unwrap();
       reset();
-      setSelectedImage(null);
-      setSelectedFile(null);
     } catch (error) {
       console.error('Error creating product:', error);
     }
   };
 
+
   return (
     <div className="max-w-2xl mx-auto p-6 bg-white shadow-md rounded-lg">
       <h2 className="text-2xl font-bold mb-4">Create Product</h2>
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      <form encType="multipart/form-data" onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         {fields.map((field) => (
           <div key={field.name}>
             <label className="block text-sm font-medium">{field.label}</label>
@@ -93,27 +110,13 @@ const ProductForm = () => {
             )}
           </div>
         ))}
-        <div>
-          <label className="block text-sm font-medium">Image</label>
-          <input
-            type="file"
-            onChange={handleImageChange}
-            className="w-full mt-1 border-gray-300 rounded-md shadow-sm"
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium">Product File</label>
-          <input
-            type="file"
-            onChange={handleFileChange}
-            className="w-full mt-1 border-gray-300 rounded-md shadow-sm"
-          />
-        </div>
+
+        <input type="file" name="image" accept="image/*" onChange={handleFileChange} />
+
         <button
           type="submit"
-          className={`w-full py-2 px-4 text-white font-medium rounded-md shadow-sm ${
-            isLoading ? 'bg-gray-400' : 'bg-blue-600 hover:bg-blue-700'
-          }`}
+          className={`w-full py-2 px-4 text-white font-medium rounded-md shadow-sm ${isLoading ? 'bg-gray-400' : 'bg-blue-600 hover:bg-blue-700'
+            }`}
           disabled={isLoading}
         >
           {isLoading ? 'Submitting...' : 'Submit'}
