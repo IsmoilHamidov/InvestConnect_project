@@ -54,6 +54,17 @@ export const api = createApi({
         },
       }),
     }),
+    createProductInvest: builder.mutation<void, FormData>({
+      query: (data) => ({
+        url: "/create-product_1/",
+        method: "POST",
+        body: data,
+        headers: {
+          "Authorization": `Token ${localStorage.getItem("token") || ""}`,
+        },
+
+      }),
+    }),
 
     getUserProfile: builder.query({
       query: () => ({
@@ -118,6 +129,7 @@ export const {
   useGetUserProductsListQuery,
   usePaymentAndcheckMutation,
   useGetPrivateInfoQuery,
+  useCreateProductInvestMutation,
 } = api;
 
 export interface ProductInformation {
