@@ -103,7 +103,7 @@ const PrivateInfoCard = ({ productId }: { productId: number }) => {
             <Phone className="text-primary" />
             <div>
               <p className="font-medium text-gray-800">Kontakt ma'lumotlari</p>
-              {getPrivateInfo.contact_info.split('\r\n').map((line, index) => (
+              {getPrivateInfo.contact_info.split('\r\n').map((line: string, index: number) => (
                 <p key={index} className="text-gray-600">{line}</p>
               ))}
             </div>
