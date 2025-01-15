@@ -83,9 +83,9 @@ export const Registration: React.FC<INavbarStepProps> = () => {
       </div>
 
       <div className="mt-4">
-        <label className="block text-custom-gray mb-2">Telefon</label>
+        <label className="block text-custom-gray mb-2">Telefon raqami</label>
         <input
-          placeholder="+998"
+          placeholder="Telefon raqamingizni kiriting"
           className="w-full border border-gray-300 focus:border-2 
           focus:border-custom-blue-gray ease-out delay-150
           rounded-xl py-2 px-3"
@@ -98,6 +98,7 @@ export const Registration: React.FC<INavbarStepProps> = () => {
         <div className="relative">
           <input
             type={showPassword ? "text" : "password"} // Toggle password visibility
+            placeholder="Parollingizni kiriting"
             className="w-full border border-gray-300 focus:border-2 
             focus:border-custom-blue-gray ease-out delay-150
             rounded-xl py-2 px-3"
