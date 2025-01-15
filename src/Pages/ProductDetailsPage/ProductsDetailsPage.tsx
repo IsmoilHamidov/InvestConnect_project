@@ -18,9 +18,6 @@ export const ProductDetailsPage = () => {
           <h1 className="text-4xl font-semibold text-custom-gray capitalize">
             {data?.name}
           </h1>
-          <div className="bg-green-200 py-1 px-4 rounded-xl text-green-700">
-            активный
-          </div>
         </div>
         {error ? (
           <>Oh no, there was an error</>
@@ -28,11 +25,6 @@ export const ProductDetailsPage = () => {
           <>Loading...</>
         ) : data ? (
           <div className="p-4 py-8 pl-0 bg-white  flex justify-between">
-            {/* <div className="w-1/2 h-auto border flex flex-row gap-y-3">
-                  <img src={data.image} alt="product image" 
-                  className="h-[22rem] w-full object-cover rounded-xl" />
-                </div> */}
-
             <ImageSlider />
             <div className="flex flex-col w-[48%] gap-y-10 justify-between">
               <div className="w-[70%] p-5 rounded-xl shadow-md border border-gray-200 bg-white">

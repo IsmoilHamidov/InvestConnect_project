@@ -10,8 +10,9 @@ import { FaStar } from "react-icons/fa";
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const PrivateInfoCard = (productId: any) => {
   const { data } = usePrivateInfoStore();
-  const { data: getPrivateInfo, isSuccess } = useGetPrivateInfoQuery(productId.productId);
-  const [isInfo, setInfo] = useState(data);
+  const { data: getPrivateInfo, isSuccess } = useGetPrivateInfoQuery(undefined);
+  const [isInfo, setInfo] = useState(data)
+
   const {
     company_name,
     kampanya_egasi,

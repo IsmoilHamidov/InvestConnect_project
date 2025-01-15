@@ -88,7 +88,7 @@ export const LoginModal: React.FC<INavbarStepProps> = () => {
 
 
         <p className="flex justify-center flex-wrap mb-0 mt-3 text-center font-normal text-base">
-          Hali ro'yxatdan o'tganmisiz?
+          Ro'yxaydan o'tmaganmsiz?
           <span
             className="text-[#ce8f11] ms-2 text-base font-medium cursor-pointer text-center "
             onClick={() => openModal("registration")}

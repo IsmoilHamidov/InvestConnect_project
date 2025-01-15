@@ -10,10 +10,13 @@ import logo_text from "../../assets/images/navLogo.png";
 import { Link } from "react-router-dom";
 import ProfilePopover from "./ProfilePopover ";
 import PrivacyPolicy from "../PrivacyPolicy";
+import { useToast } from "@/hooks/use-toast";
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+
+  const { toast } = useToast();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -36,6 +39,15 @@ const Navbar: React.FC = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+  
+    const Process = () => {
+      toast({
+        className: "top-center",
+        description: `Jarayonda`,
+        variant: "destructive",
+      });
+    };
+
 
   return (
     <div>
@@ -92,7 +104,7 @@ const Navbar: React.FC = () => {
             <div className="flex justify-center items-center gap-x-3 py-2">
               <img src={logo_text} className="h-14 object-contain" alt="logo_text" />
             </div>
-            <div className="h-full flex items-center gap-x-7 text-white text-base font-normal">
+            <div className="h-full flex items-center gap-x-7 text-white text-base font-normal" onClick={Process}>
               <a href="#">Taklif</a>
               <a href="#">Investitsiya Platformasi</a>
               <a href="#">Hamkorlar</a>

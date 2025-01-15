@@ -26,7 +26,7 @@ interface ProductCardProps {
 
 export const ProductCard: React.FC<ProductCardProps> = ({ product }) => (
   <div className="product grid px-4 py-6">
-    <div className="border border-[#B29C6F] rounded-md flex flex-col min-h-[500px]">
+    <div className="border bg-white border-[#B29C6F] rounded-md flex flex-col min-h-[500px]">
       <div className="relative group flex-1">
         <img
           src={product.image}
