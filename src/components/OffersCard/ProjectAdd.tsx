@@ -7,23 +7,23 @@ const ProductForm = () => {
   const { register, handleSubmit, reset } = useForm();
   const [createProduct, { isLoading, isSuccess, isError }] = useCreateProductMutation();
 
-  const [selectedFile, setSelectedFile] = useState<{}>(null);
-  const [selectedDoc, setSelectedDoc] = useState<{}>(null);
-  const [selectedDemo, setSelectedDemo] = useState<{}>(null);
+  const [selectedFile, setSelectedFile] = useState();
+  const [selectedDoc, setSelectedDoc] = useState();
+  const [selectedDemo, setSelectedDemo] = useState();
   const { toast } = useToast();
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files[0]) {
+    if (e.target.files) {
       setSelectedFile(e.target.files[0]);
     }
   };
   const handleDocChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files[0]) {
+    if (e.target.files) {
       setSelectedDoc(e.target.files[0]);
     }
   };
   const handleDemoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files[0]) {
+    if (e.target.files) {
       setSelectedDemo(e.target.files[0]);
     }
   };

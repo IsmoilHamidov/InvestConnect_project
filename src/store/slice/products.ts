@@ -35,7 +35,7 @@ export const api = createApi({
 
     paymentAndcheck: builder.mutation({
       query: (data) => ({
-        url: "/payment-and-check/",
+        url: "/api/payment-unlock/",
         method: "POST",
         body: data,
         headers: {
