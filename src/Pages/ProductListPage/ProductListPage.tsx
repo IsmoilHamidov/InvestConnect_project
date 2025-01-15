@@ -9,24 +9,21 @@ import { useLocation } from "react-router-dom";
 
 const ProductListPage = () => {
   const [search, setSearch] = useState("");
-  // const [degree, setDegree] = useState("");
   const [category, setCategory] = useState("");
   const [isModalOpen, setModalOpen] = useState(false);
 
   const { data, error, isLoading } = useGetProductsQuery(
     `?search=${search}&degree=&category__name=${category}`
-    );
-  
+  );
 
   const location = useLocation();
   useEffect(() => {
     const savedPosition = sessionStorage.getItem("scrollPosition");
     if (savedPosition) {
       window.scrollTo(0, parseInt(savedPosition, 10));
-      sessionStorage.removeItem("scrollPosition"); 
+      sessionStorage.removeItem("scrollPosition");
     }
-  }, [location]);;
-  
+  }, [location]);
 
   return (
     <>
@@ -49,16 +46,6 @@ const ProductListPage = () => {
                   setCategory(selectedCategory)
                 }
               />
-              {/* <select
-              //   className="border bg-background px-6 py-3 border-black rounded-[75px] text-primary"
-              //   value={degree} // Привязка состояния к select
-              //   onChange={(e) => setDegree(e.target.value)} // Обновление состояния Degree
-              // >
-              //   <option value="">---</option>
-              //   <option value="bronze">bronze</option>
-              //   <option value="silver">silver</option>
-              //   <option value="gold">gold</option>
-              // </select> */}
               <input
                 className="border bg-background w-[20rem] px-5 py-3 border-black rounded-[75px]"
                 type="text"
@@ -78,7 +65,7 @@ const ProductListPage = () => {
             <>Loading...</>
           ) : data ? (
             <>
-              {data?.map((product: Product, index: number) => (
+              {[...data]?.reverse().map((product: Product, index: number) => (
                 <ProductCard key={index} product={product} />
               ))}
             </>
