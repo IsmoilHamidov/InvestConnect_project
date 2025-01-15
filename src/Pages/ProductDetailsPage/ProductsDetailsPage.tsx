@@ -18,9 +18,6 @@ export const ProductDetailsPage = () => {
           <h1 className="text-4xl font-semibold text-custom-gray capitalize">
             {data?.name}
           </h1>
-          <div className="bg-green-200 py-1 px-4 rounded-xl text-green-700">
-            активный
-          </div>
         </div>
         {error ? (
           <>Oh no, there was an error</>

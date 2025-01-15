@@ -22,7 +22,7 @@ const CategoriesModal: React.FC<CategoriesModalProps> = ({ open, onClose, onSele
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Категории</DialogTitle>
+          <DialogTitle className='m-0'>Категории</DialogTitle>
         </DialogHeader>
         {isLoading && <p>Загрузка...</p>}
         {error && <p>Произошла ошибка при загрузке категорий.</p>}
