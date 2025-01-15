@@ -1,118 +1,125 @@
-import { usePrivateInfoStore } from "@/store/privateInfoData";
-import { Badge } from "./ui/badge";
-import { cn } from "@/lib/utils";
-import { useGetPrivateInfoQuery } from "@/store/slice/products";
-import { useEffect, useState } from "react";
-import { Download, EyeOff } from "lucide-react";
+import { EyeOff, Users, LineChart, Target, Briefcase, Phone, Download } from "lucide-react";
 import PaymentAndCheck from "./PaymentAndCheck";
-import { FaStar } from "react-icons/fa";
+import { useGetPrivateInfoQuery } from "@/store/slice/products";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const PrivateInfoCard = (productId: any) => {
-  const { data } = usePrivateInfoStore();
-  const { data: getPrivateInfo, isSuccess } = useGetPrivateInfoQuery(undefined);
-  const [isInfo, setInfo] = useState(data)
+const baseUrl = "https://bakirali007.pythonanywhere.com/";
 
+const PrivateInfoCard = ({ productId }: { productId: number }) => {
   const {
-    company_name,
-    kampanya_egasi,
-    kontact,
-    oylik_daromadi,
-    soff_foydasi,
-    status,
-  } = isInfo;
+    data: getPrivateInfo,
+    isLoading,
+    error,
+  } = useGetPrivateInfoQuery(productId);
 
-  useEffect(() => {
-    if (getPrivateInfo) {
-      console.log(getPrivateInfo);
-      
-      setInfo({ ...getPrivateInfo.private_info });
-    }
-    
-  }, [isSuccess]);
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString("uz-UZ", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  };
+
+  if (error) {
+    return (
+      <div className="mt-11 p-4 bg-red-50 border rounded-md flex items-center justify-between gap-10">
+        <EyeOff size={50} />
+        <p className="text-sm font-semibold text-gray-600">
+          Ma'lumotlarni ko'rish uchun siz to'lashingiz kerak.
+        </p>
+        <PaymentAndCheck productId={productId} amount={10} />
+      </div>
+    );
+  }
+
+  if (isLoading) {
+    return <div className="w-full mt-8 p-4 text-center">Loading...</div>;
+  }
+
+  if (!getPrivateInfo) {
+    return null;
+  }
+
+  const sections = [
+    { 
+      title: "Biznes-reja", 
+      value: getPrivateInfo.business_plan, 
+      icon: Target 
+    },
+    { 
+      title: "Jamoa haqida", 
+      value: getPrivateInfo.team_info, 
+      icon: Users 
+    },
+    { 
+      title: "Bozor tahlili", 
+      value: getPrivateInfo.market_analysis, 
+      icon: LineChart 
+    },
+    { 
+      title: "Investitsiya ishlatilishi", 
+      value: getPrivateInfo.use_of_investment, 
+      icon: Briefcase 
+    },
+  ];
 
   return (
-    <div>
-      {isInfo.company_name === "***" ? (
-        <div className="mt-11 p-4 bg-red-50 border rounded-md flex items-center justify-between gap-10">
-          <EyeOff size={50} />
-          <p className="text-sm font-semibold text-gray-600">
-            Ma'lumotlarni ko'rish uchun siz to'lashingiz kerak. 
-          </p>
-          <PaymentAndCheck productId={productId.productId} amount={10} />
+    <div className="w-full mt-8 bg-white rounded-2xl shadow-xl overflow-hidden">
+      <div className="relative h-64">
+        <img
+          src={`${baseUrl}${getPrivateInfo.prototype_demo}`}
+          alt="Loyiha tasviri"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end">
+          <div className="p-8 text-white">
+            <div className="flex items-center gap-3 mb-3">
+              <span className={`px-3 py-1 ${getPrivateInfo.is_active ? "bg-emerald-500" : "bg-red-500"} rounded-full text-sm`}>
+                {getPrivateInfo.is_active ? "Active" : "Inactive"}
+              </span>
+              <span className="text-sm opacity-75">
+                {formatDate(getPrivateInfo.created_at)}
+              </span>
+            </div>
+            <h2 className="text-3xl font-bold">Loyiha ma'lumotlari</h2>
+          </div>
         </div>
-      ) 
-      : (
-          <div className="w-full mt-14">
-            <div className="mx-auto bg-white rounded-xl shadow-xl p-8 pb-9 border border-gray-200">
-              <>
-                <div className="flex justify-between items-center">
-                  <div className="flex text-xl gap-x-1 text-[#B29C6F]">
-                    <FaStar />
-                    <FaStar />
-                    <FaStar />
-                  </div>
+      </div>
 
-                  <Badge
-                    variant="outline"
-                    className={cn(
-                      status === "aktiv"
-                        ? "bg-custom-blue-gray text-white px-6 py-1 rounded-full shadow-sm"
-                        : "bg-red-600 text-white px-3 py-1 rounded-full shadow-sm"
-                    )}
-                  >
-                    {status}
-                  </Badge>
-                </div>
-                <h3 className="text-[21px] text-center font-semibold text-custom-gray tracking-wide mb-8 mt-5">
-                  Loyihaga oid shaxsiy ma'lumotlar
-                </h3>
+      <div className="p-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {sections.map(({ title, value, icon: Icon }) => (
+            <div key={title} className="border-l-4 border-primary pl-6">
+              <div className="flex items-center gap-3 mb-3">
+                <Icon className="text-primary" />
+                <h3 className="font-semibold text-gray-800">{title}</h3>
+              </div>
+              <p className="text-gray-600">{value}</p>
+            </div>
+          ))}
+        </div>
 
-                <div className="grid grid-cols-3 gap-5 gap-x-10 mb-5">
-                  {[
-                    { label: "Loyiha egasi", value: kampanya_egasi || "Default Owner" },
-                    { label: "Kontakt", value: kontact || "Default Contact" },
-                    { label: "Linked In", value: '' || "Default User" },
-                    { label: "Kompaniya", value: company_name || "Default Company" },
-                    { label: "Kompaniya", value: company_name || "Default Company" },
-                    { label: "Kompaniya", value: company_name || "Default Company" },
-                  ].map((item, index) => (
-                    <div key={index} className="bg-gray-100 rounded-lg w-full p-4">
-                      <span className="font-medium text-gray-700 me-1">{item.label}:</span> {item.value}
-                    </div>
-                  ))}
-                </div>
-
-                <div className="grid grid-cols-3 gap-x-10">
-                  {[
-                    { label: "Oylik daromadi", value: `$${oylik_daromadi}`, colorClass: "text-[#B29C6F]" },
-                    { label: "Soff foydasi", value: `$${soff_foydasi}`, colorClass: "text-[#B29C6F]" },
-                    { label: "Soff foydasi", value: `$${soff_foydasi}`, colorClass: "text-[#B29C6F]" },
-                  ].map((item, index) => (
-                    <div key={index} className="bg-gray-100 rounded-lg p-4 text-center">
-                      <p className="text-sm text-custom-gray">{item.label}</p>
-                      <p className={`leading-10 text-2xl font-semibold ${item.colorClass}`}>{item.value}</p>
-                    </div>
-                  ))}
-                </div>
-
-
-                <button
-                  className="mt-11 m-auto px-8 py-3 bg-gradient-to-r
-                            from-[#749BA9] to-[#5d717e] 
-                            hover:from-[#627D8A] hover:to-[#3A4D56] 
-                            text-white font-semibold text-base rounded-3xl 
-                            flex justify-center items-center gap-x-5 
-                            shadow-lg duration-200 ease-in-out"
-                >
-                  To‘liq ma’lumotlarni yuklab olish
-                  <Download size={20} />
-                </button>
-              </>
+        <div className="mt-8 flex flex-col sm:flex-row justify-between items-center gap-4 pt-8 border-t">
+          <div className="flex items-center gap-3">
+            <Phone className="text-primary" />
+            <div>
+              <p className="font-medium text-gray-800">Kontakt ma'lumotlari</p>
+              {getPrivateInfo.contact_info.split('\r\n').map((line: string, index: number) => (
+                <p key={index} className="text-gray-600">{line}</p>
+              ))}
             </div>
           </div>
-      )}
-
+          {getPrivateInfo.legal_documents && (
+            <a
+              href={`${baseUrl}${getPrivateInfo.legal_documents}`}
+              download
+              className="flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg hover:bg-purple-700 transition"
+            >
+              <Download size={20} />
+              Hujjatlarni yuklab olish
+            </a>
+          )}
+        </div>
+      </div>
     </div>
   );
 };
