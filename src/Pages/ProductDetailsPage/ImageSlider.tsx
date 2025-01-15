@@ -24,7 +24,7 @@ const ImageSlider = () => {
   if (error) return <p>Something went wrong!</p>;
 
   return (
-    <div className="flex flex-col justify-between w-[47%]">
+    <div className="flex flex-col justify-between w-[47%] gap-y-4">
       <div className="w-full h-auto">
         <img
           src={imageBasicUrl + selectedImage}

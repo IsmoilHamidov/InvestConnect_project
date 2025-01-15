@@ -112,7 +112,8 @@ const PrivateInfoCard = ({ productId }: { productId: number }) => {
             <a
               href={`${baseUrl}${getPrivateInfo.legal_documents}`}
               download
-              className="flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg hover:bg-purple-700 transition"
+              target="_blank"
+              className="flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg  transition"
             >
               <Download size={20} />
               Hujjatlarni yuklab olish

@@ -83,7 +83,7 @@ export const LoginModal: React.FC<INavbarStepProps> = () => {
           disabled={isLoading}
           className="Blue_button font-semibold w-full bg-[#749BA9] text-white p-2 rounded-2xl mt-2"
         >
-          {isLoading ? "Logging in..." : "Login"}
+          {isLoading ? "Kirilmoqda..." : "Kirish"}
         </button>
 
 

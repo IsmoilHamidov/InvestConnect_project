@@ -42,7 +42,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => (
         <div className="absolute text-red-50 z-20 top-4 -right-[16px] grid justify-items-end">
             <div className="bg-[#B29C6F] px-4 py-3">
                 <p className="font-normal text-white text-[14px] leading-3">
-                    Topligging
+                  Yuqori joylashuv
                 </p>
             </div>
             <div className="bg-[#443B3A] w-4 h-3" style={{ clipPath: "polygon(0 0, 0 100%, 100% 0)" }} />
@@ -72,7 +72,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => (
               sessionStorage.setItem("scrollPosition", String(window.scrollY));
             }}>
             <Button className="Blue_button border rounded-[40px] px-4 py-2">
-              Ontdek meer
+             Ko'proq bilib olish
             </Button>
           </Link>
         </div>

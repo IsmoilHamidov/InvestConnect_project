@@ -22,10 +22,10 @@ const CategoriesModal: React.FC<CategoriesModalProps> = ({ open, onClose, onSele
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle className='m-0'>Категории</DialogTitle>
+          <DialogTitle className='m-0'>Kategoriyalar</DialogTitle>
         </DialogHeader>
-        {isLoading && <p>Загрузка...</p>}
-        {error && <p>Произошла ошибка при загрузке категорий.</p>}
+        {isLoading && <p>Yuklanmoqda...</p>}
+        {error && <p>Kategoriyalarni yuklashda xatolik yuz berdi.</p>}
         <ul className="space-y-2">
           {categories?.map((category: CategoryType) => (
             <li

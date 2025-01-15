@@ -126,7 +126,7 @@ export const Registration: React.FC<INavbarStepProps> = () => {
               className="Modal_radio"
               value="investor"
             />
-            Investor
+          Sarmoya kirituvchi
           </label>
         </div>
         <div>
@@ -137,7 +137,7 @@ export const Registration: React.FC<INavbarStepProps> = () => {
               value="startup"
               {...register("role", { required: true })}
             />
-            Startap asoschisi
+         Loyiha asoschisi
           </label>
         </div>
       </div>
