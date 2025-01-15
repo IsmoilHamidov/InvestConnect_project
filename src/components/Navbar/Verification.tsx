@@ -148,7 +148,7 @@ export const Verification: React.FC<INavbarStepProps> = () => {
               disabled={isVerifying}
               className="Blue_button text-center font-semibold h-10 w-[47%] bg-custom-blue-gray text-white p-2 rounded-lg "
             >
-              {isVerifying ? "Verifying..." : "Verify"}
+              {isVerifying ? "Tastiqlanyapti..." : "Tastiqlash"}
             </button>
 
             <button

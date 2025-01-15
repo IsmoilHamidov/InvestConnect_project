@@ -104,7 +104,6 @@ const ProductForm = () => {
             {field.type === "textarea" ? (
               <textarea
                 {...register(field.name, { required: true })}
-                defaultValue={field.defaultValue || ""}
                 className="w-full border-gray-300 p-2 px-3 rounded-xl"
               />
             ) : (
@@ -112,8 +111,6 @@ const ProductForm = () => {
                 type={field.type}
                 required
                 step={field.step || undefined}
-                defaultValue={field.defaultValue || ""}
-                {...register(field.name, { required: true })}
                 className="w-full p-2 border-gray-300 rounded-xl"
               />
             )}
@@ -137,6 +134,7 @@ const ProductForm = () => {
           </select>
         </div>
 
+    
         <div className="w-full grid">
           <label htmlFor="image" className="text-sm">
             Image
