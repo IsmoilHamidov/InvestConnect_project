@@ -1,7 +1,8 @@
+import { EyeOff, Users, LineChart, Target, Briefcase, Phone, Download } from "lucide-react";
+import PaymentAndCheck from "./PaymentAndCheck";
 import { useGetPrivateInfoQuery } from "@/store/slice/products";
-import { FaStar } from "react-icons/fa";
 
-const baseUrl = "https://bakirali007.pythonanywhere.com/"
+const baseUrl = "https://bakirali007.pythonanywhere.com/";
 
 const PrivateInfoCard = ({ productId }: { productId: number }) => {
   const {
@@ -18,108 +19,107 @@ const PrivateInfoCard = ({ productId }: { productId: number }) => {
     });
   };
 
-  // Данные для отображения секций
+  if (error) {
+    return (
+      <div className="mt-11 p-4 bg-red-50 border rounded-md flex items-center justify-between gap-10">
+        <EyeOff size={50} />
+        <p className="text-sm font-semibold text-gray-600">
+          Ma'lumotlarni ko'rish uchun siz to'lashingiz kerak.
+        </p>
+        <PaymentAndCheck productId={productId} amount={10} />
+      </div>
+    );
+  }
+
+  if (isLoading) {
+    return <div className="w-full mt-8 p-4 text-center">Loading...</div>;
+  }
+
+  if (!getPrivateInfo) {
+    return null;
+  }
+
   const sections = [
-    {
-      title: "Tuzilgan sana",
-      value: getPrivateInfo?.created_at ? formatDate(getPrivateInfo.created_at) : null,
+    { 
+      title: "Biznes-reja", 
+      value: getPrivateInfo.business_plan, 
+      icon: Target 
     },
-    {
-      title: "Kontakt",
-      value: getPrivateInfo?.contact_info?.replace(/\r\n/g, ", "),
+    { 
+      title: "Jamoa haqida", 
+      value: getPrivateInfo.team_info, 
+      icon: Users 
     },
-    {
-      title: "Biznes-reja",
-      value: getPrivateInfo?.business_plan,
+    { 
+      title: "Bozor tahlili", 
+      value: getPrivateInfo.market_analysis, 
+      icon: LineChart 
     },
-    {
-      title: "Moliyaviy prognozlar",
-      value: getPrivateInfo?.financial_forecasts,
-    },
-    {
-      title: "Bozor tahlili",
-      value: getPrivateInfo?.market_analysis,
-    },
-    {
-      title: "Jamoa haqida",
-      value: getPrivateInfo?.team_info,
-    },
-    {
-      title: "Investitsiya ishlatilishi",
-      value: getPrivateInfo?.use_of_investment,
+    { 
+      title: "Investitsiya ishlatilishi", 
+      value: getPrivateInfo.use_of_investment, 
+      icon: Briefcase 
     },
   ];
 
   return (
-    <div className="w-full mt-8">
-      {error ? (
-        <>Oh no, there was an error</>
-      ) : isLoading ? (
-        <>Loading...</>
-      ) : getPrivateInfo ? (
-        <div className="rounded-xl p-6">
-          {/* Header */}
-          <div className="flex justify-between items-center mb-6">
-            <div className="flex gap-x-1 text-[#B29C6F]">
-              <FaStar />
-              <FaStar />
-              <FaStar />
+    <div className="w-full mt-8 bg-white rounded-2xl shadow-xl overflow-hidden">
+      <div className="relative h-64">
+        <img
+          src={`${baseUrl}${getPrivateInfo.prototype_demo}`}
+          alt="Loyiha tasviri"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end">
+          <div className="p-8 text-white">
+            <div className="flex items-center gap-3 mb-3">
+              <span className={`px-3 py-1 ${getPrivateInfo.is_active ? "bg-emerald-500" : "bg-red-500"} rounded-full text-sm`}>
+                {getPrivateInfo.is_active ? "Active" : "Inactive"}
+              </span>
+              <span className="text-sm opacity-75">
+                {formatDate(getPrivateInfo.created_at)}
+              </span>
             </div>
-            <div
-              className={`${
-                getPrivateInfo.is_active ? "bg-green-200 text-green-700" : "bg-red-700 text-red-200"
-              } py-1 px-4 rounded-xl shadow-sm`}
-            >
-              {getPrivateInfo.is_active ? "Active" : "Inactive"}
+            <h2 className="text-3xl font-bold">Loyiha ma'lumotlari</h2>
+          </div>
+        </div>
+      </div>
+
+      <div className="p-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {sections.map(({ title, value, icon: Icon }) => (
+            <div key={title} className="border-l-4 border-primary pl-6">
+              <div className="flex items-center gap-3 mb-3">
+                <Icon className="text-primary" />
+                <h3 className="font-semibold text-gray-800">{title}</h3>
+              </div>
+              <p className="text-gray-600">{value}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-8 flex flex-col sm:flex-row justify-between items-center gap-4 pt-8 border-t">
+          <div className="flex items-center gap-3">
+            <Phone className="text-primary" />
+            <div>
+              <p className="font-medium text-gray-800">Kontakt ma'lumotlari</p>
+              {getPrivateInfo.contact_info.split('\r\n').map((line, index) => (
+                <p key={index} className="text-gray-600">{line}</p>
+              ))}
             </div>
           </div>
-
-          {/* Title */}
-          <h3 className="text-xl font-semibold text-center text-gray-700 mb-6">
-            Loyihaga oid shaxsiy ma'lumotlar
-          </h3>
-
-          {/* Dynamic Sections */}
-          <div className="grid grid-cols-1 gap-6 mb-6">
-            {sections.map(
-              (section, index) =>
-                section.value && (
-                  <div key={index} className="bg-background p-4 rounded-md">
-                    <h4 className="font-medium text-gray-600">{section.title}:</h4>
-                    <p className="text-gray-600">{section.value}</p>
-                  </div>
-                )
-            )}
-          </div>
-
-          {/* Prototype Demo */}
-          {getPrivateInfo.prototype_demo && (
-            <div className="mb-6">
-              <h4 className="text-lg font-semibold text-gray-700 mb-2">
-                Mahsulot prototipi
-              </h4>
-              <img
-                src={`${baseUrl}${getPrivateInfo.prototype_demo}`}
-                alt="Prototype Demo"
-                className="rounded-lg shadow-md"
-              />
-            </div>
-          )}
-
-          {/* Download Section */}
           {getPrivateInfo.legal_documents && (
-            <div className="text-center">
-              <a
-                href={`${baseUrl}${getPrivateInfo.legal_documents}`}
-                download
-                className="inline-block px-6 py-3 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition"
-              >
-                Hujjatlarni yuklab olish
-              </a>
-            </div>
+            <a
+              href={`${baseUrl}${getPrivateInfo.legal_documents}`}
+              download
+              className="flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg hover:bg-purple-700 transition"
+            >
+              <Download size={20} />
+              Hujjatlarni yuklab olish
+            </a>
           )}
         </div>
-      ) : null}
+      </div>
     </div>
   );
 };
