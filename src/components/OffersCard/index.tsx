@@ -16,7 +16,6 @@ const Offers: React.FC = () => {
         data?.length === 0 ? 'h-[17.725rem]' : 'h-auto'
       }`}
     >
-      
       <div className="flex flex-row items-center justify-between mb-10">
         <h1 className="text-xl font-semibold">Loyhalaringiz</h1>
         <Link to={'/ProjectAdd'}>
