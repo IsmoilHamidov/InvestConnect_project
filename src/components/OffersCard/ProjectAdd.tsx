@@ -90,7 +90,7 @@ const ProductForm = () => {
 
   return (
     <div className="bg-gray-100 mx-auto py-9 shadow-md rounded-lg">
-      <h2 className="text-2xl text-center font-bold mb-7">Create Product</h2>
+      <h2 className="text-2xl text-center font-bold mb-7">Loyiha qo'shing</h2>
       <form
         encType="multipart/form-data"
         onSubmit={handleSubmit(onSubmit)}
@@ -104,13 +104,17 @@ const ProductForm = () => {
             {field.type === "textarea" ? (
               <textarea
                 {...register(field.name, { required: true })}
-                className="w-full border-gray-300 p-2 px-3 rounded-xl"
+                rows={3}
+                placeholder={field.placeholder || ""}
+                className=" w-full border-gray-300 p-2 px-3 rounded-xl resize-none"
               />
             ) : (
               <input
                 type={field.type}
                 required
                 step={field.step || undefined}
+                placeholder={field.placeholder || ""}
+                {...register(field.name, { required: true })}
                 className="w-full p-2 border-gray-300 rounded-xl"
               />
             )}
@@ -119,7 +123,7 @@ const ProductForm = () => {
 
         <div className="w-full grid">
           <label className="block text-sm font-medium text-gray-600 mb-2">
-            Category
+            Turkum
           </label>
           <select
             {...register("category", { required: true })} // Bind category to react-hook-form
@@ -134,10 +138,9 @@ const ProductForm = () => {
           </select>
         </div>
 
-    
         <div className="w-full grid">
           <label htmlFor="image" className="text-sm">
-            Image
+          Rasm
           </label>
           <input
             className="p-2 border-gray-300 rounded-xl"
@@ -149,19 +152,19 @@ const ProductForm = () => {
         </div>
         <div className="w-full grid">
           <label htmlFor="legal_documents" className="text-sm">
-            Legal Document
+          Yuridik hujjat
           </label>
           <input
             className="p-2 border-gray-300 rounded-xl"
             type="file"
             name="legal_documents"
-            accept="image/*"
+            accept=".pdf, .doc, .docx, .txt"
             onChange={handleDocChange}
           />
         </div>
         <div className="w-full grid">
           <label htmlFor="prototype_demo" className="text-sm">
-            Prototype Demo
+          Demo prototipi
           </label>
           <input
             className="p-2 border-gray-300 rounded-xl"
@@ -179,13 +182,13 @@ const ProductForm = () => {
           }`}
           disabled={isLoading}
         >
-          {isLoading ? "Submitting..." : "Submit"}
+          {isLoading ? "Yuborilmoqda..." : "Yuborish"}
         </button>
         {isSuccess && (
-          <p className="text-green-600 mt-2">Product created successfully!</p>
+          <p className="text-green-600 mt-2">Loyiha muvaffaqiyatli qo'shildi!</p>
         )}
         {isError && (
-          <p className="text-red-600 mt-2">Failed to create product.</p>
+          <p className="text-red-600 mt-2">Loyiha qo'shilmadi.</p>
         )}
       </form>
     </div>

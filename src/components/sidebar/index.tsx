@@ -40,6 +40,7 @@ function SidebarItem({ icon, label, isActive }: SidebarItemProps) {
 
 export default function Sidebar() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
@@ -85,15 +86,19 @@ export default function Sidebar() {
           ) : data ? (
             <>
               <h2 className="font-semibold text-base text-custom-gray">
-                {data?.firstname || "Unknown"} {data?.lastname || "User"}
+                {data?.firstname || "Noma'lum"} {data?.lastname || "shaxs"}
               </h2>
-              <p className="text-base text-[#749BA9]">
-                {data?.role || "Unknown Role"}
+              <p className="text-[14px] leading-7 text-[#749BA9]">
+                {data?.role === "startup"
+                  ? "Loyiha asoschisi"
+                  : data?.role === "investor"
+                  ? "Sarmoya kirituvchi"
+                  : "Noma'lum rol"}
               </p>
             </>
           ) : null}
         </div>
-        <div className="flex gap-2 mt-4 mb-8">
+        <div className="flex gap-2 mt-3 mb-8">
           <Button variant="ghost" size="icon" onClick={toggleModal}>
             <Pencil style={{ width: "17px", height: "17px" }} />
           </Button>

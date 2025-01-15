@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Product, ProductCard } from "@/components/ui/ProductCard";
 import { useGetProductsQuery } from "@/store/slice/products";
 import { useEffect, useState } from "react";
+import { TbCategory } from "react-icons/tb";
+import { IoSearch } from "react-icons/io5";
 import { useLocation } from "react-router-dom";
 
 const ProductListPage = () => {
@@ -31,13 +33,13 @@ const ProductListPage = () => {
       <main className="pb-4 bg-gray-100">
         <Banner>
           <div>
-            <div className=" flex gap-5 pt-36 pb-32  justify-center items-center">
+            <div className=" flex gap-8 pt-36 pb-32  justify-center items-center">
               <Button
                 variant="secondary"
                 onClick={() => setModalOpen(true)}
-                className="px-6 py-3 text-sm text-white"
-              >
-                Показать категории
+                className="flex items-center justify-center px-5 py-5 text-sm text-white rounded-xl"
+              > <TbCategory />
+               Kategoriyalarni ko'rsatish
               </Button>
               <CategoriesModal
                 open={isModalOpen}
@@ -46,23 +48,29 @@ const ProductListPage = () => {
                   setCategory(selectedCategory)
                 }
               />
-              <input
-                className="border bg-background w-[20rem] px-5 py-3 border-black rounded-[75px]"
-                type="text"
-                value={search}
-                placeholder="Search"
-                onChange={(e) => {
-                  setSearch(e.target.value);
-                }}
-              />
+
+              <div className="flex justify-center items-center gap-x-3 border bg-background
+               w-[24.2rem] px-4 py-3 border-custom-gray rounded-[75px] text-custom-gray">
+                <IoSearch size={22} />
+                <input
+                  className="bg-background w-[24rem]  border-black rounded-e-[75px]"
+                  type="text"
+                  value={search}
+                  placeholder="Izlash"
+                  onChange={(e) => {
+                    setSearch(e.target.value);
+                  }}
+                />
+              </div>
+
             </div>
           </div>
         </Banner>
         <div className="products grid grid-cols-3 pt-48  max-w-7xl m-auto">
           {error ? (
-            <>Oh no, there was an error</>
+            <>Xatolik yuz berdi</>
           ) : isLoading ? (
-            <>Loading...</>
+            <>Yuklanmoqda...</>
           ) : data ? (
             <>
               {[...data]?.reverse().map((product: Product, index: number) => (

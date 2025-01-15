@@ -54,21 +54,21 @@ export default AGREEMENT_TERMS;
 export const Paymentfields: { name: "message" | "cardNumber" | "expiryDate"; label: string; placeholder: string; rows?: number; maxLength?: number; type: "input" | "textarea" }[] = [
   {
     name: "message",
-    label: "Сообщение к оплате",
-    placeholder: "Введите сообщение",
+    label: "To'lov uchun xabar qoldirish",
+    placeholder: "Xabaringizni kiriting",
     rows: 2,
     type: "textarea",
   },
   {
     name: "cardNumber",
-    label: "Номер карты",
-    placeholder: "Введите номер карты",
+    label: "Karta raqami",
+    placeholder: "Karta raqamini kiriting",
     type: "input",
   },
   {
     name: "expiryDate",
-    label: "Срок действия карты",
-    placeholder: "MM/ГГ",
+    label: "Kartaning amal qilish muddati",
+    placeholder: "MM/YY",
     type: "input",
   },
 ];

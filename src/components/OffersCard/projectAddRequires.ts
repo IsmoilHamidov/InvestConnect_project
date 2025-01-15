@@ -1,71 +1,87 @@
-
 export const fields = [
-  { name: "name", label: "Name", type: "text",},
+  { 
+    name: "name", 
+    label: "Ism", 
+    type: "text", 
+    placeholder: "F.I.SH." 
+  },
   {
     name: "location",
-    label: "Location",
+    label: "Joylashuv",
     type: "text",
-  },
-  {
-    name: "rendement",
-    label: "Rendement (%)",
-    type: "number",
-  },
-  {
-    name: "price",
-    label: "Price",
-    type: "number",
-    step: "0.01",
-  },
-  {
-    name: "short_description",
-    label: "Company short description",
-    type: "text",
-
-  },
-  {
-    name: "investment_range",
-    label: "Investment Range",
-    type: "text",
-  },
-  {
-    name: "team_info",
-    label: "Team Info",
-    type: "text",
+    placeholder: "Uzbekistan, Toshkent",
   },
   {
     name: "business_plan",
-    label: "Business Plan",
+    label: "Biznes-reja",
     type: "text",
+    placeholder: "Biznes-rejani kiriting",
   },
   {
     name: "use_of_investment",
-    label: "Use of Investment",
+    label: "Investitsiyalardan foydalanish",
     type: "text",
+    placeholder: "Investitsiyalarni qanday ishlatishni yozing",
+  },
+  {
+    name: "price",
+    label: "narxi",
+    type: "number",
+    step: "0.01",
+    placeholder: "Narxni kiriting",
   },
   {
     name: "financial_forecasts",
-    label: "Financial Forecasts",
+    label: "Moliyaviy prognozlar",
     type: "text",
+    placeholder: "Moliyaviy prognozlarni kiriting",
+  },
+  {
+    name: "rendement",
+    label: "samaradorlik (%)",
+    type: "number",
+    placeholder: "Samaradorlikni kiriting (%)",
+  },
+  {
+    name: "investment_range",
+    label: "Sotuvdan Daromad",
+    type: "number",
+    placeholder: "Sotuvdan tushumni kiriting",
+  },
+  {
+    name: "short_description",
+    label: "kompaniyaning qisqacha tavsifi",
+    type: "text",
+    placeholder: "Kompaniya haqida qisqacha ma'lumot yozing",
+  },
+  {
+    name: "team_info",
+    label: "Jamoa haqida ma'lumot",
+    type: "text",
+    placeholder: "Jamoa haqida qisqacha yozing",
   },
   {
     name: "team_details",
-    label: "Team Details",
+    label: "Jamoa tafsilotlar",
     type: "text",
-  },
-  {
-    name: "market_analysis",
-    label: "Market Analysis",
-    type: "text",
+    placeholder: "Jamoaning tafsilotlarini yozing",
   },
   {
     name: "contact_info",
-    label: "Company Contact Info",
+    label: "Kompaniyaning aloqa ma'lumotlari",
     type: "text",
+    placeholder: "Aloqa ma'lumotlarini kiriting",
+  },
+  {
+    name: "market_analysis",
+    label: "Bozor tahlili",
+    type: "text",
+    placeholder: "Bozor tahlilini yozing",
   },
   {
     name: "description",
-    label: "Description",
+    label: "Tavsif",
     type: "textarea",
+    placeholder: "Loyiha haqida batafsil tavsif yozing",
   },
 ];
