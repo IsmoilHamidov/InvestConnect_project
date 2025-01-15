@@ -75,6 +75,7 @@ export const api = createApi({
         },
       }),
     }),
+
     getPrivateInfo: builder.query({
       query: (id) => ({
         url: `/products/information-detail/${id}`,
@@ -84,6 +85,7 @@ export const api = createApi({
         },
       }),
     }),
+    
     getUsers: builder.query({
       query: () => ({
         url: "/users/profile/",

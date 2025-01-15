@@ -55,7 +55,8 @@ export const Registration: React.FC<INavbarStepProps> = () => {
       console.error("Failed to register:", err);
     }
   };
-
+  console.log("isError:", isError);
+  console.log("error:", error);
   const hasErrors = Object.keys(errors).length > 0;
 
   return (
@@ -149,9 +150,9 @@ export const Registration: React.FC<INavbarStepProps> = () => {
                   checked={isChecked}
                   onChange={() => setIsChecked(!isChecked)}
                 />
-                <span className="text-start text-blue-500">
-                  Men <PrivacyPolicy /> qabul qilaman
-                </span>
+                <p className="text-start text-custom-gray text-base">
+                     Men <span className="text-blue-500 me-1"><PrivacyPolicy /></span>qabul qilaman
+                </p>
             </div>
       </div>
 
@@ -179,11 +180,12 @@ export const Registration: React.FC<INavbarStepProps> = () => {
       {isError && (
         <p className="text-center text-[15px] text-red-500 mt-2">
           Ro'yxatdan o'tish muvaffaqiyatsiz tugadi:{" "}
-          {error &&
-            "data" in error &&
-            (error.data as { error?: string })?.error}
+          {error && "data" in error && Array.isArray((error.data as { phone?: string[] })?.phone)
+            ? (error.data as { phone?: string[] })?.phone?.[0]
+            : "Noma'lum xato"}
         </p>
       )}
+
       {isSuccess && <p>Muvaffaqiyatli ro'yxatdan o'tdingiz!</p>}
     </form>
   );

@@ -31,7 +31,7 @@ const ProductListPage = () => {
   return (
     <>
       <NavbarAdmin />
-      <main className="pb-4">
+      <main className="pb-4 bg-gray-100">
         <Banner>
           <div>
             <div className=" flex gap-5 pt-36 pb-32  justify-center items-center">

@@ -66,7 +66,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => (
       </div>
 
 
-      <div className=" bg-gray-100 grid px-4 py-6 gap-3 rounded-b-md">
+      <div className=" bg-white grid px-4 py-6 gap-3 rounded-b-md">
         <div className="flex justify-between">
           <span className="title text-custom-gray text-xl font-medium">
             {product.name}
