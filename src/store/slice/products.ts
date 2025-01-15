@@ -35,7 +35,7 @@ export const api = createApi({
 
     paymentAndcheck: builder.mutation({
       query: (data) => ({
-        url: "/payment-and-check/",
+        url: "/api/payment-unlock/",
         method: "POST",
         body: data,
         headers: {
@@ -52,6 +52,17 @@ export const api = createApi({
         headers: {
           "Authorization": `Token ${localStorage.getItem("token") || ""}`,
         },
+      }),
+    }),
+    createProductInvest: builder.mutation<void, FormData>({
+      query: (data) => ({
+        url: "/create-product_1/",
+        method: "POST",
+        body: data,
+        headers: {
+          "Authorization": `Token ${localStorage.getItem("token") || ""}`,
+        },
+
       }),
     }),
 
@@ -120,6 +131,7 @@ export const {
   useGetUserProductsListQuery,
   usePaymentAndcheckMutation,
   useGetPrivateInfoQuery,
+  useCreateProductInvestMutation,
 } = api;
 
 export interface ProductInformation {
