@@ -135,7 +135,7 @@ const ProductForm = () => {
         </div>
         <div className='w-full grid'>
           <label htmlFor="legal_documents" className='text-sm'>Legal Document</label>
-          <input className='p-2 border-gray-300 rounded-xl' type="file" name="legal_documents" accept="image/*" onChange={handleDocChange} />
+          <input className='p-2 border-gray-300 rounded-xl' type="file" name="legal_documents" accept="image/*,application/pdf" onChange={handleDocChange} />
         </div>
         <div className='w-full grid'>
           <label htmlFor="prototype_demo" className='text-sm'>Prototype Demo</label>
