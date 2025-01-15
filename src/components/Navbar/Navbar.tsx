@@ -10,6 +10,7 @@ import logo_text from "../../assets/images/navLogo.png";
 import { Link } from "react-router-dom";
 import ProfilePopover from "./ProfilePopover ";
 import PrivacyPolicy from "../PrivacyPolicy";
+import { useToast } from "@/hooks/use-toast";
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -37,6 +38,15 @@ const Navbar: React.FC = () => {
     };
   }, []);
 
+  const toast = useToast()
+
+  const proccess = () => {
+    toast.toast({
+      description: `Jarayonda`,
+      variant: "destructive",
+    });
+  };
+  
   return (
     <div>
       {/* Navbar */}
@@ -93,9 +103,9 @@ const Navbar: React.FC = () => {
               <img src={logo_text} className="h-14 object-contain" alt="logo_text" />
             </div>
             <div className="h-full flex items-center gap-x-7 text-white text-base font-normal">
-              <a href="#">Taklif</a>
-              <a href="#">Investitsiya Platformasi</a>
-              <a href="#">Hamkorlar</a>
+              <a onClick={proccess} href="#">Taklif</a>
+              <a onClick={proccess} href="#">Investitsiya Platformasi</a>
+              <a onClick={proccess} href="#">Hamkorlar</a>
             </div>
             <div className="flex items-center gap-x-7 text-white text-base font-light">
               <a href="#"><i className="fa-solid fa-phone me-2"></i>09 / 279 88 92</a>
