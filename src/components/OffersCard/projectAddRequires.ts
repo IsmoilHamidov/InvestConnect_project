@@ -87,3 +87,10 @@ export const fields = [
     placeholder: "Loyiha haqida batafsil tavsif yozing",
   },
 ];
+
+export const errorTranslations: Record<string, string> = {
+  "Ensure that there are no more than 10 digits in total.": "Raqamlar soni 10 tadan oshmasligi kerak.",
+  "Ensure this field has no more than 5 characters.": "Bu maydonda 5 ta belgidan ko‘p bo‘lishi mumkin emas.",
+  // Добавь другие ошибки сюда
+};
+
