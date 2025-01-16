@@ -10,6 +10,7 @@ import Professionals from "./Professionals"
 import Footer from "../../components/Footer/Footer"
 import { NavbarStep } from "@/components/Navbar/NavbarStep"
 import ScrollPositionManager from "@/components/Loading/ScrollPosition/SaveScroll"
+import Example from "@/components/OffersCard/example"
 
 
 function Home() {
@@ -28,6 +29,7 @@ function Home() {
       <InfoCard/>
       <Professionals/>
       <Footer/>
+      <Example/>
     </>
   )
 }

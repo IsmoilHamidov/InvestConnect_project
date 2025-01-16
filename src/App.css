@@ -165,3 +165,14 @@ html{
   border-color: #749BA9;
 }
 
+.Input_placeholder::placeholder {
+  font-style: italic !important;
+}
+
+input::placeholder{
+  font-style: italic;
+}
+
+textarea::placeholder{
+  font-style: italic;
+}

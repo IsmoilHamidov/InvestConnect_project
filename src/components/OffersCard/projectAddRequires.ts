@@ -8,9 +8,9 @@ export const fields = [
   },
   {
     name: "location",
-    label: "Joylashuv",
+    label: "Joylashuvni",
     type: "text",
-    placeholder: "Joylashuvingiz",
+    placeholder: "Joylashuvingizni kiriting",
   },
   {
     name: "business_plan",
