@@ -64,13 +64,13 @@ const PrivateInfoCard = ({ productId }: { productId: number }) => {
 
   return (
     <div className="w-full mt-8 bg-white rounded-2xl shadow-xl overflow-hidden">
-      <div className="relative h-64">
+      <div className="relative h-64" id="opened_projects">
         <img
           src={`${baseUrl}${getPrivateInfo.prototype_demo}`}
           alt="Loyiha tasviri"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end">
+        <div className="absolute  inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end">
           <div className="p-8 text-white">
             <div className="flex items-center gap-3 mb-3">
               <span className={`px-3 py-1 ${getPrivateInfo.is_active ? "bg-emerald-500" : "bg-red-500"} rounded-full text-sm`}>

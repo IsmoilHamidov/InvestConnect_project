@@ -1,15 +1,16 @@
 export const fields = [
   { 
     name: "name", 
-    label: "Ism", 
+    label: "Loyiha Nomi", 
     type: "text", 
-    placeholder: "F.I.SH." 
+    placeholder: "Loyiha Nomi",
+    requirement: 10
   },
   {
     name: "location",
     label: "Joylashuv",
     type: "text",
-    placeholder: "Uzbekistan, Toshkent",
+    placeholder: "Joylashuvingiz",
   },
   {
     name: "business_plan",
@@ -29,6 +30,7 @@ export const fields = [
     type: "number",
     step: "0.01",
     placeholder: "Narxni kiriting",
+    requirement: 14
   },
   {
     name: "financial_forecasts",
