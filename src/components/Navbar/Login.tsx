@@ -22,17 +22,17 @@ export const LoginModal: React.FC<INavbarStepProps> = () => {
 
       toast({
         className: "top-center",
-        description: `Login successful`,
+        description: `Xisobga muvaffaqiyatli kirildi`,
         variant: "success",
       });
       localStorage.setItem("token", response.token);
       closeModal();
       window.location.reload();
     } catch (err) {
-      console.error("Login failed:", err);
+      console.error("Kirish muvaffaqiyatsiz tugadi:", err);
       toast({
         className: "top-center bg-red-500",
-        description: `Login failed. Please check your credentials and try again.`,
+        description: `Kirish muvaffaqiyatsiz tugadi. Iltimos qayta urinib ko'ring.`,
         variant: "destructive",
       });
     }

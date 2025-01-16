@@ -41,7 +41,7 @@ export const Registration: React.FC<INavbarStepProps> = () => {
       localStorage.setItem("selectedOption", data.role);
 
       toast({
-        description: `Registration successful!`,
+        description: `Ro'yxatdan muvaffaqiyatli o'tildi!`,
         variant: "success",
       });
 
@@ -49,7 +49,7 @@ export const Registration: React.FC<INavbarStepProps> = () => {
     } catch (err) {
       toast({
         className: " bg-red-500",
-        description: `Failed to register`,
+        description: `Ro'yxatdan o'tib bo'lmadi`,
         variant: "destructive",
       });
       console.error("Failed to register:", err);

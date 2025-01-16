@@ -81,7 +81,7 @@ export const Verification: React.FC<INavbarStepProps> = () => {
     try {
       const response = await verifyUser({ user: userId, code }).unwrap();
       toast({
-        description: `Tekshirish muvaffaqiyatli o'tdi`,
+        description: `Tasdiqlash muvaffaqiyatli o'tdi`,
         variant: "success",
       });
       closeModal();
@@ -91,7 +91,7 @@ export const Verification: React.FC<INavbarStepProps> = () => {
       window.location.reload();
     } catch (err) {
       console.error("Verification failed:", err);
-      alert("Verification failed. Please try again.");
+      alert("Tekshirish muvaffaqiyatsiz tugadi. Iltimos, qayta urinib ko'ring.");
     }
   };
 
