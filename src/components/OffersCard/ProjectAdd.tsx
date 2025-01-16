@@ -14,7 +14,7 @@ import folderImage from "../../assets/images/rb_4574.png"
 
 const Example = () => {
   const { register, handleSubmit, reset } = useForm();
-  const [createProduct, { isLoading, isSuccess, isError }] = useCreateProductMutation();
+  const [createProduct, { isLoading }] = useCreateProductMutation();
   const { data: getUserId } = useGetUsersQuery(undefined);
   const { data: getCategories } = useGetCategoriesQuery(undefined);
   const [selectedFile, setSelectedFile] = useState<File | undefined>();
