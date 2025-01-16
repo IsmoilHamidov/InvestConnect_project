@@ -43,7 +43,8 @@ const Navbar: React.FC = () => {
   const proccess = () => {
     toast.toast({
       description: 'Jarayonda',
-      variant: "destructive",
+      variant: "warning",
+      duration: 1400
     });
   };
   
@@ -106,8 +107,8 @@ const Navbar: React.FC = () => {
                 <a onClick={proccess} href="#">Hamkorlar</a>
               </div>
               <div className="flex items-center gap-x-7 text-white text-base font-light">
-                <a href="#"><i className="fa-solid fa-phone me-2"></i>09 / 279 88 92</a>
-                <a href="#"><i className="fa-solid fa-envelope me-2"></i>info@invest-connect.be</a>
+                <a href="tel:+998902798892"><i className="cursor-pointer fa-solid fa-phone me-2"></i>09 / 279 88 92</a>
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=info@invest-connect.be" target="_blank"><i className="fa-solid fa-envelope me-2"></i>info@invest-connect.be</a>
               </div>
             </div>
           </nav>

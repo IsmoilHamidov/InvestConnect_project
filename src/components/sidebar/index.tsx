@@ -15,7 +15,7 @@ import {
   Calendar,
   Users,
   HelpCircle,
-  Building2,
+  UserPen,
   LogOut,
   Pencil,
 } from "lucide-react";
@@ -25,6 +25,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { HiX } from "react-icons/hi";
 import ProfileForm from "../profileForms";
+import { useToast } from "@/hooks/use-toast";
 
 function SidebarItem({ icon, label, isActive }: SidebarItemProps) {
   return (
@@ -40,7 +41,7 @@ function SidebarItem({ icon, label, isActive }: SidebarItemProps) {
 
 export default function Sidebar() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  
+  const toast = useToast()
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
@@ -54,6 +55,14 @@ export default function Sidebar() {
       window.location.reload();
     }, 100);
     navigate("/");
+  };
+
+  const proccess = () => {
+    toast.toast({
+      description: 'Jarayonda',
+      variant: "warning",
+      duration: 1000
+    });
   };
 
   return (
@@ -170,16 +179,28 @@ export default function Sidebar() {
           />
         </Link>
         <SidebarItem
-          icon={<Building2 className="h-4 w-4" />}
-          label="Takliflar"
+          icon={<UserPen className="h-4 w-4" />}
+          label="Shaxsiy sarlovha"
           isActive
         />
-        <SidebarItem icon={<Calendar className="h-4 w-4" />} label="Kalendar" />
-        <SidebarItem icon={<Users className="h-4 w-4" />} label="Jamiyat" />
-        <SidebarItem
-          icon={<Users className="h-4 w-4" />} // Update icon if incorrect
-          label="Mening kontaktlarim"
-        />
+
+        <button onClick={proccess} className="w-full">
+          <SidebarItem 
+            
+            icon={<Calendar className="h-4 w-4" />}
+            label="Kalendar" />
+        </button>
+        <button onClick={proccess} className="w-full">
+            <SidebarItem icon={<Users className="h-4 w-4" />} label="Jamiyat" />
+        </button>
+
+        <button onClick={proccess} className="w-full">
+            <SidebarItem
+              icon={<Users className="h-4 w-4" />} // Update icon if incorrect
+              label="Mening kontaktlarim"
+            />
+        </button>
+
       </div>
 
       <div className="mt-auto border-t p-2">

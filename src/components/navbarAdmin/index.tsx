@@ -57,7 +57,9 @@ export default function NavbarAdmin() {
           className="hover:bg-white/10 text-white"
           aria-label="Messages"
         >
-          <Mail className="h-5 w-5 " />
+          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=info@invest-connect.be" target="_blank">
+            <Mail className="h-5 w-5 " />
+          </a>
         </Button>
 
 

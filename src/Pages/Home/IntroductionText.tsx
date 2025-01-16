@@ -1,9 +1,10 @@
-import TextImage from "../../assets/images/Group 524.png"
+import TextImage from "../../assets/images/profile_sample.jpg"
+import profilLofo from "../../assets/images/profile_sample_logo.png"
 
 function IntroductionText() {
   return (
     <div className='relative min-h-[64rem] '>
-        <div className='w-full h-[55rem] bg-custom-blue-gray rounded-br-none py-12'
+        <div className='w-full h-[55rem] bg-custom-blue-gray rounded-br-none py-12 -z-10'
             style={{
                 clipPath: 'polygon(0 0, 100% 0, 100% 75%, 0% 100%)'
             }}>
@@ -21,11 +22,18 @@ function IntroductionText() {
                     Shu bois ko‘plab odamlar pul topish va sarmoya kiritishning ishonchli yo‘llarini izlashadi.
                     </span>
                 </div>       
-                <button className='Brown_button relative rounded-3xl p-3 px-12 text-base text-white bg-custom-gray mt-16 '>ALOQA</button>
+                <a href="tel:+998902798892" className='cursor-pointer Brown_button relative rounded-3xl p-3 px-12 text-base text-white bg-custom-gray mt-16 '>ALOQA</a>
             </div>
         </div>
-        <img className='absolute top-[480px] left-1/2 transform -translate-x-1/2 z-5 w-[53rem]  object-contain' 
-            src={TextImage} alt="TextImage" />
+        
+        <div className="absolute w-[54rem] h-[31rem] top-[480px] left-1/2 transform -translate-x-1/2 " >
+            <div className="absolute top-[395px] -left-[35px] border-2 border-white  drop-shadow-2xl
+                 flex justify-center items-center rounded-full   bg-custom-blue-gray w-20 h-20 p-2">
+                <img src={profilLofo} alt="" className="object-contain w-full h-full" />
+            </div>
+            <img className='rounded-2xl border border-custom-blue-gray h-full w-full object-contain shadow-lg ' 
+                src={TextImage} alt="TextImage" />
+        </div>
                 
     </div>
   )
