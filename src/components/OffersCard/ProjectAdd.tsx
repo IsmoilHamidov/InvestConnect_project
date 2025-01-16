@@ -1,15 +1,16 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useForm } from "react-hook-form";
 import { useCreateProductMutation, useGetCategoriesQuery, useGetUsersQuery } from "@/store/slice/products";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
-import { fields } from "./projectAddRequires";
+import { errorTranslations, fields } from "./projectAddRequires";
 import { CategoryType } from "../Category";
 import NavbarAdmin from "../navbarAdmin";
 
 const ProductForm = () => {
   const { register, handleSubmit, reset } = useForm();
-  const [createProduct, { isLoading, isSuccess, isError, }] =
+  const [createProduct, { isLoading, isSuccess, isError }] =
     useCreateProductMutation();
 
   const { data: getUserId } = useGetUsersQuery(undefined);
@@ -42,7 +43,6 @@ const ProductForm = () => {
 
   const navigate = useNavigate();
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = async (data: any) => {
     const formData = new FormData();
 
@@ -76,7 +76,7 @@ const ProductForm = () => {
     try {
       await createProduct(formData).unwrap();
       toast({
-        description: "Product successfully created!",
+        description: "Loyiha muvaffaqiyatli qoshildi!",
         variant: "success",
         duration: 3000,
       });
@@ -84,11 +84,28 @@ const ProductForm = () => {
       navigate("/profile");
     } catch (error) {
       console.error("Error creating product:", error);
-      toast({
-        description: "Failed to create the product. Please try again.",
-        variant: "destructive",
-      });
+    
+      if ((error as any).data) {
+        Object.entries((error as any).data).forEach(([field, messages]) => {
+          if (Array.isArray(messages)) {
+            messages.forEach((msg) => {
+              toast({
+                description: `${
+                  fields.find((f) => f.name === field)?.label || field
+                }: ${errorTranslations[msg] || msg}`,
+                variant: "destructive",
+              });
+            });
+          }
+        });
+      } else {
+        toast({
+          description: "Noma'lum xatolik yuz berdi.",
+          variant: "destructive",
+        });
+      }
     }
+    
   };
 
   return (
@@ -96,7 +113,7 @@ const ProductForm = () => {
 
         <NavbarAdmin/>
     
-      <div className="bg-gray-100 mx-auto border border-red-500 pb-9 pt-24 shadow-md rounded-lg">
+      <div className="bg-gray-100 mx-auto pb-9 pt-24 shadow-md rounded-lg">
         <h2 className="text-2xl text-center font-bold mb-7">Loyiha qo'shing</h2>
         <form
           encType="multipart/form-data"
