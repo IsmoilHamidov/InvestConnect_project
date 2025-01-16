@@ -64,7 +64,7 @@ const PrivateInfoCard = ({ productId }: { productId: number }) => {
 
   return (
     <div className="w-full mt-8 bg-white rounded-2xl shadow-xl overflow-hidden">
-      <div className="relative h-64" id="opened_projects">
+      <div className="relative h-80" id="opened_projects">
         <img
           src={`${baseUrl}${getPrivateInfo.prototype_demo}`}
           alt="Loyiha tasviri"
@@ -93,21 +93,23 @@ const PrivateInfoCard = ({ productId }: { productId: number }) => {
                 <Icon className="text-primary" />
                 <h3 className="font-semibold text-gray-800">{title}</h3>
               </div>
-              <p className="text-gray-600">{value}</p>
+              <p className="text-custom-gray text-base leading-7">{value}</p>
             </div>
           ))}
         </div>
 
         <div className="mt-8 flex flex-col sm:flex-row justify-between items-center gap-4 pt-8 border-t">
-          <div className="flex items-center gap-3">
+          
+          <div className="flex items-center gap-4 ">
             <Phone className="text-primary" />
             <div>
-              <p className="font-medium text-gray-800">Kontakt ma'lumotlari</p>
+              <p className="font-medium text-gray-800 text-base">Kontakt ma'lumotlari</p>
               {getPrivateInfo.contact_info.split('\r\n').map((line: string, index: number) => (
-                <p key={index} className="text-gray-600">{line}</p>
+                <p key={index} className="text-gray-600 text-base">{line}</p>
               ))}
             </div>
           </div>
+
           {getPrivateInfo.legal_documents && (
             <a
               href={`${baseUrl}${getPrivateInfo.legal_documents}`}
