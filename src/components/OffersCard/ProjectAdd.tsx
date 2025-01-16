@@ -121,7 +121,7 @@ const Example = () => {
                   <span className="text-2xl font-semibold">1</span>
                 </div>
               </div>
-              <div className="w-32 h-1 bg-gray-400 transition-all duration-300 ease-in-out"> </div>
+              <div className="w-36 h-1 bg-gray-400 transition-all duration-300 ease-in-out"> </div>
               <div className="flex items-center">
                 <div
                   className={`w-14 h-14 flex items-center justify-center rounded-full border-2 transition-all duration-300 ease-in-out ${
@@ -134,8 +134,6 @@ const Example = () => {
                 </div>
               </div>
         </div>
-
-        
 
         <form
           encType="multipart/form-data"
