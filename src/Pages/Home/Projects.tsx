@@ -19,6 +19,7 @@ function Projects() {
 
   const limitedData = data?.slice(0, 3) || [];
 
+
   return (
     <div className="relative min-h-[60rem] mt-8 ">
       <div
@@ -89,11 +90,10 @@ function Projects() {
                   <Link
                     to={`/product/${card.id}`}
                     onClick={() => {
-                      sessionStorage.setItem("scrollPosition", String(window.scrollY));
-                    }}
+                      sessionStorage.setItem("scrollPosition", String(window.scrollY));}}
                   >
                     <Button className="Blue_button border rounded-[40px] px-4 py-2">
-                      Ontdek meer
+                        Ko'proq bilib olish
                     </Button>
                   </Link>
                 </div>
@@ -102,7 +102,7 @@ function Projects() {
           ))}
         </div>
 
-          <Link to={'/products'} >
+          <Link to={'/products'} onClick={() => window.scrollTo(0, 0)} >
               <button
                 className="Brown_button rounded-3xl p-3 px-12
                  text-base text-white bg-custom-gray mt-5"

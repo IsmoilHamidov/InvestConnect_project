@@ -3,9 +3,14 @@ import { useGetProductQuery } from "@/store/slice/products";
 import { useParams } from "react-router-dom";
 import ImageSlider from "./ImageSlider";
 import PrivateInfoCard from "@/components/PrivateInfoCard";
+import { useEffect } from "react";
 
 export const ProductDetailsPage = () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const { productid } = useParams<{ productid: string | any }>();
   const { data, error,} = useGetProductQuery(productid);
   console.log(data);
