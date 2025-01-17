@@ -18,6 +18,8 @@ const ProductListPage = () => {
     `?search=${search}&degree=&category__name=${category}`
   );
 
+
+
   const location = useLocation();
   useEffect(() => {
     const savedPosition = sessionStorage.getItem("scrollPosition");

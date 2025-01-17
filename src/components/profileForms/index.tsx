@@ -123,7 +123,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ closeModal }) => {
                                 <Input
                                     placeholder={label}
                                     {...register(field, {
-                                        required: `${label} is required`,
+                                        required: `${label} kiritilishi shart`,
                                         onChange: (e) => {
                                             if (field === "firstname" || field === "lastname") {
                                                 e.target.value = capitalizeFirstLetter(e.target.value);
