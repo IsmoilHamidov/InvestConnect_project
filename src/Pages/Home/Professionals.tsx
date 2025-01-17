@@ -15,7 +15,7 @@ const cardInfo = [
     id: 2,
     image: image2,
     name: "Nico Di Tarantok",
-    specialist: "Starup boshqarish menejer",
+    specialist: "Startup boshqarish menejer",
   },
   {
     id: 3,
@@ -62,9 +62,9 @@ function Professionals() {
               ))}
           </div>
 
-          <div className='w-full flex justify-center items-center mt-12'>
+          {/* <div className='w-full flex justify-center items-center mt-12'>
               <button className='Blue_button mt-5 rounded-3xl p-3 px-10 text-base text-white bg-custom-blue-gray'>CONTACTEER</button>
-          </div>
+          </div> */}
         </div>
     </div>
   )

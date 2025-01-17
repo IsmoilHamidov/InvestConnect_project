@@ -7,7 +7,7 @@ const imageBasicUrl = "https://bakirali007.pythonanywhere.com/"
 
 const ImageSlider = () => {
   const { productid } = useParams<{ productid: string | any }>();
-  const { data, error, isLoading } = useGetProductQuery(productid);
+  const { data, error} = useGetProductQuery(productid);
 
   const [selectedImage, setSelectedImage] = useState<string>("");
   const [images, setImages] = useState<string[]>([]);
@@ -20,7 +20,6 @@ const ImageSlider = () => {
     }
   }, [data]);
 
-  if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Something went wrong!</p>;
 
   return (
