@@ -46,17 +46,17 @@ const PaymentAndCheck: React.FC<PaymentAndCheckProps> = ({
     },
     resolver: yupResolver(
       yup.object({
-        message: yup.string().max(200, "Максимум 200 символов").optional(),
+        message: yup.string().max(200, "Maksimal 200 ta belgi").optional(),
         cardNumber: yup
           .string()
           .required("Введите номер карты")
-          .matches(/^[0-9]{4}([ ]?[0-9]{4}){3}$/, "Неверный формат номера карты"),
+          .matches(/^[0-9]{4}([ ]?[0-9]{4}){3}$/, "Noto'g'ri karta raqami formati"),
         expiryDate: yup
           .string()
-          .required("Введите срок действия карты")
+          .required("Kartaning amal qilish muddatini kiriting")
           .matches(
             /^(0[1-9]|1[0-2])\/\d{2}$/,
-            "Неверный формат срока действия (должно быть MM/YY)"
+            "Noto'g'ri amal qilish muddati formati (MM / YY bo'lishi kerak)"
           ),
       })
     ),
@@ -66,19 +66,6 @@ const PaymentAndCheck: React.FC<PaymentAndCheckProps> = ({
   const auth = localStorage.getItem("token");
   const { openModal } = useAuthModalStore();
 
-  const handleAgree = () => {
-    setShowAgreementDialog(false);
-    setShowPaymentDialog(true);
-    if (!auth) {
-      setShowPaymentDialog(false)
-      openModal("login");
-      return toast({
-        title: "Xatolik",
-        description: "Siz tizimga kirmagansiz",
-        variant: "destructive",
-      });
-    }
-  };
 
   const handlePaymentCheck = async (data: PaymentFormData) => {
     try {
@@ -89,26 +76,29 @@ const PaymentAndCheck: React.FC<PaymentAndCheckProps> = ({
         cardNumber: data.cardNumber,
         expiryDate: data.expiryDate,
       }).unwrap();
-
+  
       setPrivateInfoData(response.private_info);
       toast({
         title: "Tolov muvofaqiyatli amalga oshdi!",
         description: `Siz ${amount} USD Toladingiz`,
         variant: "success",
       });
-      if (triggerRef.current) {
-        triggerRef.current.click();
+  
+      setShowAgreementDialog(false);
+      setShowPaymentDialog(false);
+  
+      setTimeout(() => {
         window.location.reload();
-      }
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      }, 300); 
     } catch (err) {
       toast({
-        title: "Ошибка",
-        description: "Что-то пошло не так",
+        title: "Xato",
+        description: "Biror narsa noto'g'ri ketdi",
         variant: "destructive",
       });
     }
   };
+  
 
   const formatCardNumber = (value: string) => {
     return value
@@ -125,29 +115,46 @@ const PaymentAndCheck: React.FC<PaymentAndCheckProps> = ({
 
   return (
     <>
-      <Dialog open={showAgreementDialog} onOpenChange={setShowAgreementDialog}>
-        <DialogTrigger asChild>
-          <Button
-            ref={triggerRef}
-            className="border rounded-[40px] px-5 py-2"
-          >
-            To'lov qilish
-          </Button>
-        </DialogTrigger>
-        <DialogContent className="sm:max-w-2xl">
-          <h1 className="text-xl font-bold mb-4">Shartlar</h1>
-          <AGREEMENT_TERMS />
-          <div className="flex justify-end space-x-2">
-            <Button
-              variant="outline"
-              onClick={() => setShowAgreementDialog(false)}
+      <Dialog
+              open={showAgreementDialog}
+              onOpenChange={(isOpen) => {
+                if (!isOpen) {
+                  setShowAgreementDialog(false);
+                } else if (!auth) {
+                  openModal("login");
+                } else {
+                  setShowAgreementDialog(true);
+                }
+              }}
             >
-              Bekor qilish
-            </Button>
-            <Button onClick={handleAgree}>Roziman</Button>
-          </div>
-        </DialogContent>
-      </Dialog>
+              <DialogTrigger asChild>
+                <Button ref={triggerRef} className="border rounded-[40px] px-5 py-2">
+                  To'lov qilish
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-2xl">
+                <h1 className="text-xl font-bold mb-4">Shartlar</h1>
+                <AGREEMENT_TERMS />
+                <div className="flex justify-end space-x-2">
+                  <Button
+                    variant="outline"
+                    onClick={() => setShowAgreementDialog(false)}
+                  >
+                    Bekor qilish
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      setShowAgreementDialog(false);
+                      setShowPaymentDialog(true);
+                    }}
+                  >
+                    Roziman
+                  </Button>
+                </div>
+              </DialogContent>
+            </Dialog>
+
+
 
       <Dialog open={showPaymentDialog} onOpenChange={setShowPaymentDialog}>
         <DialogContent className="sm:max-w-md">

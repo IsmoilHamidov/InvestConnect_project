@@ -7,7 +7,7 @@ import PrivateInfoCard from "@/components/PrivateInfoCard";
 export const ProductDetailsPage = () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { productid } = useParams<{ productid: string | any }>();
-  const { data, error, isLoading } = useGetProductQuery(productid);
+  const { data, error,} = useGetProductQuery(productid);
   console.log(data);
   
 
@@ -23,9 +23,8 @@ export const ProductDetailsPage = () => {
         </div>
         {error ? (
           <>Oh no, there was an error</>
-        ) : isLoading ? (
-          <>Loading...</>
-        ) : data ? (
+        ) 
+        : data ? (
           <div className="p-4 py-8 pl-0 bg-white  flex justify-between">
             <ImageSlider />
             <div className="flex flex-col w-[48%] gap-y-10 justify-between">
