@@ -1,6 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useForm } from "react-hook-form";
-import { useCreateProductMutation, useGetCategoriesQuery, useGetUsersQuery } from "@/store/slice/products";
+import {
+  useCreateProductMutation,
+  useGetCategoriesQuery,
+  useGetUsersQuery,
+} from "@/store/slice/products";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
@@ -9,20 +12,19 @@ import { CategoryType } from "../Category";
 import NavbarAdmin from "../navbarAdmin";
 import { MdOutlineFileUpload, MdOutlineNavigateNext } from "react-icons/md";
 import { GrFormPrevious } from "react-icons/gr";
-import folderImage from "../../assets/images/rb_4574.png"
-
+import folderImage from "../../assets/images/rb_4574.png";
 
 const Example = () => {
   const { register, handleSubmit, reset } = useForm();
   const [createProduct, { isLoading }] = useCreateProductMutation();
   const { data: getUserId } = useGetUsersQuery(undefined);
   const { data: getCategories } = useGetCategoriesQuery(undefined);
-  const [selectedFile, setSelectedFile] = useState<File | undefined>();
-  const [selectedDoc, setSelectedDoc] = useState<File | undefined>();
-  const [selectedDemo, setSelectedDemo] = useState<File | undefined>();
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [selectedDoc, setSelectedDoc] = useState<File | null>(null);
+  const [selectedDemo, setSelectedDemo] = useState<File | null>(null);
   const { toast } = useToast();
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState("basic"); 
+  const [activeTab, setActiveTab] = useState("basic");
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -60,79 +62,76 @@ const Example = () => {
     formData.append("market_analysis", data.market_analysis);
     formData.append("contact_info", data.contact_info);
 
-      if (selectedFile) {
-        formData.append("image", selectedFile);
-      }
-      if (selectedDoc) {
-        formData.append("legal_documents", selectedDoc);
-      }
-      if (selectedDemo) {
-        formData.append("prototype_demo", selectedDemo);
-      }
-  
-      try {
-        await createProduct(formData).unwrap();
-        toast({
-          description: "Loyiha muvaffaqiyatli qoshildi!",
-          variant: "success",
-          duration: 3000,
-        });
-        reset();
-        navigate("/profile");
-      } catch (error) {
-        console.error("Error creating product:", error);
-      
-        if ((error as any).data) {
-          Object.entries((error as any).data).forEach(([field, messages]) => {
-            if (Array.isArray(messages)) {
-              messages.forEach((msg) => {
-                toast({
-                  description: `${
-                    fields.find((f) => f.name === field)?.label || field
+    if (selectedFile) {
+      formData.append("image", selectedFile);
+    }
+    if (selectedDoc) {
+      formData.append("legal_documents", selectedDoc);
+    }
+    if (selectedDemo) {
+      formData.append("prototype_demo", selectedDemo);
+    }
+
+    try {
+      await createProduct(formData).unwrap();
+      toast({
+        description: "Loyiha muvaffaqiyatli qo'shildi!",
+        variant: "success",
+        duration: 3000,
+      });
+      reset();
+      navigate("/profile");
+    } catch (error) {
+      console.error("Error creating product:", error);
+
+      if ((error as any).data) {
+        Object.entries((error as any).data).forEach(([field, messages]) => {
+          if (Array.isArray(messages)) {
+            messages.forEach((msg) => {
+              toast({
+                description: `${fields.find((f) => f.name === field)?.label || field
                   }: ${errorTranslations[msg] || msg}`,
-                  variant: "destructive",
-                  duration: 10000
-                });
+                variant: "destructive",
+                duration: 10000,
               });
-            }
-          });
-        } else {
-          toast({
-            description: "Noma'lum xatolik yuz berdi.",
-            variant: "destructive",
-          });
-        }
+            });
+          }
+        });
+      } else {
+        toast({
+          description: "Noma'lum xatolik yuz berdi.",
+          variant: "destructive",
+        });
       }
-      
-    };
+    }
+  };
+
   return (
     <>
       <NavbarAdmin />
       <div className="bg-gray-100 mx-auto pb-14 pt-24 shadow-md rounded-lg">
-          <div className="flex items-center justify-center mb-12">
-              <div className="flex items-center">
-                <div
-                  className={`w-14 h-14 flex items-center justify-center rounded-full border-2 transition-all duration-300 ease-in-out ${
-                    activeTab === "basic"
-                      ? "bg-gradient-to-r from-custom-blue-gray to-gray-500 text-white border-[#57737d] "
-                      : " bg-gray-200 text-gray-500 border-gray-300"
-                  }`}
-                >
-                  <span className="text-2xl font-semibold">1</span>
-                </div>
-              </div>
-              <div className="w-36 h-1 bg-gray-400 transition-all duration-300 ease-in-out"> </div>
-              <div className="flex items-center">
-                <div
-                  className={`w-14 h-14 flex items-center justify-center rounded-full border-2 transition-all duration-300 ease-in-out ${
-                    activeTab === "details"
-                      ? "bg-gradient-to-r from-custom-blue-gray to-gray-500 text-white border-[#57737d] "
-                      : "bg-gray-200 text-gray-500 border-gray-300"
-                  }`}
-                >
-                  <span className="text-2xl font-semibold">2</span>
-                </div>
-              </div>
+        <div className="flex items-center justify-center mb-12">
+          <div className="flex items-center">
+            <div
+              className={`w-14 h-14 flex items-center justify-center rounded-full border-2 transition-all duration-300 ease-in-out ${activeTab === "basic"
+                ? "bg-gradient-to-r from-custom-blue-gray to-gray-500 text-white border-[#57737d] "
+                : " bg-gray-200 text-gray-500 border-gray-300"
+                }`}
+            >
+              <span className="text-2xl font-semibold">1</span>
+            </div>
+          </div>
+          <div className="w-36 h-1 bg-gray-400 transition-all duration-300 ease-in-out"></div>
+          <div className="flex items-center">
+            <div
+              className={`w-14 h-14 flex items-center justify-center rounded-full border-2 transition-all duration-300 ease-in-out ${activeTab === "details"
+                ? "bg-gradient-to-r from-custom-blue-gray to-gray-500 text-white border-[#57737d] "
+                : "bg-gray-200 text-gray-500 border-gray-300"
+                }`}
+            >
+              <span className="text-2xl font-semibold">2</span>
+            </div>
+          </div>
         </div>
 
         <form
@@ -142,182 +141,208 @@ const Example = () => {
         >
           {activeTab === "basic" && (
             <>
-            <h2 className="text-[1.5rem] w-full text-center font-semibold mb-11">Loyiha haqida umumiy ma'lumot kiritish</h2>
-            <div className="w-[48%] grid">
+              <h2 className="text-[1.5rem] w-full text-center font-semibold mb-11">
+                Loyiha haqida umumiy ma'lumot kiritish
+              </h2>
+              <div className="w-[48%] grid">
                 <label className="block text-sm font-medium text-gray-600 mb-2">
-                Turkum
+                  Turkum
                 </label>
                 <select
-                {...register("category", { required: true })} 
-                className="w-full bg-background rounded-xl p-3 focus:outline-none "
+                  {...register("category", { required: true })}
+                  className="w-full bg-background rounded-xl p-3 focus:outline-none "
                 >
-                {getCategories &&
+                  {getCategories &&
                     getCategories.map((category: CategoryType) => (
                       <option key={category.id} value={category.id}>
                         {category.name}
-                    </option>
+                      </option>
                     ))}
                 </select>
-            </div>
+              </div>
 
-            {fields
-                .filter((field) => field.type !== "textarea") 
+              {fields
+                .filter((field) => field.type !== "textarea")
                 .map((field) => (
-                    <div key={field.name} className="w-[48%] flex flex-col justify-center">
+                  <div
+                    key={field.name}
+                    className="w-[48%] flex flex-col justify-center"
+                  >
                     <label className="block text-sm font-medium capitalize leading-9">
-                        {field.label}
+                      {field.label}
                     </label>
                     <input
-                        type={field.type}
-                        required
-                        step={field.step || undefined}
-                        placeholder={field.placeholder || ""}
-                        {...register(field.name, { required: true })}
-                        className="w-full p-3 px-3  border-gray-300 rounded-xl"
+                      type={field.type}
+                      required
+                      step={field.step || undefined}
+                      placeholder={field.placeholder || ""}
+                      {...register(field.name, { required: true })}
+                      className="w-full p-3 px-3  border-gray-300 rounded-xl"
                     />
-                    </div>
+                  </div>
                 ))}
-              
-                    <div className="w-full flex justify-center items-center mt-8">
-                        <button
-                            className="w-1/6 py-2 flex items-center justify-center rounded-full Blue_button text-lg  font-medium text-white"
-                            onClick={() => {
-                            const tabs = ["basic", "details"]; // List of available tabs
-                            const currentIndex = tabs.indexOf(activeTab);
-                            const nextIndex = (currentIndex + 1) % tabs.length; 
-                            setActiveTab(tabs[nextIndex]);
-                            }}
-                        >
-                            Oldinga
-                            <MdOutlineNavigateNext size={27}  />
-                        </button>
-                    </div>
+
+              <div className="w-full flex justify-center items-center mt-8">
+                <button
+                  className="w-1/6 py-2 flex items-center justify-center rounded-full Blue_button text-lg  font-medium text-white"
+                  onClick={() => {
+                    setActiveTab("details");
+                  }}
+                >
+                  Oldinga
+                  <MdOutlineNavigateNext size={27} />
+                </button>
+              </div>
             </>
           )}
-
 
           {activeTab === "details" && (
             <>
-            <h2 className="text-[1.5rem] w-full text-center font-semibold mb-8">Loyiha haqida batafsil ma'lumot yuklash</h2>
-                  {fields
-                    .filter((field) => field.type === "textarea") 
-                    .map((field) => (
-                        <div key={field.name} className="w-[48%] flex flex-col justify-center">
-                        <label className="block text-sm font-medium text-custom-gray capitalize leading-9">
-                            {field.label}
-                        </label>
-                        <textarea
-                            {...register(field.name, { required: true })}
-                            placeholder={field.placeholder || ""}
-                            className="w-full border-gray-300 h-[13rem] p-3 rounded-xl resize-none"
-                        />
-                        </div>
-                    ))}
+              <h2 className="text-[1.5rem] w-full text-center font-semibold mb-8">
+                Loyiha haqida batafsil ma'lumot yuklash
+              </h2>
+              {fields
+                .filter((field) => field.type === "textarea")
+                .map((field) => (
+                  <div
+                    key={field.name}
+                    className="w-[48%] flex flex-col justify-center"
+                  >
+                    <label className="block text-sm font-medium text-custom-gray capitalize leading-9">
+                      {field.label}
+                    </label>
+                    <textarea
+                      {...register(field.name, { required: true })}
+                      placeholder={field.placeholder || ""}
+                      className="w-full border-gray-300 h-[13rem] p-3 rounded-xl resize-none"
+                    />
+                  </div>
+                ))}
 
-                    <div className="w-[48%] grid gap-2">
-                        <label htmlFor="image" className="text-sm font-medium text-custom-gray">
-                          Rasm
-                        </label>
-                        <div className="w-full h-[13.2rem] flex flex-col justify-between rounded-xl 
-                        border-2 border-dotted border-custom-gray px-4 py-3 text-gray-700 ">
-                          <input
-                            className="transition-all duration-300"
-                            type="file"
-                            name="image"
-                            accept="image/*"
-                            onChange={handleFileChange}
-                          />
-                          <div className="w-full h-[75%]">
-                            {selectedFile && (
-                              <img
-                                src={URL.createObjectURL(selectedFile)} // Convert file to URL for display
-                                alt="Selected"
-                                className="w-10/12 h-full object-cover rounded-lg"
-                              />
-                            )}
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="w-[48%] grid gap-2">
-                          <label htmlFor="prototype_demo" className="text-sm font-medium text-custom-gray">
-                          Demo prototipi
-                          </label>
-                          <div className="w-full h-[13.2rem] flex flex-col justify-between rounded-xl 
-                         border-2 border-dotted border-custom-gray px-4 py-3 text-gray-700 ">
-                          <input
-                            className="transition-all duration-300"
-                            type="file"
-                            name="prototype_demo"
-                            accept="image/*"
-                            onChange={handleDemoChange}
-                          />
-                          <div className="w-full h-[75%]">
-                            {selectedDemo && (
-                              <img
-                                src={URL.createObjectURL(selectedDemo)} // Convert file to URL for display
-                                alt="Selected"
-                                className="w-10/12 h-full object-cover rounded-lg"
-                              />
-                            )}
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="w-[48%] grid gap-2">
-                          <label htmlFor="prototype_demo" className="text-sm font-medium text-custom-gray">
-                          Yuridik hujjat
-                          </label>
-                          <div className="w-full h-[13.2rem] flex flex-col justify-between rounded-xl 
-                        border-2 border-dotted border-custom-gray px-4 py-3 text-gray-700 ">
-                          <input
-                            className="transition-all duration-300"
-                            type="file"
-                            name="legal_documents"
-                            accept=".pdf, .doc, .docx, .txt"
-                            onChange={handleDocChange}
-                          />
-                          <div className="w-full h-[85%] flex justify-center items-center">
-                            {selectedDoc && (
-                              <img
-                                src={folderImage} 
-                                alt="Selected"
-                                className="h-full object-contain rounded-lg"
-                              />
-                            )}
-                          </div>
-                        </div>
-                      </div>
-
-
-                <div className="w-full flex justify-center gap-x-12 items-center mt-7">
-                      <button
-                          className="w-1/6 py-2 flex justify-center items-center rounded-full Blue_button text-lg  font-medium text-white"
-                          onClick={() => {
-                          const tabs = ["basic", "details"]; 
-                          const currentIndex = tabs.indexOf(activeTab);
-                          const prevIndex = (currentIndex - 1 + tabs.length) % tabs.length; 
-                          setActiveTab(tabs[prevIndex]);
-                          }}
-                      >
-                          <GrFormPrevious size={27} />
-                          Ortga
-                      </button>
-
-                      <button
-                          type="submit"
-                          className={`w-1/6 py-2 flex justify-center items-center gap-2 rounded-full Brown_button text-lg  font-medium text-white ${
-                          isLoading ? "bg-gray-400" : "bg-blue-600 hover:bg-blue-700"
-                          }`}
-                          disabled={isLoading}
-
-                      > <MdOutlineFileUpload size={25} />
-                          {isLoading ? "Yuborilmoqda..." : "Yuborish"}
-                      </button>
+              <div className="w-[48%] grid gap-2">
+                <label htmlFor="image" className="text-sm font-medium text-custom-gray">
+                  Rasm
+                </label>
+                <div
+                  className="w-full h-[13.2rem] flex flex-col justify-center items-center rounded-xl
+        border-2 border-dotted border-custom-gray px-4 py-3 text-gray-700 relative overflow-hidden"
+                >
+                  <input
+                    id="image"
+                    className="absolute inset-0 opacity-0 cursor-pointer"
+                    type="file"
+                    name="image"
+                    accept="image/*"
+                    onChange={handleFileChange}
+                  />
+                  {!selectedFile ? (
+                    <div className="flex flex-col items-center justify-center gap-2">
+                      <MdOutlineFileUpload size={40} className="text-gray-500" />
+                      <p className="text-sm text-gray-500">Rasmni yuklash uchun bu yerni bosing</p>
+                    </div>
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center">
+                      <img
+                        src={URL.createObjectURL(selectedFile)}
+                        alt="Selected"
+                        className="w-full h-full object-cover rounded-lg"
+                      />
+                    </div>
+                  )}
                 </div>
+              </div>
+
+              <div className="w-[48%] grid gap-2">
+                <label htmlFor="prototype_demo" className="text-sm font-medium text-custom-gray">
+                  Demo prototipi
+                </label>
+                <div
+                  className="w-full h-[13.2rem] flex flex-col justify-center items-center rounded-xl
+        border-2 border-dotted border-custom-gray px-4 py-3 text-gray-700 relative overflow-hidden"
+                >
+                  <input
+                    id="prototype_demo"
+                    className="absolute inset-0 opacity-0 cursor-pointer"
+                    type="file"
+                    name="prototype_demo"
+                    accept="image/*"
+                    onChange={handleDemoChange}
+                  />
+                  {!selectedDemo ? (
+                    <div className="flex flex-col items-center justify-center gap-2">
+                      <MdOutlineFileUpload size={40} className="text-gray-500" />
+                      <p className="text-sm text-gray-500">Prototip yuklash uchun bu yerni bosing</p>
+                    </div>
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center">
+                      <img
+                        src={URL.createObjectURL(selectedDemo)}
+                        alt="Selected"
+                        className="w-full h-full object-cover rounded-lg"
+                      />
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <div className="w-[48%] grid gap-2">
+                <label htmlFor="legal_documents" className="text-sm font-medium text-custom-gray">
+                  Yuridik hujjat
+                </label>
+                <div
+                  className="w-full h-[13.2rem] flex flex-col justify-center items-center rounded-xl border-2 border-dotted border-custom-gray px-4 py-3 text-gray-700 relative overflow-hidden"
+                >
+                  <input
+                    id="legal_documents"
+                    className="absolute inset-0 opacity-0 cursor-pointer"
+                    type="file"
+                    name="legal_documents"
+                    accept=".pdf, .doc, .docx, .txt"
+                    onChange={handleDocChange}
+                  />
+                  {!selectedDoc ? (
+                    <div className="flex flex-col items-center justify-center gap-2">
+                      <MdOutlineFileUpload size={40} className="text-gray-500" />
+                      <p className="text-sm text-gray-500">Hujjat yuklash uchun bu yerni bosing</p>
+                    </div>
+                  ) : (
+                    <div className="w-full h-full flex flex-col items-center justify-center">
+                      <img
+                        src={folderImage}
+                        alt="Selected"
+                        className="h-[70%] w-auto object-contain rounded-lg"
+                      />
+                      <p className="mt-2 text-sm text-gray-600 truncate w-full text-center">
+                        {selectedDoc.name}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+
+
+              <div className="w-full flex justify-center gap-x-12 items-center mt-7">
+                <button
+                  className="w-1/6 py-2 flex justify-center items-center rounded-full Blue_button text-lg  font-medium text-white"
+                  onClick={() => setActiveTab("basic")}
+                >
+                  <GrFormPrevious size={27} />
+                  Ortga
+                </button>
+
+                <button
+                  type="submit"
+                  className={`w-1/6 py-2 flex justify-center items-center gap-2 rounded-full Brown_button text-lg  font-medium text-white ${isLoading ? "bg-gray-400" : "bg-blue-600 hover:bg-blue-700"
+                    }`}
+                  disabled={isLoading}
+                >
+                  <MdOutlineFileUpload size={25} />
+                  {isLoading ? "Yuborilmoqda..." : "Yuborish"}
+                </button>
+              </div>
             </>
           )}
-
         </form>
       </div>
     </>
