@@ -10,6 +10,7 @@ import logo_text from "../../assets/images/navLogo.png";
 import { Link } from "react-router-dom";
 import ProfilePopover from "./ProfilePopover ";
 import PrivacyPolicy from "../PrivacyPolicy";
+import { useToast } from "@/hooks/use-toast";
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -37,6 +38,16 @@ const Navbar: React.FC = () => {
     };
   }, []);
 
+  const toast = useToast()
+
+  const proccess = () => {
+    toast.toast({
+      description: 'Jarayonda',
+      variant: "warning",
+      duration: 1400
+    });
+  };
+  
   return (
     <div>
       {/* Navbar */}
@@ -74,43 +85,41 @@ const Navbar: React.FC = () => {
                 <div className="fixed">
                   <ProfilePopover />
                 </div>
-              </div>
-
-            </div>
+              </div></div>
             
-          </div>
+            </div>
+            <div
+              className={`w-full border-t my-1 border-[#749BA9] transition-all duration-500 ease-in-out ${
+                isScrolled ? "opacity-0" : "opacity-100"
+              }`}
+            ></div>
+            <div
+              className={`flex justify-between items-center transition-all duration-500 ease-in-out ${
+                isScrolled ? "hidden" : "flex"
+              }`}
+            >
+              <div className="flex justify-center items-center gap-x-3 py-2">
+                <img src={logo_text} className="h-14 object-contain" alt="logo_text" />
+              </div>
+              <div className="h-full flex items-center gap-x-7 text-white text-base font-normal">
+                <a onClick={proccess} href="#">Taklif</a>
+                <a onClick={proccess} href="#">Investitsiya Platformasi</a>
+                <a onClick={proccess} href="#">Hamkorlar</a>
+              </div>
+              <div className="flex items-center gap-x-7 text-white text-base font-light">
+                <a href="tel:+998902798892"><i className="cursor-pointer fa-solid fa-phone me-2"></i>09 / 279 88 92</a>
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=info@invest-connect.be" target="_blank"><i className="fa-solid fa-envelope me-2"></i>info@invest-connect.be</a>
+              </div>
+            </div>
+          </nav>
+          {/* bg-[#B29C6F] */}
           <div
-            className={`w-full border-t my-1 border-[#749BA9] transition-all duration-500 ease-in-out ${
-              isScrolled ? "opacity-0" : "opacity-100"
-            }`}
+            className="h-1 bg-custom-blue-gray transition-all duration-300"
+            style={{ width: `${scrollProgress}%` }}
           ></div>
-          <div
-            className={`flex justify-between items-center transition-all duration-500 ease-in-out ${
-              isScrolled ? "hidden" : "flex"
-            }`}
-          >
-            <div className="flex justify-center items-center gap-x-3 py-2">
-              <img src={logo_text} className="h-14 object-contain" alt="logo_text" />
-            </div>
-            <div className="h-full flex items-center gap-x-7 text-white text-base font-normal">
-              <a href="#">Taklif</a>
-              <a href="#">Investitsiya Platformasi</a>
-              <a href="#">Hamkorlar</a>
-            </div>
-            <div className="flex items-center gap-x-7 text-white text-base font-light">
-              <a href="#"><i className="fa-solid fa-phone me-2"></i>09 / 279 88 92</a>
-              <a href="#"><i className="fa-solid fa-envelope me-2"></i>info@invest-connect.be</a>
-            </div>
-          </div>
-        </nav>
-        {/* bg-[#B29C6F] */}
-        <div
-          className="h-1 bg-custom-blue-gray transition-all duration-300"
-          style={{ width: `${scrollProgress}%` }}
-        ></div>
+        </div>
       </div>
-    </div>
-  );
-};
-
-export default Navbar;
+    );
+  };
+  
+  export default Navbar;

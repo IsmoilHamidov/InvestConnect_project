@@ -5,42 +5,43 @@ import { Button } from "@/components/ui/button";
 import { Product, ProductCard } from "@/components/ui/ProductCard";
 import { useGetProductsQuery } from "@/store/slice/products";
 import { useEffect, useState } from "react";
+import { TbCategory } from "react-icons/tb";
+import { IoSearch } from "react-icons/io5";
 import { useLocation } from "react-router-dom";
 
 const ProductListPage = () => {
   const [search, setSearch] = useState("");
-  // const [degree, setDegree] = useState("");
   const [category, setCategory] = useState("");
   const [isModalOpen, setModalOpen] = useState(false);
 
   const { data, error, isLoading } = useGetProductsQuery(
     `?search=${search}&degree=&category__name=${category}`
-    );
-  
+  );
+
+
 
   const location = useLocation();
   useEffect(() => {
     const savedPosition = sessionStorage.getItem("scrollPosition");
     if (savedPosition) {
       window.scrollTo(0, parseInt(savedPosition, 10));
-      sessionStorage.removeItem("scrollPosition"); 
+      sessionStorage.removeItem("scrollPosition");
     }
-  }, [location]);;
-  
+  }, [location]);
 
   return (
     <>
       <NavbarAdmin />
-      <main className="pb-4">
+      <main className="pb-4 bg-gray-100">
         <Banner>
           <div>
-            <div className=" flex gap-5 pt-36 pb-32  justify-center items-center">
+            <div className=" flex gap-8 pt-36 pb-32  justify-center items-center">
               <Button
                 variant="secondary"
                 onClick={() => setModalOpen(true)}
-                className="px-6 py-3 text-sm text-white"
-              >
-                Показать категории
+                className="flex items-center justify-center px-5 py-5 text-sm text-white rounded-xl"
+              > <TbCategory />
+               Kategoriyalarni ko'rsatish
               </Button>
               <CategoriesModal
                 open={isModalOpen}
@@ -49,36 +50,32 @@ const ProductListPage = () => {
                   setCategory(selectedCategory)
                 }
               />
-              {/* <select
-              //   className="border bg-background px-6 py-3 border-black rounded-[75px] text-primary"
-              //   value={degree} // Привязка состояния к select
-              //   onChange={(e) => setDegree(e.target.value)} // Обновление состояния Degree
-              // >
-              //   <option value="">---</option>
-              //   <option value="bronze">bronze</option>
-              //   <option value="silver">silver</option>
-              //   <option value="gold">gold</option>
-              // </select> */}
-              <input
-                className="border bg-background w-[20rem] px-5 py-3 border-black rounded-[75px]"
-                type="text"
-                value={search}
-                placeholder="Search"
-                onChange={(e) => {
-                  setSearch(e.target.value);
-                }}
-              />
+
+              <div className="flex justify-center items-center gap-x-3 border bg-background
+               w-[24.2rem] px-4 py-3 border-custom-gray rounded-[75px] text-custom-gray">
+                <IoSearch size={22} />
+                <input
+                  className="bg-background w-[24rem]  border-black rounded-e-[75px]"
+                  type="text"
+                  value={search}
+                  placeholder="Izlash"
+                  onChange={(e) => {
+                    setSearch(e.target.value);
+                  }}
+                />
+              </div>
+
             </div>
           </div>
         </Banner>
         <div className="products grid grid-cols-3 pt-48  max-w-7xl m-auto">
           {error ? (
-            <>Oh no, there was an error</>
+            <>Xatolik yuz berdi</>
           ) : isLoading ? (
-            <>Loading...</>
+            <>Yuklanmoqda...</>
           ) : data ? (
             <>
-              {data?.map((product: Product, index: number) => (
+              {[...data]?.reverse().map((product: Product, index: number) => (
                 <ProductCard key={index} product={product} />
               ))}
             </>

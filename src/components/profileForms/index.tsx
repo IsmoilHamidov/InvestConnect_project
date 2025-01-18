@@ -65,7 +65,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ closeModal }) => {
             };
             await updateProfileDetail({ id: data?.id, data: updatedFormData }).unwrap();
             toast({
-                description: `Saved!`,
+                description: `Saqlandi!`,
                 variant: "success",
             });
             closeModal();
@@ -74,16 +74,16 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ closeModal }) => {
             }, 800);
         } catch (err) {
             toast({
-                description: `Failed to update profile!`,
+                description: `Profilni yangilab bo‘lmadi!`,
                 variant: "destructive",
             });
         }
     };
     useEffect(() => {
         if (error) {
-            console.error("Error fetching user data:", error);
+            console.error("Foydalanuvchi maʼlumotlarini olishda xatolik yuz berdi:", error);
             toast({
-                description: `Failed to fetch profile data.`,
+                description: `Profil maʼlumotlarini olib boʻlmadi.`,
                 variant: "destructive",
             });
         }
@@ -114,16 +114,16 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ closeModal }) => {
                 <div className="w-full">
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 w-full">
                         {[
-                            { label: "First Name", field: "firstname" },
-                            { label: "Last Name", field: "lastname" },
-                            { label: "Email", field: "email" },
-                            { label: "Username", field: "username" },
+                            { label: "Ism", field: "firstname" },
+                            { label: "Familiya", field: "lastname" },
+                            { label: "Elektron pochta", field: "email" },
+                            { label: "Foydalanuvchi nomi", field: "username" },
                         ].map(({ label, field }) => (
                             <div key={field}>
                                 <Input
                                     placeholder={label}
                                     {...register(field, {
-                                        required: `${label} is required`,
+                                        required: `${label} kiritilishi shart`,
                                         onChange: (e) => {
                                             if (field === "firstname" || field === "lastname") {
                                                 e.target.value = capitalizeFirstLetter(e.target.value);

@@ -3,11 +3,18 @@ import { useGetProductQuery } from "@/store/slice/products";
 import { useParams } from "react-router-dom";
 import ImageSlider from "./ImageSlider";
 import PrivateInfoCard from "@/components/PrivateInfoCard";
+import { useEffect } from "react";
 
 export const ProductDetailsPage = () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const { productid } = useParams<{ productid: string | any }>();
-  const { data, error, isLoading } = useGetProductQuery(productid);
+  const { data, error,} = useGetProductQuery(productid);
+  console.log(data);
+  
 
   return (
     <>
@@ -18,24 +25,15 @@ export const ProductDetailsPage = () => {
           <h1 className="text-4xl font-semibold text-custom-gray capitalize">
             {data?.name}
           </h1>
-          <div className="bg-green-200 py-1 px-4 rounded-xl text-green-700">
-            активный
-          </div>
         </div>
         {error ? (
           <>Oh no, there was an error</>
-        ) : isLoading ? (
-          <>Loading...</>
-        ) : data ? (
+        ) 
+        : data ? (
           <div className="p-4 py-8 pl-0 bg-white  flex justify-between">
-            {/* <div className="w-1/2 h-auto border flex flex-row gap-y-3">
-                  <img src={data.image} alt="product image" 
-                  className="h-[22rem] w-full object-cover rounded-xl" />
-                </div> */}
-
             <ImageSlider />
             <div className="flex flex-col w-[48%] gap-y-10 justify-between">
-              <div className="w-[70%] p-5 rounded-xl shadow-md border border-gray-200 bg-white">
+              <div className="w-[400px] min-w-[70%] p-5 rounded-xl shadow-md border border-gray-200 bg-white">
                 <div className="flex justify-between items-center mb-4">
                   <span className="text-custom-gray text-base font-medium">
                     Narxi:
@@ -45,9 +43,9 @@ export const ProductDetailsPage = () => {
 
                 <div className="flex justify-between items-center mb-4">
                   <span className="text-custom-gray text-base font-medium">
-                    Samaradorlik:
+                  Samaradorlik:
                   </span>
-                  <p className="0 font-semibold">{data.rendement}%</p>
+                  <p className="0 font-semibold">{data.rendement}</p>
                 </div>
 
                 <div className="flex justify-between items-center mb-4">
@@ -61,7 +59,7 @@ export const ProductDetailsPage = () => {
                   <span className="text-custom-gray text-base font-medium">
                     Sotuvdan Daromad:
                   </span>
-                  <p className="font-semibold">$100/oy</p>
+                  <p className="font-semibold">{data.investment_range}</p>
                 </div>
               </div>
 
@@ -83,22 +81,28 @@ export const ProductDetailsPage = () => {
                   </div>
 
                   <div className="flex justify-between items-center text-custom-gray text-[15px]">
-                    <div className="">Joylashuv</div>
+                    <div>Joylashuv</div>
                     <div className="flex-grow border-t border-dotted border-gray-800 mx-2"></div>
-                    <span className=" font-medium">{data.location}</span>
+                    <span className="font-medium truncate max-w-[450px]">{data.location}</span>
                   </div>
 
                   <div className="flex justify-between items-center text-custom-gray text-[15px]">
-                    <div className="">Oxirgi yangilangan vaqti</div>
-                    <div className="flex-grow border-t border-dotted border-gray-800 mx-2"></div>
-                    <span className="font-medium ">{data.created_at}</span>
-                  </div>
+                      <div className="self-start">Qisqacha tavsif</div>
+                      <div className="self-start mt-[12px] flex-grow border-t border-dotted border-gray-800 mx-2"></div>
+                      <span
+                        className="font-medium max-w-[70%]  overflow-hidden text-ellipsis"
+                        style={{
+                          display: '-webkit-box',
+                          WebkitBoxOrient: 'vertical',
+                          WebkitLineClamp: 3, 
+                          lineHeight: '1.5rem', 
+                        }}
+                      >
+                        {data.short_description}
+                      </span>
 
-                  <div className="flex justify-between items-center text-custom-gray text-[15px]">
-                    <div className="">Qo‘shimcha holat</div>
-                    <div className="flex-grow border-t border-dotted border-gray-800 mx-2"></div>
-                    <span className="font-medium">Yangi uzilgan uzum</span>
                   </div>
+                
                 </div>
               </div>
             </div>

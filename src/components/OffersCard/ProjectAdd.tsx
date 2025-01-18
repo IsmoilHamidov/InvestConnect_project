@@ -1,130 +1,352 @@
-import { useForm } from 'react-hook-form';
-import { useCreateProductMutation } from '@/store/slice/products';
-import { useState } from 'react';
-import { useToast } from '@/hooks/use-toast';
+import { useForm } from "react-hook-form";
+import {
+  useCreateProductMutation,
+  useGetCategoriesQuery,
+  useGetUsersQuery,
+} from "@/store/slice/products";
+import { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
+import { useNavigate } from "react-router-dom";
+import { errorTranslations, fields } from "./projectAddRequires";
+import { CategoryType } from "../Category";
+import NavbarAdmin from "../navbarAdmin";
+import { MdOutlineFileUpload, MdOutlineNavigateNext } from "react-icons/md";
+import { GrFormPrevious } from "react-icons/gr";
+import folderImage from "../../assets/images/rb_4574.png";
 
-const ProductForm = () => {
+const Example = () => {
   const { register, handleSubmit, reset } = useForm();
-  const { toast } = useToast()
-  const [createProduct, { isLoading, isSuccess, isError }] = useCreateProductMutation();
-
+  const [createProduct, { isLoading }] = useCreateProductMutation();
+  const { data: getUserId } = useGetUsersQuery(undefined);
+  const { data: getCategories } = useGetCategoriesQuery(undefined);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [selectedDoc, setSelectedDoc] = useState<File | null>(null);
+  const [selectedDemo, setSelectedDemo] = useState<File | null>(null);
+  const { toast } = useToast();
+  const navigate = useNavigate();
+  const [activeTab, setActiveTab] = useState("basic");
+
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
+    if (e.target.files) {
       setSelectedFile(e.target.files[0]);
     }
   };
   const handleDocChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
+    if (e.target.files) {
       setSelectedDoc(e.target.files[0]);
     }
   };
-  const fields = [
-    { name: 'name', label: 'Name', type: 'text' },
-    { name: 'description', label: 'Description', type: 'textarea' },
-    { name: 'location', label: 'Location', type: 'text' },
-    { name: 'user', label: 'User ID', type: 'number' },
-    { name: 'category', label: 'Category', type: 'number' },
-    { name: 'rendement', label: 'Rendement (%)', type: 'number' },
-    { name: 'price', label: 'Price', type: 'number', step: '0.01' },
-    { name: 'kampanya_egasi', label: 'Company Owner', type: 'text' },
-    { name: 'kontact', label: 'Contact', type: 'text' },
-    { name: 'campany_name', label: 'Company Name', type: 'text' },
-    { name: 'short_description', label: 'Short Description', type: 'text' },
-    { name: 'investment_range', label: 'Investment Range', type: 'text' },
-    { name: 'team_info', label: 'Team Info', type: 'text' },
-    { name: 'business_plan', label: 'Business Plan', type: 'text' },
-    { name: 'use_of_investment', label: 'Use of Investment', type: 'text' },
-    { name: 'financial_forecasts', label: 'Financial Forecasts', type: 'text' },
-    { name: 'team_detaill', label: 'Team Detail', type: 'text' },
-    { name: 'market_analysis', label: 'Market Analysis', type: 'text' },
-    { name: 'legal_documents', label: 'Legal Documents', type: 'file' },
-    { name: 'contact_info', label: 'Contact Info', type: 'text' },
-    { name: 'oylik_daromadi', label: 'Monthly Revenue', type: 'number', step: '0.01' },
-    { name: 'soff_foydasi', label: 'Net Profit', type: 'number', step: '0.01' },
-  ];
+
+  const handleDemoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      setSelectedDemo(e.target.files[0]);
+    }
+  };
 
   const onSubmit = async (data: any) => {
     const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("description", data.description);
+    formData.append("location", data.location);
+    formData.append("user", getUserId?.id || "");
+    formData.append("category", data.category);
+    formData.append("rendement", `${data.rendement}%`);
+    formData.append("price", parseFloat(data.price).toFixed(2));
+    formData.append("short_description", data.short_description);
+    formData.append("investment_range", data.investment_range);
+    formData.append("team_info", data.team_info);
+    formData.append("business_plan", data.business_plan);
+    formData.append("use_of_investment", data.use_of_investment);
+    formData.append("financial_forecasts", data.financial_forecasts);
+    formData.append("team_details", data.team_details);
+    formData.append("market_analysis", data.market_analysis);
+    formData.append("contact_info", data.contact_info);
 
-    // Add all text and number fields to FormData
-    Object.keys(data).map((key) => {
-      if (data[key]) {
-        formData.append(key, String(data[key]));
-      }
-    });
-
-    // Add selected files to FormData
     if (selectedFile) {
-      formData.append('image', selectedFile);
+      formData.append("image", selectedFile);
     }
     if (selectedDoc) {
-      formData.append('legal_documents', selectedDoc);
+      formData.append("legal_documents", selectedDoc);
+    }
+    if (selectedDemo) {
+      formData.append("prototype_demo", selectedDemo);
     }
 
     try {
       await createProduct(formData).unwrap();
-      reset(); // Clear the form
-      setSelectedFile(null); // Clear file inputs
-      setSelectedDoc(null);
-    } catch (error) {
-      console.error('Error creating product:', error);
       toast({
-        variant: "destructive",
-        description: "Xatolik",
-      })
+        description: "Loyiha muvaffaqiyatli qo'shildi!",
+        variant: "success",
+        duration: 3000,
+      });
+      reset();
+      navigate("/profile");
+    } catch (error) {
+      console.error("Error creating product:", error);
 
+      if ((error as any).data) {
+        Object.entries((error as any).data).forEach(([field, messages]) => {
+          if (Array.isArray(messages)) {
+            messages.forEach((msg) => {
+              toast({
+                description: `${fields.find((f) => f.name === field)?.label || field
+                  }: ${errorTranslations[msg] || msg}`,
+                variant: "destructive",
+                duration: 10000,
+              });
+            });
+          }
+        });
+      } else {
+        toast({
+          description: "Noma'lum xatolik yuz berdi.",
+          variant: "destructive",
+        });
+      }
     }
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-white shadow-md rounded-lg">
-      <h2 className="text-2xl font-bold mb-4">Create Product</h2>
-      <form encType="multipart/form-data" onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-        {fields.map((field) => (
-          <div key={field.name}>
-            <label className="block text-sm font-medium">{field.label}</label>
-            {field.type === 'textarea' ? (
-              <textarea
-                {...register(field.name, { required: true })}
-                className="w-full mt-1 border-gray-300 rounded-md shadow-sm"
-              />
-            ) : (
-              <input
-                type={field.type}
-                step={field.step || undefined}
-                {...register(field.name, { required: field.type !== 'file' })}
-                className="w-full mt-1 border-gray-300 rounded-md shadow-sm"
-              />
-            )}
+    <>
+      <NavbarAdmin />
+      <div className="bg-gray-100 mx-auto pb-14 pt-24 shadow-md rounded-lg">
+        <div className="flex items-center justify-center mb-12">
+          <div className="flex items-center">
+            <div
+              className={`w-14 h-14 flex items-center justify-center rounded-full border-2 transition-all duration-300 ease-in-out ${activeTab === "basic"
+                ? "bg-gradient-to-r from-custom-blue-gray to-gray-500 text-white border-[#57737d] "
+                : " bg-gray-200 text-gray-500 border-gray-300"
+                }`}
+            >
+              <span className="text-2xl font-semibold">1</span>
+            </div>
           </div>
-        ))}
-
-        <div>
-          <label className="block text-sm font-medium">Upload Image</label>
-          <input type="file" name="image" accept="image/*" onChange={handleFileChange} />
+          <div className="w-36 h-1 bg-gray-400 transition-all duration-300 ease-in-out"></div>
+          <div className="flex items-center">
+            <div
+              className={`w-14 h-14 flex items-center justify-center rounded-full border-2 transition-all duration-300 ease-in-out ${activeTab === "details"
+                ? "bg-gradient-to-r from-custom-blue-gray to-gray-500 text-white border-[#57737d] "
+                : "bg-gray-200 text-gray-500 border-gray-300"
+                }`}
+            >
+              <span className="text-2xl font-semibold">2</span>
+            </div>
+          </div>
         </div>
 
-        <div>
-          <label className="block text-sm font-medium">Upload Legal Documents</label>
-          <input type="file" name="legal_documents" accept=".pdf,.doc,.docx" onChange={handleDocChange} />
-        </div>
-
-        <button
-          type="submit"
-          className={`w-full py-2 px-4 text-white font-medium rounded-md shadow-sm ${isLoading ? 'bg-gray-400' : 'bg-blue-600 hover:bg-blue-700'
-            }`}
-          disabled={isLoading}
+        <form
+          encType="multipart/form-data"
+          onSubmit={handleSubmit(onSubmit)}
+          className="max-w-7xl m-auto flex flex-wrap justify-between items-center gap-y-7  text-custom-gray"
         >
-          {isLoading ? 'Submitting...' : 'Submit'}
-        </button>
-        {isSuccess && <p className="text-green-600 mt-2">Product created successfully!</p>}
-        {isError && <p className="text-red-600 mt-2">Failed to create product.</p>}
-      </form>
-    </div>
+          {activeTab === "basic" && (
+            <>
+              <h2 className="text-[1.5rem] w-full text-center font-semibold mb-11">
+                Loyiha haqida umumiy ma'lumot kiritish
+              </h2>
+              <div className="w-[48%] grid">
+                <label className="block text-sm font-medium text-gray-600 mb-2">
+                  Turkum
+                </label>
+                <select
+                  {...register("category", { required: true })}
+                  className="w-full bg-background rounded-xl p-3 focus:outline-none "
+                >
+                  {getCategories &&
+                    getCategories.map((category: CategoryType) => (
+                      <option key={category.id} value={category.id}>
+                        {category.name}
+                      </option>
+                    ))}
+                </select>
+              </div>
+
+              {fields
+                .filter((field) => field.type !== "textarea")
+                .map((field) => (
+                  <div
+                    key={field.name}
+                    className="w-[48%] flex flex-col justify-center"
+                  >
+                    <label className="block text-sm font-medium capitalize leading-9">
+                      {field.label}
+                    </label>
+                    <input
+                      type={field.type}
+                      required
+                      step={field.step || undefined}
+                      placeholder={field.placeholder || ""}
+                      {...register(field.name, { required: true })}
+                      className="w-full p-3 px-3  border-gray-300 rounded-xl"
+                    />
+                  </div>
+                ))}
+
+              <div className="w-full flex justify-center items-center mt-8">
+                <button
+                  className="w-1/6 py-2 flex items-center justify-center rounded-full Blue_button text-lg  font-medium text-white"
+                  onClick={() => {
+                    setActiveTab("details");
+                  }}
+                >
+                  Oldinga
+                  <MdOutlineNavigateNext size={27} />
+                </button>
+              </div>
+            </>
+          )}
+
+          {activeTab === "details" && (
+            <>
+              <h2 className="text-[1.5rem] w-full text-center font-semibold mb-8">
+                Loyiha haqida batafsil ma'lumot yuklash
+              </h2>
+              {fields
+                .filter((field) => field.type === "textarea")
+                .map((field) => (
+                  <div
+                    key={field.name}
+                    className="w-[48%] flex flex-col justify-center"
+                  >
+                    <label className="block text-sm font-medium text-custom-gray capitalize leading-9">
+                      {field.label}
+                    </label>
+                    <textarea
+                      {...register(field.name, { required: true })}
+                      placeholder={field.placeholder || ""}
+                      className="w-full border-gray-300 h-[13rem] p-3 rounded-xl resize-none"
+                    />
+                  </div>
+                ))}
+
+              <div className="w-[48%] grid gap-2">
+                <label htmlFor="image" className="text-sm font-medium text-custom-gray">
+                  Rasm
+                </label>
+                <div
+                  className="w-full h-[13.2rem] flex flex-col justify-center items-center rounded-xl
+        border-2 border-dotted border-custom-gray px-4 py-3 text-gray-700 relative overflow-hidden"
+                >
+                  <input
+                    id="image"
+                    className="absolute inset-0 opacity-0 cursor-pointer"
+                    type="file"
+                    name="image"
+                    accept="image/*"
+                    onChange={handleFileChange}
+                  />
+                  {!selectedFile ? (
+                    <div className="flex flex-col items-center justify-center gap-2">
+                      <MdOutlineFileUpload size={40} className="text-gray-500" />
+                      <p className="text-sm text-gray-500">Rasmni yuklash uchun bu yerni bosing</p>
+                    </div>
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center">
+                      <img
+                        src={URL.createObjectURL(selectedFile)}
+                        alt="Selected"
+                        className="w-full h-full object-cover rounded-lg"
+                      />
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <div className="w-[48%] grid gap-2">
+                <label htmlFor="prototype_demo" className="text-sm font-medium text-custom-gray">
+                  Demo prototipi
+                </label>
+                <div
+                  className="w-full h-[13.2rem] flex flex-col justify-center items-center rounded-xl
+        border-2 border-dotted border-custom-gray px-4 py-3 text-gray-700 relative overflow-hidden"
+                >
+                  <input
+                    id="prototype_demo"
+                    className="absolute inset-0 opacity-0 cursor-pointer"
+                    type="file"
+                    name="prototype_demo"
+                    accept="image/*"
+                    onChange={handleDemoChange}
+                  />
+                  {!selectedDemo ? (
+                    <div className="flex flex-col items-center justify-center gap-2">
+                      <MdOutlineFileUpload size={40} className="text-gray-500" />
+                      <p className="text-sm text-gray-500">Prototip yuklash uchun bu yerni bosing</p>
+                    </div>
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center">
+                      <img
+                        src={URL.createObjectURL(selectedDemo)}
+                        alt="Selected"
+                        className="w-full h-full object-cover rounded-lg"
+                      />
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <div className="w-[48%] grid gap-2">
+                <label htmlFor="legal_documents" className="text-sm font-medium text-custom-gray">
+                  Yuridik hujjat
+                </label>
+                <div
+                  className="w-full h-[13.2rem] flex flex-col justify-center items-center rounded-xl border-2 border-dotted border-custom-gray px-4 py-3 text-gray-700 relative overflow-hidden"
+                >
+                  <input
+                    id="legal_documents"
+                    className="absolute inset-0 opacity-0 cursor-pointer"
+                    type="file"
+                    name="legal_documents"
+                    accept=".pdf, .doc, .docx, .txt"
+                    onChange={handleDocChange}
+                  />
+                  {!selectedDoc ? (
+                    <div className="flex flex-col items-center justify-center gap-2">
+                      <MdOutlineFileUpload size={40} className="text-gray-500" />
+                      <p className="text-sm text-gray-500">Hujjat yuklash uchun bu yerni bosing</p>
+                    </div>
+                  ) : (
+                    <div className="w-full h-full flex flex-col items-center justify-center">
+                      <img
+                        src={folderImage}
+                        alt="Selected"
+                        className="h-[70%] w-auto object-contain rounded-lg"
+                      />
+                      <p className="mt-2 text-sm text-gray-600 truncate w-full text-center">
+                        {selectedDoc.name}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+
+
+              <div className="w-full flex justify-center gap-x-12 items-center mt-7">
+                <button
+                  className="w-1/6 py-2 flex justify-center items-center rounded-full Blue_button text-lg  font-medium text-white"
+                  onClick={() => setActiveTab("basic")}
+                >
+                  <GrFormPrevious size={27} />
+                  Ortga
+                </button>
+
+                <button
+                  type="submit"
+                  className={`w-1/6 py-2 flex justify-center items-center gap-2 rounded-full Brown_button text-lg  font-medium text-white ${isLoading ? "bg-gray-400" : "bg-blue-600 hover:bg-blue-700"
+                    }`}
+                  disabled={isLoading}
+                >
+                  <MdOutlineFileUpload size={25} />
+                  {isLoading ? "Yuborilmoqda..." : "Yuborish"}
+                </button>
+              </div>
+            </>
+          )}
+        </form>
+      </div>
+    </>
   );
 };
 
-export default ProductForm;
- 
+export default Example;

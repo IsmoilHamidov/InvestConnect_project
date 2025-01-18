@@ -35,7 +35,7 @@ export const api = createApi({
 
     paymentAndcheck: builder.mutation({
       query: (data) => ({
-        url: "/payment-and-check/",
+        url: "/api/payment-unlock/",
         method: "POST",
         body: data,
         headers: {
@@ -75,6 +75,7 @@ export const api = createApi({
         },
       }),
     }),
+
     getPrivateInfo: builder.query({
       query: (id) => ({
         url: `/products/information-detail/${id}`,
@@ -84,6 +85,7 @@ export const api = createApi({
         },
       }),
     }),
+    
     getUsers: builder.query({
       query: () => ({
         url: "/users/profile/",

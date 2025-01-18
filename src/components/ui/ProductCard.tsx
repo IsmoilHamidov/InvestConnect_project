@@ -26,12 +26,12 @@ interface ProductCardProps {
 
 export const ProductCard: React.FC<ProductCardProps> = ({ product }) => (
   <div className="product grid px-4 py-6">
-    <div className="border border-[#B29C6F] rounded-md">
-      <div className="relative group">
+    <div className="border bg-white border-[#B29C6F] rounded-md flex flex-col min-h-[500px]">
+      <div className="relative group flex-1">
         <img
           src={product.image}
           alt={product.name}
-          className="w-full h-[368px] object-cover z-20 rounded-t-md "
+          className="w-full h-[368px] object-cover z-20 rounded-t-md"
           style={{ objectPosition: "center" }} // Центрирование изображения
         />
 
@@ -39,54 +39,40 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => (
             <span className="text-white text-xl font-medium z-40">Batafsil</span>
         </Link>
 
-        {/* <div className="px-4 py-2 bg-[#B29C6F] absolute top-4 -right-[21px] text-red-50 z-20">
-            Topligging
-        </div> */}
-
         <div className="absolute text-red-50 z-20 top-4 -right-[16px] grid justify-items-end">
-            <div className="bg-[#B29C6F]  px-4 py-3">
-                <p className="font-normal text-white text-[14px] leading-3 ">
-                    Topligging
+            <div className="bg-[#B29C6F] px-4 py-3">
+                <p className="font-normal text-white text-[14px] leading-3">
+                  Yuqori joylashuv
                 </p>
             </div>
-            <div
-                className="bg-[#443B3A] w-4 h-3"
-                style={{
-                clipPath: "polygon(0 0, 0 100%, 100% 0)",
-                }}>
-            </div>
+            <div className="bg-[#443B3A] w-4 h-3" style={{ clipPath: "polygon(0 0, 0 100%, 100% 0)" }} />
         </div>
-
 
         <Star
           role="button"
           tabIndex={0}
-          className="cursor-pointer absolute top-5 left-5 scale-125 fill-white text-[#B29C6F] focus:fill-[#B29C6F]  focus:text-gray-800 focus:scale-30 outline-none z-30"
+          className="cursor-pointer absolute top-5 left-5 scale-125 fill-white text-[#B29C6F] focus:fill-[#B29C6F] focus:text-gray-800 focus:scale-30 outline-none z-30"
         />
       </div>
 
-
-      <div className=" bg-gray-100 grid px-4 py-6 gap-3 rounded-b-md">
+      <div className="grid px-4 py-6 gap-3 rounded-b-md flex-1">
         <div className="flex justify-between">
           <span className="title text-custom-gray text-xl font-medium">
             {product.name}
           </span>
-          {/* <span className="text-3xl">{product.name}</span> */}
         </div>
         <div className="flex justify-between">
           <div className="title">{product.category.name}</div>
-          {/* <div>{product.name}</div> */}
         </div>
         <div>{product.description}</div>
         <div className="flex justify-between pt-5">
           <div className="text-[22px]">{product.price} Uzs</div>
-
           <Link to={`/product/${product.id}`}
             onClick={() => {
               sessionStorage.setItem("scrollPosition", String(window.scrollY));
             }}>
             <Button className="Blue_button border rounded-[40px] px-4 py-2">
-              Ontdek meer
+             Ko'proq bilib olish
             </Button>
           </Link>
         </div>

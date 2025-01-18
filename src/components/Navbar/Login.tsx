@@ -22,17 +22,17 @@ export const LoginModal: React.FC<INavbarStepProps> = () => {
 
       toast({
         className: "top-center",
-        description: `Login successful`,
+        description: `Xisobga muvaffaqiyatli kirildi`,
         variant: "success",
       });
       localStorage.setItem("token", response.token);
       closeModal();
       window.location.reload();
     } catch (err) {
-      console.error("Login failed:", err);
+      console.error("Kirish muvaffaqiyatsiz tugadi:", err);
       toast({
         className: "top-center bg-red-500",
-        description: `Login failed. Please check your credentials and try again.`,
+        description: `Kirish muvaffaqiyatsiz tugadi. Iltimos qayta urinib ko'ring.`,
         variant: "destructive",
       });
     }
@@ -83,12 +83,12 @@ export const LoginModal: React.FC<INavbarStepProps> = () => {
           disabled={isLoading}
           className="Blue_button font-semibold w-full bg-[#749BA9] text-white p-2 rounded-2xl mt-2"
         >
-          {isLoading ? "Logging in..." : "Login"}
+          {isLoading ? "Kirilmoqda..." : "Kirish"}
         </button>
 
 
         <p className="flex justify-center flex-wrap mb-0 mt-3 text-center font-normal text-base">
-          Hali ro'yxatdan o'tganmisiz?
+          Ro'yxaydan o'tmaganmsiz?
           <span
             className="text-[#ce8f11] ms-2 text-base font-medium cursor-pointer text-center "
             onClick={() => openModal("registration")}

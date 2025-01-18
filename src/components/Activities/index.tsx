@@ -22,10 +22,16 @@ const ActivityCard: React.FC<{id: any, name: string; price: string; month: strin
                     </CardHeader>
                 </div>
             </Card>
-            <div className="flex px-3 min-w-52 py-3 items-center 
-            justify-center gap-x-4 font-normal bg-gray-700 text-white rounded-xl">
+            <Link to={`/product/${id}`} onClick={() => {
+            sessionStorage.setItem("scrollPosition", String(window.scrollY));}}
+             className="flex px-4 min-w-64 py-[12px] items-center 
+                 justify-between font-normal bg-gray-700 text-white rounded-2xl">
                 <span className="text-[22px] font-normal tracking-wide">$ {price}</span>
-            </div>
+                <div className="bg-gray-100  text-gray-700 h-full
+                 px-3 py-[1.7px] rounded-lg text-sm font-medium">
+                    Ko'rish
+                </div>
+            </Link>
         </Card>
     );
 };
@@ -33,6 +39,8 @@ const ActivityCard: React.FC<{id: any, name: string; price: string; month: strin
 const Activities = () => {
     const [reloading, setReloading] = useState(false); // Track reloading state
     const { data, error, isLoading, refetch } = useGetInvestorProductsQuery(undefined);
+    console.log(data);
+    
 
     const handleRefresh = async () => {
         setReloading(true); 
@@ -41,7 +49,7 @@ const Activities = () => {
     };
 
     return (
-        <div className="w-full mx-auto bg-white py-7 px-7 rounded-2xl mt-9 shadow-lg border">
+        <div className="w-full mx-auto bg-white py-7 px-7 rounded-2xl mt-10 mb-3 shadow-lg border">
             <div className="flex flex-row justify-between items-center mb-4">
                 <h2 className="text-xl font-semibold text-gray-800 mb-5">Ochilgan loyihalar</h2>
                 <button

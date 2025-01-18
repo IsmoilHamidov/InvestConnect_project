@@ -23,16 +23,16 @@ export const Verification: React.FC<INavbarStepProps> = () => {
 
       if (response.data) {
         toast({
-          description: `Your new verification code is ${response.data.verification_code}`,
+          description: `Sizning yangi tasdiqlash kodingiz ${response.data.verification_code}`,
           variant: "success",
         });
       } else {
-        throw new Error("No verification code returned");
+        throw new Error("Tasdiqlash kodi qaytarilmadi");
       }
     } catch (err) {
-      console.error("Failed to resend code:", err);
+      console.error("Kodni qayta jo'natib bo'lmadi:", err);
       toast({
-        description: "Failed to resend verification code.",
+        description: "Tasdiqlash kodini qayta jo'natib bo'lmadi.",
         variant: "destructive",
       });
     }
@@ -74,14 +74,14 @@ export const Verification: React.FC<INavbarStepProps> = () => {
   const handleVerify = async () => {
     const code = verificationCode.join("");
     if (!userId || code.length !== 6) {
-      alert("Please enter the complete verification code.");
+      alert("Iltimos, to'liq tasdiqlash kodini kiriting.");
       return;
     }
 
     try {
       const response = await verifyUser({ user: userId, code }).unwrap();
       toast({
-        description: `Verification successful!`,
+        description: `Tasdiqlash muvaffaqiyatli o'tdi`,
         variant: "success",
       });
       closeModal();
@@ -91,7 +91,7 @@ export const Verification: React.FC<INavbarStepProps> = () => {
       window.location.reload();
     } catch (err) {
       console.error("Verification failed:", err);
-      alert("Verification failed. Please try again.");
+      alert("Tekshirish muvaffaqiyatsiz tugadi. Iltimos, qayta urinib ko'ring.");
     }
   };
 
@@ -103,7 +103,7 @@ export const Verification: React.FC<INavbarStepProps> = () => {
     if (data) {
       toast({
         duration: 13000,
-        description: `Your verification code is ${data.verification_code}`,
+        description: `Sizning tasdiqlash kodingiz ${data.verification_code}`,
         variant: "success",
       });
     }
@@ -112,9 +112,9 @@ export const Verification: React.FC<INavbarStepProps> = () => {
 
   useEffect(() => {
     if (error) {
-      console.error("Error fetching verification code:", error);
+      console.error("Tasdiqlash kodini olishda xatolik:", error);
       toast({
-        description: `Failed to fetch code: ${String(error)}`,
+        description: `Kodni olib bo'lmadi: ${String(error)}`,
         variant: "destructive",
       });
     }
@@ -148,7 +148,7 @@ export const Verification: React.FC<INavbarStepProps> = () => {
               disabled={isVerifying}
               className="Blue_button text-center font-semibold h-10 w-[47%] bg-custom-blue-gray text-white p-2 rounded-lg "
             >
-              {isVerifying ? "Verifying..." : "Verify"}
+              {isVerifying ? "Tastiqlanyapti..." : "Tastiqlash"}
             </button>
 
             <button
