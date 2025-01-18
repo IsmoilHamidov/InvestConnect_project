@@ -1,25 +1,25 @@
 import { useForm } from 'react-hook-form';
 import { useCreateProductMutation } from '@/store/slice/products';
 import { useState } from 'react';
+import { useToast } from '@/hooks/use-toast';
 
 const ProductForm = () => {
   const { register, handleSubmit, reset } = useForm();
+  const { toast } = useToast()
   const [createProduct, { isLoading, isSuccess, isError }] = useCreateProductMutation();
 
-  const [selectedFile, setSelectedFile] = useState<{}>(null);
-  const [selectedDoc, setSelectedDoc] = useState<{}>(null);
-
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [selectedDoc, setSelectedDoc] = useState<File | null>(null);
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files[0]) {
+    if (e.target.files && e.target.files[0]) {
       setSelectedFile(e.target.files[0]);
     }
   };
   const handleDocChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files[0]) {
+    if (e.target.files && e.target.files[0]) {
       setSelectedDoc(e.target.files[0]);
     }
   };
-
   const fields = [
     { name: 'name', label: 'Name', type: 'text' },
     { name: 'description', label: 'Description', type: 'textarea' },
@@ -31,47 +31,31 @@ const ProductForm = () => {
     { name: 'kampanya_egasi', label: 'Company Owner', type: 'text' },
     { name: 'kontact', label: 'Contact', type: 'text' },
     { name: 'campany_name', label: 'Company Name', type: 'text' },
-
-    { name: 'short_description', label: 'Company short_description', type: 'text' },
-    { name: 'investment_range', label: 'investment_range', type: 'text' },
-    { name: 'team_info', label: 'team_info Name', type: 'text' },
-    { name: 'business_plan', label: 'business_plan Name', type: 'text' },
-    { name: 'use_of_investment', label: 'use_of_investment Name', type: 'text' },
-    { name: 'financial_forecasts', label: 'financial_forecasts Name', type: 'text' },
-    { name: 'team_detaill', label: 'team_detaill Name', type: 'text' },
-    { name: 'market_analysis', label: 'market_analysis Name', type: 'text' },
-    { name: 'legal_documents', label: 'legal_documents Name', type: 'file' },
-    { name: 'contact_info', label: 'Company contact_info	null', type: 'text' },
-
+    { name: 'short_description', label: 'Short Description', type: 'text' },
+    { name: 'investment_range', label: 'Investment Range', type: 'text' },
+    { name: 'team_info', label: 'Team Info', type: 'text' },
+    { name: 'business_plan', label: 'Business Plan', type: 'text' },
+    { name: 'use_of_investment', label: 'Use of Investment', type: 'text' },
+    { name: 'financial_forecasts', label: 'Financial Forecasts', type: 'text' },
+    { name: 'team_detaill', label: 'Team Detail', type: 'text' },
+    { name: 'market_analysis', label: 'Market Analysis', type: 'text' },
+    { name: 'legal_documents', label: 'Legal Documents', type: 'file' },
+    { name: 'contact_info', label: 'Contact Info', type: 'text' },
     { name: 'oylik_daromadi', label: 'Monthly Revenue', type: 'number', step: '0.01' },
     { name: 'soff_foydasi', label: 'Net Profit', type: 'number', step: '0.01' },
   ];
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = async (data: any) => {
     const formData = new FormData();
 
-    // Add all text fields to FormData
-    formData.append('name', data.name);
-    formData.append('description', data.description);
-    formData.append('location', data.location);
-    formData.append('user', data.user);
-    formData.append('category', data.category);
+    // Add all text and number fields to FormData
+    Object.keys(data).map((key) => {
+      if (data[key]) {
+        formData.append(key, String(data[key]));
+      }
+    });
 
-    formData.append('short_description', data.short_description);
-    formData.append('investment_range', data.investment_range);
-    formData.append('team_info', data.team_info);
-    formData.append('business_plan', data.business_plan);
-    formData.append('use_of_investment', data.use_of_investment);
-    formData.append('financial_forecasts', data.financial_forecasts);
-    formData.append('team_detaill', data.team_detaill);
-    formData.append('market_analysis', data.market_analysis);
-    formData.append('contact_info', data.contact_info);
-    formData.append('rendement', `${data.rendement}%`);
-
-    formData.append('price', parseFloat(data.price).toFixed(2));
-
-    // Add the file
+    // Add selected files to FormData
     if (selectedFile) {
       formData.append('image', selectedFile);
     }
@@ -81,12 +65,18 @@ const ProductForm = () => {
 
     try {
       await createProduct(formData).unwrap();
-      reset();
+      reset(); // Clear the form
+      setSelectedFile(null); // Clear file inputs
+      setSelectedDoc(null);
     } catch (error) {
       console.error('Error creating product:', error);
+      toast({
+        variant: "destructive",
+        description: "Xatolik",
+      })
+
     }
   };
-
 
   return (
     <div className="max-w-2xl mx-auto p-6 bg-white shadow-md rounded-lg">
@@ -104,14 +94,22 @@ const ProductForm = () => {
               <input
                 type={field.type}
                 step={field.step || undefined}
-                {...register(field.name, { required: true })}
+                {...register(field.name, { required: field.type !== 'file' })}
                 className="w-full mt-1 border-gray-300 rounded-md shadow-sm"
               />
             )}
           </div>
         ))}
 
-        <input type="file" name="image" accept="image/*" onChange={handleFileChange} />
+        <div>
+          <label className="block text-sm font-medium">Upload Image</label>
+          <input type="file" name="image" accept="image/*" onChange={handleFileChange} />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium">Upload Legal Documents</label>
+          <input type="file" name="legal_documents" accept=".pdf,.doc,.docx" onChange={handleDocChange} />
+        </div>
 
         <button
           type="submit"
@@ -129,3 +127,4 @@ const ProductForm = () => {
 };
 
 export default ProductForm;
+ 
