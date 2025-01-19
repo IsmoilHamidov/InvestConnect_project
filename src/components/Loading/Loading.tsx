@@ -16,12 +16,12 @@ const Loading: React.FC = () => {
   return (
     <div className="w-full h-[100vh] bg-gray-100  flex justify-center items-center">
       <dotlottie-wc
-            src="https://lottie.host/e75cafe1-da2a-4d03-a300-3579697c2cf9/zcZ1fk0JpY.lottie"
-            autoplay
-            loop
-            style={{ width: "510px", height: "510px" }}
-            >
-        </dotlottie-wc>
+        src="https://lottie.host/e75cafe1-da2a-4d03-a300-3579697c2cf9/zcZ1fk0JpY.lottie"
+        autoplay
+        loop
+        style={{ width: "510px", height: "510px" }}
+      >
+      </dotlottie-wc>
     </div>
   );
 };

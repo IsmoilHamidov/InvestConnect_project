@@ -61,7 +61,6 @@ const Example = () => {
     formData.append("team_details", data.team_details);
     formData.append("market_analysis", data.market_analysis);
     formData.append("contact_info", data.contact_info);
-
     if (selectedFile) {
       formData.append("image", selectedFile);
     }
@@ -71,7 +70,6 @@ const Example = () => {
     if (selectedDemo) {
       formData.append("prototype_demo", selectedDemo);
     }
-
     try {
       await createProduct(formData).unwrap();
       toast({
