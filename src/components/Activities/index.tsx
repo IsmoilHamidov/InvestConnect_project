@@ -3,8 +3,8 @@ import { useGetInvestorProductsQuery } from "@/store/slice/apiSlice";
 import { RefreshCcw } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-
-const ActivityCard: React.FC<{id: any, name: string; price: string; month: string; image: string }> = ({id, name, price, month, image }) => {
+import { Skeleton } from "@mui/material";
+const ActivityCard: React.FC<{ id: any, name: string; price: string; month: string; image: string }> = ({ id, name, price, month, image }) => {
     return (
         <Card className="flex w-full justify-between items-center bg-gray-100 rounded-lg px-4 py-1">
             <Card className="border-none bg-transparent shadow-none">
@@ -23,8 +23,9 @@ const ActivityCard: React.FC<{id: any, name: string; price: string; month: strin
                 </div>
             </Card>
             <Link to={`/product/${id}`} onClick={() => {
-            sessionStorage.setItem("scrollPosition", String(window.scrollY));}}
-             className="flex px-4 min-w-64 py-[12px] items-center 
+                sessionStorage.setItem("scrollPosition", String(window.scrollY));
+            }}
+                className="flex px-4 min-w-64 py-[12px] items-center 
                  justify-between font-normal bg-gray-700 text-white rounded-2xl">
                 <span className="text-[22px] font-normal tracking-wide">$ {price}</span>
                 <div className="bg-gray-100  text-gray-700 h-full
@@ -40,12 +41,12 @@ const Activities = () => {
     const [reloading, setReloading] = useState(false); // Track reloading state
     const { data, error, isLoading, refetch } = useGetInvestorProductsQuery(undefined);
     console.log(data);
-    
+
 
     const handleRefresh = async () => {
-        setReloading(true); 
-        await refetch();   
-        setReloading(false); 
+        setReloading(true);
+        await refetch();
+        setReloading(false);
     };
 
     return (
@@ -54,22 +55,22 @@ const Activities = () => {
                 <h2 className="text-xl font-semibold text-gray-800 mb-5">Ochilgan loyihalar</h2>
                 <button
                     className={`flex items-center gap-x-2 p-2 rounded-full  ${reloading ? 'animate-spin' : 'bg-transparent'}`}
-                    onClick={handleRefresh} 
-                    disabled={isLoading || reloading} 
+                    onClick={handleRefresh}
+                    disabled={isLoading || reloading}
                 >
                     {reloading ? (
-                    <span
-                        className="animate-spin"
-                        style={{
-                            transition: 'transform .3s ease-in-out' 
-                        }}
+                        <span
+                            className="animate-spin"
+                            style={{
+                                transition: 'transform .3s ease-in-out'
+                            }}
                         >
-                        <RefreshCcw size={22} />
+                            <RefreshCcw size={22} />
                         </span>
-                    
+
                     ) : (
                         <>
-                            <span className="text-base font-medium"> 
+                            <span className="text-base font-medium">
                                 Yangilash
                             </span>
                             <RefreshCcw size={22} />
@@ -79,8 +80,25 @@ const Activities = () => {
             </div>
 
             {isLoading && !reloading && (
-                <div className="flex items-center justify-center h-full text-base">
-                    <p>Loyihalar yuklanmoqda...</p>
+                <div className="flex flex-col gap-4">
+                    {Array(2)
+                        .fill(null)
+                        .map((_, index) => (
+                            <div
+                                key={index}
+                                className="flex flex-row items-center gap-4 border rounded-lg p-4"
+                            >
+                                <Skeleton
+                                    variant="rectangular"
+                                    width={80}
+                                    height={80}
+                                    className="rounded-lg"
+                                />
+                                <div className="flex flex-col flex-1">
+                                    <Skeleton variant="text" width="50%" height={30} />
+                                </div>
+                            </div>
+                        ))}
                 </div>
             )}
 

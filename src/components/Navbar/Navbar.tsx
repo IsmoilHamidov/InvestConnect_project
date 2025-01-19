@@ -13,8 +13,8 @@ import PrivacyPolicy from "../PrivacyPolicy";
 import { useToast } from "@/hooks/use-toast";
 
 const Navbar: React.FC = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
+  const [isScrolled, setIsScrolled] = useState<boolean>(false);
+  const [scrollProgress, setScrollProgress] = useState<number>(0);
 
   useEffect(() => {
     const handleScroll = () => {

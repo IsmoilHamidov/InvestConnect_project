@@ -8,6 +8,7 @@ import {
   DialogTrigger,
 } from "../ui/dialog";
 import { useNavigate } from "react-router-dom";
+import { Skeleton } from '@mui/material';
 
 import {
   Home,
@@ -91,7 +92,10 @@ export default function Sidebar() {
           {error ? (
             <>Yo'q, xatolik yuz berdi</>
           ) : isLoading ? (
-            <>Yuklanmoqda...</>
+            <>
+                <Skeleton variant="text" width="120px" height={20} />
+                <Skeleton variant="text" width="120px" height={20} />
+            </>
           ) : data ? (
             <>
               <h2 className="font-semibold text-base text-custom-gray">
@@ -101,8 +105,8 @@ export default function Sidebar() {
                 {data?.role === "startup"
                   ? "Loyiha asoschisi"
                   : data?.role === "investor"
-                  ? "Sarmoya kirituvchi"
-                  : "Noma'lum rol"}
+                    ? "Sarmoya kirituvchi"
+                    : "Noma'lum rol"}
               </p>
             </>
           ) : null}
@@ -185,20 +189,20 @@ export default function Sidebar() {
         />
 
         <button onClick={proccess} className="w-full">
-          <SidebarItem 
-            
+          <SidebarItem
+
             icon={<Calendar className="h-4 w-4" />}
             label="Kalendar" />
         </button>
         <button onClick={proccess} className="w-full">
-            <SidebarItem icon={<Users className="h-4 w-4" />} label="Jamiyat" />
+          <SidebarItem icon={<Users className="h-4 w-4" />} label="Jamiyat" />
         </button>
 
         <button onClick={proccess} className="w-full">
-            <SidebarItem
-              icon={<Users className="h-4 w-4" />} // Update icon if incorrect
-              label="Mening kontaktlarim"
-            />
+          <SidebarItem
+            icon={<Users className="h-4 w-4" />} 
+            label="Mening kontaktlarim"
+          />
         </button>
 
       </div>
