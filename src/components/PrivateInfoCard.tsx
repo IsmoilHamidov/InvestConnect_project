@@ -32,7 +32,7 @@ const PrivateInfoCard = ({ productId }: { productId: number }) => {
   }
 
   if (isLoading) {
-    return <div className="w-full mt-8 p-4 text-center">Loading...</div>;
+    return <div className="w-full mt-8 p-4 text-center"></div>;
   }
 
   if (!getPrivateInfo) {

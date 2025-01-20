@@ -4,17 +4,39 @@ import { useParams } from "react-router-dom";
 import ImageSlider from "./ImageSlider";
 import PrivateInfoCard from "@/components/PrivateInfoCard";
 import { useEffect } from "react";
+import { Skeleton } from "@mui/material";
 
 export const ProductDetailsPage = () => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   const { productid } = useParams<{ productid: string | any }>();
-  const { data, error,} = useGetProductQuery(productid);
+  const { data, error, isLoading } = useGetProductQuery(productid);
   console.log(data);
-  
+
+  const renderSkeletonsId = () => {
+    return (
+      <>
+        <Skeleton variant="text" width="50%" height={50} sx={{ marginBottom: 5 }} />
+        <div className="flex gap-8">
+          <div className="w-[50%]">
+            <Skeleton variant="rounded" width="100%" height={350} sx={{marginBottom:8}} />
+            <Skeleton variant="rounded" width="15%" height={70} />
+
+          </div>
+          <div className="w-[50%] flex flex-col gap-6">
+            <Skeleton variant="text" width="80%" height={40} />
+            <Skeleton variant="text" width="70%" height={30} />
+            <Skeleton variant="text" width="60%" height={30} />
+            <Skeleton variant="text" width="90%" height={50} />
+            <Skeleton variant="text" width="100%" height={100} />
+          </div>
+        </div>
+      </>
+    );
+  };
+
 
   return (
     <>
@@ -28,65 +50,67 @@ export const ProductDetailsPage = () => {
         </div>
         {error ? (
           <>Oh no, there was an error</>
-        ) 
-        : data ? (
-          <div className="p-4 py-8 pl-0 bg-white  flex justify-between">
-            <ImageSlider />
-            <div className="flex flex-col w-[48%] gap-y-10 justify-between">
-              <div className="w-[400px] min-w-[70%] p-5 rounded-xl shadow-md border border-gray-200 bg-white">
-                <div className="flex justify-between items-center mb-4">
-                  <span className="text-custom-gray text-base font-medium">
-                    Narxi:
-                  </span>
-                  <p className="font-semibold text-[22px] ">${data.price}</p>
-                </div>
-
-                <div className="flex justify-between items-center mb-4">
-                  <span className="text-custom-gray text-base font-medium">
-                  Samaradorlik:
-                  </span>
-                  <p className="0 font-semibold">{data.rendement}</p>
-                </div>
-
-                <div className="flex justify-between items-center mb-4">
-                  <span className="text-custom-gray text-base font-medium">
-                    Ulush:
-                  </span>
-                  <p className="font-semibold ">50%</p>
-                </div>
-
-                <div className="flex justify-between items-center">
-                  <span className="text-custom-gray text-base font-medium">
-                    Sotuvdan Daromad:
-                  </span>
-                  <p className="font-semibold">{data.investment_range}</p>
-                </div>
-              </div>
-
-              <div className="rounded-xl bg-white capitalize">
-                <p className="text-sm text-custom-gray font-medium">
-                  ИКТУ: 00806001001000000
-                </p>
-                <div className="mt-5 space-y-5">
-                  <div className="flex justify-between items-center text-custom-gray text-[14px]">
-                    <div className="">Loyiha nomi</div>
-                    <div className="flex-grow border-t border-dotted border-gray-800 mx-2"></div>
-                    <span className="font-medium ">{data.name}</span>
+        ) : isLoading ? (
+          renderSkeletonsId()
+        )
+          : data ? (
+            <div className="p-4 py-8 pl-0 bg-white  flex justify-between">
+              <ImageSlider />
+              <div className="flex flex-col w-[48%] gap-y-10 justify-between">
+                <div className="w-[400px] min-w-[70%] p-5 rounded-xl shadow-md border border-gray-200 bg-white">
+                  <div className="flex justify-between items-center mb-4">
+                    <span className="text-custom-gray text-base font-medium">
+                      Narxi:
+                    </span>
+                    <p className="font-semibold text-[22px] ">${data.price}</p>
                   </div>
 
-                  <div className="flex justify-between items-center text-custom-gray text-[14px]">
-                    <div className="">Kategoriya</div>
-                    <div className="flex-grow border-t border-dotted border-gray-800 mx-2"></div>
-                    <span className=" font-medium">{data.category}</span>
+                  <div className="flex justify-between items-center mb-4">
+                    <span className="text-custom-gray text-base font-medium">
+                      Samaradorlik:
+                    </span>
+                    <p className="0 font-semibold">{data.rendement}</p>
                   </div>
 
-                  <div className="flex justify-between items-center text-custom-gray text-[15px]">
-                    <div>Joylashuv</div>
-                    <div className="flex-grow border-t border-dotted border-gray-800 mx-2"></div>
-                    <span className="font-medium truncate max-w-[450px]">{data.location}</span>
+                  <div className="flex justify-between items-center mb-4">
+                    <span className="text-custom-gray text-base font-medium">
+                      Ulush:
+                    </span>
+                    <p className="font-semibold ">50%</p>
                   </div>
 
-                  <div className="flex justify-between items-center text-custom-gray text-[15px]">
+                  <div className="flex justify-between items-center">
+                    <span className="text-custom-gray text-base font-medium">
+                      Sotuvdan Daromad:
+                    </span>
+                    <p className="font-semibold">{data.investment_range}</p>
+                  </div>
+                </div>
+
+                <div className="rounded-xl bg-white capitalize">
+                  <p className="text-sm text-custom-gray font-medium">
+                    ИКТУ: 00806001001000000
+                  </p>
+                  <div className="mt-5 space-y-5">
+                    <div className="flex justify-between items-center text-custom-gray text-[14px]">
+                      <div className="">Loyiha nomi</div>
+                      <div className="flex-grow border-t border-dotted border-gray-800 mx-2"></div>
+                      <span className="font-medium ">{data.name}</span>
+                    </div>
+
+                    <div className="flex justify-between items-center text-custom-gray text-[14px]">
+                      <div className="">Kategoriya</div>
+                      <div className="flex-grow border-t border-dotted border-gray-800 mx-2"></div>
+                      <span className=" font-medium">{data.category}</span>
+                    </div>
+
+                    <div className="flex justify-between items-center text-custom-gray text-[15px]">
+                      <div>Joylashuv</div>
+                      <div className="flex-grow border-t border-dotted border-gray-800 mx-2"></div>
+                      <span className="font-medium truncate max-w-[450px]">{data.location}</span>
+                    </div>
+
+                    <div className="flex justify-between items-center text-custom-gray text-[15px]">
                       <div className="self-start">Qisqacha tavsif</div>
                       <div className="self-start mt-[12px] flex-grow border-t border-dotted border-gray-800 mx-2"></div>
                       <span
@@ -94,20 +118,20 @@ export const ProductDetailsPage = () => {
                         style={{
                           display: '-webkit-box',
                           WebkitBoxOrient: 'vertical',
-                          WebkitLineClamp: 3, 
-                          lineHeight: '1.5rem', 
+                          WebkitLineClamp: 3,
+                          lineHeight: '1.5rem',
                         }}
                       >
                         {data.short_description}
                       </span>
 
+                    </div>
+
                   </div>
-                
                 </div>
               </div>
             </div>
-          </div>
-        ) : null}
+          ) : null}
         <PrivateInfoCard productId={productid} />
       </main>
     </>
