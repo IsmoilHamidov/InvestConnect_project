@@ -1,7 +1,10 @@
+import { useEffect } from "react";
 import TextImage from "../../assets/images/profile_sample.jpg"
 import profilLofo from "../../assets/images/profile_sample_logo.png"
 
 function IntroductionText() {
+
+
   return (
     <div className='relative min-h-[64rem] '>
         <div className='w-full h-[55rem] bg-custom-blue-gray rounded-br-none py-12 -z-10'
@@ -10,8 +13,9 @@ function IntroductionText() {
             }}>
 
             <div className='flex flex-col justify-center items-center max-w-7xl m-auto text-white font-light'>
-                <h3 className='mb-5 text-3xl'>Siz to'g'ri joyga keldingiz.</h3>
-                <div className='flex text-center flex-col items-center justify-center  w-10/12'>
+                <h3 className='mb-5 text-3xl' data-aos="fade-down">Siz to'g'ri joyga keldingiz.</h3>
+                <div  data-aos="fade-up" data-aos-delay="200" 
+                 className='flex text-center flex-col items-center justify-center  w-10/12'>
                     <p className='leading-8'>Har doim sarmoya kiritish uchun innovatsion va barqaror loyihalar izlayapsizmi?
                     InvestConnect – bu investorlar va g‘oya egalari uchun mo‘ljallangan global platforma. Bizning maqsadimiz – yangi startaplarni, kreativ biznes g‘oyalarni va rivojlanayotgan loyihalarni qo‘llab-quvvatlash uchun samarali bog‘lovchi bo‘lish.
                     </p>
@@ -31,7 +35,7 @@ function IntroductionText() {
                  flex justify-center items-center rounded-full   bg-custom-blue-gray w-20 h-20 p-2">
                 <img src={profilLofo} alt="" className="object-contain w-full h-full" />
             </div>
-            <img className='rounded-2xl border border-custom-blue-gray h-full w-full object-contain shadow-lg ' 
+            <img  className='rounded-2xl border border-custom-blue-gray h-full w-full object-contain shadow-lg ' 
                 src={TextImage} alt="TextImage" />
         </div>
                 

@@ -256,7 +256,7 @@ const Example = () => {
                 </label>
                 <div
                   className="w-full h-[13.2rem] flex flex-col justify-center items-center rounded-xl
-        border-2 border-dotted border-custom-gray px-4 py-3 text-gray-700 relative overflow-hidden"
+                   border-2 border-dotted border-custom-gray px-4 py-3 text-gray-700 relative overflow-hidden"
                 >
                   <input
                     id="prototype_demo"

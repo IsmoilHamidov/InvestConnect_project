@@ -36,8 +36,13 @@ function Projects() {
         </h3>
 
         <div className="flex justify-between items-center mt-16 w-[80rem] px-4 py-6">
-          {limitedData.map((card: { id: Key | null | undefined; image: string | undefined; name: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined; category: { name: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; }; description: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; price: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; }) => (
-            <div key={card.id} className="border border-[#B29C6F] rounded-md product grid ">
+          {limitedData.map((card: { id: Key | null | undefined; image: string | undefined; name: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined; category: { name: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; }; description: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; price: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined;},index: number) => (
+            <div key={card.id} 
+              data-aos="fade-zoom-in"
+              data-aos-easing="ease-in-back"
+              data-aos-offset="0"
+              data-aos-delay={index * 450} 
+              className="border border-[#B29C6F] rounded-md product grid ">
               <div>
                 
               </div>
@@ -103,7 +108,7 @@ function Projects() {
         </div>
 
           <Link to={'/products'} onClick={() => window.scrollTo(0, 0)} >
-              <button
+              <button id="about_us"
                 className="Brown_button rounded-3xl p-3 px-12
                  text-base text-white bg-custom-gray mt-5"
               >

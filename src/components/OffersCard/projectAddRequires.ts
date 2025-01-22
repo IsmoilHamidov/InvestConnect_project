@@ -52,9 +52,9 @@ export const fields = [
   },
   {
     name: "short_description",
-    label: "kompaniyaning qisqacha tavsifi",
+    label: "Loyiha haqida qisqacha tavsifi",
     type: "text",
-    placeholder: "Kompaniya haqida qisqacha ma'lumot yozing",
+    placeholder: "Loyiha haqida haqida qisqacha ma'lumot yozing",
   },
   {
     name: "team_info",

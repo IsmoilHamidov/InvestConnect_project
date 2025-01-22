@@ -77,7 +77,8 @@ const Navbar: React.FC = () => {
               className="Blue_button text-white border-0 rounded-3xl p-2 px-3 text-sm bg-[#749BA9]">
                 <PrivacyPolicy />
               </button>
-              <Link to={"/products"}>Loyihalar</Link>
+              <Link  onClick={() => window.scrollTo(0, 0)}
+              to={"/products"}>Loyihalar</Link>
               <a href="#about_us">Biz haqimizda</a>
               <a href="#our_service">Bizning Xizmatlar</a>
 

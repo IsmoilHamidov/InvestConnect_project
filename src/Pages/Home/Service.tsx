@@ -3,8 +3,12 @@ import { ServiceArr } from '@/constants/service';
 
 function Service() {
   return (
-    <div className="py-16 mt-20 flex flex-col justify-center items-center" id='our_service'>
-     <h2 className='text-center text-[2.5rem] font-light mb-7' >Bizning xizmatlar</h2>
+    <div className="py-16 mt-20 flex flex-col justify-center items-center">
+     <h2 className='text-center text-[2.5rem] font-light mb-7'
+      data-aos="fade-up"
+      data-aos-anchor-placement="top-bottom"
+      data-aos-delay="1000"
+      >Bizning xizmatlar</h2>
       {ServiceArr.map((service, index) => (
         <div
           key={service.id}
@@ -13,12 +17,19 @@ function Service() {
           }`}
         >
           <div className="w-[62%]  h-auto p-2 py-4">
-            <h3 className="text-custom-blue-gray text-2xl font-semibold 
+            <h3 
+                data-aos="fade-up"
+                data-aos-anchor-placement="top-bottom"
+                data-aos-delay="1100"
+                className="text-custom-blue-gray text-2xl font-semibold 
                 mb-1 first-letter:text-3xl ">
                 {service.title}
             </h3>
 
-            <div className='flex gap-x-4 mt-4'>
+            <div
+             data-aos="fade-up"
+             data-aos-anchor-placement="top-bottom"
+             data-aos-delay="1150" className='flex gap-x-4 mt-4'>
                 <div className="px-[5px] h-[full]  bg-custom-blue-gray "></div>
                 <p className='text-custom-gray leading-7' >{service.text}</p>
             </div>
@@ -27,7 +38,9 @@ function Service() {
           <div
             className={`w-[30%] mt-4 flex ${
               index % 2 !== 0 ? 'justify-start' : 'justify-end'
-            }`}>
+            }`}
+            data-aos="fade-up"
+            data-aos-delay={index * 1200}>
           
             <img
               src={service.img}
