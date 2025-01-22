@@ -19,7 +19,7 @@ const Loading: React.FC = () => {
         src="https://lottie.host/e75cafe1-da2a-4d03-a300-3579697c2cf9/zcZ1fk0JpY.lottie"
         autoplay
         loop
-        style={{ width: "510px", height: "510px" }}
+        style={{ width: "520px", height: "520px" }}
       >
       </dotlottie-wc>
     </div>

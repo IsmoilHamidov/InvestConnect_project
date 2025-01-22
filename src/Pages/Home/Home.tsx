@@ -10,10 +10,22 @@ import Professionals from "./Professionals"
 import Footer from "../../components/Footer/Footer"
 import { NavbarStep } from "@/components/Navbar/NavbarStep"
 import ScrollPositionManager from "@/components/Loading/ScrollPosition/SaveScroll"
-
+import { useEffect } from "react"
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 function Home() {
- 
+  useEffect(() => {
+    AOS.init({
+      duration: 1000, 
+      easing: 'ease-in-out', 
+      offset: 100, 
+      delay: 200, 
+      once: true, 
+    });
+  }, []);
+
+
   return (
     <>
       <ScrollPositionManager />

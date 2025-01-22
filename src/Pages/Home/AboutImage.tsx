@@ -6,7 +6,12 @@ import aboutLogo from '../../assets/images/Altro Logo Icon.png'
 function AboutImage() {
   return (
     <div className="w-full flex justify-center items-center mt-32">
-        <div className='relative  max-w-7xl w-full h-[24rem] flex justify-center items-center'
+        <div  
+        data-aos="fade-zoom-in"
+        data-aos-easing="ease-in-back"
+        data-aos-delay="350"
+        data-aos-offset="0"
+        className='relative  max-w-7xl w-full h-[24rem] flex justify-center items-center'
             style={{
                 backgroundImage: `url(${About_long_image})`,
                 backgroundSize: "cover",
@@ -14,9 +19,22 @@ function AboutImage() {
                 backgroundRepeat: "no-repeat",
             }}>
 
-            <img className="absolute left-20 top-16 w-24 h-20 " src={quotes} alt="quotes" />
-            <h3 className=" left-28 w-8/12 top-14 text-5xl font-medium leading-[64px] text-white">Moliyaviy maqsadlaringizni amalga oshirish uchun aniq reja asosida investitsiya kiriting</h3>
-            <img className="absolute -bottom-24 -right-16 h-[12.5rem]" src={aboutLogo} alt="aboutLogo" />
+            <img data-aos="fade-right"
+                data-aos-offset="400"
+                data-aos-easing="ease-in-sine"
+                className="absolute left-20 top-16 w-24 h-20 " src={quotes} alt="quotes" />
+            <h3 data-aos="fade-right"
+                data-aos-offset="500"
+                data-aos-easing="ease-in-sine"
+              className=" left-28 w-8/12 top-14 text-5xl font-medium leading-[64px] text-white">
+              Moliyaviy maqsadlaringizni amalga oshirish uchun aniq reja asosida investitsiya kiriting</h3>
+            <img 
+              id='our_service'
+              data-aos="fade-down"
+              data-aos-easing="linear"
+              data-aos-duration="1400"
+              data-aos-delay="800"
+            className="absolute -bottom-24 -right-16 h-[12.5rem]" src={aboutLogo} alt="aboutLogo" />
         </div>
     </div>
   )

@@ -13,7 +13,6 @@ export const ProductDetailsPage = () => {
 
   const { productid } = useParams<{ productid: string | any }>();
   const { data, error, isLoading } = useGetProductQuery(productid);
-  console.log(data);
 
   const renderSkeletonsId = () => {
     return (

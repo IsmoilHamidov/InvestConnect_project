@@ -22,8 +22,8 @@ const Introduction_Image: React.FC = () => {
           left: 0,
           right: 0,
           bottom: 0,
-          backgroundColor: "rgba(0, 0, 0, 0.54)",  
-          filter: "brightness(50%)", 
+          backgroundColor: "rgba(0, 0, 0, 0.51)",  
+          filter: "brightness(60%)", 
           zIndex: -1, 
         }}
       />
