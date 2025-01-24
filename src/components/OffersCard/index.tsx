@@ -11,10 +11,7 @@ const Offers: React.FC = () => {
 
   return (
     <div
-      className={`p-6 py-8 w-full mx-auto shadow-md border-[1px] rounded-[15px] ${
-        data?.length === 0 ? "h-[17.725rem]" : "h-auto"
-      }`}
-    >
+      className="p-6 py-8 min-h-[17.725rem] w-full mx-auto shadow-md border-[1px] rounded-2xl">
       <div className="flex flex-row items-center justify-between mb-10">
         <h1 className="text-xl font-semibold">Loyhalaringiz</h1>
         <Link to={"/ProjectAdd"}>

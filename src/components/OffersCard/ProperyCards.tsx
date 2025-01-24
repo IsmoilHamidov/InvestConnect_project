@@ -26,11 +26,11 @@ type ProperyCardProps = {
 
     
     <Card className="flex  relative border border-[#C5C3C3] items-center 
-        px-4 py-4 mb-5 ">
+        px-4 py-4 ">
         <img
             src={`https://bakirali007.pythonanywhere.com/${image}`}
             alt={title}
-            className="w-28 h-20 rounded object-cover mr-4"
+            className="w-24 h-16 rounded object-cover mr-4"
             onError={(e) => {
                 e.currentTarget.src = 'https://via.placeholder.com/150';
             }}
@@ -38,19 +38,18 @@ type ProperyCardProps = {
 
         <div className="flex-1">
             <CardHeader className="p-0">
-            <CardTitle className="text-lg font-semibold text-[#749BA9] capitalize">
+            <CardTitle className="w-[90%] text-md font-medium text-[#749BA9] capitalize">
                 {title}
             </CardTitle>
             </CardHeader>
-            <CardContent className="flex flex-col gap-2 mt-1 ">
-         
-            <span className="font-normal text-[#443B3A] text-xs">
-                {type}
-            </span>
-    
-            <div>
-                <p className="text-base font-medium text-custom-gray">{price}</p>
-            </div>
+
+            <CardContent >
+                <div className="flex items-center gap-x-3 mt-2">
+                    <span className="font-normal text-[#443B3A] text-xs">
+                        {type}
+                    </span>
+                    <p className="text-base font-medium text-custom-gray">{price}</p>
+                </div>
             </CardContent>
         </div>
     

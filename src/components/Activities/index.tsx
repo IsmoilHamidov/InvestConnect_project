@@ -4,35 +4,40 @@ import { RefreshCcw } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Skeleton } from "@mui/material";
+import { RxDragHandleDots2 } from "react-icons/rx";
+
+
 const ActivityCard: React.FC<{ id: any, name: string; price: string; month: string; image: string }> = ({ id, name, price, month, image }) => {
     return (
-        <Card className="flex w-full justify-between items-center bg-gray-100 rounded-lg px-4 py-1">
-            <Card className="border-none bg-transparent shadow-none">
+        <Card className="flex w-full justify-between items-center border border-gray-200 rounded-none 
+             px-4 py-1 cursor-grab duration-200 ease-in-out hover:bg-[#c5c5c53e]">
+            <Card className="border-none bg-transparent shadow-none ">
                 <div className="flex items-center gap-x-2">
+                    <RxDragHandleDots2 size={22} className="me-3 text-custom-gray"/>
                     <img
                         src={image}
                         alt={name}
-                        className="w-28 h-20 rounded-md object-cover shadow-sm"
+                        className="w-24 h-16 rounded-md object-cover shadow-sm"
                     />
                     <CardHeader>
                         <p className="text-sm text-custom-gray uppercase">{month}</p>
                         <Link to={`/product/${id}`}>
-                            <CardTitle className="text-lg font-medium text-custom-gray">{name}</CardTitle>
+                            <CardTitle className="text-md font-medium text-custom-gray">{name}</CardTitle>
                         </Link>
                     </CardHeader>
                 </div>
             </Card>
-            <Link to={`/product/${id}`} onClick={() => {
-                sessionStorage.setItem("scrollPosition", String(window.scrollY));
-            }}
-                className="flex px-4 min-w-64 py-[12px] items-center 
-                 justify-between font-normal bg-gray-700 text-white rounded-2xl">
-                <span className="text-[22px] font-normal tracking-wide">$ {price}</span>
-                <div className="bg-gray-100  text-gray-700 h-full
-                 px-3 py-[1.7px] rounded-lg text-sm font-medium">
+
+            <div className="flex items-center justify-between min-w-60">
+                <span className="text-[22px] font-normal  tracking-wide">$ {price}</span>
+
+                <Link to={`/product/${id}`} onClick={() => {
+                    sessionStorage.setItem("scrollPosition", String(window.scrollY));
+                }} className="bg-custom-blue-gray text-white 
+                    px-4 py-1 h-full rounded-xl text-sm font-medium ">
                     Ko'rish
-                </div>
-            </Link>
+                </Link>
+            </div>
         </Card>
     );
 };
@@ -42,6 +47,7 @@ const Activities = () => {
     const { data, error, isLoading, refetch } = useGetInvestorProductsQuery(undefined);
     console.log(data);
 
+    const showSkeleton = isLoading || reloading ; 
 
     const handleRefresh = async () => {
         setReloading(true);
@@ -50,8 +56,8 @@ const Activities = () => {
     };
 
     return (
-        <div className="w-full mx-auto bg-white py-7 px-7 rounded-2xl mt-10 mb-3 shadow-lg border">
-            <div className="flex flex-row justify-between items-center mb-4">
+        <div className="w-full mx-auto bg-white py-7 px-7 rounded-2xl mt-10  shadow-lg border">
+            <div className="flex flex-row justify-between items-center mb-6">
                 <h2 className="text-xl font-semibold text-gray-800 mb-5">Ochilgan loyihalar</h2>
                 <button
                     className={`flex items-center gap-x-2 p-2 rounded-full  ${reloading ? 'animate-spin' : 'bg-transparent'}`}
@@ -79,28 +85,37 @@ const Activities = () => {
                 </button>
             </div>
 
-            {isLoading && !reloading && (
+
+            {showSkeleton && (
                 <div className="flex flex-col gap-4">
-                    {Array(2)
+                    {Array(data?.length || 2)
                         .fill(null)
                         .map((_, index) => (
                             <div
                                 key={index}
-                                className="flex flex-row items-center gap-4 border rounded-lg p-4"
-                            >
-                                <Skeleton
-                                    variant="rectangular"
-                                    width={80}
-                                    height={80}
-                                    className="rounded-lg"
-                                />
-                                <div className="flex flex-col flex-1">
-                                    <Skeleton variant="text" width="50%" height={30} />
+                                className="flex justify-between items-center gap-4 border rounded-lg p-4"
+
+                            >  <div className="w-10/12 ps-7 flex items-center flex-row  gap-x-5">
+
+                                    <Skeleton
+                                        variant="rectangular"
+                                        width={80}
+                                        height={60}
+                                        className="rounded-lg"
+                                    />
+
+                                    <Skeleton variant="text" width="30%" height={30} />
+                                </div>
+                                
+                                <div className="w-1/3 flex justify-end">
+                                    <Skeleton variant="text" width="50%" height={32} />
                                 </div>
                             </div>
                         ))}
                 </div>
             )}
+
+         
 
             {error && (
                 <div className="flex items-center justify-center h-full">
@@ -108,14 +123,14 @@ const Activities = () => {
                 </div>
             )}
 
-            {data?.length === 0 && (
+            {data?.length === 0 && !showSkeleton && (
                 <div className="flex items-start justify-start h-full">
                     <p className="italic text-[17px]">Sizda xarid qilgan loyihalar mavjud emas.</p>
                 </div>
             )}
 
-            {data?.length > 0 && (
-                <div className="flex flex-col gap-[15px]">
+            {data?.length > 0 && !showSkeleton && (
+                <div className="flex flex-col ">
                     {data.map((activity: { id: any; name: string; price: string; month: string; image: any; }, index: any) => (
                         <ActivityCard
                             key={activity.id || index}

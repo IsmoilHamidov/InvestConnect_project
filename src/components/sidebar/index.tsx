@@ -75,7 +75,7 @@ export default function Sidebar() {
       <div className="flex flex-col items-center border-b p-6">
         <div
           className="flex items-center justify-center bg-[#B29C6F] text-white  
-            w-[70px] h-[70px] rounded-full text-5xl font-normal mb-2 mt-3"
+            w-[60px] h-[60px] rounded-full text-4xl font-normal mb-2 mt-3"
         >
           {data?.profile_image ? (
             <img
