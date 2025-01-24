@@ -18,7 +18,6 @@ const Navbar: React.FC = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Check if the page is scrolled
       if (window.scrollY > 80) {
         setIsScrolled(true);
       } else {
@@ -59,7 +58,7 @@ const Navbar: React.FC = () => {
       >
         <nav className="max-w-7xl mx-auto Nav_links">
           <div
-            className={`py-2 flex justify-between transition-all duration-700 ease-in ${
+            className={`py-2 flex items-center justify-between transition-all duration-700 ease-in ${
               isScrolled ? "max-h-12 overflow-hidden " : "max-h-32"
             }`}
           >
@@ -72,7 +71,7 @@ const Navbar: React.FC = () => {
             </div>
 
             {/* Navbar Content */}
-            <div className="flex gap-x-9 items-center text-white text-base font-normal">
+            <div className="flex gap-x-10 items-center text-white text-base font-normal">
               <button 
               className="Blue_button text-white border-0 rounded-3xl p-2 px-3 text-sm bg-[#749BA9]">
                 <PrivacyPolicy />
@@ -82,13 +81,15 @@ const Navbar: React.FC = () => {
               <a href="#about_us">Biz haqimizda</a>
               <a href="#our_service">Bizning Xizmatlar</a>
 
-              <div className="relative flex gap-x-7 items-center text-white text-base font-normal">
+              <div className="relative w-auto h-full flex ms-20
+                items-center justify-end text-white text-base font-normal">
                 <div className="fixed">
                   <ProfilePopover />
                 </div>
-              </div></div>
-            
+              </div>
             </div>
+            
+          </div>
             <div
               className={`w-full border-t my-1 border-[#749BA9] transition-all duration-500 ease-in-out ${
                 isScrolled ? "opacity-0" : "opacity-100"

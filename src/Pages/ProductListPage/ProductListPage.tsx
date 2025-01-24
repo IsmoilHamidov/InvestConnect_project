@@ -9,7 +9,6 @@ import { TbCategory } from "react-icons/tb";
 import { IoSearch } from "react-icons/io5";
 import { useLocation } from "react-router-dom";
 import { Skeleton } from "@mui/material";
-import { normalize } from "path";
 
 const ProductListPage = () => {
   const [search, setSearch] = useState<string>("");

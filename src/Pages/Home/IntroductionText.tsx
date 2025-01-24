@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import TextImage from "../../assets/images/profile_sample.jpg"
 import profilLofo from "../../assets/images/profile_sample_logo.png"
 
