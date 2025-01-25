@@ -1,6 +1,7 @@
 import { EyeOff, Users, LineChart, Target, Briefcase, Phone, Download } from "lucide-react";
 import PaymentAndCheck from "./PaymentAndCheck";
 import { useGetPrivateInfoQuery } from "@/store/slice/products";
+import { Link } from "react-router";
 
 const baseUrl = "https://bakirali007.pythonanywhere.com/";
 
@@ -103,7 +104,7 @@ const PrivateInfoCard = ({ productId }: { productId: number }) => {
           <div className="flex items-center gap-4 ">
             <Phone className="text-primary" />
             <div>
-              <p className="font-medium text-gray-800 text-base">Kontakt ma'lumotlari</p>
+              <Link to={"tel:+998999999999"} className="font-medium text-gray-800 text-base">Kontakt ma'lumotlari</Link>
               {getPrivateInfo.contact_info.split('\r\n').map((line: string, index: number) => (
                 <p key={index} className="text-gray-600 text-base">{line}</p>
               ))}
