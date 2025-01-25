@@ -61,39 +61,36 @@ const Offers: React.FC = () => {
       )}
 
       {!isLoading && (
-        <div className="">
+        <div className="flex flex-col gap-y-3">
           {data?.map(
             (
               item: {
                 id: number;
                 image: any;
                 name: string;
-                category: string;
-                degree: string;
+                category: { name: string }
                 price: any;
                 location: string;
               },
               index: React.Key | null | undefined
             ) => {
               return (
+                <div>
                 <ProperyCard
                   key={index}
                   image={item.image}
                   id={item.id}
                   title={typeof item.name === "string" ? item.name : "Untitled"}
-                  location={
-                    typeof item.location === "string"
-                      ? item.location
-                      : "Topligging"
-                  }
+                  location={typeof item.location === "string" ? item.location : "Topligging"}
                   category={
-                    typeof item.category === "string"
-                      ? item.category
+                    item.category && typeof item.category.name === "string"
+                      ? item.category.name
                       : "Unknown"
                   }
-                  type={typeof item.degree === "string" ? item.degree : "N/A"}
                   price={item.price ? `$${item.price}` : "N/A"}
+                  type={""}
                 />
+              </div>
               );
             }
           )}
