@@ -88,7 +88,7 @@ const Activities = () => {
 
             {showSkeleton && (
                 <div className="flex flex-col gap-4">
-                    {Array(data?.length || 2)
+                    {Array(data?.length || 1)
                         .fill(null)
                         .map((_, index) => (
                             <div

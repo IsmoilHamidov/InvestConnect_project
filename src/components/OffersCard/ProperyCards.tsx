@@ -19,12 +19,11 @@ type ProperyCardProps = {
     image,
     title,
     location,
-    type,
     price,
-    // category,
+    category,
   }) => (
 
-    
+
     <Card className="flex  relative border border-[#C5C3C3] items-center 
         px-4 py-4 ">
         <img
@@ -45,8 +44,8 @@ type ProperyCardProps = {
 
             <CardContent >
                 <div className="flex items-center gap-x-3 mt-2">
-                    <span className="font-normal text-[#443B3A] text-xs">
-                        {type}
+                    <span className="font-normal text-[#443B3A] text-base">
+                        {category}
                     </span>
                     <p className="text-base font-medium text-custom-gray">{price}</p>
                 </div>

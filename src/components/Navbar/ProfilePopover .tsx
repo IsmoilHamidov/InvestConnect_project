@@ -2,12 +2,14 @@ import { useAuthModalStore } from "@/store/authModalStore";
 import { useGetUsersQuery } from "@/store/slice/products";
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-// import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog';
-// import { Button } from "../ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog';
+import { Button } from "../ui/button";
 
 
 const ProfilePopover: React.FC = () => {
   const [showPopover, setShowPopover] = useState<boolean>(false);
+  const [showPaymentDialog, setShowPaymentDialog] = useState(false);
+
   const popoverRef = useRef<HTMLDivElement | null>(null);
   const popoverButtonRef = useRef<HTMLButtonElement | null>(null);
   const navigate = useNavigate();
@@ -34,7 +36,9 @@ const ProfilePopover: React.FC = () => {
   }, []);
 
   const handleSignOut = () => {
-    localStorage.clear(); // Очистка всех данных
+    console.log("runed");
+    
+    localStorage.clear();
     setTimeout(() => {
       window.location.reload();
     }, 100);
@@ -93,34 +97,33 @@ const ProfilePopover: React.FC = () => {
           </button>
 
           <button className="block w-full text-left text-md px-4 py-2 hover:bg-gray-100 text-black"
-          onClick={handleSignOut}>
+          onClick={() => setShowPaymentDialog(!showPaymentDialog)}>
             Chiqish
           </button>
 
 
-          {/* <Dialog>
-            <DialogTrigger asChild>
-              <button className="block w-full text-left text-md px-4 py-2 hover:bg-gray-100 text-black">
-                Sign Out
-              </button>
-            </DialogTrigger>
-            <DialogContent>
-              <DialogHeader>
-                <DialogTitle>You want to log out of the account?</DialogTitle>
-                    <div className="flex justify-center items-center gap-9">
-                        <DialogTrigger asChild>
-                            <button
-                            className="text-lg font-semibold">No</button>
-                        </DialogTrigger>
-                        <Button className="rounded-2xl text-lg font-normal px-5 py-3 " 
-                        onClick={handleSignOut}>Yes</Button>
-                    </div>
-              </DialogHeader>
-            </DialogContent>
-          </Dialog> */}
           
         </div>
       )}
+          <Dialog open={showPaymentDialog} onOpenChange={setShowPaymentDialog}>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Hisobdan chiqmoqchimisiz?</DialogTitle>
+                    <div className="flex justify-center items-center gap-9">
+                        <DialogTrigger asChild>
+                            <button
+                            className="text-lg font-semibold">Yo'q</button>
+                        </DialogTrigger>
+                        <Button
+                          className="rounded-2xl text-lg font-normal px-6 py-3 "
+                          onClick={handleSignOut}
+                        >
+                          Ha
+                        </Button>
+                    </div>
+              </DialogHeader>
+            </DialogContent>
+          </Dialog>
     </div>
   );
 };
