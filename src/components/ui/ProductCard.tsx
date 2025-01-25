@@ -15,7 +15,9 @@ export interface Product {
   image: string; // Описание продукта (обязательно, от 1 символа)
   name: string; // Название продукта (обязательно, от 1 до 50 символов)
   description: string;
+  rendement: number,
   price: number;
+  location:string
 }
 
 
@@ -25,7 +27,7 @@ interface ProductCardProps {
 
 
 export const ProductCard: React.FC<ProductCardProps> = ({ product }) => (
-  <div className="product grid px-4 py-6">
+  <div className="product grid px-4 pt-3">
     <div className="border bg-white border-[#B29C6F] rounded-md flex flex-col min-h-[500px]">
       <div className="relative group flex-1">
         <img
@@ -40,10 +42,14 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => (
         </Link>
 
         <div className="absolute text-red-50 z-20 top-4 -right-[16px] grid justify-items-end">
-            <div className="bg-[#B29C6F] px-4 py-3">
-                <p className="font-normal text-white text-[14px] leading-3">
-                  Yuqori joylashuv
-                </p>
+            <div className="bg-[#B29C6F] px-4 py-3  overflow-hidden">
+            <p
+              className="font-normal text-white text-[14px] leading-3 truncate max-w-[200px] overflow-hidden"
+              title={product.location} 
+            >
+              {product.location}
+            </p>
+
             </div>
             <div className="bg-[#443B3A] w-4 h-3" style={{ clipPath: "polygon(0 0, 0 100%, 100% 0)" }} />
         </div>
@@ -56,17 +62,21 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => (
       </div>
 
       <div className="grid px-4 py-6 gap-3 rounded-b-md flex-1">
-        <div className="flex justify-between">
-          <span className="title text-custom-gray text-xl font-medium">
+        <div className="flex justify-between min-h-10">
+          <span className="title text-custom-gray text-lg font-medium">
             {product.name}
           </span>
         </div>
-        <div className="flex justify-between">
-          <div className="title">{product.category.name}</div>
+        <div className="flex justify-between items-center">
+          <div className="title font-medium text-lg">{product.category.name}</div>
+          <p className="flex flex-col items-end text-base font-medium"> 
+            {product.rendement}
+            <span className="text-sm font-light">samaradorlik</span>
+          </p>
         </div>
         <div>{product.description}</div>
-        <div className="flex justify-between pt-5">
-          <div className="text-[22px]">{product.price} Uzs</div>
+        <div className="flex justify-between pt-3">
+          <div className="text-[22px]">${product.price} </div>
           <Link to={`/product/${product.id}`}
             onClick={() => {
               sessionStorage.setItem("scrollPosition", String(window.scrollY));

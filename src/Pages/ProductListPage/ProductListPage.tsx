@@ -20,6 +20,9 @@ const ProductListPage = () => {
     `?search=${search}&degree=&category__name=${category}`
   );
 
+ console.log(data);
+
+
   const location = useLocation();
 
   useEffect(() => {
