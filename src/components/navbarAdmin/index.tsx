@@ -40,7 +40,7 @@ export default function NavbarAdmin() {
   };
 
   return (
-    <nav className="flex fixed z-50 w-full items-center justify-between px-4 py-2 bg-primary">
+    <nav className="flex fixed z-50 w-full items-center justify-between px-4 py-[8px] bg-primary">
       <NavbarStep />
       <div className="flex items-center gap-2">
         <Button
@@ -54,7 +54,8 @@ export default function NavbarAdmin() {
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>
-              <BreadcrumbLink href="/">Bosha sahifa</BreadcrumbLink>
+              
+              <BreadcrumbLink className="font-semibold" href="/">Bosh sahifa</BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
