@@ -55,7 +55,7 @@ export default function NavbarAdmin() {
           <BreadcrumbList>
             <BreadcrumbItem>
               
-              <BreadcrumbLink className="font-semibold" href="/">Bosh sahifa</BreadcrumbLink>
+              <BreadcrumbLink className="font-medium" href="/">Bosh sahifa</BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
