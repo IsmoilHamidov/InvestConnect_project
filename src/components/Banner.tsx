@@ -15,11 +15,11 @@ const Banner: React.FC<BannerProps> = ({ children }) => {
         alt="Баннер" 
         className="absolute inset-0 w-full object-cover pt-[51px]" 
       /> */}
-      <img 
+      {/* <img 
         src={bannerNewImage} 
         alt="Баннер" 
         className="absolute inset-0 w-full h-[19rem] object-cover opacity-80 brightness-100 blur-[1.5px]"
-      />
+      /> */}
 
 
       {/* <div className="absolute inset-0 flex items-center justify-center">
