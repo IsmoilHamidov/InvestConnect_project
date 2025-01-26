@@ -26,7 +26,7 @@ export const fields = [
   },
   {
     name: "price",
-    label: "narxi",
+    label: "Narxi",
     type: "number",
     step: "0.01",
     placeholder: "Narxni kiriting",
@@ -40,7 +40,7 @@ export const fields = [
   },
   {
     name: "rendement",
-    label: "samaradorlik (%)",
+    label: "Samaradorlik (%)",
     type: "number",
     placeholder: "Samaradorlikni kiriting (%)",
   },
