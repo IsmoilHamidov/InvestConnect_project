@@ -108,12 +108,8 @@ const Example = () => {
     const emptyFields = fields.some(
       (field) => field.type !== "textarea" && !data[field.name]?.trim()
     );
-  
     if (emptyFields) {
-      toast({
-        description: "Keyingi bosqichga o'tish uchun barcha maydonlarni to'ldiring!",
-        variant: "destructive",
-      });
+      setActiveTab("error");
     } else {
       setActiveTab("details");
     }
