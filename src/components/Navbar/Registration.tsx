@@ -16,6 +16,7 @@ interface RegistrationFormValues {
   confirmPassword: string;
 }
 
+
 export const Registration: React.FC<INavbarStepProps> = () => {
   const { openModal } = useAuthModalStore();
   const { toast } = useToast();
@@ -133,18 +134,13 @@ export const Registration: React.FC<INavbarStepProps> = () => {
                 <label className="block text-custom-gray mb-2">Parolni Tastiqlash</label>
                 <div className="relative">
                   <input
-                    type={showPassword ? "text" : "password"}
+                    type="password"
                     placeholder="Parolingizni tasdiqlang"
                     className="w-full border border-gray-300 focus:border-2 
                     focus:border-custom-blue-gray ease-out delay-150
                     rounded-xl py-2 px-3"
                     {...register("confirmPassword", { required: "Parolni tasdiqlash shart" })}
                   />
-                  <span
-                    className="absolute right-3 top-3 cursor-pointer"
-                    onClick={() => setShowPassword(!showPassword)}
-                  >
-                  </span>
                 </div>
                 {errors.confirmPassword && (
                   <p className="text-red-500 text-sm mt-1">
@@ -217,11 +213,8 @@ export const Registration: React.FC<INavbarStepProps> = () => {
       </div>
 
       {isError && (
-        <p className="text-center text-[15px] text-red-500 mt-2">
-          Ro'yxatdan o'tish muvaffaqiyatsiz tugadi:{" "}
-          {error && "data" in error && Array.isArray((error.data as { phone?: string[] })?.phone)
-            ? (error.data as { phone?: string[] })?.phone?.[0]
-            : "Noma'lum xato"}
+        <p className="grid w-full text-wrap text-center text-[14px] text-red-500 mt-2">
+          Registration failed: {JSON.stringify(error)}
         </p>
       )}
 

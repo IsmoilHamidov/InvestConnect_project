@@ -67,7 +67,7 @@ type ProperyCardProps = {
         </div>
 
 
-        <Link to={`/product/${id}`} onClick={() => {
+        <Link to={`/products/${id}`} onClick={() => {
             sessionStorage.setItem("scrollPosition", String(window.scrollY));
             }}>
            <Button

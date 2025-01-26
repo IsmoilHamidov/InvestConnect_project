@@ -54,7 +54,7 @@ function Projects() {
                   style={{ objectPosition: "center" }}
                 />
                 <Link
-                  to={`/product/${card.id}`}
+                  to={`/products/${card.id}`}
                   className="absolute inset-0 bg-primary bg-opacity-60 opacity-0 z-20 group-hover:opacity-85 transition-opacity duration-300 flex items-center justify-center"
                 >
                   <span className="text-white text-xl font-medium z-40">Batafsil</span>
@@ -93,7 +93,7 @@ function Projects() {
                 <div className="flex justify-between pt-5">
                   <div className="text-2xl">{card.price} UZS</div>
                   <Link
-                    to={`/product/${card.id}`}
+                    to={`/products/${card.id}`}
                     onClick={() => {
                       sessionStorage.setItem("scrollPosition", String(window.scrollY));}}
                   >

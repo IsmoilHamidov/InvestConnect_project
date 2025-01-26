@@ -37,7 +37,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => (
           style={{ objectPosition: "center" }} // Центрирование изображения
         />
 
-        <Link to={`/product/${product.id}`} className="absolute inset-0 bg-primary bg-opacity-90 opacity-0 z-20 group-hover:opacity-90 transition-opacity duration-300 flex items-center justify-center">
+        <Link to={`/products/${product.id}`} className="absolute inset-0 bg-primary bg-opacity-90 opacity-0 z-20 group-hover:opacity-90 transition-opacity duration-300 flex items-center justify-center">
             <span className="text-white text-xl font-medium z-40">Batafsil</span>
         </Link>
 
@@ -61,7 +61,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => (
         />
       </div>
 
-      <div className="grid px-4 py-6 gap-3 rounded-b-md flex-1">
+      <div className="grid px-4 py-5 gap-3 rounded-b-md flex-1">
         <div className="flex justify-between min-h-10">
           <span className="title text-custom-gray text-lg font-medium">
             {product.name}
@@ -76,8 +76,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => (
         </div>
         <div>{product.description}</div>
         <div className="flex justify-between pt-3">
-          <div className="text-[22px]">${product.price} </div>
-          <Link to={`/product/${product.id}`}
+          <div className="text-[22px] font-medium">${product.price} </div>
+          <Link to={`/products/${product.id}`}
             onClick={() => {
               sessionStorage.setItem("scrollPosition", String(window.scrollY));
             }}>

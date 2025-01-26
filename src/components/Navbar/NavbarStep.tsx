@@ -28,7 +28,7 @@ export const NavbarStep = () => {
   return (
     <div className=" fixed inset-0 flex items-center justify-center
      bg-black bg-opacity-70 z-50">
-      <div className="min-w-[31.4rem] h-auto  bg-white px-7 py-7
+      <div className="w-[31.4rem] h-auto  bg-white px-7 py-7
        rounded-xl relative ">
         <button
           className="absolute top-4 right-4 "

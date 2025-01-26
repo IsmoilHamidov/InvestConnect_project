@@ -142,7 +142,7 @@ html{
 }
 
 .nav_links{
-  transition: .2s ease-in;
+  transition: .3s ease-in-out;
 }
 .Nav_links a:hover{
   color: #749BA9;

@@ -1,7 +1,7 @@
 import { Bell, Home, Mail, Menu } from "lucide-react";
 import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useGetUsersQuery } from "@/store/slice/products";
 import { useAuthModalStore } from "@/store/authModalStore";
 import { NavbarStep } from "../Navbar/NavbarStep";
@@ -12,13 +12,17 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
+  BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { useMemo } from "react";
+import React from "react";
 
 
 const linkTranslate: Record<string, string> = {
   products: "Loyihalar",
   product: "Loyiha",
+  ProjectAdd: "Loyiha Qo'shish",
 };
 
 export default function NavbarAdmin() {
@@ -27,7 +31,6 @@ export default function NavbarAdmin() {
   const username = data?.username || null;
   const navigate = useNavigate();
 
-  const pathname = location.pathname.split("/")[1]
 
   const initials = data?.username?.charAt(0).toUpperCase() || "";
 
@@ -39,8 +42,16 @@ export default function NavbarAdmin() {
     }
   };
 
+  const location = useLocation();
+  const { pathname } = location;
+
+  const pathSegments = useMemo(() => {
+    const segments = pathname.split("/").filter(Boolean);
+    return segments;
+  }, [pathname]);
+
   return (
-    <nav className="flex fixed z-50 w-full items-center justify-between px-4 py-[8px] bg-primary">
+    <nav className="flex fixed z-50 w-full items-center justify-between px-4 py-[9px] bg-primary">
       <NavbarStep />
       <div className="flex items-center gap-2">
         <Button
@@ -53,16 +64,35 @@ export default function NavbarAdmin() {
         </Button>
         <Breadcrumb>
           <BreadcrumbList>
+            {/* Home Link */}
             <BreadcrumbItem>
-              
-              <BreadcrumbLink className="font-medium" href="/">Bosh sahifa</BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbLink href={`/${pathname}`}>
-                {linkTranslate[pathname] || pathname}
+              <BreadcrumbLink className="font-medium" href="/">
+                Bosh sahifa
               </BreadcrumbLink>
             </BreadcrumbItem>
+            {pathSegments.map((segment, index) => {
+            const href = "/" + pathSegments.slice(0, index + 1).join("/");
+            const isLast = index === pathSegments.length - 1;
+            const isId = /^\d+$/.test(segment);
+            const isRepeated = segment === pathSegments[index - 1];
+
+            return (
+                  <React.Fragment key={segment}>
+                      <BreadcrumbSeparator />
+                      <BreadcrumbItem>
+                        {isLast || isRepeated ? (
+                          <BreadcrumbPage>
+                            {isId ? "Loyiha" : linkTranslate[segment] || segment}
+                          </BreadcrumbPage>
+                        ) : (
+                          <BreadcrumbLink href={href}>
+                            {linkTranslate[segment] || segment}
+                          </BreadcrumbLink>
+                        )}
+                      </BreadcrumbItem>
+                    </React.Fragment>
+                  );
+                })}   
           </BreadcrumbList>
         </Breadcrumb>
       </div>

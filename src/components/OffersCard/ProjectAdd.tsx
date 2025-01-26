@@ -1,4 +1,4 @@
-import { useForm } from "react-hook-form";
+import { FieldError, useForm } from "react-hook-form";
 import {
   useCreateProductMutation,
   useGetCategoriesQuery,
@@ -15,7 +15,7 @@ import { GrFormPrevious } from "react-icons/gr";
 import folderImage from "../../assets/images/rb_4574.png";
 
 const Example = () => {
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit, reset, formState: { errors }} = useForm();
   const [createProduct, { isLoading }] = useCreateProductMutation();
   const { data: getUserId } = useGetUsersQuery(undefined);
   const { data: getCategories } = useGetCategoriesQuery(undefined);
@@ -104,6 +104,23 @@ const Example = () => {
     }
   };
 
+  const handleNextStep = handleSubmit((data) => {
+    const emptyFields = fields.some(
+      (field) => field.type !== "textarea" && !data[field.name]?.trim()
+    );
+  
+    if (emptyFields) {
+      toast({
+        description: "Keyingi bosqichga o'tish uchun barcha maydonlarni to'ldiring!",
+        variant: "destructive",
+      });
+    } else {
+      setActiveTab("details");
+    }
+  });
+  
+  
+
   return (
     <>
       <NavbarAdmin />
@@ -174,18 +191,25 @@ const Example = () => {
                       required
                       step={field.step || undefined}
                       placeholder={field.placeholder || ""}
-                      {...register(field.name, { required: true })}
-                      className="w-full p-3 px-3  border-gray-300 rounded-xl"
+                      {...register(field.name, { required: `${field.label} kiritilishi  shart` })}
+                      className={`w-full p-3 px-3 border-gray-300 rounded-xl ${
+                        errors[field.name] ? "border-red-500" : ""
+                      }`}
                     />
+
+                  {errors[field.name] && (
+                      <span className="text-red-500 text-sm mt-2">
+                        {(errors[field.name] as FieldError).message}
+                      </span>
+                    )}
                   </div>
                 ))}
 
               <div className="w-full flex justify-center items-center mt-8">
-                <button
-                  className="w-1/6 py-2 flex items-center justify-center rounded-full Blue_button text-lg  font-medium text-white"
-                  onClick={() => {
-                    setActiveTab("details");
-                  }}
+              <button
+                  type="button"
+                  className="w-1/6 py-2 flex items-center justify-center rounded-full Blue_button text-lg font-medium text-white"
+                  onClick={handleNextStep}
                 >
                   Oldinga
                   <MdOutlineNavigateNext size={27} />

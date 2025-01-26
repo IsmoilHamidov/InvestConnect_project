@@ -21,7 +21,7 @@ const ActivityCard: React.FC<{ id: any, name: string; price: string; month: stri
                     />
                     <CardHeader>
                         <p className="text-sm text-custom-gray uppercase">{month}</p>
-                        <Link to={`/product/${id}`}>
+                        <Link to={`/products/${id}`}>
                             <CardTitle className="text-md font-medium text-custom-gray">{name}</CardTitle>
                         </Link>
                     </CardHeader>
@@ -31,7 +31,7 @@ const ActivityCard: React.FC<{ id: any, name: string; price: string; month: stri
             <div className="flex items-center justify-between min-w-60">
                 <span className="text-[22px] font-normal  tracking-wide">$ {price}</span>
 
-                <Link to={`/product/${id}`} onClick={() => {
+                <Link to={`/products/${id}`} onClick={() => {
                     sessionStorage.setItem("scrollPosition", String(window.scrollY));
                 }} className="bg-custom-blue-gray text-white 
                     px-4 py-1 h-full rounded-xl text-sm font-medium ">
