@@ -56,11 +56,12 @@ export const Registration: React.FC<INavbarStepProps> = () => {
       });
 
       openModal("verification");
-    } catch (err) {
+    } catch (err: any) {
       toast({
-        className: " bg-red-500",
-        description: `Ro'yxatdan o'tib bo'lmadi`,
+        className: "bg-red-500 text-white",
+        description: `Ro'yxatdan o'tayotkanda xatolik yuz berdi: ${JSON.stringify(err)}`,
         variant: "destructive",
+        duration: 5100
       });
       console.error("Failed to register:", err);
     }
@@ -72,10 +73,10 @@ export const Registration: React.FC<INavbarStepProps> = () => {
 
   return (
     <form  onSubmit={handleSubmit(onSubmit)} >
-      <h2 className="text-xl font-semibold mb-6">Ro'yxatdan O'tish</h2>
+      <h2 className="text-xl font-semibold mb-5">Ro'yxatdan O'tish</h2>
 
       {hasErrors && (
-        <p className="text-red-500 text-[15px] mb-4">
+        <p className="text-red-500 text-[15px] mb-3">
           Davom etish uchun barcha maydonlarni to'ldiring.
         </p>
       )}
@@ -142,11 +143,7 @@ export const Registration: React.FC<INavbarStepProps> = () => {
                     {...register("confirmPassword", { required: "Parolni tasdiqlash shart" })}
                   />
                 </div>
-                {errors.confirmPassword && (
-                  <p className="text-red-500 text-sm mt-1">
-                    {errors.confirmPassword.message}
-                  </p>
-                )}
+              
               </div>
 
             <div className="flex gap-x-7 mt-8">
@@ -212,11 +209,11 @@ export const Registration: React.FC<INavbarStepProps> = () => {
         </div>
       </div>
 
-      {isError && (
+      {/* {isError && (
         <p className="grid w-full text-wrap text-center text-[14px] text-red-500 mt-2">
           Registration failed: {JSON.stringify(error)}
         </p>
-      )}
+      )} */}
 
       {isSuccess && <p>Muvaffaqiyatli ro'yxatdan o'tdingiz!</p>}
     </form>
