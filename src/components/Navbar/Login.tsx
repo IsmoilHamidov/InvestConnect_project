@@ -13,9 +13,25 @@ export const LoginModal: React.FC<INavbarStepProps> = () => {
   const { closeModal, openModal } = useAuthModalStore();
   const { toast } = useToast();
   const [showPassword, setShowPassword] = useState(false);
+  const [hasErrors, setHasErrors] = useState(false);
+
+
+  const validateFields = () => {
+    if (!phone || !password) {
+      setHasErrors(true); 
+      return false;
+    }
+    setHasErrors(false);
+    return true;
+  };
+
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!validateFields()) {
+      return; 
+    }
 
     try {
       const response = await loginUser({ phone, password }).unwrap();
@@ -32,7 +48,7 @@ export const LoginModal: React.FC<INavbarStepProps> = () => {
       console.error("Kirish muvaffaqiyatsiz tugadi:", err);
       toast({
         className: "top-center bg-red-500",
-        description: `Kirish muvaffaqiyatsiz tugadi. Iltimos qayta urinib ko'ring.`,
+        description: `Telefon raqami yoki parol noto'g'ri.`,
         variant: "destructive",
       });
     }
@@ -40,10 +56,17 @@ export const LoginModal: React.FC<INavbarStepProps> = () => {
 
   return (
     <div>
-      <h2 className="text-xl font-semibold mb-6 ">Kirish</h2>
+      <h2 className="text-xl font-semibold mb-5 ">Kirish</h2>
+
+      {hasErrors && (
+        <p className="text-red-500 text-[15px] mb-3">
+            Kirish uchun telefon raqami va parolni kiriting
+        </p>
+      )}
+
       <form onSubmit={handleLogin} className="mb-3 grid gap-4">
         <div>
-          <label className="block text-gray-700 mb-2">Telefon nomer</label>
+          <label className="block text-gray-700 mb-2">Telefon raqami</label>
           <input
             type="text"
             value={phone}
