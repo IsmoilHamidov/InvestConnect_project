@@ -48,7 +48,7 @@ export const LoginModal: React.FC<INavbarStepProps> = () => {
             type="text"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
-            placeholder="Enter phone number"
+            placeholder="Telefon raqamingizni kiriting"
             className="w-full border border-gray-300 focus:border-2 
             focus:border-custom-blue-gray ease-out delay-150
             rounded-xl py-2 px-3"
@@ -64,7 +64,7 @@ export const LoginModal: React.FC<INavbarStepProps> = () => {
                 className="w-full border border-gray-300 focus:border-2 
                 focus:border-custom-blue-gray ease-out delay-150
                 rounded-xl py-2 px-3"
-                placeholder="Enter password"
+                placeholder="Parolni kiriting"
               />
               <span
                 className="absolute right-3 top-3 cursor-pointer"
