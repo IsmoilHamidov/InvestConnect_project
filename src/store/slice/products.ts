@@ -9,7 +9,7 @@ export const api = createApi({
       headers.set(
         "X-CSRFToken",
         "NsBgsgNCHjopnvKGkTMzJPkz3vH99oGYyU7SeHFc9iA6seh2MCrnQff7JrLffxvI"
-      ); // CSRF токен
+      ); 
       return headers;
     },
   }),
@@ -25,7 +25,7 @@ export const api = createApi({
     }),
     getProductsInformationList: builder.query<
       ProductInformation[], // Тип ответа
-      { key?: string; value?: string; search?: string } // Параметры запроса
+      { key?: string; value?: string; search?: string } 
     >({
       query: (params) => ({
         url: "/products/information-list/",
