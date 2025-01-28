@@ -87,7 +87,6 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ closeModal }) => {
                 variant: "destructive",
             });
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [error]);
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
 

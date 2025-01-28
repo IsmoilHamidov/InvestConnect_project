@@ -6,7 +6,7 @@ import { Toaster } from "@/components/ui/toaster";
 import Loading from './components/Loading/Loading';
 
 const App: React.FC = () => {
-  const [isLoading, setIsLoading] = useState(true); 
+  const [isLoading, setIsLoading] = useState<boolean>(true); 
 
   useEffect(() => {
     const loadingTimeout = setTimeout(() => {
