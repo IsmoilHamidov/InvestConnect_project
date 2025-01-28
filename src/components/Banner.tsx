@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 // import bannerImage from "/src/assets/images/banner_ProductListPage.png";
 // import logoImage from "/src/assets/images/Subtract.png";
-import bannerNewImage from '../assets/images/Product_mage.jpg'
+// import bannerNewImage from '../assets/images/Product_mage.jpg'
 
 interface BannerProps {
   children?: ReactNode;
