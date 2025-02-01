@@ -29,12 +29,12 @@ const renderSkeleton = () => {
   ));
 };
 
-const ProductSidebarCategory: React.FC<CategoriesModalProps> = ({ onSelectCategory }) =>  {;
+const ProductSidebarCategory: React.FC<CategoriesModalProps> = ({ onSelectCategory }) =>  {
   
   const { data: categories, isLoading, error } = useGetCategoriesQuery(undefined);
   const [showBrands, setShowBrands] = useState<boolean>(true);
   const [selectedCategory, setSelectedCategory] = useState<string | null>("Barchasi")
-  
+  const allCategories = [{ id: "all", name: "Barchasi" }, ...(categories || [])];
 
 
   const handleSelectCategory = (categoryName: string) => {
@@ -58,32 +58,21 @@ const ProductSidebarCategory: React.FC<CategoriesModalProps> = ({ onSelectCatego
           transition={{ duration: 0.5 }}
         >
             <div className="space-y-2">
-                  <button
-                    className={`w-full flex items-center cursor-pointer text-base py-2 duration-300 
-                      ${selectedCategory === "Barchasi" 
-                        ? 'text-secondary border-b-[1px] border-secondary font-medium' 
-                        : 'text-gray-500 border-b-[1px] border-b-gray-200 hover:border-secondary'
-                      }`}
-                    onClick={() => handleSelectCategory("Barchasi")}
-                  >
-                    <div>Barchasi</div>
-                  </button>
 
-              {categories?.map((category: CategoryType) => (
-                <button
-                    key={category.id}
-                    className={`w-full flex items-center cursor-pointer text-base py-2 duration-300 
-                      ${selectedCategory === category.name 
-                        ? 'text-secondary border-b-[1px] border-secondary font-medium' 
-                        : 'text-gray-500 border-b-[1px] border-b-gray-200  hover:border-secondary'
-                      }`}
-                    onClick={() => handleSelectCategory(category.name)}
-                  >
-      
-                    <div>{category.name}</div>
-                  </button>
-                ))}
-            </div>
+                  {allCategories.map((category: CategoryType) => (
+                    <button
+                      key={category.id}
+                      className={`w-full flex items-center cursor-pointer text-base py-2 duration-300 
+                        ${selectedCategory === category.name 
+                          ? 'text-secondary border-b-[1px] border-secondary font-medium' 
+                          : 'text-gray-500 border-b-[1px] border-b-gray-200 hover:border-secondary'
+                        }`}
+                      onClick={() => handleSelectCategory(category.name)}
+                    >
+                      <div>{category.name}</div>
+                    </button>
+                  ))}
+                  </div>
           </motion.div>
         )}
       </div>

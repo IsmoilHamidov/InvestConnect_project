@@ -1,6 +1,5 @@
-import { create } from "zustand";
+import { create } from 'zustand';
 
-// Описываем интерфейс стора
 interface ProductsFiltersStore {
   selectedLocation: string;
   setSelectedLocation: (location: string) => void;
@@ -13,19 +12,43 @@ interface ProductsFiltersStore {
 
   selectedMaxPrice: string;
   setSelectedMaxPrice: (price: string) => void;
+
+  viewMode: 'grid' | 'list';
+  setViewMode: (mode: 'grid' | 'list') => void;
+
+  itemsPerPage: number;
+  setItemsPerPage: (items: number) => void;
+
+  currentPage: number;
+  setCurrentPage: (page: number) => void;
+
+  refetch: () => void;
+  setRefetch: (refetchFn: () => void) => void;
 }
 
-
 export const useProductsFiltersStore = create<ProductsFiltersStore>((set) => ({
-  selectedLocation: "",
+  selectedLocation: '',
   setSelectedLocation: (location) => set({ selectedLocation: location }),
 
-  selectedCategory: "",
+  selectedCategory: '',
   setSelectedCategory: (category) => set({ selectedCategory: category }),
 
-  selectedMinPrice: "",
+  selectedMinPrice: '',
   setSelectedMinPrice: (price) => set({ selectedMinPrice: price }),
-  
-  selectedMaxPrice: "",
+
+  selectedMaxPrice: '',
   setSelectedMaxPrice: (price) => set({ selectedMaxPrice: price }),
+
+  viewMode: 'grid',
+  setViewMode: (mode) => set({ viewMode: mode }),
+
+  itemsPerPage: 9,
+  setItemsPerPage: (items) => set({ itemsPerPage: items }),
+
+  currentPage: 0,
+  setCurrentPage: (page) => set({ currentPage: page }),
+
+// refetch
+  refetch: () => {},
+  setRefetch: (refetchFn) => set({ refetch: refetchFn }),
 }));
