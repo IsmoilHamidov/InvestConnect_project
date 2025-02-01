@@ -10,8 +10,8 @@ interface PaginationProps {
 }
 
 const Pagination: React.FC<PaginationProps> = ({ itemsPerPage, items, onPageChange }) => {
-  const [itemOffset, setItemOffset] = useState<number>(0);
-
+  const [, setItemOffset] = useState<number>(0);
+  
   // Calculate number of pages
   const pageCount = Math.ceil(items.length / itemsPerPage);
 
@@ -22,18 +22,7 @@ const Pagination: React.FC<PaginationProps> = ({ itemsPerPage, items, onPageChan
   };
 
   const visiblePageNumbers = 3;
-  const pageNumbersToShow = () => {
-    const currentPage = Math.floor(itemOffset / itemsPerPage);
-    const startPage = Math.max(0, currentPage - Math.floor(visiblePageNumbers / 2));
-    const endPage = Math.min(pageCount - 1, startPage + visiblePageNumbers - 1);
-
-    const pages = [];
-    for (let i = startPage; i <= endPage; i++) {
-      pages.push(i);
-    }
-
-    return pages;
-  };
+ 
 
   return (
     <div>

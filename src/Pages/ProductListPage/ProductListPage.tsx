@@ -1,18 +1,18 @@
-import CategoriesModal from "@/components/Category";
+// import CategoriesModal from "@/components/Category";
+// import { Button } from "@/components/ui/button";
+// import { TbCategory } from "react-icons/tb";
 import NavbarAdmin from "@/components/navbarAdmin";
-import { Button } from "@/components/ui/button";
 import { Product, ProductCard } from "@/components/ui/ProductCard";
 import { useGetProductsQuery } from "@/store/slice/products";
 import { useEffect, useState } from "react";
-import { TbCategory } from "react-icons/tb";
 import { IoSearch } from "react-icons/io5";
 import { useLocation } from "react-router-dom";
 import { Skeleton } from "@mui/material";
 import EmptyNone from "../../assets/images/empty-none.svg";
-import ProductSidebar from "../ProductFilter/ProductSidebar";
-import Pagination from "../ProductFilter/pagination";
+import ProductSidebar from "../../components/ProductFilter/ProductSidebar";
+import Pagination from "../../components/ProductFilter/pagination";
 import Footer from "@/components/Footer/Footer";
-import ProductBanner from "../ProductFilter/productBanner";
+import ProductBanner from "../../components/ProductFilter/productBanner";
 import { useProductsFiltersStore } from "@/store/ProductsFiltersStore";
 
 const ProductListPage = () => {
@@ -21,7 +21,7 @@ const ProductListPage = () => {
   const { selectedLocation } = useProductsFiltersStore();
 
 
-  const [isModalOpen, setModalOpen] = useState<boolean>(false);
+  // const [isModalOpen, setModalOpen] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [itemsPerPage, setItemsPerPage] = useState(9);
 
@@ -32,7 +32,6 @@ const ProductListPage = () => {
     `?search=${search}&location=${selectedLocation}&max_price=500000&min_price=0&category__name=${category}`,
     );
 
-  console.log(data);
 
   const location = useLocation();
 
@@ -68,21 +67,21 @@ const ProductListPage = () => {
     });
   };
 
-  const handleCategorySelect = (selectedCategory: string) => {
-    setCategory(selectedCategory);
-    setIsRefetching(true);
-    refetch().finally(() => {
-      setIsRefetching(false);
-    });
-  };
+  // const handleCategorySelect = (selectedCategory: string) => {
+  //   setCategory(selectedCategory);
+  //   setIsRefetching(true);
+  //   refetch().finally(() => {
+  //     setIsRefetching(false);
+  //   });
+  // };
 
   return (
     <>
       <NavbarAdmin />
       <main className="pt-12">
         <div className="py-11 bg-gray-100 ">
-          <div className="max-w-7xl m-auto flex gap-8 justify-between items-center">
-            <Button
+          <div className="max-w-7xl m-auto flex gap-8 justify-center items-center">
+            {/* <Button
               variant="secondary"
               onClick={() => setModalOpen(true)}
               className="flex items-center justify-center px-4 py-5 text-sm text-white rounded-md"
@@ -94,11 +93,11 @@ const ProductListPage = () => {
               open={isModalOpen}
               onClose={() => setModalOpen(false)}
               onSelectCategory={handleCategorySelect}
-            />
+            /> */}
 
             <div
               className="flex justify-between items-center gap-x-3 bg-background
-                     w-[33rem] h-[48px] px-5 py-2 rounded-2xl text-custom-gray"
+                     w-[35rem] h-[48px] px-5 py-2 rounded-2xl text-custom-gray"
             >
               <input
                 className="bg-background w-[90%] border-black 
@@ -112,7 +111,7 @@ const ProductListPage = () => {
               <IoSearch size={22} />
             </div>
 
-            <p>New Item</p>
+  
           </div>
         </div>
         <div className="max-w-7xl m-auto mb-20">

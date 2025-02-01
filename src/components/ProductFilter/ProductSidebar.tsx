@@ -1,5 +1,5 @@
 import ProductLocation from './productLocation'
-import MultiRangeSlider from './productPrice';
+// import MultiRangeSlider from './productPrice';
 import ProductSidebarCategory from './productSidebarCategory'
 
 
@@ -13,11 +13,11 @@ function ProductSidebar({ onSelectCategory }: ProductSidebarProps) {
   return (
     <div className="w-full flex flex-col gap-9">
         <ProductSidebarCategory  onSelectCategory={onSelectCategory}/>
-        <MultiRangeSlider 
+        {/* <MultiRangeSlider 
           min={0} 
           max={500} 
           onChange={(values) => console.log(values)} 
-        />
+        /> */}
         <ProductLocation/>
   </div>
   )
