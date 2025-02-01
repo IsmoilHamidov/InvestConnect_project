@@ -5,7 +5,7 @@ import bigLogo from "../../assets/images/Altro Logo.png"
 function Footer() {
   return (
     <>
-        <div className='w-full bg-[#F0F3F4] py-24 relative'>
+        <div className='w-full bg-gray-100 py-24 relative'>
                 <div className='max-w-7xl  m-auto flex justify-between relative z-40'>
                     <div className='w-[35%]  flex flex-col'>
                         <img src={logo} className='w-[11rem] h-[3.5rem] object-contain' alt="logo" />
@@ -66,7 +66,7 @@ function Footer() {
         </div>
         
         <div className='w-full bg-custom-blue-gray py-4 relative z-40'>
-            <p className='max-w-7xl m-auto text-white'>Mualliflik Huquqi 2022 Invest Connect Barcha Huquqlar Himoyalangan.</p>
+            <p className='max-w-7xl m-auto text-white text-base'>Mualliflik Huquqi 2022 Invest Connect Barcha Huquqlar Himoyalangan.</p>
         </div>
     </>
   )
