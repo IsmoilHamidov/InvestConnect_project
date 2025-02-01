@@ -106,16 +106,20 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, viewMode }) =
       (
         <div className="product border list  w-full py-4 px-4 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 bg-white">
           <div className="flex items-center gap-5">
-            <img
-              src={product.image}
-              alt={product.name}
-              className="w-28 h-24 object-cover rounded-xl border-2 border-gray-100 hover:border-gray-200 transition-all duration-300"
-            />
+            <Link to={`/products/${product.id}`}>
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="w-28 h-24 object-cover rounded-xl border-2 border-gray-100 hover:border-gray-200 transition-all duration-300"
+                />
+            </Link>
 
             <div className="flex-1">
-              <h3 className="text-lg font-medium text-gray-800 transition-colors duration-300">
-                {product.name}
-              </h3>
+              <Link to={`/products/${product.id}`}>
+                  <h3 className="text-lg font-medium text-gray-800 transition-colors duration-300">
+                    {product.name}
+                  </h3>
+              </Link>
               <p className="text-sm text-secondary mt-1">{product.location}</p>
               <p className="text-sm text-gray-500 mt-1">
                 Kategoriya: <span className="font-medium">{product.category.name}</span>
