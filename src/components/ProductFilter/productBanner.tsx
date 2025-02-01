@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { BsGridFill } from "react-icons/bs";
 import { ImList } from "react-icons/im";
 import { GoTriangleDown } from "react-icons/go";
-
+import { useToast } from "@/hooks/use-toast";
 
 interface ProductBannerProps {
   itemsPerPageFromBanner: (items: number) => void;
@@ -11,10 +11,21 @@ interface ProductBannerProps {
 }
 
 
+
 const ProductBanner: React.FC<ProductBannerProps> = ({ itemsPerPageFromBanner, viewMode, setViewMode}) => {
   const [gridViewActive, setGridViewActive] = useState<boolean>(true);
   const [listViewActive, setListViewActive] = useState<boolean>(false);
 
+  const toast = useToast()
+  const proccess = () => {
+    toast.toast({
+      description: 'Jarayonda',
+      variant: "warning",
+      duration: 1000
+    });
+  };
+
+  
   useEffect(() => {
     if (viewMode === "grid") {
       setGridViewActive(true);
@@ -71,16 +82,18 @@ const ProductBanner: React.FC<ProductBannerProps> = ({ itemsPerPageFromBanner, v
           </span>
         </div>
 
-        <div className="flex items-center gap-2 text-base  relative">
+        <div 
+        onClick={proccess}
+        className="flex items-center gap-2 text-base  relative">
           <label className="block">Saralash</label>
           <select
             id="countries"
             className="w-32 md:w-52 border-[1px] text-sm border-gray-200 py-1 px-4 cursor-pointer text-primeColor block dark:placeholder-gray-400 appearance-none focus-within:outline-none focus-visible:border-primeColor"
           >
-            <option value="Best Sellers">Eng yangilari</option>
-            <option value="New Arrival">Eng ko'p ko'rilganlari</option>
-            <option value="Featured">Featured</option>
-            <option value="Final Offer">Final Offer</option>
+           <option value="Best Sellers" disabled>Eng yangilari</option>
+            <option value="New Arrival" disabled>Eng ko'p ko'rilganlari</option>
+            <option value="Featured" disabled>Featured</option>
+            <option value="Final Offer" disabled>Final Offer</option>
           </select>
           <span className="absolute text-sm right-2 md:right-4 top-2.5">
             <GoTriangleDown />

@@ -15,7 +15,7 @@ interface ProductsFiltersStore {
   setSelectedMaxPrice: (price: string) => void;
 }
 
-// Создаём Zustand-стор с типизацией
+
 export const useProductsFiltersStore = create<ProductsFiltersStore>((set) => ({
   selectedLocation: "",
   setSelectedLocation: (location) => set({ selectedLocation: location }),

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import NavTitle from "./productNavtitle";
 import { useGetCategoriesQuery } from '@/store/slice/products';
 import { motion } from "framer-motion";
