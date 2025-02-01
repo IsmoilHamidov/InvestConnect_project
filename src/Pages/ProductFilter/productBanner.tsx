@@ -3,19 +3,28 @@ import { BsGridFill } from "react-icons/bs";
 import { ImList } from "react-icons/im";
 import { GoTriangleDown } from "react-icons/go";
 
-
 interface ProductBannerProps {
   itemsPerPageFromBanner: (items: number) => void;
   viewMode: "grid" | "list";
   setViewMode: React.Dispatch<React.SetStateAction<"grid" | "list">>;
 }
 
-
-const ProductBanner: React.FC<ProductBannerProps> = ({ itemsPerPageFromBanner, viewMode, setViewMode}) => {
-  const [gridViewActive, setGridViewActive] = useState<boolean>(true);
-  const [listViewActive, setListViewActive] = useState<boolean>(false);
+const ProductBanner: React.FC<ProductBannerProps> = ({
+  itemsPerPageFromBanner,
+  viewMode,
+  setViewMode,
+}) => {
+  // Устанавливаем начальное состояние из localStorage, если оно существует, иначе по умолчанию "grid"
+  const initialViewMode = localStorage.getItem("viewMode") as "grid" | "list" || "grid";
+  
+  const [gridViewActive, setGridViewActive] = useState<boolean>(initialViewMode === "grid");
+  const [listViewActive, setListViewActive] = useState<boolean>(initialViewMode === "list");
 
   useEffect(() => {
+    // Сохраняем состояние viewMode в localStorage
+    localStorage.setItem("viewMode", viewMode);
+
+    // Обновляем активные состояния кнопок
     if (viewMode === "grid") {
       setGridViewActive(true);
       setListViewActive(false);
@@ -23,37 +32,34 @@ const ProductBanner: React.FC<ProductBannerProps> = ({ itemsPerPageFromBanner, v
       setGridViewActive(false);
       setListViewActive(true);
     }
-  }, [viewMode]); 
+  }, [viewMode]);
 
   return (
     <div className="w-full flex flex-col md:flex-row md:items-center justify-between">
- 
-        <div className="flex items-center gap-4">
-          <button
-            onClick={() => setViewMode("grid")}
-            className={`${
-              gridViewActive
-                ? "bg-secondary text-white"
-                : "border-[1px] border-gray-300 text-[#737373]"
-            } w-8 h-8 text-lg flex items-center justify-center cursor-pointer gridView`}
-          >
-            <BsGridFill />
-          </button>
-          <button
-            onClick={() => setViewMode("list")}
-            className={`${
-              listViewActive
-                ? "bg-secondary text-white"
-                : "border-[1px] border-gray-300 text-[#737373]"
-            } w-8 h-8 text-base flex items-center justify-center cursor-pointer listView`}
-          >
-            <ImList />
-          </button>
-        </div>
-
+      <div className="flex items-center gap-4">
+        <button
+          onClick={() => setViewMode("grid")}
+          className={`${
+            gridViewActive
+              ? "bg-secondary text-white"
+              : "border-[1px] border-gray-300 text-[#737373]"
+          } w-8 h-8 text-lg flex items-center justify-center cursor-pointer gridView`}
+        >
+          <BsGridFill />
+        </button>
+        <button
+          onClick={() => setViewMode("list")}
+          className={`${
+            listViewActive
+              ? "bg-secondary text-white"
+              : "border-[1px] border-gray-300 text-[#737373]"
+          } w-8 h-8 text-base flex items-center justify-center cursor-pointer listView`}
+        >
+          <ImList />
+        </button>
+      </div>
 
       <div className="flex items-center gap-2 md:gap-6 mt-4 md:mt-0 text-secondary">
-     
         <div className="flex items-center gap-2  relative">
           <label className="block">Ko'rsatish</label>
           <select
@@ -86,9 +92,7 @@ const ProductBanner: React.FC<ProductBannerProps> = ({ itemsPerPageFromBanner, v
             <GoTriangleDown />
           </span>
         </div>
-
       </div>
-
     </div>
   );
 };

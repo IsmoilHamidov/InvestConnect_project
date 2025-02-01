@@ -30,9 +30,8 @@ const ProductLocation: React.FC = () => {
               <li
                 onClick={() => setSelectedLocation(item)}
                 key={index}
-                className={`border-b-[1px] border-b-[#F0F0F0] pb-2 flex items-center gap-2 hover:text-primeColor hover:border-gray-400 duration-300 ${
-                  selectedLocation === item ? "text-primeColor font-bold" : ""
-                }`}
+                className={`border-b-[1px] border-b-[#F0F0F0] pb-2 flex items-center gap-2 hover:text-primeColor hover:border-gray-400 duration-300 ${selectedLocation === item ? "text-primeColor font-bold" : ""
+                  }`}
               >
                 {item}
               </li>
