@@ -3,10 +3,28 @@ import { Link } from "react-router-dom";
 import { useGetProductsQuery } from "@/store/slice/products";
 import { Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal } from "react";
+
+
+interface Category {
+  name: string | number | boolean | React.ReactNode | null;
+}
+
+interface Card {
+  id: string | number | null;
+  image?: string;
+  name: string | number | boolean | React.ReactNode | null;
+  category: Category;
+  description: string | number | boolean | React.ReactNode | null;
+  price: string | number | boolean | React.ReactNode | null;
+  location?: string;
+  rendement: number,
+}
+
 
 function Projects() {
   const { data, error, isLoading } = useGetProductsQuery("");
+  console.log(data);
+  
 
   if (isLoading) {
     return <div className="text-center text-gray-500">Yuklanmoqda...</div>;
@@ -36,7 +54,7 @@ function Projects() {
         </h3>
 
         <div className="flex justify-between items-center mt-16 w-[80rem] px-4 py-6">
-          {limitedData.map((card: { id: Key | null | undefined; image: string | undefined; name: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined; category: { name: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; }; description: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; price: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined;},index: number) => (
+        {limitedData.map((card: Card, index: number) => (
             <div key={card.id} 
               data-aos="fade-zoom-in"
               data-aos-easing="ease-in-back"
@@ -61,8 +79,8 @@ function Projects() {
                 </Link>
                 <div className="absolute text-red-50 z-20 top-4 -right-[16px] grid justify-items-end">
                   <div className="bg-[#B29C6F]  px-4 py-3">
-                      <p className="font-normal text-white text-[14px] leading-3 ">
-                          Topligging
+                      <p className="font-normal text-white text-[14px] leading-3 truncate max-w-[200px] overflow-hidden">
+                         {card.location}
                       </p>
                   </div>
                   <div
@@ -80,29 +98,32 @@ function Projects() {
                 />
               </div>
 
-              <div className="bg-white grid px-4 py-6 gap-3 rounded-b-md">
-                <div className="flex justify-between">
-                  <span className="title  text-custom-gray text-xl font-medium">
-                    {card.name}
-                  </span>
-                </div>
-                <div className="flex justify-between">
-                  <div className="title">{card.category.name}</div>
-                </div>
-                <div>{card.description}</div>
-                <div className="flex justify-between pt-5">
-                  <div className="text-2xl">{card.price} UZS</div>
-                  <Link
-                    to={`/products/${card.id}`}
-                    onClick={() => {
-                      sessionStorage.setItem("scrollPosition", String(window.scrollY));}}
-                  >
-                    <Button className="Blue_button border rounded-[40px] px-4 py-2">
+              <div className="grid px-4 py-5 gap-3 rounded-b-md flex-1 bg-white">
+                    <div className="flex justify-between min-h-10">
+                      <span className="title text-custom-gray text-lg font-medium">
+                        {card.name}
+                      </span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <div className="title font-medium text-lg">{card.category.name}</div>
+                      <p className="flex flex-col items-end text-base font-medium"> 
+                        {card.rendement}
+                        <span className="text-sm font-light">samaradorlik</span>
+                      </p>
+                    </div>
+                    <div>{card.description}</div>
+                    <div className="flex justify-between pt-3">
+                      <div className="text-[22px] font-medium">${card.price} </div>
+                      <Link to={`/products/${card.id}`}
+                        onClick={() => {
+                          sessionStorage.setItem("scrollPosition", String(window.scrollY));
+                        }}>
+                        <Button className="Blue_button border rounded-[40px] px-4 py-2">
                         Ko'proq bilib olish
-                    </Button>
-                  </Link>
+                        </Button>
+                      </Link>
+                    </div>
                 </div>
-              </div>
             </div>
           ))}
         </div>
