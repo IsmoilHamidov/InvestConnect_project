@@ -12,11 +12,11 @@ const NavTitle: React.FC<NavTitleProps> = ({ title, icons }) => {
     <div className="flex items-center justify-between pb-4">
       {icons ? (
         <>
-          <h3 className="font-medium lg:text-[17px] text-primeColor">{title}</h3>
+          <h3 className="font-medium lg:text-[17px] text-[#B29C6F]">{title}</h3>
           {icons && <BiCaretDown />}
         </>
       ) : (
-        <h3 className="font-medium lg:text-[17px] text-primeColor">{title}</h3>
+        <h3 className="font-medium lg:text-[17px] text-[#B29C6F]">{title}</h3>
       )}
     </div>
   );

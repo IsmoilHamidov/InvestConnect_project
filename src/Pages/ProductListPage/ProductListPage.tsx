@@ -1,6 +1,3 @@
-// import CategoriesModal from "@/components/Category";
-// import { Button } from "@/components/ui/button";
-// import { TbCategory } from "react-icons/tb";
 import NavbarAdmin from "@/components/navbarAdmin";
 import { Product, ProductCard } from "@/components/ui/ProductCard";
 import { useGetProductsQuery } from "@/store/slice/products";
@@ -17,24 +14,15 @@ import { useProductsFiltersStore } from "@/store/ProductsFiltersStore";
 
 const ProductListPage = () => {
   const [search, setSearch] = useState<string>("");
-  const [category, setCategory] = useState<string>("");
-  const { selectedLocation } = useProductsFiltersStore();
-
-
-  // const [isModalOpen, setModalOpen] = useState<boolean>(false);
-  const [currentPage, setCurrentPage] = useState<number>(0);
-  const [itemsPerPage, setItemsPerPage] = useState(9);
-
+  const { setRefetch } = useProductsFiltersStore();
+  const { selectedLocation, selectedCategory, setSelectedCategory, viewMode, itemsPerPage, currentPage, setCurrentPage } = useProductsFiltersStore();
   const [isRefetching, setIsRefetching] = useState(false);
-  const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
-
   const { data, error, isLoading, refetch } = useGetProductsQuery(
-    `?search=${search}&location=${selectedLocation}&max_price=500000&min_price=0&category__name=${category}`,
-    );
+    `?search=${search}&location=${selectedLocation}&max_price=500000&min_price=0&category=${selectedCategory}`
+  );
 
-
+  // scroll location
   const location = useLocation();
-
   useEffect(() => {
     const savedPosition = sessionStorage.getItem("scrollPosition");
     if (savedPosition) {
@@ -53,27 +41,13 @@ const ProductListPage = () => {
     ));
   };
 
-  // Pagination
+// pagination
   const startIndex = currentPage * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const paginatedData = data?.slice(startIndex, endIndex) || [];
-
-  const itemsPerPageFromBanner = (items: number) => {
-    setItemsPerPage(items);
-    setIsRefetching(true);
-    setCurrentPage(0);
-    refetch().then(() => {
-      setIsRefetching(false);
-    });
-  };
-
-  // const handleCategorySelect = (selectedCategory: string) => {
-  //   setCategory(selectedCategory);
-  //   setIsRefetching(true);
-  //   refetch().finally(() => {
-  //     setIsRefetching(false);
-  //   });
-  // };
+  useEffect(() => {
+    setRefetch(() => refetch); 
+  }, [setRefetch, refetch]);
 
   return (
     <>
@@ -81,20 +55,6 @@ const ProductListPage = () => {
       <main className="pt-12">
         <div className="py-11 bg-gray-100 ">
           <div className="max-w-7xl m-auto flex gap-8 justify-center items-center">
-            {/* <Button
-              variant="secondary"
-              onClick={() => setModalOpen(true)}
-              className="flex items-center justify-center px-4 py-5 text-sm text-white rounded-md"
-            >
-              <TbCategory className="mr-2" />
-              Kategoriyalarni ko'rsatish
-            </Button>
-            <CategoriesModal
-              open={isModalOpen}
-              onClose={() => setModalOpen(false)}
-              onSelectCategory={handleCategorySelect}
-            /> */}
-
             <div
               className="flex justify-between items-center gap-x-3 bg-background
                      w-[35rem] h-[48px] px-5 py-2 rounded-2xl text-custom-gray"
@@ -110,8 +70,6 @@ const ProductListPage = () => {
               />
               <IoSearch size={22} />
             </div>
-
-  
           </div>
         </div>
         <div className="max-w-7xl m-auto mb-20">
@@ -120,18 +78,14 @@ const ProductListPage = () => {
               Loyihalar
             </h2>
             <div className="w-[76%] ">
-              <ProductBanner
-                itemsPerPageFromBanner={itemsPerPageFromBanner}
-                viewMode={viewMode}
-                setViewMode={setViewMode}
-              />
+             <ProductBanner />
             </div>
           </div>
           <div className="flex justify-between gap-x-10 ">
             <div className="w-[18%]">
               <ProductSidebar
-                onSelectCategory={(selectedCategory) => {
-                  setCategory(selectedCategory);
+                onSelectCategory={(category) => {
+                  setSelectedCategory(category);
                   setIsRefetching(true);
                   refetch().finally(() => {
                     setIsRefetching(false);
@@ -165,7 +119,7 @@ const ProductListPage = () => {
                     }`}
                   >
                     {data && data.length > itemsPerPage && (
-                      <Pagination
+                     <Pagination
                         itemsPerPage={itemsPerPage}
                         items={data}
                         onPageChange={(selectedPage: number) =>

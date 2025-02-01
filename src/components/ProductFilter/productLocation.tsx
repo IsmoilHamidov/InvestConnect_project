@@ -9,6 +9,7 @@ const ProductLocation: React.FC = () => {
   const { selectedLocation, setSelectedLocation } = useProductsFiltersStore();
 
   const locations: string[] = [
+    "Barchasi",
     "Toshkent",
     "Buxoro",
     "Andijon",
@@ -18,6 +19,14 @@ const ProductLocation: React.FC = () => {
     "Sirdaryo",
     "Surxandaryo",
   ];
+
+  const handleLocationClick = (location: string) => {
+    if (location === "Barchasi") {
+      setSelectedLocation(""); 
+    } else {
+      setSelectedLocation(location); 
+    }
+  };
 
   return (
     <div>
@@ -29,11 +38,13 @@ const ProductLocation: React.FC = () => {
           <ul className="cursor-pointer flex flex-col gap-y-4 text-sm lg:text-base text-[#767676]">
             {locations.map((item, index) => (
               <li
-                onClick={() => setSelectedLocation(item)}
+                onClick={() => handleLocationClick(item)}
                 key={index}
 
                 className={`w-full flex items-center cursor-pointer text-base pb-1  duration-300 ${
-                  selectedLocation === item ? "text-secondary  border-b-[1px] border-secondary font-medium" : ""
+                  selectedLocation === item || (selectedLocation === "" && item === "Barchasi")
+                    ? "text-secondary  border-b-[1px] border-secondary font-medium"
+                    : ""
                 }`}
               >
                 {item}
