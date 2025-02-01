@@ -35,7 +35,7 @@ const ProductBanner: React.FC<ProductBannerProps> = ({ itemsPerPageFromBanner, v
               gridViewActive
                 ? "bg-secondary text-white"
                 : "border-[1px] border-gray-300 text-[#737373]"
-            } w-8 h-8 text-lg flex items-center justify-center cursor-pointer gridView`}
+            } w-8 h-8 rounded-sm text-lg flex items-center justify-center cursor-pointer gridView`}
           >
             <BsGridFill />
           </button>
@@ -45,7 +45,7 @@ const ProductBanner: React.FC<ProductBannerProps> = ({ itemsPerPageFromBanner, v
               listViewActive
                 ? "bg-secondary text-white"
                 : "border-[1px] border-gray-300 text-[#737373]"
-            } w-8 h-8 text-base flex items-center justify-center cursor-pointer listView`}
+            } w-8 h-8 rounded-sm text-base flex items-center justify-center cursor-pointer listView`}
           >
             <ImList />
           </button>

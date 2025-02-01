@@ -129,6 +129,7 @@ console.log(data);
               <ProductSidebar 
                 onSelectCategory={(selectedCategory) => {
                   setCategory(selectedCategory);
+                  
                   setIsRefetching(true);
                   refetch().finally(() => {
                     setIsRefetching(false);
