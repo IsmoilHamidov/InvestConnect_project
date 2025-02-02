@@ -33,7 +33,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, viewMode }) =
        {viewMode === "grid" ?(
 
         <div className="product grid">
-          <div className="bg-white shadow-sm rounded-xl flex flex-col h-full hover:shadow-md duration-200 ease-in">
+          <div className="bg-white shadow-sm rounded-xl flex flex-col h-full hover:shadow-md duration-200 ease-in-out">
             <div className="relative group flex-1">
               <img
                 src={product.image}
@@ -91,8 +91,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, viewMode }) =
                   onClick={() => {
                     sessionStorage.setItem("scrollPosition", String(window.scrollY));
                   }}>
-                  <button className="text-sm border-custom-blue-gray text-gray-900 border rounded-2xl px-3 py-[3px]">
-                  Ko'rish
+                  <button className="text-sm bg-blue-50 text-secondary hover:bg-primary hover:text-white 
+                  border border-primary rounded-xl px-3 py-1 transition-all duration-300">
+                    Ko'rish
                   </button>
                 </Link>
               </div>
@@ -139,7 +140,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, viewMode }) =
                 sessionStorage.setItem("scrollPosition", String(window.scrollY));
               }}
             >
-              <button className="text-sm bg-blue-50 text-secondary hover:bg-blue-100 border border-primary rounded-xl px-4 py-2 transition-all duration-300">
+              <button className="text-sm bg-blue-50 text-secondary hover:bg-primary hover:text-white
+               border border-primary rounded-2xl px-4 py-2 transition-all duration-300">
                 Ko'rish
               </button>
             </Link>
