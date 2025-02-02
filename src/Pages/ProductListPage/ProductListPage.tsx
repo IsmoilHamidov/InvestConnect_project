@@ -49,6 +49,10 @@ const ProductListPage = () => {
     setRefetch(() => refetch); 
   }, [setRefetch, refetch]);
 
+  useEffect(() => {
+    setCurrentPage(0);
+  }, [selectedLocation, selectedCategory, setCurrentPage]);
+  
   return (
     <>
       <NavbarAdmin />
