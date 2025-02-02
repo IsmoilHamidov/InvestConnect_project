@@ -1,4 +1,3 @@
-// components/ProductFilter/ProductBanner.tsx
 import React, { useEffect } from 'react';
 import { BsGridFill } from 'react-icons/bs';
 import { ImList } from 'react-icons/im';
@@ -12,7 +11,8 @@ const ProductBanner: React.FC = () => {
   const toast = useToast();
 
   const handleRefetch = () => {
-    refetch(); 
+    console.log('Loading...');
+    refetch(); // Refetchni chaqiradi
   };
 
   const proccess = () => {
@@ -26,6 +26,15 @@ const ProductBanner: React.FC = () => {
   const gridViewActive = viewMode === 'grid';
   const listViewActive = viewMode === 'list';
 
+  // viewMode o'zgarganda refetchni chaqirish
+  useEffect(() => {
+    handleRefetch(); // viewMode o'zgarganda refetchni chaqirish
+  }, [viewMode]);
+
+  useEffect(() => {
+    setRefetch(() => handleRefetch); // setRefetchni yangilaymiz
+  }, [setRefetch]);
+
   useEffect(() => {
     if (viewMode === 'grid') {
       setViewMode('grid');
@@ -34,14 +43,9 @@ const ProductBanner: React.FC = () => {
     }
   }, [viewMode, setViewMode]);
 
-
-  useEffect(() => {
-    setRefetch(() => handleRefetch);
-  }, [setRefetch]);
-
   return (
     <div className="w-full flex flex-col md:flex-row md:items-center justify-between">
-      <div  className="flex items-center gap-4">
+      <div className="flex items-center gap-4">
         <button
           onClick={() => setViewMode('grid')}
           className={`${
@@ -62,7 +66,7 @@ const ProductBanner: React.FC = () => {
 
       <div className="flex items-center gap-2 md:gap-6 mt-4 md:mt-0 text-secondary">
         <div className="flex items-center gap-2 relative">
-          <label  className="block">Ko'rsatish</label>
+          <label className="block">Ko'rsatish</label>
           <select
             onClick={handleRefetch}
             onChange={(e) => setItemsPerPage(+e.target.value)}
@@ -82,7 +86,6 @@ const ProductBanner: React.FC = () => {
         <div onClick={proccess} className="flex items-center gap-2 text-base relative">
           <label className="block">Saralash</label>
           <select
-            id="countries"
             className="w-32 md:w-52 border-[1px] text-sm border-gray-200 py-1 px-4 cursor-pointer text-primeColor block dark:placeholder-gray-400 appearance-none focus-within:outline-none focus-visible:border-primeColor"
           >
             <option value="Best Sellers" disabled>
