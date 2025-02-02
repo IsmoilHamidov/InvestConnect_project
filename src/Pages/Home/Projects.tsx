@@ -2,7 +2,6 @@
 import { Link } from "react-router-dom";
 import { useGetProductsQuery } from "@/store/slice/products";
 import { Star } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
 
 interface Category {
@@ -60,35 +59,30 @@ function Projects() {
               data-aos-easing="ease-in-back"
               data-aos-offset="0"
               data-aos-delay={index * 450} 
-              className="border border-[#B29C6F] rounded-md product grid ">
-              <div>
-                
-              </div>
-              <div className="relative group ">
+              className="w-[30%] bg-white shadow-md rounded-xl flex flex-col h-full hover:shadow-lg duration-200 ease-in-out ">
+            
+              <div className="relative group flex-1">
                 <img
                   src={card.image}
                   alt='image'
-                  className="w-[391px] h-[368px] object-cover z-20 rounded-t-md"
+                  className="w-full border h-[19rem] object-cover z-20 rounded-xl  border-gray-200"
                   style={{ objectPosition: "center" }}
                 />
-                <Link
-                  to={`/products/${card.id}`}
-                  className="absolute inset-0 bg-primary bg-opacity-60 opacity-0 z-20 group-hover:opacity-85 transition-opacity duration-300 flex items-center justify-center"
-                >
-                  <span className="text-white text-xl font-medium z-40">Batafsil</span>
-                </Link>
-                <div className="absolute text-red-50 z-20 top-4 -right-[16px] grid justify-items-end">
-                  <div className="bg-[#B29C6F]  px-4 py-3">
-                      <p className="font-normal text-white text-[14px] leading-3 truncate max-w-[200px] overflow-hidden">
-                         {card.location}
-                      </p>
+              <Link to={`/products/${card.id}`} className="absolute inset-0 rounded-xl bg-primary bg-opacity-70 opacity-0 
+                z-20 group-hover:opacity-90 transition-opacity duration-300 flex items-center justify-center">
+                  <span className="text-white text-lg font-medium z-40">Batafsil</span>
+              </Link>
+
+              <div className="absolute text-red-50 z-20 top-4 -right-[16px] grid justify-items-end">
+                  <div className="bg-[#B29C6F] px-4 py-1 overflow-hidden">
+                    <p
+                      className="font-normal text-white text-[15px]  truncate max-w-[130px] overflow-hidden"
+                      title={card.location} 
+                    >
+                      {card.location}
+                    </p>
                   </div>
-                  <div
-                    className="bg-[#443B3A] w-4 h-3"
-                    style={{
-                    clipPath: "polygon(0 0, 0 100%, 100% 0)",
-                    }}>
-                </div>
+                  <div className="bg-[#443B3A] w-4 h-3" style={{ clipPath: "polygon(0 0, 0 100%, 100% 0)" }} />
               </div>
 
                 <Star
@@ -98,40 +92,48 @@ function Projects() {
                 />
               </div>
 
-              <div className="grid px-4 py-5 gap-3 rounded-b-md flex-1 bg-white">
-                    <div className="flex justify-between min-h-10">
-                      <span className="title text-custom-gray text-lg font-medium">
+              <div className="grid px-4 py-5 gap-3 rounded-b-xl flex-1 bg-white ">
+                <div>
+                    <div className="flex h-14 mb-2">
+                      <span className="text-custom-gray text-base leading-6 font-medium">
                         {card.name}
                       </span>
                     </div>
-                    <div className="flex justify-between items-center">
-                      <div className="title font-medium text-lg">{card.category.name}</div>
-                      <p className="flex flex-col items-end text-base font-medium"> 
+                    <div className="flex justify-between">
+                      <p className="flex flex-col text-md font-medium"> 
                         {card.rendement}
-                        <span className="text-sm font-light">samaradorlik</span>
+                        <span className="text-xs font-light">samaradorlik</span>
+                      </p>
+
+                      <p className="text-end font-normal text-xs text-wrap h-auto max-w-[150px] break-words">
+                        Kategoriya: {card.category.name} 
                       </p>
                     </div>
-                    <div>{card.description}</div>
-                    <div className="flex justify-between pt-3">
-                      <div className="text-[22px] font-medium">${card.price} </div>
-                      <Link to={`/products/${card.id}`}
-                        onClick={() => {
-                          sessionStorage.setItem("scrollPosition", String(window.scrollY));
-                        }}>
-                        <Button className="Blue_button border rounded-[40px] px-4 py-2">
-                        Ko'proq bilib olish
-                        </Button>
-                      </Link>
-                    </div>
                 </div>
+                
+                <div className="flex justify-between  mt-7">
+                  <div className="text-[22px] text-gray-900 font-medium">${card.price} </div>
+                  <Link to={`/products/${card.id}`}
+                    onClick={() => {
+                      sessionStorage.setItem("scrollPosition", String(window.scrollY));
+                    }}>
+                    <button className="text-sm bg-blue-50 text-secondary hover:bg-primary hover:text-white 
+                    border border-primary rounded-xl px-3 py-1 transition-all duration-300">
+                      Ko'rish
+                    </button>
+                  </Link>
+                </div>
+              </div>
             </div>
           ))}
         </div>
 
+
+
           <Link to={'/products'} onClick={() => window.scrollTo(0, 0)} >
               <button id="about_us"
                 className="Brown_button rounded-3xl p-3 px-12
-                 text-base text-white bg-custom-gray mt-5"
+                 text-base text-white bg-custom-gray mt-8"
               >
                 Bizning taklifimizni ko'ring
               </button>

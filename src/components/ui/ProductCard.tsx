@@ -33,7 +33,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, viewMode }) =
        {viewMode === "grid" ?(
 
         <div className="product grid">
-          <div className="bg-white shadow-sm rounded-xl flex flex-col h-full hover:shadow-md duration-200 ease-in">
+          <div className="bg-white shadow-sm rounded-xl flex flex-col h-full hover:shadow-md duration-200 ease-in-out">
             <div className="relative group flex-1">
               <img
                 src={product.image}

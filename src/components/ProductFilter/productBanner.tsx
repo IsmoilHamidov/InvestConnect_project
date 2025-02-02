@@ -7,7 +7,7 @@ import { useProductsFiltersStore } from '@/store/ProductsFiltersStore';
 
 const ProductBanner: React.FC = () => {
   const { refetch, setRefetch } = useProductsFiltersStore();
-  const { viewMode, setViewMode, itemsPerPage, setItemsPerPage } = useProductsFiltersStore();
+  const { viewMode, setViewMode, setItemsPerPage } = useProductsFiltersStore();
   const toast = useToast();
 
   const handleRefetch = () => {
