@@ -14,17 +14,14 @@ const ProductBanner: React.FC<ProductBannerProps> = ({
   viewMode,
   setViewMode,
 }) => {
-  // Устанавливаем начальное состояние из localStorage, если оно существует, иначе по умолчанию "grid"
   const initialViewMode = localStorage.getItem("viewMode") as "grid" | "list" || "grid";
   
   const [gridViewActive, setGridViewActive] = useState<boolean>(initialViewMode === "grid");
   const [listViewActive, setListViewActive] = useState<boolean>(initialViewMode === "list");
 
   useEffect(() => {
-    // Сохраняем состояние viewMode в localStorage
     localStorage.setItem("viewMode", viewMode);
 
-    // Обновляем активные состояния кнопок
     if (viewMode === "grid") {
       setGridViewActive(true);
       setListViewActive(false);

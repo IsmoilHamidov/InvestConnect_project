@@ -34,7 +34,7 @@ const ProductSidebarCategory: React.FC<CategoriesModalProps> = ({ onSelectCatego
 
   const handleSelectCategory = (categoryName: string) => {
     setSelectedCategory(categoryName);
-    localStorage.setItem("selectedCategory", categoryName); // LocalStorage ga saqlash
+    localStorage.setItem("selectedCategory", categoryName); 
     onSelectCategory(categoryName === "Barchasi" ? "" : categoryName);
   };
 

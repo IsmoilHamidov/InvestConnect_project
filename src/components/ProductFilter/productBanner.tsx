@@ -12,7 +12,7 @@ const ProductBanner: React.FC = () => {
 
   const handleRefetch = () => {
     console.log('Loading...');
-    refetch(); // Refetchni chaqiradi
+    refetch(); 
   };
 
   const proccess = () => {
@@ -26,13 +26,12 @@ const ProductBanner: React.FC = () => {
   const gridViewActive = viewMode === 'grid';
   const listViewActive = viewMode === 'list';
 
-  // viewMode o'zgarganda refetchni chaqirish
   useEffect(() => {
-    handleRefetch(); // viewMode o'zgarganda refetchni chaqirish
-  }, [viewMode]);
+    handleRefetch(); 
+  }, [viewMode]); // Re-fetch when view mode changes
 
   useEffect(() => {
-    setRefetch(() => handleRefetch); // setRefetchni yangilaymiz
+    setRefetch(() => handleRefetch); 
   }, [setRefetch]);
 
   useEffect(() => {
@@ -68,8 +67,10 @@ const ProductBanner: React.FC = () => {
         <div className="flex items-center gap-2 relative">
           <label className="block">Ko'rsatish</label>
           <select
-            onClick={handleRefetch}
-            onChange={(e) => setItemsPerPage(+e.target.value)}
+             onChange={(e) => {
+              setItemsPerPage(+e.target.value);
+              handleRefetch(); // Trigger re-fetch when items per page change
+            }}
             id="countries"
             className="w-16 md:w-20 border-[1px] border-gray-200 py-1 px-4 cursor-pointer text-primeColor text-base block dark:placeholder-gray-400 appearance-none focus-within:outline-none focus-visible:border-primeColor"
           >

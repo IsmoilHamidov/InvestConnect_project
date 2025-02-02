@@ -41,13 +41,18 @@ const ProductListPage = () => {
     ));
   };
 
-// pagination
   const startIndex = currentPage * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const paginatedData = data?.slice(startIndex, endIndex) || [];
   useEffect(() => {
-    setRefetch(() => refetch); 
-  }, [setRefetch, refetch]);
+    if (search || selectedCategory || selectedLocation) {
+      setIsRefetching(true);
+      refetch()
+        .finally(() => {
+          setIsRefetching(false);
+        });
+    }
+  }, [search, selectedCategory, selectedLocation, refetch]);
 
   return (
     <>
@@ -78,7 +83,7 @@ const ProductListPage = () => {
               Loyihalar
             </h2>
             <div className="w-[76%] ">
-             <ProductBanner />
+              <ProductBanner />
             </div>
           </div>
           <div className="flex justify-between gap-x-10 ">
@@ -95,11 +100,10 @@ const ProductListPage = () => {
             </div>
 
             <div
-              className={`${
-                viewMode === "grid"
-                  ? "w-[76%] pr-4 products grid grid-cols-[30%,30%,30%] justify-between gap-y-14"
-                  : "w-[76%] flex flex-col gap-y-5 "
-              }`}
+              className={`${viewMode === "grid"
+                ? "w-[76%] pr-4 products grid grid-cols-[30%,30%,30%] justify-between gap-y-14"
+                : "w-[76%] flex flex-col gap-y-5 "
+                }`}
             >
               {error ? (
                 <p className="text-red-500">Xatolik yuz berdi</p>
@@ -114,12 +118,10 @@ const ProductListPage = () => {
                   ))}
 
                   <div
-                    className={`col-span-3 flex justify-center items-center ${
-                      viewMode === "list" ? "mt-14" : ""
-                    }`}
+                    className={`col-span-3 flex justify-center items-center ${viewMode === 'list' ? 'mt-14' : ''}`}
                   >
                     {data && data.length > itemsPerPage && (
-                     <Pagination
+                      <Pagination
                         itemsPerPage={itemsPerPage}
                         items={data}
                         onPageChange={(selectedPage: number) =>
@@ -130,17 +132,13 @@ const ProductListPage = () => {
                   </div>
                 </>
               ) : (
-                <div className="flex flex-col gap-y-5 items-center mt-24 col-span-3  text-center">
-                  <p className="text-gray-600 font-semibold text-xl ">
-                    Hech narsa topilmadi!
-                  </p>
-                  <img
-                    src={EmptyNone}
-                    className="h-72"
-                    alt="No products found"
-                  />
+                <div className="flex flex-col gap-y-5 items-center mt-24 col-span-3 text-center">
+                  <p className="text-gray-600 font-semibold text-xl">Hech narsa topilmadi!</p>
+                  <img src={EmptyNone} className="h-72" alt="No products found" />
                 </div>
               )}
+
+
             </div>
           </div>
         </div>
