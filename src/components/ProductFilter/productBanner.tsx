@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { BsGridFill } from 'react-icons/bs';
 import { ImList } from 'react-icons/im';
@@ -8,12 +7,12 @@ import { useProductsFiltersStore } from '@/store/ProductsFiltersStore';
 
 const ProductBanner: React.FC = () => {
   const { refetch, setRefetch } = useProductsFiltersStore();
-  const { viewMode, setViewMode,  setItemsPerPage } = useProductsFiltersStore();
+  const { viewMode, setViewMode, itemsPerPage, setItemsPerPage } = useProductsFiltersStore();
   const toast = useToast();
 
-
   const handleRefetch = () => {
-    refetch(); 
+    console.log('Loading...');
+    refetch(); // Refetchni chaqiradi
   };
 
   const proccess = () => {
@@ -24,9 +23,17 @@ const ProductBanner: React.FC = () => {
     });
   };
 
-
   const gridViewActive = viewMode === 'grid';
   const listViewActive = viewMode === 'list';
+
+  // viewMode o'zgarganda refetchni chaqirish
+  useEffect(() => {
+    handleRefetch(); // viewMode o'zgarganda refetchni chaqirish
+  }, [viewMode]);
+
+  useEffect(() => {
+    setRefetch(() => handleRefetch); // setRefetchni yangilaymiz
+  }, [setRefetch]);
 
   useEffect(() => {
     if (viewMode === 'grid') {
@@ -36,14 +43,9 @@ const ProductBanner: React.FC = () => {
     }
   }, [viewMode, setViewMode]);
 
-
-  useEffect(() => {
-    setRefetch(() => handleRefetch);
-  }, [setRefetch]);
-
   return (
     <div className="w-full flex flex-col md:flex-row md:items-center justify-between">
-      <div  className="flex items-center gap-4">
+      <div className="flex items-center gap-4">
         <button
           onClick={() => setViewMode('grid')}
           className={`${
@@ -53,7 +55,6 @@ const ProductBanner: React.FC = () => {
           <BsGridFill />
         </button>
         <button
-
           onClick={() => setViewMode('list')}
           className={`${
             listViewActive ? 'bg-secondary text-white' : 'border-[1px] border-gray-300 text-[#737373]'
@@ -65,8 +66,7 @@ const ProductBanner: React.FC = () => {
 
       <div className="flex items-center gap-2 md:gap-6 mt-4 md:mt-0 text-secondary">
         <div className="flex items-center gap-2 relative">
-
-          <label  className="block">Ko'rsatish</label>
+          <label className="block">Ko'rsatish</label>
           <select
             onClick={handleRefetch}
             onChange={(e) => setItemsPerPage(+e.target.value)}

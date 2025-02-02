@@ -24,7 +24,6 @@ const renderSkeleton = () => {
   );
 };
 
-
 const ProductSidebarCategory: React.FC<CategoriesModalProps> = ({ onSelectCategory }) =>  {
   
   const { data: categories, isLoading, error } = useGetCategoriesQuery(undefined);
