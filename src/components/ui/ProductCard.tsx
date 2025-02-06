@@ -80,7 +80,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, viewMode }) =
                     </p>
 
                     <p className="text-end font-normal text-xs text-wrap h-auto max-w-[150px] break-words">
-                      Kategoriya: {product.category.name} 
+                      Turkum: {product.category.name} 
                     </p>
                   </div>
               </div>

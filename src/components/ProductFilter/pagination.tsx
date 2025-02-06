@@ -27,7 +27,7 @@ const Pagination: React.FC<PaginationProps> = ({ itemsPerPage, items, onPageChan
   return (
     <div>
       <ReactPaginate
-        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        onClick={() => window.scrollTo({ top: 135, behavior: "smooth" })} 
         nextLabel={<RiArrowRightDoubleFill size={23} className="text-secondary ms-3" />}
         previousLabel={<RiArrowLeftDoubleFill size={23} className="text-secondary me-3"/>}
         onPageChange={handlePageClick}

@@ -65,7 +65,7 @@ function Projects() {
                 <img
                   src={card.image}
                   alt='image'
-                  className="w-full border h-[19rem] object-cover z-20 rounded-xl  border-gray-200"
+                  className="w-full border h-[20rem] object-cover z-20 rounded-xl  border-gray-200"
                   style={{ objectPosition: "center" }}
                 />
               <Link to={`/products/${card.id}`} className="absolute inset-0 rounded-xl bg-primary bg-opacity-70 opacity-0 
@@ -106,12 +106,12 @@ function Projects() {
                       </p>
 
                       <p className="text-end font-normal text-xs text-wrap h-auto max-w-[150px] break-words">
-                        Kategoriya: {card.category.name} 
+                        Turkum: {card.category.name} 
                       </p>
                     </div>
                 </div>
                 
-                <div className="flex justify-between  mt-7">
+                <div className="flex justify-between  mt-5">
                   <div className="text-[22px] text-gray-900 font-medium">${card.price} </div>
                   <Link to={`/products/${card.id}`}
                     onClick={() => {

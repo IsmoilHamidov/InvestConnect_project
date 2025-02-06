@@ -41,9 +41,9 @@ const ProductSidebarCategory: React.FC<CategoriesModalProps> = ({ onSelectCatego
   return (
     <div className="w-full">
       <div onClick={() => setShowBrands(!showBrands)}>
-        <NavTitle title="Kategoriya" icons={true} />
+        <NavTitle title="Turkum" icons={true} />
         {isLoading && renderSkeleton()}
-        {error && <p>Kategoriyalarni yuklashda xatolik yuz berdi.</p>}
+        {error && <p>Turkum yuklashda xatolik yuz berdi.</p>}
       </div>
       <div>
         {showBrands && !isLoading && (

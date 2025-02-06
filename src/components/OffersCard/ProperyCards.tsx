@@ -1,7 +1,10 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-    
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
+
+
 
 type ProperyCardProps = {
     id: number;
@@ -10,24 +13,36 @@ type ProperyCardProps = {
     location: string;
     type: string;
     price: string;
-    category:string
-  };
-  
+    category: string;
+};
 
-  const ProperyCard: React.FC<ProperyCardProps> = ({
+
+const ProperyCard: React.FC<ProperyCardProps> = ({
     id,
     image,
     title,
     location,
     price,
     category,
-  }) => (
+  }) => {
+    const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
+        id: id.toString(),
+      });
 
+  const style = {
+    transition,
+    transform: CSS.Transform.toString(transform),
+  };
 
-    <Card className="flex  relative border border-[#C5C3C3] items-center 
+  return(
+
+    <Card 
+      
+        
+        className="flex  relative border border-[#C5C3C3] items-center 
         px-4 py-4 ">
         <img
-            src={`https://bakirali007.pythonanywhere.com/${image}`}
+           src={image ? `https://bakirali007.pythonanywhere.com/${image}` : "https://via.placeholder.com/150"}
             alt={title}
             className="w-24 h-16 rounded object-cover mr-4"
             onError={(e) => {
@@ -35,7 +50,7 @@ type ProperyCardProps = {
             }}
             />
 
-        <div className="flex-1">
+        <div className="flex-1 border-red-500">
             <CardHeader className="p-0">
             <CardTitle className="w-[90%] text-md font-medium text-[#749BA9] capitalize">
                 {title}
@@ -79,7 +94,7 @@ type ProperyCardProps = {
         </Link>
 
     </Card>
-  );
+  )};
   
   export default ProperyCard;
   
