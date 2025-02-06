@@ -3,7 +3,6 @@ import { Product, ProductCard } from "@/components/ui/ProductCard";
 import { useGetProductsQuery } from "@/store/slice/products";
 import { useEffect, useState } from "react";
 import { IoSearch } from "react-icons/io5";
-import { useLocation } from "react-router-dom";
 import { Skeleton } from "@mui/material";
 import EmptyNone from "../../assets/images/empty-none.svg";
 import ProductSidebar from "../../components/ProductFilter/ProductSidebar";
@@ -14,7 +13,6 @@ import { useProductsFiltersStore } from "@/store/ProductsFiltersStore";
 
 const ProductListPage = () => {
   const [search, setSearch] = useState<string>("");
-  const { setRefetch } = useProductsFiltersStore();
   const { selectedLocation, selectedCategory, setSelectedCategory, viewMode, itemsPerPage, currentPage, setCurrentPage } = useProductsFiltersStore();
   const [isRefetching, setIsRefetching] = useState(false);
   const { data, error, isLoading, refetch } = useGetProductsQuery(
@@ -22,14 +20,14 @@ const ProductListPage = () => {
   );
 
   // scroll location
-  const location = useLocation();
   useEffect(() => {
-    const savedPosition = sessionStorage.getItem("scrollPosition");
-    if (savedPosition) {
-      window.scrollTo(0, parseInt(savedPosition, 10));
-      sessionStorage.removeItem("scrollPosition");
-    }
-  }, [location]);
+    const handleScroll = () => {
+      sessionStorage.setItem(location.pathname, window.scrollY.toString());
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [location.pathname]);
+  
 
   const renderSkeletons = () => {
     return Array.from({ length: 3 }).map((_, index) => (

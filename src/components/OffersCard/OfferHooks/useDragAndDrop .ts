@@ -30,20 +30,32 @@ export const useDragAndDrop = (apiHook: any) => {
     useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
   );
 
-  const getTaskPos = (id: number) => projects.findIndex((project) => project.id === id);
+
+  // Saving action in LocalStorage 
+  useEffect(() => {
+    const savedOrder = localStorage.getItem("projectsOrder");
+    if (savedOrder) {
+      setProjects(JSON.parse(savedOrder));
+    } else if (data) {
+      setProjects(data);
+    }
+  }, [data]);
+  const getTaskPos = (id: number) => projects.findIndex((p) => p.id === id);
 
   const handleDragEnd = (event: any) => {
     const { active, over } = event;
+    if (!over || active.id === over.id) return;
 
-    if (active.id === over.id) return; 
-
-    setProjects((prevProducts) => {
+    setProjects((prevProjects) => {
       const originalPos = getTaskPos(active.id);
       const newPos = getTaskPos(over.id);
+      const newOrder = arrayMove(prevProjects, originalPos, newPos);
 
-      return arrayMove(prevProducts, originalPos, newPos);
+      localStorage.setItem("projectsOrder", JSON.stringify(newOrder));
+      return newOrder;
     });
   };
+
 
   return {
     projects,

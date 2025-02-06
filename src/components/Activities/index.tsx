@@ -21,18 +21,20 @@ const ActivityCard = ({ id, name, location, price, image, category, month }
 
         return (
         <Card  ref={setNodeRef} style={style} 
-        className="flex w-full justify-between items-center border border-gray-200 rounded-none 
-             px-4 py-1">
+             className="flex w-full justify-between items-center border border-gray-200
+              rounded-none px-4 py-1 duration-100 hover:[transform:scale(1.0080)]  hover:rounded-lg hover:border-primary">
             <Card className="border-none bg-transparent shadow-none ">
                 <div className="flex items-center gap-x-1">
                     <RxDragHandleDots2 {...listeners} 
                     {...attributes} size={22} 
                     className="me-4 text-custom-gray cursor-grab active:cursor-grabbing focus:outline-none focus:ring-0"/>
-                    <img
-                        src={image}
-                        alt={name}
-                        className="w-24 h-16 rounded-md object-cover shadow-sm"
-                    />
+                    <Link to={`/products/${id}`}>
+                        <img
+                            src={image}
+                            alt={name}
+                            className="w-24 h-16 rounded-md object-cover shadow-sm"
+                        /> 
+                    </Link>
                     <p>{category}</p>
                     <CardHeader>
                         <p className="text-sm text-custom-gray uppercase">{month}</p>

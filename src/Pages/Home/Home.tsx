@@ -9,7 +9,7 @@ import Service from "./Service"
 import Professionals from "./Professionals"
 import Footer from "../../components/Footer/Footer"
 import { NavbarStep } from "@/components/Navbar/NavbarStep"
-import ScrollPositionManager from "@/components/Loading/ScrollPosition/SaveScroll"
+// import ScrollPositionManager from "@/components/Loading/ScrollPosition/SaveScroll"
 import { useEffect } from "react"
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -28,7 +28,6 @@ function Home() {
 
   return (
     <>
-      <ScrollPositionManager />
       <NavbarStep />
       <Introduction_Image/>
       <IntroductionText/>
