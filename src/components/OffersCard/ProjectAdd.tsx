@@ -7,7 +7,7 @@ import {
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
-import { errorTranslations, fields } from "./projectAddRequires";
+import { errorTranslations, fields } from "./OfferHooks/projectAddRequires";
 import { CategoryType } from "../Category";
 import NavbarAdmin from "../navbarAdmin";
 import { MdOutlineFileUpload, MdOutlineNavigateNext } from "react-icons/md";
@@ -243,7 +243,7 @@ const Example = () => {
                 </label>
                 <div
                   className="w-full h-[13.2rem] flex flex-col justify-center items-center rounded-xl
-        border-2 border-dotted border-custom-gray px-4 py-3 text-gray-700 relative overflow-hidden"
+                  border-2 border-dotted border-custom-gray px-4 py-3 text-gray-700 relative overflow-hidden"
                 >
                   <input
                     id="image"

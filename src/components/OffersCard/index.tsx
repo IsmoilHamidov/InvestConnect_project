@@ -7,7 +7,6 @@ import { Skeleton } from "@mui/material";
 
 const Offers: React.FC = () => {
   const { data, error, isLoading } = useGetUserProductsListQuery(undefined);
-  console.log(data);
 
   return (
     <div

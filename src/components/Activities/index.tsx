@@ -5,25 +5,41 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Skeleton } from "@mui/material";
 import { RxDragHandleDots2 } from "react-icons/rx";
+import { useDragAndDrop } from "../OffersCard/OfferHooks/useDragAndDrop ";
+import { DndContext, closestCorners } from "@dnd-kit/core";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
+import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
 
 
-const ActivityCard: React.FC<{ id: any, name: string; price: string; month: string; image: string }> = ({ id, name, price, month, image }) => {
-    return (
-        <Card className="flex w-full justify-between items-center border border-gray-200 rounded-none 
-             px-4 py-1 cursor-grab duration-200 ease-in-out hover:bg-[#c5c5c53e]">
+const ActivityCard = ({ id, name, location, price, image, category, month }
+    : { id: number; name: string; location: string; price: number; month:string; image?: string; category:string; }) => {
+    
+    const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });
+    const style = {transition, transform: CSS.Transform.toString(transform),};
+
+
+        return (
+        <Card  ref={setNodeRef} style={style} 
+        className="flex w-full justify-between items-center border border-gray-200 rounded-none 
+             px-4 py-1">
             <Card className="border-none bg-transparent shadow-none ">
-                <div className="flex items-center gap-x-2">
-                    <RxDragHandleDots2 size={22} className="me-3 text-custom-gray"/>
+                <div className="flex items-center gap-x-1">
+                    <RxDragHandleDots2 {...listeners} 
+                    {...attributes} size={22} 
+                    className="me-4 text-custom-gray cursor-grab active:cursor-grabbing focus:outline-none focus:ring-0"/>
                     <img
                         src={image}
                         alt={name}
                         className="w-24 h-16 rounded-md object-cover shadow-sm"
                     />
+                    <p>{category}</p>
                     <CardHeader>
                         <p className="text-sm text-custom-gray uppercase">{month}</p>
                         <Link to={`/products/${id}`}>
                             <CardTitle className="text-md font-medium text-custom-gray">{name}</CardTitle>
                         </Link>
+                        <span>{location}</span>
                     </CardHeader>
                 </div>
             </Card>
@@ -42,13 +58,12 @@ const ActivityCard: React.FC<{ id: any, name: string; price: string; month: stri
     );
 };
 
+
 const Activities = () => {
-    const [reloading, setReloading] = useState(false); // Track reloading state
-    const { data, error, isLoading, refetch } = useGetInvestorProductsQuery(undefined);
-    console.log(data);
-
+    const [reloading, setReloading] = useState(false);
+    const { projects, isLoading, error, refetch, sensors, handleDragEnd } = useDragAndDrop(useGetInvestorProductsQuery);
+   
     const showSkeleton = isLoading || reloading ; 
-
     const handleRefresh = async () => {
         setReloading(true);
         await refetch();
@@ -88,34 +103,29 @@ const Activities = () => {
 
             {showSkeleton && (
                 <div className="flex flex-col gap-4">
-                    {Array(data?.length || 1)
-                        .fill(null)
-                        .map((_, index) => (
-                            <div
-                                key={index}
-                                className="flex justify-between items-center gap-4 border rounded-lg p-4"
-
-                            >  <div className="w-10/12 ps-7 flex items-center flex-row  gap-x-5">
-
-                                    <Skeleton
-                                        variant="rectangular"
-                                        width={80}
-                                        height={60}
-                                        className="rounded-lg"
-                                    />
-
-                                    <Skeleton variant="text" width="30%" height={30} />
-                                </div>
-                                
-                                <div className="w-1/3 flex justify-end">
-                                    <Skeleton variant="text" width="50%" height={32} />
-                                </div>
+                    {Array(projects?.length || 1)
+                    .fill(null)
+                    .map((_, index) => (
+                        <div
+                            key={index}
+                            className="flex justify-between items-center gap-4 border rounded-lg p-4">
+                            <div className="w-10/12 ps-7 flex items-center flex-row  gap-x-5">
+                                <Skeleton
+                                    variant="rectangular"
+                                    width={80}
+                                    height={60}
+                                    className="rounded-lg"
+                                />
+                                <Skeleton variant="text" width="30%" height={30} />
                             </div>
-                        ))}
+                            
+                            <div className="w-1/3 flex justify-end">
+                                <Skeleton variant="text" width="50%" height={32} />
+                            </div>
+                        </div>
+                    ))}
                 </div>
             )}
-
-         
 
             {error && (
                 <div className="flex items-center justify-center h-full">
@@ -123,25 +133,35 @@ const Activities = () => {
                 </div>
             )}
 
-            {data?.length === 0 && !showSkeleton && (
+            {projects?.length === 0 && !showSkeleton && (
                 <div className="flex items-start justify-start h-full">
                     <p className="italic text-[17px]">Sizda xarid qilgan loyihalar mavjud emas.</p>
                 </div>
             )}
 
-            {data?.length > 0 && !showSkeleton && (
-                <div className="flex flex-col ">
-                    {data.map((activity: { id: any; name: string; price: string; month: string; image: any; }, index: any) => (
-                        <ActivityCard
-                            key={activity.id || index}
-                            name={activity.name}
-                            id={activity.id}
-                            price={activity.price}
-                            month={activity.month}
-                            image={activity.image || "/path/to/default/image.jpg"}
-                        />
+
+            {projects?.length > 0 && !showSkeleton && (
+            <DndContext 
+                sensors={sensors}
+                collisionDetection={closestCorners}
+                onDragEnd={handleDragEnd}>
+                <div  className="flex flex-col">
+                <SortableContext items={projects} strategy={verticalListSortingStrategy}>
+                    {projects.map((activity, index) => (
+                    <ActivityCard
+                        key={activity.id || index}
+                        name={activity.name}
+                        id={activity.id}
+                        price={activity.price}
+                        month={activity.month}
+                        location={activity.location}
+                        category={activity.category}
+                        image={activity.image || "/path/to/default/image.jpg"}
+                    />
                     ))}
+                </SortableContext>
                 </div>
+            </DndContext>
             )}
         </div>
     );

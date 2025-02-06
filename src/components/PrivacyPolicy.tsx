@@ -32,7 +32,7 @@ const PrivacyPolicy = () => {
     <Dialog>
       <DialogTrigger>
         <span className="lowercase ">
-           shart va qoidalarni{" "}
+           shart va qoidalar{" "}
         </span>
       </DialogTrigger>
       <DialogContent className="max-w-2xl animate-fade-in">

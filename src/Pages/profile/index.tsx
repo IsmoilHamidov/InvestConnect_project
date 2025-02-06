@@ -5,8 +5,6 @@ import Offers from "../../components/OffersCard";
 import AnalyticsBox from "@/components/OffersCard/AnalyticsBox";
 import Activities from "@/components/Activities";
 
-
-
 const Profile = () => {
   return (
     <div className="flex flex-col w-full h-screen">
@@ -17,7 +15,7 @@ const Profile = () => {
         <aside className="w-[270px] bg-white border relative z-40">
           <Sidebar />
         </aside>
-        <main className="flex-1 relative pt-10 pl-6 pr-9">
+        <main className="flex-1 relative pt-10 pb-4 pl-6 pr-9">
           <div className="flex mt-12 gap-x-8">
             {/* <div className="w-full">
               <ProfileForm />
@@ -35,7 +33,8 @@ const Profile = () => {
               
             </div>
           </div>
-            <div className="w-full">
+          
+           <div className="w-full">
                 <Activities />
             </div>
         </main>
