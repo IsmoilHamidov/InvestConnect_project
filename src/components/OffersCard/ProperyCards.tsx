@@ -1,8 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { useSortable } from "@dnd-kit/sortable";
-import { CSS } from "@dnd-kit/utilities";
 
 
 
@@ -25,20 +23,11 @@ const ProperyCard: React.FC<ProperyCardProps> = ({
     price,
     category,
   }) => {
-    const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
-        id: id.toString(),
-      });
-
-  const style = {
-    transition,
-    transform: CSS.Transform.toString(transform),
-  };
+  
 
   return(
-
+    
     <Card 
-      
-        
         className="flex  relative border border-[#C5C3C3] items-center 
         px-4 py-4 ">
         <img

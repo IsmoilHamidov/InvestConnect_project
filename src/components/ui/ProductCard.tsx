@@ -123,7 +123,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, viewMode }) =
               </Link>
               <p className="text-sm text-secondary mt-1">{product.location}</p>
               <p className="text-sm text-gray-500 mt-1">
-                Kategoriya: <span className="font-medium">{product.category.name}</span>
+                Turkum: <span className="font-medium">{product.category.name}</span>
               </p>
             </div>
 
