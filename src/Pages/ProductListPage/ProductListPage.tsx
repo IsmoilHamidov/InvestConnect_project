@@ -32,16 +32,32 @@ const ProductListPage = () => {
   const renderSkeletons = () => {
     return Array.from({ length: 3 }).map((_, index) => (
       <div key={index} className="p-4">
-        <Skeleton variant="rectangular" width="100%" height={350} />
-        <Skeleton variant="text" width="60%" sx={{ marginTop: 2 }} />
-        <Skeleton variant="text" width="40%" />
+        {viewMode === "grid" ? (
+          <>
+            <Skeleton variant="rectangular" width="100%" height={350} />
+            <Skeleton variant="text" width="60%" sx={{ marginTop: 2 }} />
+            <Skeleton variant="text" width="40%" />
+          </>
+        ) : (
+          <div className="flex justify-between items-center gap-4 border rounded-xl p-4">
+            <div className="w-10/12 ps-2 flex items-center flex-row gap-x-5">
+              <Skeleton variant="rectangular" width={80} height={80} className="rounded-lg" />
+              <Skeleton variant="text" width="20%" height={30} />
+            </div>
+            <div className="w-1/3 flex justify-end">
+              <Skeleton variant="text" width="50%" height={32} />
+            </div>
+          </div>
+        )}
       </div>
     ));
   };
+  
 
   const startIndex = currentPage * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const paginatedData = data?.slice(startIndex, endIndex) || [];
+
   useEffect(() => {
     if (search || selectedCategory || selectedLocation) {
       setIsRefetching(true);
@@ -55,7 +71,14 @@ const ProductListPage = () => {
   useEffect(() => {
     setCurrentPage(0);
   }, [selectedLocation, selectedCategory, setCurrentPage]);
-  
+
+  useEffect(() => {
+  setIsRefetching(true);
+  refetch().finally(() => {
+    setIsRefetching(false);
+  });
+}, [itemsPerPage, viewMode, refetch]);
+
   return (
     <>
       <NavbarAdmin />
