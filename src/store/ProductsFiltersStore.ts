@@ -42,8 +42,14 @@ export const useProductsFiltersStore = create<ProductsFiltersStore>((set) => ({
   viewMode: 'grid',
   setViewMode: (mode) => set({ viewMode: mode }),
 
-  itemsPerPage: 9,
-  setItemsPerPage: (items) => set({ itemsPerPage: items }),
+  itemsPerPage: (() => {
+    const savedItems = sessionStorage.getItem('itemsPerPage');
+    return savedItems ? Number(savedItems) : 9;
+  })(),
+  setItemsPerPage: (items) => {
+    sessionStorage.setItem('itemsPerPage', items.toString());
+    set({ itemsPerPage: items });
+  },
 
   currentPage: 0,
   setCurrentPage: (page) => set({ currentPage: page }),

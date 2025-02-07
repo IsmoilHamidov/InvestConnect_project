@@ -25,7 +25,7 @@ const PrivateInfoCard = ({ productId }: { productId: number }) => {
       <div className="mt-11 p-4 bg-red-50 border rounded-md flex items-center justify-between gap-10">
         <EyeOff size={50} />
         <p className="text-sm font-semibold text-gray-600">
-          Ma'lumotlarni ko'rish uchun siz to'lashingiz kerak.
+          Ma'lumotlarni ko'rish uchun siz to'lov qilshingiz kerak.
         </p>
         <PaymentAndCheck productId={productId} amount={10} />
       </div>

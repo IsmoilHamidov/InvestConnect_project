@@ -7,13 +7,22 @@ import { useProductsFiltersStore } from '@/store/ProductsFiltersStore';
 
 const ProductBanner: React.FC = () => {
   const { refetch, setRefetch } = useProductsFiltersStore();
-  const { viewMode, setViewMode, setItemsPerPage } = useProductsFiltersStore();
+  const { viewMode, setViewMode, itemsPerPage, setItemsPerPage, setCurrentPage  } = useProductsFiltersStore();
   const toast = useToast();
 
   const handleRefetch = () => {
     console.log('Loading...');
     refetch(); 
   };
+  
+  useEffect(() => {
+    const savedItemsPerPage = sessionStorage.getItem('itemsPerPage');
+    console.log("Retrieved itemsPerPage:", savedItemsPerPage); 
+    if (savedItemsPerPage) {
+      setItemsPerPage(Number(savedItemsPerPage));
+    }
+  }, [setItemsPerPage]);
+  
 
   const proccess = () => {
     toast.toast({
@@ -67,10 +76,14 @@ const ProductBanner: React.FC = () => {
         <div className="flex items-center gap-2 relative">
           <label className="block">Ko'rsatish</label>
           <select
-             onChange={(e) => {
-              setItemsPerPage(+e.target.value);
-              handleRefetch(); // Trigger re-fetch when items per page change
-            }}
+              value={itemsPerPage} 
+              onChange={(e) => {
+                const newItemsPerPage = Number(e.target.value);
+                sessionStorage.setItem('itemsPerPage', newItemsPerPage.toString());
+                setItemsPerPage(newItemsPerPage);
+                setCurrentPage(0);
+                handleRefetch();
+              }}
             id="countries"
             className="w-16 md:w-20 border-[1px] border-gray-200 py-1 px-4 cursor-pointer text-primeColor text-base block dark:placeholder-gray-400 appearance-none focus-within:outline-none focus-visible:border-primeColor"
           >
