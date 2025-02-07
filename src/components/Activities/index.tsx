@@ -22,7 +22,7 @@ const ActivityCard = ({ id, name, location, price, image, category, month }
         return (
         <Card  ref={setNodeRef} style={style} 
              className="flex w-full justify-between items-center border border-gray-200
-              rounded-none px-4 py-1 duration-100 hover:[transform:scale(1.0080)]  hover:rounded-lg hover:border-primary">
+              rounded-none px-4 py-1 duration-100 hover:[transform:scale(1.0050)]  hover:rounded-md hover:border-primary">
             <Card className="border-none bg-transparent shadow-none ">
                 <div className="flex items-center gap-x-1">
                     <RxDragHandleDots2 {...listeners} 
@@ -52,7 +52,7 @@ const ActivityCard = ({ id, name, location, price, image, category, month }
                 <Link to={`/products/${id}`} onClick={() => {
                     sessionStorage.setItem("scrollPosition", String(window.scrollY));
                 }} className="bg-custom-blue-gray text-white 
-                    px-4 py-1 h-full rounded-xl text-sm font-medium ">
+                    px-4 py-1 h-full rounded-xl text-sm font-medium Blue_button">
                     Ko'rish
                 </Link>
             </div>

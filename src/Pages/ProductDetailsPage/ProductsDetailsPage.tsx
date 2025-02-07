@@ -98,7 +98,7 @@ export const ProductDetailsPage = () => {
                     </div>
 
                     <div className="flex justify-between items-center text-custom-gray text-[14px]">
-                      <div className="">Kategoriya</div>
+                      <div className="">Turkum</div>
                       <div className="flex-grow border-t border-dotted border-gray-800 mx-2"></div>
                       <span className=" font-medium">{data.category}</span>
                     </div>
