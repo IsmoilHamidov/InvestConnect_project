@@ -37,12 +37,13 @@ const ProductBanner: React.FC = () => {
 
   useEffect(() => {
     handleRefetch(); 
-  }, [viewMode]); // Re-fetch when view mode changes
+  }, [viewMode]); 
 
   useEffect(() => {
     setRefetch(() => handleRefetch); 
   }, [setRefetch]);
 
+  
   useEffect(() => {
     if (viewMode === 'grid') {
       setViewMode('grid');

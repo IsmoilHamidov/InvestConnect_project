@@ -39,8 +39,16 @@ export const useProductsFiltersStore = create<ProductsFiltersStore>((set) => ({
   selectedMaxPrice: '',
   setSelectedMaxPrice: (price) => set({ selectedMaxPrice: price }),
 
-  viewMode: 'grid',
-  setViewMode: (mode) => set({ viewMode: mode }),
+
+  viewMode: (() => {
+    const savedViewMode = sessionStorage.getItem('viewMode');
+    return savedViewMode === 'grid' || savedViewMode === 'list' ? savedViewMode : 'grid';
+  })(),
+  setViewMode: (mode) => {
+    sessionStorage.setItem('viewMode', mode); 
+    set({ viewMode: mode }); 
+  },
+
 
   itemsPerPage: (() => {
     const savedItems = sessionStorage.getItem('itemsPerPage');
