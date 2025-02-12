@@ -84,37 +84,37 @@ export const Registration: React.FC<INavbarStepProps> = () => {
       <div className="scroll_modal">
         <div className="mr-6">
             <div className="mt-4">
-              <label className="block text-custom-gray mb-2">
+              <label className="block text-secondary mb-2">
                 Foydalanuvchi nomi
               </label>
               <input
                 placeholder="UserName"
                 className="w-full border border-gray-300 focus:border-2 
-                focus:border-custom-blue-gray ease-out delay-150
+                focus:border-primary ease-out delay-150
                 rounded-xl py-2 px-3"
                 {...register("username", { required: true })}
               />
             </div>
 
             <div className="mt-4">
-              <label className="block text-custom-gray mb-2">Telefon raqami</label>
+              <label className="block text-secondary mb-2">Telefon raqami</label>
               <input
                 placeholder="Telefon raqamingizni kiriting"
                 className="w-full border border-gray-300 focus:border-2 
-                focus:border-custom-blue-gray ease-out delay-150
+                focus:border-primary ease-out delay-150
                 rounded-xl py-2 px-3"
                 {...register("phone", { required: true })}
               />
             </div>
 
             <div className="mb-3 mt-4 relative">
-              <label className="block text-custom-gray mb-2">Parol</label>
+              <label className="block text-secondary mb-2">Parol</label>
               <div className="relative">
                 <input
                   type={showPassword ? "text" : "password"} // Toggle password visibility
                   placeholder="Parollingizni kiriting"
                   className="w-full border border-gray-300 focus:border-2 
-                  focus:border-custom-blue-gray ease-out delay-150
+                  focus:border-primary ease-out delay-150
                   rounded-xl py-2 px-3"
                   {...register("password", { required: true })}
                 />
@@ -132,13 +132,13 @@ export const Registration: React.FC<INavbarStepProps> = () => {
             </div>
 
             <div className="mb-3 mt-4 relative">
-                <label className="block text-custom-gray mb-2">Parolni Tastiqlash</label>
+                <label className="block text-secondary mb-2">Parolni Tastiqlash</label>
                 <div className="relative">
                   <input
                     type="password"
                     placeholder="Parolingizni tasdiqlang"
                     className="w-full border border-gray-300 focus:border-2 
-                    focus:border-custom-blue-gray ease-out delay-150
+                    focus:border-primary ease-out delay-150
                     rounded-xl py-2 px-3"
                     {...register("confirmPassword", { required: "Parolni tasdiqlash shart" })}
                   />
@@ -180,7 +180,7 @@ export const Registration: React.FC<INavbarStepProps> = () => {
                         checked={isChecked}
                         onChange={() => setIsChecked(!isChecked)}
                       />
-                      <p className="text-start text-custom-gray text-base">
+                      <p className="text-start text-secondary text-base">
                           Men <span className="text-blue-500 me-1"><PrivacyPolicy /></span>qabul qilaman
                       </p>
                   </div>

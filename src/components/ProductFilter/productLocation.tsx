@@ -44,7 +44,7 @@ const ProductLocation: React.FC = () => {
                 className={`w-full flex items-center cursor-pointer text-base pb-1  duration-300 ${
                   selectedLocation === item || (selectedLocation === "" && item === "Barchasi")
                     ? "text-secondary  border-b-[1px] border-secondary font-medium"
-                    : ""
+                    : "hover:border-b-[1px] border-b-gray-200 hover:border-secondary duration-300"
                 }`}
               >
                 {item}

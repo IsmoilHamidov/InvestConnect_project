@@ -41,7 +41,7 @@ function InfoCard() {
               <button className="w-11 h-11 bg-[#CED6D9] rounded-full flex justify-center items-center">
                 <i className="fa-solid fa-chevron-left"></i>
               </button>
-              <button className="w-11 h-11 bg-custom-gray rounded-full flex justify-center items-center">
+              <button className="w-11 h-11 bg-secondary rounded-full flex justify-center items-center">
                 <i className="fa-solid fa-chevron-right"></i>
               </button>
             </div>
@@ -51,7 +51,7 @@ function InfoCard() {
             {cardData.map((card, index) => (
               <div key={index} className="bg-white shadow-md overflow-hidden">
                 <img src={card.image} alt={card.title} className="w-full object-cover" />
-                <div className="p-5 text-custom-gray">
+                <div className="p-5 text-secondary">
                   <p className=" text-sm font-semibold mb-2">{card.date}</p>
                   <h3 className="text-lg font-semibold mb-2">{card.title}</h3>
                   <p className=" text-sm">{card.description}</p>
@@ -63,7 +63,7 @@ function InfoCard() {
         </div>
 
         <div className='w-full flex justify-end'>
-           <button className='Brown_button mt-5 rounded-3xl p-3 px-12 text-base text-white bg-custom-gray'>Lees meer</button>
+           <button className='Brown_button mt-5 rounded-3xl p-3 px-12 text-base text-white bg-secondary'>Lees meer</button>
         </div>
       </div>
 

@@ -27,7 +27,7 @@ const ActivityCard = ({ id, name, location, price, image, category, month }
                 <div className="flex items-center gap-x-1">
                     <RxDragHandleDots2 {...listeners} 
                     {...attributes} size={22} 
-                    className="me-4 text-custom-gray cursor-grab active:cursor-grabbing focus:outline-none focus:ring-0"/>
+                    className="me-4 text-secondary cursor-grab active:cursor-grabbing focus:outline-none focus:ring-0"/>
                     <Link to={`/products/${id}`}>
                         <img
                             src={image}
@@ -37,9 +37,9 @@ const ActivityCard = ({ id, name, location, price, image, category, month }
                     </Link>
                     <p>{category}</p>
                     <CardHeader>
-                        <p className="text-sm text-custom-gray uppercase">{month}</p>
+                        <p className="text-sm text-secondary uppercase">{month}</p>
                         <Link to={`/products/${id}`}>
-                            <CardTitle className="text-md font-medium text-custom-gray">{name}</CardTitle>
+                            <CardTitle className="text-md font-medium text-secondary">{name}</CardTitle>
                         </Link>
                         <span>{location}</span>
                     </CardHeader>
@@ -51,7 +51,7 @@ const ActivityCard = ({ id, name, location, price, image, category, month }
 
                 <Link to={`/products/${id}`} onClick={() => {
                     sessionStorage.setItem("scrollPosition", String(window.scrollY));
-                }} className="bg-custom-blue-gray text-white 
+                }} className="bg-primary text-white 
                     px-4 py-1 h-full rounded-xl text-sm font-medium Blue_button">
                     Ko'rish
                 </Link>

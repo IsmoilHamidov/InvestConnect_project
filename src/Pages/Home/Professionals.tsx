@@ -31,7 +31,7 @@ function Professionals() {
     <div className='py-32'>
         <div className='max-w-7xl m-auto '>
           <div className='w-full flex justify-center'>
-            <h3 className="w-3/5 text-center text-[2.5rem] font-light text-custom-gray">
+            <h3 className="w-3/5 text-center text-[2.5rem] font-light text-secondary">
                Shaxsiy yondashuvga ega ixtisoslashgan jamoa
             </h3>
           </div>
@@ -43,18 +43,18 @@ function Professionals() {
                         <img src={newCards.image} alt={newCards.name} />
                       </div>
                        <p className='text-xl font-medium'>{newCards.name}</p>
-                       <p className='font-light text-custom-blue-gray'>{newCards.specialist}</p>
+                       <p className='font-light text-primary'>{newCards.specialist}</p>
                        <div className='flex  gap-x-3 text-sm '>
-                            <a  href='#' className='w-8 h-8 text-[#756E6E] flex justify-center items-center rounded-full border border-custom-gray'>
+                            <a  href='#' className='w-8 h-8 text-[#756E6E] flex justify-center items-center rounded-full border border-secondary'>
                               <i className="fa-brands fa-facebook-f"></i>
                             </a>
-                            <a href='#' className='w-8 h-8 text-[#756E6E] flex justify-center items-center rounded-full border border-custom-gray'>
+                            <a href='#' className='w-8 h-8 text-[#756E6E] flex justify-center items-center rounded-full border border-secondary'>
                                 <i className="fa-brands fa-instagram"></i>
                             </a>
-                            <a href='#' className='w-8 h-8 text-[#756E6E] flex justify-center items-center rounded-full border border-custom-gray'>
+                            <a href='#' className='w-8 h-8 text-[#756E6E] flex justify-center items-center rounded-full border border-secondary'>
                                 <i className="fa-brands fa-youtube"></i>
                             </a>
-                            <a href='#' className='w-8 h-8 text-[#756E6E] flex justify-center items-center rounded-full border border-custom-gray'>
+                            <a href='#' className='w-8 h-8 text-[#756E6E] flex justify-center items-center rounded-full border border-secondary'>
                                 <i className="fa-brands fa-linkedin-in"></i>
                             </a>
                        </div>

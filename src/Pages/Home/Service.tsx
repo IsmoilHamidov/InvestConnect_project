@@ -21,7 +21,7 @@ function Service() {
                 data-aos="fade-up"
                 data-aos-anchor-placement="top-bottom"
                 data-aos-delay="1100"
-                className="text-custom-blue-gray text-2xl font-semibold 
+                className="text-primary text-2xl font-semibold 
                 mb-1 first-letter:text-3xl ">
                 {service.title}
             </h3>
@@ -30,8 +30,8 @@ function Service() {
              data-aos="fade-up"
              data-aos-anchor-placement="top-bottom"
              data-aos-delay="1150" className='flex gap-x-4 mt-4'>
-                <div className="px-[5px] h-[full]  bg-custom-blue-gray "></div>
-                <p className='text-custom-gray leading-7' >{service.text}</p>
+                <div className="px-[5px] h-[full]  bg-primary"></div>
+                <p className='text-secondary leading-7' >{service.text}</p>
             </div>
           </div>
 
@@ -51,7 +51,7 @@ function Service() {
 
         </div>
       ))}
-      <button className='Brown_button rounded-3xl p-3 px-12 text-base text-white bg-custom-gray mt-16 '>ALOQA</button>
+      <button className='Brown_button rounded-3xl p-3 px-12 text-base text-white bg-secondary mt-16 '>ALOQA</button>
     </div>
   );
 }

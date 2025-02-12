@@ -116,7 +116,7 @@ const Navbar: React.FC = () => {
           </nav>
           {/* bg-[#B29C6F] */}
           <div
-            className="h-1 bg-custom-blue-gray"
+            className="h-1 bg-primary"
             style={{ width: `${scrollProgress}%` }}
           ></div>
         </div>
