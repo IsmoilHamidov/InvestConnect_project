@@ -7,7 +7,7 @@ import Intro_logo from "../../assets/images/InvestLogo.png";
 const Introduction_Image: React.FC = () => {
   return (
     <div
-      className="intro_box relative h-[55rem] w-full py-5 z-10"
+      className="intro_box relative h-[100vh] w-full py-5 z-10"
       style={{
         backgroundImage: `url(${intro_image})`,
         backgroundSize: "cover",

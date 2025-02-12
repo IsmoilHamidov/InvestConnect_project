@@ -69,7 +69,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, viewMode }) =
             <div className="px-2 pt-4 -200 pb-6 border-gray border-b  rounded-b-xl flex-1 bg-white flex flex-col justify-between">
               <div>
                   <div className="flex h-14 mb-2">
-                    <span className="text-custom-gray text-base leading-6 font-medium">
+                    <span className="text-secondary text-base leading-6 font-medium">
                       {product.name}
                     </span>
                   </div>

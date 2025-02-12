@@ -37,7 +37,7 @@ const PrivacyPolicy = () => {
       </DialogTrigger>
       <DialogContent className="max-w-2xl animate-fade-in">
         <DialogHeader>
-          <DialogTitle className="text-xl text-center font-semibold text-custom-blue-gray">
+          <DialogTitle className="text-xl text-center font-semibold text-primary">
             FOYDALANUVCHILAR VA FOYDALANISH SHARTNOMASI
           </DialogTitle>
           <DialogDescription 

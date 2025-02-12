@@ -94,7 +94,7 @@ const PrivateInfoCard = ({ productId }: { productId: number }) => {
                 <Icon className="text-primary" />
                 <h3 className="font-semibold text-gray-800">{title}</h3>
               </div>
-              <p className="text-custom-gray text-base leading-7">{value}</p>
+              <p className="text-secondary text-base leading-7">{value}</p>
             </div>
           ))}
         </div>

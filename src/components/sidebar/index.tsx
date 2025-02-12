@@ -98,7 +98,7 @@ export default function Sidebar() {
             </>
           ) : data ? (
             <>
-              <h2 className="font-semibold text-base text-custom-gray">
+              <h2 className="font-semibold text-base text-secondary">
                 {data?.firstname || "Noma'lum"} {data?.lastname || "shaxs"}
               </h2>
               <p className="text-[14px] leading-7 text-[#749BA9]">
@@ -144,7 +144,7 @@ export default function Sidebar() {
               <DialogTrigger>
                 <LogOut
                   style={{ width: "17px", height: "17px" }}
-                  className="hover:text-custom-blue-gray ease-in"
+                  className="hover:text-primary ease-in"
                 />
               </DialogTrigger>
               <DialogContent>

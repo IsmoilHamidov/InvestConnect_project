@@ -146,15 +146,15 @@ export const Verification: React.FC<INavbarStepProps> = () => {
             <button
               onClick={handleVerify}
               disabled={isVerifying}
-              className="Blue_button text-center font-semibold h-10 w-[47%] bg-custom-blue-gray text-white p-2 rounded-lg "
+              className="Blue_button text-center font-semibold h-10 w-[47%] bg-primary text-white p-2 rounded-lg "
             >
               {isVerifying ? "Tastiqlanyapti..." : "Tastiqlash"}
             </button>
 
             <button
               onClick={handleResendCode}
-              className="text-center font-semibold h-10 w-[47%] border-2 border-custom-blue-gray hover:text-white hover:border-0
-               text-custom-blue-gray p-2 rounded-lg hover:bg-[#57737d] transition-all duration-200 ease-in "
+              className="text-center font-semibold h-10 w-[47%] border-2 border-primary hover:text-white hover:border-0
+               text-primary p-2 rounded-lg hover:bg-[#57737d] transition-all duration-200 ease-in "
             >
             Qayta yuborish
             </button>

@@ -40,7 +40,7 @@ const ProductSidebarCategory: React.FC<CategoriesModalProps> = ({ onSelectCatego
 
   return (
     <div className="w-full">
-      <div onClick={() => setShowBrands(!showBrands)}>
+      <div  className="cursor-pointer" onClick={() => setShowBrands(!showBrands)}>
         <NavTitle title="Turkum" icons={true} />
         {isLoading && renderSkeleton()}
         {error && <p>Turkum yuklashda xatolik yuz berdi.</p>}

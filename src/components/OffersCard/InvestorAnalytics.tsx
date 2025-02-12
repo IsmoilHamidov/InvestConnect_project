@@ -20,7 +20,7 @@ const analyticsData = [
 export default function InvestorAnalytics() {
   return (
     <div className="w-full min-h-[16rem] bg-white shadow-md border-[1px] rounded-[15px] p-6 py-8">
-      <h2 className="text-xl font-bold mb-4 text-custom-gray">Analitika</h2>
+      <h2 className="text-xl font-bold mb-4 text-secondary">Analitika</h2>
       <div className="text-sm text-gray-500 mb-5">Sizga shaxsiy bo'lganlar</div>
       <div className="grid grid-cols-2 gap-4">
         {analyticsData.map((item) => (

@@ -51,7 +51,7 @@ const ProperyCard: React.FC<ProperyCardProps> = ({
                     <span className="font-normal text-[#443B3A] text-base">
                         {category}
                     </span>
-                    <p className="text-base font-medium text-custom-gray">{price}</p>
+                    <p className="text-base font-medium text-secondary">{price}</p>
                 </div>
             </CardContent>
         </div>

@@ -22,7 +22,7 @@ const CategoriesModal: React.FC<CategoriesModalProps> = ({ open, onClose, onSele
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle className='m-0'>Turkumlar</DialogTitle>
+          <DialogTitle className='m-0 cur'>Turkumlar</DialogTitle>
         </DialogHeader>
         {isLoading && <p>Yuklanmoqda...</p>}
         {error && <p>Turkumlarni yuklashda xatolik yuz berdi.</p>}

@@ -198,7 +198,7 @@ const PaymentAndCheck: React.FC<PaymentAndCheckProps> = ({
                         placeholder={field.placeholder}
                         rows={field.rows}
                         maxLength={field.maxLength}
-                        className="w-full px-3 py-2 border border-custom-blue-gray rounded-lg resize-none outline-none"
+                        className="w-full px-3 py-2 border border-primary rounded-lg resize-none outline-none"
                       />
                     ) : (
                       <input
@@ -206,7 +206,7 @@ const PaymentAndCheck: React.FC<PaymentAndCheckProps> = ({
                         onChange={handleChange}
                         type="text"
                         placeholder={field.placeholder}
-                        className="w-full px-3 py-2 mt-1 border border-custom-blue-gray rounded-lg"
+                        className="w-full px-3 py-2 mt-1 border border-primary rounded-lg"
                       />
                     );
                   }}

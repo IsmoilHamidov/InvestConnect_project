@@ -87,7 +87,7 @@ const ProductListPage = () => {
           <div className="max-w-7xl m-auto flex gap-8 justify-center items-center">
             <div
               className="flex justify-between items-center gap-x-3 bg-background
-                     w-[35rem] h-[48px] px-5 py-2 rounded-2xl text-custom-gray"
+                     w-[35rem] h-[48px] px-5 py-2 rounded-2xl text-secondary"
             >
               <input
                 className="bg-background w-[90%] border-black 
@@ -104,7 +104,7 @@ const ProductListPage = () => {
         </div>
         <div className="max-w-7xl m-auto mb-20">
           <div className="mt-12 mb-11 flex justify-between items-center">
-            <h2 className="w-[18%] font-bold text-3xl text-custom-gray">
+            <h2 className="w-[18%] font-bold text-3xl text-secondary">
               Loyihalar
             </h2>
             <div className="w-[76%] ">

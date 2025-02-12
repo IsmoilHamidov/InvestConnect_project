@@ -125,7 +125,7 @@ const Example = () => {
           <div className="flex items-center">
             <div
               className={`w-14 h-14 flex items-center justify-center rounded-full border-2 transition-all duration-300 ease-in-out ${activeTab === "basic"
-                ? "bg-gradient-to-r from-custom-blue-gray to-gray-500 text-white border-[#57737d] "
+                ? "bg-gradient-to-r from-primary to-gray-500 text-white border-[#57737d] "
                 : " bg-gray-200 text-gray-500 border-gray-300"
                 }`}
             >
@@ -136,7 +136,7 @@ const Example = () => {
           <div className="flex items-center">
             <div
               className={`w-14 h-14 flex items-center justify-center rounded-full border-2 transition-all duration-300 ease-in-out ${activeTab === "details"
-                ? "bg-gradient-to-r from-custom-blue-gray to-gray-500 text-white border-[#57737d] "
+                ? "bg-gradient-to-r from-primary to-gray-500 text-white border-[#57737d] "
                 : "bg-gray-200 text-gray-500 border-gray-300"
                 }`}
             >
@@ -148,7 +148,7 @@ const Example = () => {
         <form
           encType="multipart/form-data"
           onSubmit={handleSubmit(onSubmit)}
-          className="max-w-7xl m-auto flex flex-wrap justify-between items-center gap-y-7  text-custom-gray"
+          className="max-w-7xl m-auto flex flex-wrap justify-between items-center gap-y-7  text-secondary"
         >
           {activeTab === "basic" && (
             <>
@@ -226,7 +226,7 @@ const Example = () => {
                     key={field.name}
                     className="w-[48%] flex flex-col justify-center"
                   >
-                    <label className="block text-sm font-medium text-custom-gray capitalize leading-9">
+                    <label className="block text-sm font-medium text-secondary capitalize leading-9">
                       {field.label}
                     </label>
                     <textarea
@@ -238,12 +238,12 @@ const Example = () => {
                 ))}
 
               <div className="w-[48%] grid gap-2">
-                <label htmlFor="image" className="text-sm font-medium text-custom-gray">
+                <label htmlFor="image" className="text-sm font-medium text-secondary">
                   Rasm
                 </label>
                 <div
                   className="w-full h-[13.2rem] flex flex-col justify-center items-center rounded-xl
-                  border-2 border-dotted border-custom-gray px-4 py-3 text-gray-700 relative overflow-hidden"
+                  border-2 border-dotted border-secondary px-4 py-3 text-gray-700 relative overflow-hidden"
                 >
                   <input
                     id="image"
@@ -271,12 +271,12 @@ const Example = () => {
               </div>
 
               <div className="w-[48%] grid gap-2">
-                <label htmlFor="prototype_demo" className="text-sm font-medium text-custom-gray">
+                <label htmlFor="prototype_demo" className="text-sm font-medium text-secondary">
                   Demo prototipi
                 </label>
                 <div
                   className="w-full h-[13.2rem] flex flex-col justify-center items-center rounded-xl
-                   border-2 border-dotted border-custom-gray px-4 py-3 text-gray-700 relative overflow-hidden"
+                   border-2 border-dotted border-secondary px-4 py-3 text-gray-700 relative overflow-hidden"
                 >
                   <input
                     id="prototype_demo"
@@ -304,11 +304,11 @@ const Example = () => {
               </div>
 
               <div className="w-[48%] grid gap-2">
-                <label htmlFor="legal_documents" className="text-sm font-medium text-custom-gray">
+                <label htmlFor="legal_documents" className="text-sm font-medium text-secondary">
                   Yuridik hujjat
                 </label>
                 <div
-                  className="w-full h-[13.2rem] flex flex-col justify-center items-center rounded-xl border-2 border-dotted border-custom-gray px-4 py-3 text-gray-700 relative overflow-hidden"
+                  className="w-full h-[13.2rem] flex flex-col justify-center items-center rounded-xl border-2 border-dotted border-secondary px-4 py-3 text-gray-700 relative overflow-hidden"
                 >
                   <input
                     id="legal_documents"

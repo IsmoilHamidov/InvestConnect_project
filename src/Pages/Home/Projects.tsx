@@ -95,7 +95,7 @@ function Projects() {
               <div className="grid px-4 py-5 gap-3 rounded-b-xl flex-1 bg-white ">
                 <div>
                     <div className="flex h-14 mb-2">
-                      <span className="text-custom-gray text-base leading-6 font-medium">
+                      <span className="text-secondary text-base leading-6 font-medium">
                         {card.name}
                       </span>
                     </div>
@@ -133,7 +133,7 @@ function Projects() {
           <Link to={'/products'} onClick={() => window.scrollTo(0, 0)} >
               <button id="about_us"
                 className="Brown_button rounded-3xl p-3 px-12
-                 text-base text-white bg-custom-gray mt-8"
+                 text-base text-white bg-secondary mt-8"
               >
                 Bizning taklifimizni ko'ring
               </button>

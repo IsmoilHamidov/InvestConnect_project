@@ -82,7 +82,7 @@ export const LoginModal: React.FC<INavbarStepProps> = () => {
               onChange={handlePhoneChange}
               placeholder=""
               className="w-full pl-14 border border-gray-300 focus:border-2 
-              focus:border-custom-blue-gray ease-out delay-150
+              focus:border-primary ease-out delay-150
               rounded-xl py-2 px-3"
               maxLength={12} 
             />
@@ -96,7 +96,7 @@ export const LoginModal: React.FC<INavbarStepProps> = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="w-full border border-gray-300 focus:border-2 
-              focus:border-custom-blue-gray ease-out delay-150
+              focus:border-primary ease-out delay-150
               rounded-xl py-2 px-3"
               placeholder="Parolni kiriting"
             />
