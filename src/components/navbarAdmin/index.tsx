@@ -1,29 +1,14 @@
 import { Bell, Home, Mail, Menu } from "lucide-react";
 import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useGetUsersQuery } from "@/store/slice/products";
 import { useAuthModalStore } from "@/store/authModalStore";
 import { NavbarStep } from "../Navbar/NavbarStep";
 import { FiLogIn } from "react-icons/fi";
 import { Link } from "react-router-dom";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import { useMemo } from "react";
-import React from "react";
 
 
-const linkTranslate: Record<string, string> = {
-  products: "Loyihalar",
-  product: "Loyiha",
-  ProjectAdd: "Loyiha Qo'shish",
-};
 
 export default function NavbarAdmin() {
   const { openModal } = useAuthModalStore();
@@ -42,13 +27,7 @@ export default function NavbarAdmin() {
     }
   };
 
-  const location = useLocation();
-  const { pathname } = location;
 
-  const pathSegments = useMemo(() => {
-    const segments = pathname.split("/").filter(Boolean);
-    return segments;
-  }, [pathname]);
 
   return (
     <nav className="flex fixed z-50 w-full items-center justify-between px-4 py-[9px] bg-primary">
@@ -62,39 +41,7 @@ export default function NavbarAdmin() {
           <Menu className="h-5 w-5 text-foreground" />
           <span className="sr-only">Toggle menu</span>
         </Button>
-        <Breadcrumb>
-          <BreadcrumbList>
-            {/* Home Link */}
-            <BreadcrumbItem>
-              <BreadcrumbLink className="font-medium" href="/">
-                Bosh sahifa
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-            {pathSegments.map((segment, index) => {
-            const href = "/" + pathSegments.slice(0, index + 1).join("/");
-            const isLast = index === pathSegments.length - 1;
-            const isId = /^\d+$/.test(segment);
-            const isRepeated = segment === pathSegments[index - 1];
-
-            return (
-                  <React.Fragment key={segment}>
-                      <BreadcrumbSeparator />
-                      <BreadcrumbItem>
-                        {isLast || isRepeated ? (
-                          <BreadcrumbPage>
-                            {isId ? "Loyiha" : linkTranslate[segment] || segment}
-                          </BreadcrumbPage>
-                        ) : (
-                          <BreadcrumbLink href={href}>
-                            {linkTranslate[segment] || segment}
-                          </BreadcrumbLink>
-                        )}
-                      </BreadcrumbItem>
-                    </React.Fragment>
-                  );
-                })}   
-          </BreadcrumbList>
-        </Breadcrumb>
+       
       </div>
 
       <div className="flex items-center gap-3">
