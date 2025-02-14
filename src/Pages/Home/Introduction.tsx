@@ -79,7 +79,7 @@ const Introduction_Image: React.FC = () => {
         ) : (
           <button
             onClick={handelNavigateProfile}
-            className='Blue_button cursor-pointer bg-primary px-5 py-[12px]  
+            className='border border-gray-600 Blue_button cursor-pointer bg-primary px-5 py-[12px]  
               rounded-2xl w-fit text-base font-medium tracking-wide'>
             {buttonText}
           </button>
