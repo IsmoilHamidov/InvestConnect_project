@@ -1,23 +1,30 @@
-import { Bell, Home, Mail, Menu } from "lucide-react";
-import { Button } from "../ui/button";
-import { Badge } from "../ui/badge";
+import { Bell, Dice1, Globe,  Heart,  Home, UserRound  } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useGetUsersQuery } from "@/store/slice/products";
 import { useAuthModalStore } from "@/store/authModalStore";
 import { NavbarStep } from "../Navbar/NavbarStep";
-import { FiLogIn } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import { IoSearch } from "react-icons/io5";
+import logo from "../../assets/images/navLogo.png"
+import CustomSelect from "../ui/navAdmin_select";
+import { useToast } from "@/hooks/use-toast";
+import { useLocation } from "react-router-dom";
 
+interface NavbarAdminProps {
+  search: string;
+  setSearch: (value: string) => void;
+}
 
-
-export default function NavbarAdmin() {
+export default function NavbarAdmin({ search, setSearch }: NavbarAdminProps)  {
   const { openModal } = useAuthModalStore();
   const { data, error } = useGetUsersQuery(undefined);
   const username = data?.username || null;
   const navigate = useNavigate();
 
-
   const initials = data?.username?.charAt(0).toUpperCase() || "";
+  const location = useLocation();
+  const isProductsPage = location.pathname === "/products";
+
 
   const handelNavigateProfile = () => {
     if (data?.role === "investor") {
@@ -27,82 +34,79 @@ export default function NavbarAdmin() {
     }
   };
 
+  const toast = useToast();
+  const proccess = () => {
+    toast.toast({
+      description: 'Jarayonda',
+      variant: 'warning',
+      duration: 1000,
+    });
+  };
 
 
   return (
-    <nav className="flex fixed z-50 w-full items-center justify-between px-4 py-[9px] bg-primary">
-      <NavbarStep />
-      <div className="flex items-center gap-2">
-        <Button
-          variant="ghost"
-          size="icon"
-          className="lg:hidden hover:bg-white/10"
-        >
-          <Menu className="h-5 w-5 text-foreground" />
-          <span className="sr-only">Toggle menu</span>
-        </Button>
-       
-      </div>
+    <nav className="flex fixed z-30 w-full items-center justify-center px-4 py-[16px] bg-primary">
+    <NavbarStep />
+    <div className={`w-full max-w-7xl ${isProductsPage ? "justify-between h-[2.65rem]" : "justify-end h-[2.5rem]"}  flex items-center gap-10`}>
+      {isProductsPage && (
+        <div className="flex justify-between w-[66%] h-full">
+          <Link to={'/'}>
+            <img className="h-full object-contain" src={logo} alt="nav_logo" />
+          </Link>
+          <CustomSelect />
+          <div className="flex justify-between items-center gap-x-3 bg-background w-[58%] h-full px-5 py-2 rounded-xl text-secondary">
+            <input
+              className="bg-background w-[90%] border-black placeholder-gray-400 placeholder:text-[14px] placeholder:not-italic"
+              type="text"
+              value={search}
+              aria-label="Mahsulot izlash"
+              placeholder="Qidirish..."
+              onChange={(e) => setSearch(e.target.value)}
+            />
+            <IoSearch size={22} />
+          </div>
+        </div>
+      )}
 
-      <div className="flex items-center gap-3">
-        <Link to={"/"}>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="hover:bg-white/10 text-white"
-            aria-label="Messages"
-          >
-            <Home className="h-5 w-5 " />
-          </Button>
+      <div className={`${isProductsPage ? "w-[30%]" : "w-[37%]"} h-full flex items-center justify-between `}>
+        <Link to={"/"} className="w-fit h-full text-white flex flex-col items-center justify-between hover:text-secondary ease-out">
+          <Home size={20} />
+          <p className="text-[13px] leading-none">Bosh sahifa</p>
         </Link>
 
-        <Button
-          variant="ghost"
-          size="icon"
-          className="hover:bg-white/10 text-white"
-          aria-label="Messages"
-        >
-          <a
-            href="https://mail.google.com/mail/?view=cm&fs=1&to=info@invest-connect.be"
-            target="_blank"
-          >
-            <Mail className="h-5 w-5 " />
-          </a>
-        </Button>
+        <Link to={""} onClick={proccess} className="w-fit h-full text-white flex flex-col items-center justify-between hover:text-secondary ease-out">
+          <Bell size={20} />
+          <p className="text-[13px] leading-none">Yangiliklar</p>
+        </Link>
 
-        <div className="relative">
-          <Button
-            variant="ghost"
-            size="icon"
-            className="hover:bg-white/10 text-white"
-            aria-label="Notifications"
-          >
-            <Bell className="h-5 w-5" />
-          </Button>
-          <Badge className="absolute -top-1 -right-1 h-4 w-4 p-0 flex items-center justify-center bg-red-500 text-white text-xs">
-            2
-          </Badge>
-        </div>
+        {!isProductsPage && (
+          <Link to={""} onClick={proccess} className="w-fit h-full text-white flex flex-col items-center justify-between hover:text-secondary ease-out">
+            <Heart size={20} />
+            <p className="text-[13px] leading-none">Sevimlilar</p>
+          </Link>
+        )}
+
+        <Link to={""} onClick={proccess} className="w-fit h-full text-white flex flex-col items-center justify-between hover:text-secondary ease-out">
+          <Globe size={20} />
+          <p className="text-[13px] leading-none">O'zbekcha</p>
+        </Link>
 
         {error || !username ? (
-          <button
-            className="flex justify-center items-center gap-x-4  
-              border-2 text-white py-1 px-4 mx-3 rounded-lg  
-              font-medium text-md hover:bg-[#749BA9] "
-            onClick={() => openModal("login")}
-          >
-            Kirish
-            <FiLogIn size={17} />
-          </button>
+          <Link to={""} onClick={() => openModal("login")} className="w-fit h-full text-white flex flex-col items-center justify-between hover:text-secondary ease-out">
+            <UserRound size={20} />
+            <p className="text-[13px] leading-none">Kirish</p>
+          </Link>
         ) : (
           <button
             onClick={handelNavigateProfile}
-            className="flex items-center ms-4 me-3 justify-center bg-[#B29C6F] text-white p-1 w-[35px] h-[33px] rounded-full text-lg font-medium"
+            className="w-[42px] h-[95%] text-xl font-medium flex items-center  justify-center bg-[#B29C6F] text-white p-1 rounded-full"
           >
             {initials}
           </button>
         )}
       </div>
-    </nav>
+
+    </div>
+  </nav>
   );
 }
