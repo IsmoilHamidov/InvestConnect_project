@@ -3,7 +3,7 @@ import { useGetProductQuery } from "@/store/slice/products";
 import { useParams } from "react-router-dom";
 import ImageSlider from "./ImageSlider";
 import PrivateInfoCard from "@/components/PrivateInfoCard";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Skeleton } from "@mui/material";
 
 export const ProductDetailsPage = () => {
@@ -36,13 +36,11 @@ export const ProductDetailsPage = () => {
     );
   };
 
+  const [search, setSearch] = useState("");
 
   return (
     <>
-      <NavbarAdmin search={""} setSearch={function (value: string): void {
-        throw new Error("Function not implemented.");
-      } } />
-
+      <NavbarAdmin search={search} setSearch={setSearch} />
       <main className="max-w-7xl mx-auto py-10 pt-32">
         <div className="mb-3 flex gap-8 items-center">
           <h1 className="text-4xl font-semibold text-secondary capitalize">

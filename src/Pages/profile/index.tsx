@@ -4,14 +4,14 @@ import Sidebar from "@/components/sidebar";
 import Offers from "../../components/OffersCard";
 import AnalyticsBox from "@/components/OffersCard/AnalyticsBox";
 import Activities from "@/components/Activities";
+import { useState } from "react";
 
 const Profile = () => {
+  const [search, setSearch] = useState("");
   return (
     <div className="flex flex-col w-full h-screen">
       <header className="w-full relative z-20">
-            <NavbarAdmin search={""} setSearch={function (value: string): void {
-          throw new Error("Function not implemented.");
-        } }/>
+          <NavbarAdmin search={search} setSearch={setSearch} />
       </header>
       <div className="flex w-full flex-1 relative">
         <aside className="w-[270px] bg-white border relative z-40">

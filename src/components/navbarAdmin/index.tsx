@@ -1,4 +1,4 @@
-import { Bell, Dice1, Globe,  Heart,  Home, UserRound  } from "lucide-react";
+import { Bell, Globe,  Heart,  Home, UserRound  } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useGetUsersQuery } from "@/store/slice/products";
 import { useAuthModalStore } from "@/store/authModalStore";

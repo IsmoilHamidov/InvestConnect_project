@@ -115,13 +115,12 @@ const Example = () => {
     }
   });
   
-  
+
+  const [search, setSearch] = useState("");
 
   return (
     <>
-      <NavbarAdmin search={""} setSearch={function (value: string): void {
-        throw new Error("Function not implemented.");
-      } } />
+      <NavbarAdmin search={search} setSearch={setSearch} />
       <div className="bg-gray-100 mx-auto pb-14 pt-32 shadow-md rounded-lg">
         <div className="flex items-center justify-center mb-11">
           <div className="flex items-center">
