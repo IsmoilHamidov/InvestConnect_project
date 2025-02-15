@@ -72,9 +72,9 @@ const Introduction_Image: React.FC = () => {
         {error || !username ? (
           <button      
             onClick={() => openModal("login")}
-            className='Blue_button cursor-pointer bg-primary px-5 py-[12px]  
+            className='border border-gray-600 Blue_button cursor-pointer bg-primary px-5 py-[12px]  
               rounded-2xl w-fit text-base font-medium tracking-wide'>
-              Kelajakka sarmoyani – biz bilan boshlang !
+              Kelajakka sarmoyani biz bilan boshlang !
           </button>
         ) : (
           <button

@@ -39,10 +39,12 @@ export const ProductDetailsPage = () => {
 
   return (
     <>
-      <NavbarAdmin />
+      <NavbarAdmin search={""} setSearch={function (value: string): void {
+        throw new Error("Function not implemented.");
+      } } />
 
-      <main className="max-w-7xl mx-auto p-10 ">
-        <div className="mt-16 mb-5 flex gap-8 items-center">
+      <main className="max-w-7xl mx-auto py-10 pt-32">
+        <div className="mb-3 flex gap-8 items-center">
           <h1 className="text-4xl font-semibold text-secondary capitalize">
             {data?.name}
           </h1>

@@ -38,13 +38,13 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, viewMode }) =
               <img
                 src={product.image}
                 alt={product.name}
-                className="w-full border h-[19rem] object-cover z-20 rounded-xl  border-gray-200"
-                style={{ objectPosition: "center" }} // Центрирование изображения
+                className="w-full border h-[19rem] object-cover  rounded-xl  border-gray-200"
+                style={{ objectPosition: "center" }}
               />
 
               <Link to={`/products/${product.id}`} className="absolute inset-0 rounded-xl bg-primary bg-opacity-70 opacity-0 
-                z-20 group-hover:opacity-90 transition-opacity duration-300 flex items-center justify-center">
-                  <span className="text-white text-lg font-medium z-40">Batafsil</span>
+                 group-hover:opacity-90 transition-opacity duration-300 flex items-center justify-center">
+                  <span className="text-white text-lg font-medium ">Batafsil</span>
               </Link>
 
               <div className="absolute text-red-50 z-20 top-4 -right-[16px] grid justify-items-end">
@@ -62,7 +62,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, viewMode }) =
               <Star
                 role="button"
                 tabIndex={0}
-                className="cursor-pointer absolute top-5 left-5 scale-105  fill-white text-[#B29C6F] focus:fill-[#B29C6F] focus:text-gray-800 focus:scale-30 outline-none z-30"
+                className="cursor-pointer absolute top-5 left-5 scale-105 z-10  fill-white text-[#B29C6F] focus:fill-[#B29C6F] focus:text-gray-800 focus:scale-30 outline-none"
               />
             </div>
 

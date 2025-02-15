@@ -10,13 +10,15 @@ function InvesterProfile() {
   return (
     <div className="flex flex-col w-full h-screen">
       <header className="w-full relative z-20">
-        <NavbarAdmin />
+        <NavbarAdmin search={""} setSearch={function (value: string): void {
+          throw new Error("Function not implemented.");
+        } } />
       </header>
       <div className="flex w-full flex-1 relative">
         <aside className="w-[270px] bg-white border relative z-40">
           <Sidebar />
         </aside>
-        <main className="flex-1 relative pt-10 pb-6 pl-6 pr-9">
+        <main className="flex-1 relative pt-14 pb-6 pl-6 pr-9">
           <div className="flex mt-12 gap-x-8">
            
             <div className="flex flex-col w-full gap-y-7 justify-between">

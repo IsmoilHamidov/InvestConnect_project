@@ -119,9 +119,11 @@ const Example = () => {
 
   return (
     <>
-      <NavbarAdmin />
-      <div className="bg-gray-100 mx-auto pb-14 pt-24 shadow-md rounded-lg">
-        <div className="flex items-center justify-center mb-12">
+      <NavbarAdmin search={""} setSearch={function (value: string): void {
+        throw new Error("Function not implemented.");
+      } } />
+      <div className="bg-gray-100 mx-auto pb-14 pt-32 shadow-md rounded-lg">
+        <div className="flex items-center justify-center mb-11">
           <div className="flex items-center">
             <div
               className={`w-14 h-14 flex items-center justify-center rounded-full border-2 transition-all duration-300 ease-in-out ${activeTab === "basic"
@@ -152,7 +154,7 @@ const Example = () => {
         >
           {activeTab === "basic" && (
             <>
-              <h2 className="text-[1.5rem] w-full text-center font-semibold mb-11">
+              <h2 className="text-[1.5rem] w-full text-center font-semibold mb-8">
                 Loyiha haqida umumiy ma'lumot kiritish
               </h2>
               <div className="w-[48%] grid">
