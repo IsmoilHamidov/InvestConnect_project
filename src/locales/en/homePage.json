@@ -1,0 +1,26 @@
+{
+  "introduction": {
+    "title": "Invest Connect",
+    "description": "An inspiring ecosystem that brings together modern startups, their founders, partners, and investors.",
+    "buttonGuest": "Start investing in the future with us!",
+    "buttonUser": "Go to Profile"
+  },
+  "introductionText": {
+    "title": "You have come to the right place.",
+    "paragraph1": "Are you always looking for innovative and sustainable projects to invest in? InvestConnect is a global platform designed for investors and idea owners. Our goal is to be an effective bridge to support new startups, creative business ideas, and growing projects.",
+    "paragraph2": "Nowadays, due to inflation, the value of your savings is decreasing, and traditional saving methods often prove ineffective.",
+    "paragraph3": "That’s why many people are searching for reliable ways to earn and invest money.",
+    "button": "CONTACT"
+  },
+
+
+  "about": {
+    "title": "Why should you choose Invest Connect?",
+    "paragraph1": "InvestConnect provides you with the following opportunities: Innovative opportunities: Our platform brings together exciting and promising projects from around the world. Idea owners seek funding to grow their businesses, while you have the chance to earn profits from them.",
+    "paragraph2": "Transparency and trust: Each project undergoes a thorough analysis, allowing you to make informed decisions based on clear data.",
+    "paragraph3": "Mutual success: InvestConnect fosters sustainable growth not only for investors but also for project owners. We strive to maintain a balance of interests for all parties.",
+    "paragraph4": "User-friendly system: The process of reviewing projects, investing, and monitoring progress is designed to be simple and easy to understand."
+  },
+  "financialGoals": "Invest with a clear plan to achieve your financial goals."
+
+}

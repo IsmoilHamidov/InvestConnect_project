@@ -22,8 +22,6 @@ interface Card {
 
 function Projects() {
   const { data, error, isLoading } = useGetProductsQuery("");
-  console.log(data);
-  
 
   if (isLoading) {
     return <div className="text-center text-gray-500">Yuklanmoqda...</div>;
