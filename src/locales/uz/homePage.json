@@ -1,0 +1,24 @@
+{
+  "introduction": {
+    "title": "Invest Connect",
+    "description": "Zamonaviy startaplar, ularning asoschilari, hamkorlar va investorlarni birlashtiruvchi ilhom bag‘ishlovchi ekotizim.",
+    "buttonGuest": "Kelajakka sarmoyani biz bilan boshlang!",
+    "buttonUser": "Startaplar bilan tanishishni boshlash"
+  },
+  "introductionText": {
+    "title": "Siz to'g'ri joyga keldingiz.",
+    "paragraph1": "Har doim sarmoya kiritish uchun innovatsion va barqaror loyihalar izlayapsizmi? InvestConnect – bu investorlar va g‘oya egalari uchun mo‘ljallangan global platforma. Bizning maqsadimiz – yangi startaplarni, kreativ biznes g‘oyalarni va rivojlanayotgan loyihalarni qo‘llab-quvvatlash uchun samarali bog‘lovchi bo‘lish.",
+    "paragraph2": "Hozirgi kunda inflyatsiya tufayli jamg‘armalaringizning qiymati pasaymoqda, va an’anaviy saqlash usullari ko‘pincha foydasiz bo‘lib qolmoqda.",
+    "paragraph3": "Shu bois ko‘plab odamlar pul topish va sarmoya kiritishning ishonchli yo‘llarini izlashadi.",
+    "button": "ALOQA"
+  },
+
+  "about": {
+    "title": "Nima uchun Invest Connect ni tanlashingiz kerak?",
+    "paragraph1": "InvestConnect sizga quyidagi imkoniyatlarni taqdim etadi: Innovatsion imkoniyatlar: Bizning platformamizda butun dunyodan qiziqarli va istiqbolli loyihalar jamlangan. Bu g‘oya egalari o‘z bizneslarini rivojlantirish uchun mablag‘ izlaydilar, siz esa ulardan daromad olish imkoniyatiga ega bo‘lasiz.",
+    "paragraph2": "Shaffoflik va ishonch: Har bir loyiha chuqur tahlildan o‘tadi, va siz aniq ma’lumotlarga asoslangan holda qaror qabul qilasiz.",
+    "paragraph3": "Birgalikdagi muvaffaqiyat: InvestConnect faqat investorlar uchun emas, balki loyiha egalari uchun ham barqaror o‘sish yaratadi. Biz har bir tomonning manfaatlarini muvozanatda saqlashga intilamiz.",
+    "paragraph4": "Foydalanuvchi uchun qulay tizim: Loyihalarni ko‘rib chiqish, sarmoya kiritish va monitoring qilish jarayoni oddiy va tushunarli qilib ishlab chiqilgan."
+  },
+  "financialGoals": "Moliyaviy maqsadlaringizni amalga oshirish uchun aniq reja asosida investitsiya kiriting."
+}

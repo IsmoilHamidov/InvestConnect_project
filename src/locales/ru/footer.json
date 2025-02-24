@@ -1,0 +1,34 @@
+{
+  "contact": {
+    "phone": "09 / 279 88 92",
+    "email": "info@altro-invest.be"
+  },
+  "social": {
+    "facebook": "Фейсбук",
+    "instagram": "Инстаграм",
+    "youtube": "Ютуб",
+    "linkedin": "Линкедин"
+  },
+  "site_map": {
+    "title": "Карта сайта",
+    "offer": "Предложение",
+    "investment_platform": "Инвестиционная платформа",
+    "services": "Наши услуги",
+    "events": "Мероприятия",
+    "partners": "Партнёры"
+  },
+  "communication": {
+    "title": "Общение",
+    "blog": "Блог",
+    "podcasts": "Подкасты",
+    "news": "Новости",
+    "contact": "Контакты"
+  },
+  "legal": {
+    "title": "Юридическая информация",
+    "terms": "Общие условия",
+    "privacy_policy": "Политика конфиденциальности",
+    "cookie_policy": "Политика использования файлов cookie"
+  },
+  "copyright": "Авторские права 2022 Invest Connect. Все права защищены."
+}

@@ -1,0 +1,34 @@
+{
+  "contact": {
+    "phone": "09 / 279 88 92",
+    "email": "info@altro-invest.be"
+  },
+  "social": {
+    "facebook": "Facebook",
+    "instagram": "Instagram",
+    "youtube": "YouTube",
+    "linkedin": "LinkedIn"
+  },
+  "site_map": {
+    "title": "Sayt Xaritasi",
+    "offer": "Taklif",
+    "investment_platform": "Investitsiya Platformasi",
+    "services": "Bizning Xizmatlar",
+    "events": "Tadbirlar",
+    "partners": "Hamkorlar"
+  },
+  "communication": {
+    "title": "Muloqot",
+    "blog": "Blog",
+    "podcasts": "Podkastlar",
+    "news": "Yangiliklar",
+    "contact": "Aloqa"
+  },
+  "legal": {
+    "title": "Huquqiy",
+    "terms": "Umumiy Shartlar",
+    "privacy_policy": "Maxfiylik Siyosati",
+    "cookie_policy": "Cookie Siyosati"
+  },
+  "copyright": "Mualliflik Huquqi 2022 Invest Connect. Barcha huquqlar himoyalangan."
+}

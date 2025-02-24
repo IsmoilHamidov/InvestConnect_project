@@ -11,6 +11,8 @@ import { Link } from "react-router-dom";
 import ProfilePopover from "./ProfilePopover ";
 import PrivacyPolicy from "../PrivacyPolicy";
 import { useToast } from "@/hooks/use-toast";
+import { useTranslation } from "@/store/useTransition";
+import LanguageTriger from "../LanguageTriger";
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
@@ -26,7 +28,8 @@ const Navbar: React.FC = () => {
 
       // Calculate the scroll progress as a percentage
       const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const docHeight =
+        document.documentElement.scrollHeight - window.innerHeight;
       const progress = (scrollTop / docHeight) * 100;
       setScrollProgress(progress);
     };
@@ -37,22 +40,25 @@ const Navbar: React.FC = () => {
     };
   }, []);
 
-  const toast = useToast()
+  const toast = useToast();
+  const { header } = useTranslation();
 
   const proccess = () => {
     toast.toast({
-      description: 'Jarayonda',
+      description: "Jarayonda",
       variant: "warning",
-      duration: 1400
+      duration: 1400,
     });
   };
-  
+
   return (
     <div>
       {/* Navbar */}
       <div
         className={`pt-5 fixed w-full top-0 z-[1000] transition-all duration-500 ease-in-out ${
-          isScrolled ? "bg-[#242323c8] bg-opacity-97 shadow-md pb-[2px] " : "bg-transparent"
+          isScrolled
+            ? "bg-[#242323c8] bg-opacity-97 shadow-md pb-[2px] "
+            : "bg-transparent"
         }`}
         style={{ position: "fixed", zIndex: 1000 }}
       >
@@ -63,65 +69,95 @@ const Navbar: React.FC = () => {
             }`}
           >
             <div className="flex gap-x-4 text-white text-lg">
-              <a href="#"><FaFacebook /></a>
-              <a href="#"><FaInstagram /></a>
-              <a href="#"><FaLinkedin /></a>
-              <a href="#"><FaYoutube /></a>
-              <a href="#"><FaTwitter /></a>
+              <a href="#">
+                <FaFacebook />
+              </a>
+              <a href="#">
+                <FaInstagram />
+              </a>
+              <a href="#">
+                <FaLinkedin />
+              </a>
+              <a href="#">
+                <FaYoutube />
+              </a>
+              <a href="#">
+                <FaTwitter />
+              </a>
             </div>
 
             {/* Navbar Content */}
             <div className="flex gap-x-10 items-center text-white text-base font-normal">
-              <button 
-              className="Blue_button text-white border-0 rounded-3xl p-2 px-3 text-sm bg-[#749BA9]">
+              <button className="Blue_button text-white border-0 rounded-3xl p-2 px-3 text-sm bg-[#749BA9]">
                 <PrivacyPolicy />
               </button>
-              <Link  onClick={() => window.scrollTo(0, 0)}
-              to={"/products"}>Loyihalar</Link>
-              <a href="#about_us">Biz haqimizda</a>
-              <a href="#our_service">Bizning Xizmatlar</a>
-
-              <div className="relative w-auto h-full flex ms-20
-                items-center justify-end text-white text-base font-normal">
+              <Link onClick={() => window.scrollTo(0, 0)} to={"/products"}>
+              {header.projects}
+              </Link>
+              <a href="#about_us">{header.about_us}</a>
+              <a href="#our_service">{header.our_services}</a>
+              <LanguageTriger />
+              <div
+                className="relative w-auto h-full flex ms-20
+                items-center justify-end text-white text-base font-normal"
+              >
                 <div className="fixed">
                   <ProfilePopover />
                 </div>
               </div>
             </div>
-            
           </div>
-            <div
-              className={`w-full border-t my-1 border-[#749BA9] transition-all duration-500 ease-in-out ${
-                isScrolled ? "opacity-0" : "opacity-100"
-              }`}
-            ></div>
-            <div
-              className={`flex justify-between items-center transition-all duration-500 ease-in-out ${
-                isScrolled ? "hidden" : "flex"
-              }`}
-            >
-              <div className="flex justify-center items-center gap-x-3 py-2">
-                <img src={logo_text} className="h-14 object-contain" alt="logo_text" />
-              </div>
-              <div className="h-full flex items-center gap-x-7 text-white text-base font-normal">
-                <a onClick={proccess} href="#">Taklif</a>
-                <a onClick={proccess} href="#">Investitsiya Platformasi</a>
-                <a onClick={proccess} href="#">Hamkorlar</a>
-              </div>
-              <div className="flex items-center gap-x-7 text-white text-base font-light">
-                <a href="tel:+998902798892"><i className="cursor-pointer fa-solid fa-phone me-2"></i>09 / 279 88 92</a>
-                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=info@invest-connect.be" target="_blank"><i className="fa-solid fa-envelope me-2"></i>info@invest-connect.be</a>
-              </div>
-            </div>
-          </nav>
-          {/* bg-[#B29C6F] */}
           <div
-            className="h-1 bg-primary"
-            style={{ width: `${scrollProgress}%` }}
+            className={`w-full border-t my-1 border-[#749BA9] transition-all duration-500 ease-in-out ${
+              isScrolled ? "opacity-0" : "opacity-100"
+            }`}
           ></div>
-        </div>
+          <div
+            className={`flex justify-between items-center transition-all duration-500 ease-in-out ${
+              isScrolled ? "hidden" : "flex"
+            }`}
+          >
+            <div className="flex justify-center items-center gap-x-3 py-2">
+              <img
+                src={logo_text}
+                className="h-14 object-contain"
+                alt="logo_text"
+              />
+            </div>
+            <div className="h-full flex items-center gap-x-7 text-white text-base font-normal">
+              <a onClick={proccess} href="#">
+              {header.offer}
+              </a>
+              <a onClick={proccess} href="#">
+              {header.investment_platform}
+              </a>
+              <a onClick={proccess} href="#">
+              {header.partners}
+              </a>
+            </div>
+            <div className="flex items-center gap-x-7 text-white text-base font-light">
+              <a href="tel:+998902798892">
+                <i className="cursor-pointer fa-solid fa-phone me-2"></i>09 /
+                279 88 92
+              </a>
+              <a
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=info@invest-connect.be"
+                target="_blank"
+              >
+                <i className="fa-solid fa-envelope me-2"></i>
+                info@invest-connect.be
+              </a>
+            </div>
+          </div>
+        </nav>
+        {/* bg-[#B29C6F] */}
+        <div
+          className="h-1 bg-primary"
+          style={{ width: `${scrollProgress}%` }}
+        ></div>
       </div>
-    );
-  };
-  
-  export default Navbar;
+    </div>
+  );
+};
+
+export default Navbar;
