@@ -1,4 +1,4 @@
-import { Bell, Globe,  Heart,  Home, UserRound  } from "lucide-react";
+import { Bell, Globe, Heart, Home, UserRound } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useGetUsersQuery } from "@/store/slice/products";
 import { useAuthModalStore } from "@/store/authModalStore";
@@ -15,7 +15,7 @@ interface NavbarAdminProps {
   setSearch: (value: string) => void;
 }
 
-export default function NavbarAdmin({ search, setSearch }: NavbarAdminProps)  {
+export default function NavbarAdmin({ search, setSearch }: NavbarAdminProps) {
   const { openModal } = useAuthModalStore();
   const { data, error } = useGetUsersQuery(undefined);
   const username = data?.username || null;
@@ -46,67 +46,67 @@ export default function NavbarAdmin({ search, setSearch }: NavbarAdminProps)  {
 
   return (
     <nav className="flex fixed z-30 w-full items-center justify-center px-4 py-[16px] bg-primary">
-    <NavbarStep />
-    <div className={`w-full max-w-7xl ${isProductsPage ? "justify-between h-[2.65rem]" : "justify-end h-[2.5rem]"}  flex items-center gap-10`}>
-      {isProductsPage && (
-        <div className="flex justify-between w-[66%] h-full">
-          <Link to={'/'}>
-            <img className="h-full object-contain" src={logo} alt="nav_logo" />
-          </Link>
-          <CustomSelect />
-          <div className="flex justify-between items-center gap-x-3 bg-background w-[58%] h-full px-5 py-2 rounded-xl text-secondary">
-            <input
-              className="bg-background w-[90%] border-black placeholder-gray-400 placeholder:text-[14px] placeholder:not-italic"
-              type="text"
-              value={search}
-              aria-label="Mahsulot izlash"
-              placeholder="Qidirish..."
-              onChange={(e) => setSearch(e.target.value)}
-            />
-            <IoSearch size={22} />
+      <NavbarStep />
+      <div className={`w-full max-w-7xl ${isProductsPage ? "justify-between h-[2.65rem]" : "justify-end h-[2.5rem]"}  flex items-center gap-10`}>
+        {isProductsPage && (
+          <div className="flex justify-between w-[66%] h-full">
+            <Link to={'/'}>
+              <img className="h-full object-contain" src={logo} alt="nav_logo" />
+            </Link>
+            <CustomSelect />
+            <div className="flex justify-between items-center gap-x-3 bg-background w-[58%] h-full px-5 py-2 rounded-xl text-secondary">
+              <input
+                className="bg-background w-[90%] border-black placeholder-gray-400 placeholder:text-[14px] placeholder:not-italic"
+                type="text"
+                value={search}
+                aria-label="Mahsulot izlash"
+                placeholder="Qidirish..."
+                onChange={(e) => setSearch(e.target.value)}
+              />
+              <IoSearch size={22} />
+            </div>
           </div>
+        )}
+
+        <div className={`${isProductsPage ? " w-[60%] md:w-[30%]" : " w-[60%] md:w-[37%]"} h-full flex flex-row items-center justify-between `}>
+          <Link to={"/"} className="w-fit h-full mt-4 md:mt-0 text-white flex flex-col items-center justify-between hover:text-secondary ease-out">
+            <Home size={20} />
+            <p className=" hidden md:inline-block md:text-[13px] leading-none">Bosh sahifa</p>
+          </Link>
+
+          <Link to={""} onClick={proccess} className="w-fit mt-4 md:mt-0 h-full text-white flex flex-col items-center justify-between hover:text-secondary ease-out">
+            <Bell size={20} />
+            <p className="hidden md:inline-block md:text-[13px] leading-none">Yangiliklar</p>
+          </Link>
+
+          {!isProductsPage && (
+            <Link to={""} onClick={proccess} className="w-fit mt-4 md:mt-0 h-full text-white flex flex-col items-center justify-between hover:text-secondary ease-out">
+              <Heart size={20} />
+              <p className="hidden md:inline-block md:text-[13px] leading-none">Sevimlilar</p>
+            </Link>
+          )}
+
+          <Link to={""} onClick={proccess} className="w-fit mt-4 md:mt-0 h-full text-white flex flex-col items-center justify-between hover:text-secondary ease-out">
+            <Globe size={20} />
+            <p className="hidden md:inline-block md:text-[13px] leading-none">O'zbekcha</p>
+          </Link>
+
+          {error || !username ? (
+            <Link to={""} onClick={() => openModal("login")} className="w-fit h-full text-white flex flex-col items-center justify-between hover:text-secondary ease-out">
+              <UserRound size={20} />
+              <p className="text-[13px] leading-none">Kirish</p>
+            </Link>
+          ) : (
+            <button
+              onClick={handelNavigateProfile}
+              className="w-[42px] h-[95%] text-xl font-medium flex items-center  justify-center bg-[#B29C6F] text-white p-1 rounded-full"
+            >
+              {initials}
+            </button>
+          )}
         </div>
-      )}
 
-      <div className={`${isProductsPage ? "w-[30%]" : "w-[37%]"} h-full flex items-center justify-between `}>
-        <Link to={"/"} className="w-fit h-full text-white flex flex-col items-center justify-between hover:text-secondary ease-out">
-          <Home size={20} />
-          <p className="text-[13px] leading-none">Bosh sahifa</p>
-        </Link>
-
-        <Link to={""} onClick={proccess} className="w-fit h-full text-white flex flex-col items-center justify-between hover:text-secondary ease-out">
-          <Bell size={20} />
-          <p className="text-[13px] leading-none">Yangiliklar</p>
-        </Link>
-
-        {!isProductsPage && (
-          <Link to={""} onClick={proccess} className="w-fit h-full text-white flex flex-col items-center justify-between hover:text-secondary ease-out">
-            <Heart size={20} />
-            <p className="text-[13px] leading-none">Sevimlilar</p>
-          </Link>
-        )}
-
-        <Link to={""} onClick={proccess} className="w-fit h-full text-white flex flex-col items-center justify-between hover:text-secondary ease-out">
-          <Globe size={20} />
-          <p className="text-[13px] leading-none">O'zbekcha</p>
-        </Link>
-
-        {error || !username ? (
-          <Link to={""} onClick={() => openModal("login")} className="w-fit h-full text-white flex flex-col items-center justify-between hover:text-secondary ease-out">
-            <UserRound size={20} />
-            <p className="text-[13px] leading-none">Kirish</p>
-          </Link>
-        ) : (
-          <button
-            onClick={handelNavigateProfile}
-            className="w-[42px] h-[95%] text-xl font-medium flex items-center  justify-center bg-[#B29C6F] text-white p-1 rounded-full"
-          >
-            {initials}
-          </button>
-        )}
       </div>
-
-    </div>
-  </nav>
+    </nav>
   );
 }
