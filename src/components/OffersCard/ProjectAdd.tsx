@@ -15,7 +15,7 @@ import { GrFormPrevious } from "react-icons/gr";
 import folderImage from "../../assets/images/rb_4574.png";
 
 const Example = () => {
-  const { register, handleSubmit, reset, formState: { errors }} = useForm();
+  const { register, handleSubmit, reset, formState: { errors } } = useForm();
   const [createProduct, { isLoading }] = useCreateProductMutation();
   const { data: getUserId } = useGetUsersQuery(undefined);
   const { data: getCategories } = useGetCategoriesQuery(undefined);
@@ -114,15 +114,15 @@ const Example = () => {
       setActiveTab("details");
     }
   });
-  
+
 
   const [search, setSearch] = useState("");
 
   return (
     <>
       <NavbarAdmin search={search} setSearch={setSearch} />
-      <div className="bg-gray-100 mx-auto pb-14 pt-32 shadow-md rounded-lg">
-        <div className="flex items-center justify-center mb-11">
+      <div className="bg-gray-100 mx-auto md:pb-14 lg:pt-32 pt-20 shadow-md rounded-lg px-8 ">
+        <div className="flex items-center justify-center lg:mb-11 mb-6">
           <div className="flex items-center">
             <div
               className={`w-14 h-14 flex items-center justify-center rounded-full border-2 transition-all duration-300 ease-in-out ${activeTab === "basic"
@@ -149,11 +149,11 @@ const Example = () => {
         <form
           encType="multipart/form-data"
           onSubmit={handleSubmit(onSubmit)}
-          className="max-w-7xl m-auto flex flex-wrap justify-between items-center gap-y-7  text-secondary"
+          className="  lg:max-w-7xl m-auto flex flex-col lg:flex-row  flex-wrap  lg:justify-between items-center gap-y-3 lg:gap-y-7  text-secondary"
         >
           {activeTab === "basic" && (
             <>
-              <h2 className="text-[1.5rem] w-full text-center font-semibold mb-8">
+              <h2 className="md:text-[1.5rem] text-base w-full text-center font-semibold mb-8">
                 Loyiha haqida umumiy ma'lumot kiritish
               </h2>
               <div className="w-[48%] grid">
@@ -178,9 +178,9 @@ const Example = () => {
                 .map((field) => (
                   <div
                     key={field.name}
-                    className="w-[48%] flex flex-col justify-center"
+                    className="lg:w-[48%] w-full flex flex-col justify-center"
                   >
-                    <label className="block text-sm font-medium capitalize leading-9">
+                    <label className="block text-xs md:text-sm font-medium capitalize leading-9">
                       {field.label}
                     </label>
                     <input
@@ -189,12 +189,11 @@ const Example = () => {
                       step={field.step || undefined}
                       placeholder={field.placeholder || ""}
                       {...register(field.name, { required: `${field.label} kiritilishi  shart` })}
-                      className={`w-full p-3 px-3 border-gray-300 rounded-xl ${
-                        errors[field.name] ? "border-red-500" : ""
-                      }`}
+                      className={`w-full p-3 px-3 text-sm lg:text-base border-gray-300 rounded-xl ${errors[field.name] ? "border-red-500" : ""
+                        }`}
                     />
 
-                  {errors[field.name] && (
+                    {errors[field.name] && (
                       <span className="text-red-500 text-sm mt-2">
                         {(errors[field.name] as FieldError).message}
                       </span>
@@ -203,9 +202,9 @@ const Example = () => {
                 ))}
 
               <div className="w-full flex justify-center items-center mt-8">
-              <button
+                <button
                   type="button"
-                  className="w-1/6 py-2 flex items-center justify-center rounded-full Blue_button text-lg font-medium text-white"
+                  className="lg:w-1/6 w-full py-2 flex items-center justify-center rounded-full Blue_button text-lg font-medium text-white"
                   onClick={handleNextStep}
                 >
                   Oldinga
