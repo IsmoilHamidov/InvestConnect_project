@@ -11,7 +11,7 @@ import ProductSidebarCategory from './productSidebarCategory'
 function ProductSidebar({ onSelectCategory }: ProductSidebarProps) {
 
   return (
-    <div className="w-full flex flex-col gap-9">
+    <div className="w-full flex flex-col lg:gap-9 xl:mb-0">
         <ProductSidebarCategory  onSelectCategory={onSelectCategory}/>
         <ProductLocation/>
         {/* <MultiRangeSlider 
