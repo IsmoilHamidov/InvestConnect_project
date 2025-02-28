@@ -201,7 +201,7 @@ const Example = () => {
                   </div>
                 ))}
 
-              <div className="w-full flex justify-center items-center mt-8">
+              <div className="w-full flex justify-center items-center mt-8 mb-10 md:mb-0">
                 <button
                   type="button"
                   className="lg:w-1/6 w-full py-2 flex items-center justify-center rounded-full Blue_button text-lg font-medium text-white"
@@ -216,133 +216,136 @@ const Example = () => {
 
           {activeTab === "details" && (
             <>
-              <h2 className="text-[1.5rem] w-full text-center font-semibold mb-8">
+              <h2 className=" text-base md:text-[1.5rem] w-full text-center font-semibold mb-8">
                 Loyiha haqida batafsil ma'lumot yuklash
               </h2>
-              {fields
-                .filter((field) => field.type === "textarea")
-                .map((field) => (
+              <div className=" grid grid-cols-2 w-full gap-x-4 gap-y-2 md:gap-6" >
+
+                {fields
+                  .filter((field) => field.type === "textarea")
+                  .map((field) => (
+                    <div
+                      key={field.name}
+                      className=" w-full flex flex-col justify-center"
+                    >
+                      <label className="block text-xs md:text-sm font-medium text-secondary capitalize leading-9">
+                        {field.label}
+                      </label>
+                      <textarea
+                        {...register(field.name, { required: true })}
+                        placeholder={field.placeholder || ""}
+                        className="w-full text-xs md:text-sm border-gray-300 h-[13rem] p-3 rounded-xl resize-none"
+                      />
+                    </div>
+                  ))}
+
+                <div className=" w-full grid  gap-2">
+                  <label htmlFor="image" className="text-xs md:text-sm font-medium text-secondary">
+                    Rasm
+                  </label>
                   <div
-                    key={field.name}
-                    className="w-[48%] flex flex-col justify-center"
-                  >
-                    <label className="block text-sm font-medium text-secondary capitalize leading-9">
-                      {field.label}
-                    </label>
-                    <textarea
-                      {...register(field.name, { required: true })}
-                      placeholder={field.placeholder || ""}
-                      className="w-full border-gray-300 h-[13rem] p-3 rounded-xl resize-none"
-                    />
-                  </div>
-                ))}
-
-              <div className="w-[48%] grid gap-2">
-                <label htmlFor="image" className="text-sm font-medium text-secondary">
-                  Rasm
-                </label>
-                <div
-                  className="w-full h-[13.2rem] flex flex-col justify-center items-center rounded-xl
+                    className="w-full h-[13.2rem] flex flex-col justify-center items-center rounded-xl
                   border-2 border-dotted border-secondary px-4 py-3 text-gray-700 relative overflow-hidden"
-                >
-                  <input
-                    id="image"
-                    className="absolute inset-0 opacity-0 cursor-pointer"
-                    type="file"
-                    name="image"
-                    accept="image/*"
-                    onChange={handleFileChange}
-                  />
-                  {!selectedFile ? (
-                    <div className="flex flex-col items-center justify-center gap-2">
-                      <MdOutlineFileUpload size={40} className="text-gray-500" />
-                      <p className="text-sm text-gray-500">Rasmni yuklash uchun bu yerni bosing</p>
-                    </div>
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center">
-                      <img
-                        src={URL.createObjectURL(selectedFile)}
-                        alt="Selected"
-                        className="w-full h-full object-cover rounded-lg"
-                      />
-                    </div>
-                  )}
+                  >
+                    <input
+                      id="image"
+                      className="absolute inset-0 opacity-0 cursor-pointer"
+                      type="file"
+                      name="image"
+                      accept="image/*"
+                      onChange={handleFileChange}
+                    />
+                    {!selectedFile ? (
+                      <div className="flex flex-col items-center justify-center gap-2">
+                        <MdOutlineFileUpload size={40} className="text-gray-500" />
+                        <p className="text-xs md:text-sm text-gray-500">Rasmni yuklash uchun bu yerni bosing</p>
+                      </div>
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center">
+                        <img
+                          src={URL.createObjectURL(selectedFile)}
+                          alt="Selected"
+                          className="w-full h-full object-cover rounded-lg"
+                        />
+                      </div>
+                    )}
+                  </div>
                 </div>
+
+                <div className=" w-full grid gap-2">
+                  <label htmlFor="prototype_demo" className="text-xs md:text-sm font-medium text-secondary">
+                    Demo prototipi
+                  </label>
+                  <div
+                    className="w-full h-[13.2rem] flex flex-col justify-center items-center rounded-xl
+                  border-2 border-dotted border-secondary px-4 py-3 text-gray-700 relative overflow-hidden"
+                  >
+                    <input
+                      id="prototype_demo"
+                      className="absolute inset-0 opacity-0 cursor-pointer"
+                      type="file"
+                      name="prototype_demo"
+                      accept="image/*"
+                      onChange={handleDemoChange}
+                    />
+                    {!selectedDemo ? (
+                      <div className="flex flex-col items-center justify-center gap-2">
+                        <MdOutlineFileUpload size={40} className="text-gray-500" />
+                        <p className="text-xs md:text-sm text-gray-500">Prototip yuklash uchun bu yerni bosing</p>
+                      </div>
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center">
+                        <img
+                          src={URL.createObjectURL(selectedDemo)}
+                          alt="Selected"
+                          className="w-full h-full object-cover rounded-lg"
+                        />
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                <div className=" w-full grid gap-2">
+                  <label htmlFor="legal_documents" className="text-xs md:text-sm font-medium text-secondary">
+                    Yuridik hujjat
+                  </label>
+                  <div
+                    className="w-full h-[13.2rem] flex flex-col justify-center items-center rounded-xl border-2 border-dotted border-secondary px-4 py-3 text-gray-700 relative overflow-hidden"
+                  >
+                    <input
+                      id="legal_documents"
+                      className="absolute inset-0 opacity-0 cursor-pointer"
+                      type="file"
+                      name="legal_documents"
+                      accept=".pdf, .doc, .docx, .txt"
+                      onChange={handleDocChange}
+                    />
+                    {!selectedDoc ? (
+                      <div className="flex flex-col items-center justify-center gap-2">
+                        <MdOutlineFileUpload size={40} className="text-gray-500" />
+                        <p className="text-xs md:text-sm text-gray-500">Hujjat yuklash uchun bu yerni bosing</p>
+                      </div>
+                    ) : (
+                      <div className="w-full h-full flex flex-col items-center justify-center">
+                        <img
+                          src={folderImage}
+                          alt="Selected"
+                          className="h-[70%] w-auto object-contain rounded-lg"
+                        />
+                        <p className="mt-2 text-xs md:text-sm text-gray-600 truncate w-full text-center">
+                          {selectedDoc.name}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+
               </div>
 
-              <div className="w-[48%] grid gap-2">
-                <label htmlFor="prototype_demo" className="text-sm font-medium text-secondary">
-                  Demo prototipi
-                </label>
-                <div
-                  className="w-full h-[13.2rem] flex flex-col justify-center items-center rounded-xl
-                   border-2 border-dotted border-secondary px-4 py-3 text-gray-700 relative overflow-hidden"
-                >
-                  <input
-                    id="prototype_demo"
-                    className="absolute inset-0 opacity-0 cursor-pointer"
-                    type="file"
-                    name="prototype_demo"
-                    accept="image/*"
-                    onChange={handleDemoChange}
-                  />
-                  {!selectedDemo ? (
-                    <div className="flex flex-col items-center justify-center gap-2">
-                      <MdOutlineFileUpload size={40} className="text-gray-500" />
-                      <p className="text-sm text-gray-500">Prototip yuklash uchun bu yerni bosing</p>
-                    </div>
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center">
-                      <img
-                        src={URL.createObjectURL(selectedDemo)}
-                        alt="Selected"
-                        className="w-full h-full object-cover rounded-lg"
-                      />
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              <div className="w-[48%] grid gap-2">
-                <label htmlFor="legal_documents" className="text-sm font-medium text-secondary">
-                  Yuridik hujjat
-                </label>
-                <div
-                  className="w-full h-[13.2rem] flex flex-col justify-center items-center rounded-xl border-2 border-dotted border-secondary px-4 py-3 text-gray-700 relative overflow-hidden"
-                >
-                  <input
-                    id="legal_documents"
-                    className="absolute inset-0 opacity-0 cursor-pointer"
-                    type="file"
-                    name="legal_documents"
-                    accept=".pdf, .doc, .docx, .txt"
-                    onChange={handleDocChange}
-                  />
-                  {!selectedDoc ? (
-                    <div className="flex flex-col items-center justify-center gap-2">
-                      <MdOutlineFileUpload size={40} className="text-gray-500" />
-                      <p className="text-sm text-gray-500">Hujjat yuklash uchun bu yerni bosing</p>
-                    </div>
-                  ) : (
-                    <div className="w-full h-full flex flex-col items-center justify-center">
-                      <img
-                        src={folderImage}
-                        alt="Selected"
-                        className="h-[70%] w-auto object-contain rounded-lg"
-                      />
-                      <p className="mt-2 text-sm text-gray-600 truncate w-full text-center">
-                        {selectedDoc.name}
-                      </p>
-                    </div>
-                  )}
-                </div>
-              </div>
-
-
-
-              <div className="w-full flex justify-center gap-x-12 items-center mt-7">
+              <div className="w-full mb-10 md:mb-0 flex justify-center gap-x-12 items-center mt-7">
                 <button
-                  className="w-1/6 py-2 flex justify-center items-center rounded-full Blue_button text-lg  font-medium text-white"
+                  className="md:w-1/6 w-1/2 py-2 flex justify-center items-center rounded-full Blue_button text-base md:text-lg  font-medium text-white"
                   onClick={() => setActiveTab("basic")}
                 >
                   <GrFormPrevious size={27} />
@@ -351,11 +354,11 @@ const Example = () => {
 
                 <button
                   type="submit"
-                  className={`w-1/6 py-2 flex justify-center items-center gap-2 rounded-full Brown_button text-lg  font-medium text-white ${isLoading ? "bg-gray-400" : "bg-blue-600 hover:bg-blue-700"
+                  className={`md:w-1/6 w-1/2 py-2 flex justify-center items-center gap-2 rounded-full Brown_button text-base md:text-lg  font-medium text-white ${isLoading ? "bg-gray-400" : "bg-blue-600 hover:bg-blue-700"
                     }`}
                   disabled={isLoading}
                 >
-                  <MdOutlineFileUpload size={25} />
+                  <MdOutlineFileUpload  size={25} />
                   {isLoading ? "Yuborilmoqda..." : "Yuborish"}
                 </button>
               </div>
