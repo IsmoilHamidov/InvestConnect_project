@@ -73,7 +73,7 @@ const ProductBanner: React.FC = () => {
         </button>
       </div>
 
-      <div className="flex items-center gap-2 md:gap-6 mt-4 md:mt-0 text-secondary">
+      <div className="hidden md:flex items-center gap-2 md:gap-6 mt-4 md:mt-0 text-secondary">
         <div className="flex items-center gap-2 relative">
           <label className="block">Ko'rsatish</label>
           <select

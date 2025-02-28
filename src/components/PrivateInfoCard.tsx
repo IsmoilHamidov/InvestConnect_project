@@ -22,9 +22,9 @@ const PrivateInfoCard = ({ productId }: { productId: number }) => {
 
   if (error) {
     return (
-      <div className="mt-11 p-4 bg-red-50 border rounded-md flex items-center justify-between gap-10">
+      <div className="mt-11 p-4 bg-red-50 border rounded-md flex flex-col sm:flex-row items-center justify-between gap-x-10 gap-y-3">
         <EyeOff size={50} />
-        <p className="text-sm font-semibold text-gray-600">
+        <p className="text-sm text-center font-semibold text-gray-600">
           Ma'lumotlarni ko'rish uchun siz to'lov qilshingiz kerak.
         </p>
         <PaymentAndCheck productId={productId} amount={10} />

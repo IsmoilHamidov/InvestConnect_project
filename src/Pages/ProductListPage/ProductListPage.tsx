@@ -12,7 +12,15 @@ import { useProductsFiltersStore } from "@/store/ProductsFiltersStore";
 
 const ProductListPage = () => {
   const [search, setSearch] = useState<string>("");
-  const { selectedLocation, selectedCategory, setSelectedCategory, viewMode, itemsPerPage, currentPage, setCurrentPage } = useProductsFiltersStore();
+  const {
+    selectedLocation,
+    selectedCategory,
+    setSelectedCategory,
+    viewMode,
+    itemsPerPage,
+    currentPage,
+    setCurrentPage,
+  } = useProductsFiltersStore();
   const [isRefetching, setIsRefetching] = useState(false);
   const { data, error, isLoading, refetch } = useGetProductsQuery(
     `?search=${search}&location=${selectedLocation}&max_price=500000&min_price=0&category=${selectedCategory}`
@@ -26,7 +34,6 @@ const ProductListPage = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [location.pathname]);
-  
 
   const renderSkeletons = () => {
     return Array.from({ length: 3 }).map((_, index) => (
@@ -40,7 +47,12 @@ const ProductListPage = () => {
         ) : (
           <div className="flex justify-between items-center gap-4 border rounded-xl p-4">
             <div className="w-10/12 ps-2 flex items-center flex-row gap-x-5">
-              <Skeleton variant="rectangular" width={80} height={80} className="rounded-lg" />
+              <Skeleton
+                variant="rectangular"
+                width={80}
+                height={80}
+                className="rounded-lg"
+              />
               <Skeleton variant="text" width="20%" height={30} />
             </div>
             <div className="w-1/3 flex justify-end">
@@ -51,7 +63,6 @@ const ProductListPage = () => {
       </div>
     ));
   };
-  
 
   const startIndex = currentPage * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
@@ -60,10 +71,9 @@ const ProductListPage = () => {
   useEffect(() => {
     if (search || selectedCategory || selectedLocation) {
       setIsRefetching(true);
-      refetch()
-        .finally(() => {
-          setIsRefetching(false);
-        });
+      refetch().finally(() => {
+        setIsRefetching(false);
+      });
     }
   }, [search, selectedCategory, selectedLocation, refetch]);
 
@@ -72,27 +82,27 @@ const ProductListPage = () => {
   }, [selectedLocation, selectedCategory, setCurrentPage]);
 
   useEffect(() => {
-  setIsRefetching(true);
-  refetch().finally(() => {
-    setIsRefetching(false);
-  });
-}, [itemsPerPage, viewMode, refetch]);
+    setIsRefetching(true);
+    refetch().finally(() => {
+      setIsRefetching(false);
+    });
+  }, [itemsPerPage, viewMode, refetch]);
 
   return (
     <>
       <NavbarAdmin search={search} setSearch={setSearch} />
       <main className="pt-20">
-        <div className="max-w-7xl m-auto mb-20">
+        <div className="max-w-7xl m-auto mb-20 px-4 md:px-8 xl:px-0">
           <div className="mt-12 mb-11 flex justify-between items-center">
-            <h2 className="w-[18%] font-bold text-3xl text-secondary">
+            <h2 className="md:w-[18%] font-bold text-3xl text-secondary">
               Loyihalar
             </h2>
-            <div className="w-[76%] ">
+            <div className="md:w-[76%] ">
               <ProductBanner />
             </div>
           </div>
-          <div className="flex justify-between gap-x-10 ">
-            <div className="w-[18%]">
+          <div className="flex justify-between  flex-col lg:flex-row">
+            <div className="w-full lg:w-[20%]">
               <ProductSidebar
                 onSelectCategory={(category) => {
                   setSelectedCategory(category);
@@ -105,10 +115,11 @@ const ProductListPage = () => {
             </div>
 
             <div
-              className={`${viewMode === "grid"
-                ? "w-[76%] pr-4 products grid grid-cols-[30%,30%,30%] justify-between gap-y-14"
-                : "w-[76%] flex flex-col gap-y-5 "
-                }`}
+              className={`${
+                viewMode === "grid"
+                  ? "w-full lg:w-[76%] xl:pr-4 products flex flex-wrap justify-between gap-y-8"
+                  : "w-full lg:w-[76%] flex flex-col gap-y-5 "
+              }`}
             >
               {error ? (
                 <p className="text-red-500">Xatolik yuz berdi</p>
@@ -117,13 +128,17 @@ const ProductListPage = () => {
               ) : paginatedData.length > 0 ? (
                 <>
                   {paginatedData.map((product: Product) => (
-                    <div key={product.id}>
-                      <ProductCard product={product} viewMode={viewMode} />
-                    </div>
+                    <ProductCard
+                      key={product.id}
+                      product={product}
+                      viewMode={viewMode}
+                    />
                   ))}
 
                   <div
-                    className={`col-span-3 flex justify-center items-center ${viewMode === 'list' ? 'mt-14' : ''}`}
+                    className={`w-full col-span-3 flex justify-center items-center ${
+                      viewMode === "list" ? "mt-14" : ""
+                    }`}
                   >
                     {data && data.length > itemsPerPage && (
                       <Pagination
@@ -138,12 +153,16 @@ const ProductListPage = () => {
                 </>
               ) : (
                 <div className="flex flex-col gap-y-5 items-center mt-24 col-span-3 text-center">
-                  <p className="text-gray-600 font-semibold text-xl">Hech narsa topilmadi!</p>
-                  <img src={EmptyNone} className="h-72" alt="No products found" />
+                  <p className="text-gray-600 font-semibold text-xl">
+                    Hech narsa topilmadi!
+                  </p>
+                  <img
+                    src={EmptyNone}
+                    className="h-72"
+                    alt="No products found"
+                  />
                 </div>
               )}
-
-
             </div>
           </div>
         </div>

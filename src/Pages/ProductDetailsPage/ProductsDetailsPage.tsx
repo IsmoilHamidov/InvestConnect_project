@@ -11,6 +11,7 @@ export const ProductDetailsPage = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { productid } = useParams<{ productid: string | any }>();
   const { data, error, isLoading } = useGetProductQuery(productid);
 
@@ -41,7 +42,7 @@ export const ProductDetailsPage = () => {
   return (
     <>
       <NavbarAdmin search={search} setSearch={setSearch} />
-      <main className="max-w-7xl mx-auto py-10 pt-32">
+      <main className="max-w-7xl mx-auto px-4 pb-10 pt-32">
         <div className="mb-3 flex gap-8 items-center">
           <h1 className="text-4xl font-semibold text-secondary capitalize">
             {data?.name}
@@ -53,10 +54,10 @@ export const ProductDetailsPage = () => {
           renderSkeletonsId()
         )
           : data ? (
-            <div className="p-4 py-8 pl-0 bg-white  flex justify-between">
+            <div className="py-8 bg-white max-md:flex-col flex justify-between">
               <ImageSlider />
-              <div className="flex flex-col w-[48%] gap-y-10 justify-between">
-                <div className="w-[400px] min-w-[70%] p-5 rounded-xl shadow-md border border-gray-200 bg-white">
+              <div className="flex flex-col max-sm:flex-col max-md:flex-row md:w-[48%] gap-y-10 gap-x-5 max-lg:justify-between">
+                <div className="md:w-full w-full sm:w-1/2 sm:max-w-[400px] lg:min-w-[70%] p-5 rounded-xl shadow-md border border-gray-200 bg-white">
                   <div className="flex justify-between items-center mb-4">
                     <span className="text-secondary text-base font-medium">
                       Narxi:
@@ -86,7 +87,7 @@ export const ProductDetailsPage = () => {
                   </div>
                 </div>
 
-                <div className="rounded-xl bg-white capitalize">
+                <div className="md:w-full w-full sm:w-1/2 sm:max-w-[400px] rounded-xl bg-white capitalize">
                   <p className="text-sm text-secondary font-medium">
                     ИКТУ: 00806001001000000
                   </p>
