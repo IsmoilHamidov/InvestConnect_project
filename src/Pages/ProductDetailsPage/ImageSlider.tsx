@@ -1,21 +1,20 @@
 import { useGetProductQuery } from "@/store/slice/products";
-import  { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-const imageBasicUrl = "https://bakirali007.pythonanywhere.com/"
-
+const imageBasicUrl = "https://bakirali007.pythonanywhere.com/";
 
 const ImageSlider = () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { productid } = useParams<{ productid: string | any }>();
-  const { data, error} = useGetProductQuery(productid);
+  const { data, error } = useGetProductQuery(productid);
 
   const [selectedImage, setSelectedImage] = useState<string>("");
   const [images, setImages] = useState<string[]>([]);
 
   useEffect(() => {
     if (data?.image) {
-      setImages([
-        data.image]);
+      setImages([data.image]);
       setSelectedImage(data.image);
     }
   }, [data]);
@@ -23,12 +22,12 @@ const ImageSlider = () => {
   if (error) return <p>Something went wrong!</p>;
 
   return (
-    <div className="flex flex-col justify-between w-[47%] gap-y-4">
+    <div className="flex flex-col justify-between max-md:mb-5 max-md:w-full w-[47%] gap-y-4">
       <div className="w-full h-auto">
         <img
           src={imageBasicUrl + selectedImage}
           alt="Selected"
-          className="border h-[23rem] w-full object-cover rounded-xl"
+          className="border w-full object-cover rounded-xl"
         />
       </div>
 
@@ -37,8 +36,9 @@ const ImageSlider = () => {
           <div
             key={index}
             className={`cursor-pointer transition-transform transform 
-            hover:scale-105 rounded-lg ${selectedImage === image ? "ring-[2.5px] ring-[#B29C6F]" : ""
-              }`}
+            hover:scale-105 rounded-lg ${
+              selectedImage === image ? "ring-[2.5px] ring-[#B29C6F]" : ""
+            }`}
             onClick={() => setSelectedImage(image)}
           >
             <img

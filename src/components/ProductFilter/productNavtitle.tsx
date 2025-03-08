@@ -9,10 +9,10 @@ interface NavTitleProps {
 
 const NavTitle: React.FC<NavTitleProps> = ({ title, icons }) => {
   return (
-    <div className="flex items-center justify-between pb-4">
+    <div className="flex items-center justify-between max-lg:border max-lg:rounded-2xl max-lg:px-6 max-lg:py-2 mb-2">
       {icons ? (
         <>
-          <h3 className="font-medium lg:text-[17px] text-[#B29C6F]">{title}</h3>
+          <h3 className="font-medium lg:text-[17px] text-[#B29C6F] mr-2">{title}</h3>
           {icons && <BiCaretDown />}
         </>
       ) : (
