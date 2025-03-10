@@ -107,8 +107,8 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ closeModal }) => {
     };
     
     return (
-        <Card className="w-full h-full">
-            <CardContent className="grid mt-6 ">
+        <Card className="w-full relative mx-auto  h-full z-[100]">
+            <CardContent className="grid absolute mt-6 w-full ">
                 <h2 className="mb-7 font-semibold text-[21px] text-center">Profil tafsilotlari</h2>
                 <div className="w-full">
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 w-full">

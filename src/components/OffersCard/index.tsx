@@ -12,10 +12,10 @@ const Offers: React.FC = () => {
     <div
       className="p-6 py-8 min-h-[17.725rem] w-full mx-auto shadow-md border-[1px] rounded-2xl">
       <div className="flex flex-row items-center justify-between mb-10">
-        <h1 className="text-xl font-semibold">Loyhalaringiz</h1>
+        <h1 className="text-base md:text-xl font-semibold">Loyhalaringiz</h1>
         <Link to={"/ProjectAdd"}>
-          <button className="rounded-full text-[15px] py-[7px] px-5 text-white Blue_button">
-            <i className="fa-solid fa-plus me-3"></i>
+          <button className="rounded-full text-sm py-[7px] px-5 text-white Blue_button">
+            <i className="fa-solid fa-plus me-2"></i>
             Loyiha qo'shish
           </button>
         </Link>
@@ -74,22 +74,22 @@ const Offers: React.FC = () => {
               index: React.Key | null | undefined
             ) => {
               return (
-                <div>
-                <ProperyCard
-                  key={index}
-                  image={item.image}
-                  id={item.id}
-                  title={typeof item.name === "string" ? item.name : "Untitled"}
-                  location={typeof item.location === "string" ? item.location : "Topligging"}
-                  category={
-                    item.category && typeof item.category.name === "string"
-                      ? item.category.name
-                      : "Unknown"
-                  }
-                  price={item.price ? `$${item.price}` : "N/A"}
-                  type={""}
-                />
-              </div>
+                <div className="w-full" >
+                  <ProperyCard
+                    key={index}
+                    image={item.image}
+                    id={item.id}
+                    title={typeof item.name === "string" ? item.name : "Untitled"}
+                    location={typeof item.location === "string" ? item.location : "Topligging"}
+                    category={
+                      item.category && typeof item.category.name === "string"
+                        ? item.category.name
+                        : "Unknown"
+                    }
+                    price={item.price ? `$${item.price}` : "N/A"}
+                    type={""}
+                  />
+                </div>
               );
             }
           )}
