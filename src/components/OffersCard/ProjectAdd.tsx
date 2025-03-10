@@ -239,7 +239,7 @@ const Example = () => {
                     </div>
                   ))}
 
-                <div className=" w-full grid  gap-2">
+                <div className="w-full grid  gap-2">
                   <label htmlFor="image" className="text-xs md:text-sm font-medium text-secondary">
                     Rasm
                   </label>
