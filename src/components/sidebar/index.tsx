@@ -36,7 +36,7 @@ export interface SidebarItemProps {
 export interface SidebarProps {
   isSidebarOpen: boolean;
   handleToggleSidebar: () => void;
- 
+
 }
 
 function SidebarItem({ icon, label, isActive }: SidebarItemProps) {
@@ -53,7 +53,7 @@ function SidebarItem({ icon, label, isActive }: SidebarItemProps) {
 
 export default function Sidebar({ isSidebarOpen, handleToggleSidebar }: SidebarProps) {
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isFormModalOpen, setIsFormModalOpen] = useState(false);
   const toast = useToast();
   const navigate = useNavigate();
   const { data, error, isLoading } = useGetUserProfileQuery(undefined);
@@ -73,16 +73,17 @@ export default function Sidebar({ isSidebarOpen, handleToggleSidebar }: SidebarP
       duration: 1000,
     });
   };
-  const toggleModal = () => {
-    setIsModalOpen(!isModalOpen);
-  };
+
+  const toggleFormModal = () => {
+    setIsFormModalOpen(!isFormModalOpen)
+  }
 
 
 
 
   return (
     <>
-    
+
 
       <div
         className={cn(
@@ -98,12 +99,12 @@ export default function Sidebar({ isSidebarOpen, handleToggleSidebar }: SidebarP
             </Link>
           </div>
           <div>
-                
+
             <button className=" absolute top-2 right-2 lg:hidden" onClick={handleToggleSidebar}>
               <HiX size={24} />
             </button>
           </div>
-        </div> 
+        </div>
 
         <div className="flex flex-col items-center border-b p-6">
           <div className="w-[60px] h-[60px] bg-[#B29C6F] text-white rounded-full flex items-center justify-center text-4xl font-normal mb-2">
@@ -143,11 +144,11 @@ export default function Sidebar({ isSidebarOpen, handleToggleSidebar }: SidebarP
           </div>
         </div>
         <div className="flex items-center justify-center gap-2 mt-3 mb-3 ">
-          <Button variant="ghost" size="icon" onClick={toggleModal}>
+          <Button variant="ghost" size="icon" onClick={toggleFormModal}>
             <Pencil style={{ width: "17px", height: "17px" }} />
           </Button>
 
-          {isModalOpen && (
+          {isFormModalOpen && (
             <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
               <div
                 className="bg-white rounded-xl p-6 w-[31%] h-[auto] relative"
@@ -155,11 +156,11 @@ export default function Sidebar({ isSidebarOpen, handleToggleSidebar }: SidebarP
               >
                 <button
                   className="absolute top-3 right-3 text-gray-500 hover:text-gray-800"
-                  onClick={toggleModal}
+                  onClick={toggleFormModal}
                 >
                   <HiX size={24} />
                 </button>
-                <ProfileForm closeModal={toggleModal} />
+                <ProfileForm closeModal={toggleFormModal} />
               </div>
             </div>
           )}

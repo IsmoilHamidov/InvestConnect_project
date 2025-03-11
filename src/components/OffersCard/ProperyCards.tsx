@@ -28,7 +28,7 @@ const ProperyCard: React.FC<ProperyCardProps> = ({
     return (
 
         <Card
-            className="flex w-full relative border border-[#C5C3C3] items-center px-4 py-4 ">                                                                        
+            className="flex w-full relative border border-[#C5C3C3] items-center px-2 py-4 ">                                                                        
             <img
                 src={image ? `https://bakirali007.pythonanywhere.com/${image}` : "https://via.placeholder.com/150"}
                 alt={title}
@@ -38,7 +38,7 @@ const ProperyCard: React.FC<ProperyCardProps> = ({
                 }}
             />
 
-            <div className="flex-1 border-red-500">
+            <div className="flex-1">
                 <CardHeader className="p-0">
                     <CardTitle className="w-[90%] text-md font-medium text-[#749BA9] capitalize">
                         {title}
@@ -47,7 +47,7 @@ const ProperyCard: React.FC<ProperyCardProps> = ({
 
                 <CardContent >
                     <div className="flex items-center gap-x-3 mt-2">
-                        <span className="font-normal text-[#443B3A] text-base">
+                        <span className="font-normal text-[#443B3A] text-sm">
                             {category}
                         </span>
                         <p className="text-base font-medium text-secondary">{price}</p>
@@ -56,8 +56,8 @@ const ProperyCard: React.FC<ProperyCardProps> = ({
             </div>
 
             <div className="absolute top-2 -right-3 grid justify-items-end">
-                <div className="bg-[#B29C6F]  px-3 py-2">
-                    <p className="font-normal text-white text-[12px] leading-3 ">
+                <div className="bg-[#B29C6F]  px-2 py-2">
+                    <p className="font-normal text-white text-xs leading-3 ">
                         {location}
                     </p>
                 </div>

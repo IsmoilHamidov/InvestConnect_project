@@ -32,7 +32,7 @@ export default function NavbarAdmin({ search, setSearch, isSidebarOpen, handleTo
   const location = useLocation();
   const isProductsPage = location.pathname === "/products";
 
-
+  const menuLocation = location.pathname === "/profile"
   const handelNavigateProfile = () => {
     if (data?.role === "investor") {
       navigate("/investorProfile");
@@ -57,13 +57,15 @@ export default function NavbarAdmin({ search, setSearch, isSidebarOpen, handleTo
     <>
       <nav className="flex fixed z-30 w-full items-center justify-center px-4 py-[16px] bg-primary">
 
-        <NavbarStep /> 
-        <button
-          className={`z-20 bg-white p-2 rounded-full shadow-md lg:hidden ${isSidebarOpen ? "translate-x-full" : "-translate-x-0"} `}
-          onClick={handleToggleSidebar}
-        >
-          <HiMenu size={24} />
-        </button>
+        <NavbarStep />
+        <div className={`${menuLocation ? "block" : "hidden"}`} >
+          <button
+            className={`z-20 bg-white p-2 rounded-full shadow-md lg:hidden ${isSidebarOpen ? "translate-x-full" : "-translate-x-0"} `}
+            onClick={handleToggleSidebar}
+          >
+            <HiMenu size={24} />
+          </button>
+        </div>
         <div className={`w-full  ${isProductsPage ? "justify-between h-[2.65rem]" : "justify-end h-[2.5rem]"}  flex items-center gap-10`}>
           {isProductsPage && (
             <div className="flex justify-between w-[66%] h-full">
