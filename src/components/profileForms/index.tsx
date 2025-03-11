@@ -139,7 +139,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ closeModal }) => {
                                                 }
                                             },
                                         })}
-                                        className="rounded-[75px] w-full p-5 shadow"
+                                     className="rounded-[75px] w-full p-5 shadow"
                                     />
                                     {errors[field] && (
                                         <p className="text-red-500 text-sm mt-2 ms-2">
