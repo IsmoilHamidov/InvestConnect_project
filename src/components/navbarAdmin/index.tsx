@@ -32,7 +32,7 @@ export default function NavbarAdmin({ search, setSearch, isSidebarOpen, handleTo
   const location = useLocation();
   const isProductsPage = location.pathname === "/products";
 
-  const menuLocation = location.pathname === "/profile"
+  const menuLocation = location.pathname === "/profile" || "investorProfile"
   const handelNavigateProfile = () => {
     if (data?.role === "investor") {
       navigate("/investorProfile");
