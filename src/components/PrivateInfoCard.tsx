@@ -3,7 +3,7 @@ import PaymentAndCheck from "./PaymentAndCheck";
 import { useGetPrivateInfoQuery } from "@/store/slice/products";
 import { Link } from "react-router";
 
-const baseUrl = "https://bakirali007.pythonanywhere.com/";
+const baseUrl = "https:///ulugbek100.pythonanywhere.com/";
 
 const PrivateInfoCard = ({ productId }: { productId: number }) => {
   const {

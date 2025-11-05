@@ -31,7 +31,7 @@ const ProperyCard: React.FC<ProperyCardProps> = ({
         className="flex  relative border border-[#C5C3C3] items-center 
         px-4 py-4 ">
         <img
-           src={image ? `https://bakirali007.pythonanywhere.com/${image}` : "https://via.placeholder.com/150"}
+           src={image ? `https:///ulugbek100.pythonanywhere.com/${image}` : "https://via.placeholder.com/150"}
             alt={title}
             className="w-24 h-16 rounded object-cover mr-4"
             onError={(e) => {

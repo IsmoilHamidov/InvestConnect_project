@@ -11,7 +11,7 @@ interface ProfileDetail {
 export const userApi = createApi({
   reducerPath: "userApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://bakirali007.pythonanywhere.com/api/v1/app",
+    baseUrl: "https://ulugbek100.pythonanywhere.com/api/v1/app",
   }),
   endpoints: (builder) => ({
     registerUser: builder.mutation<{ user: string }, { username: string; phone: string; role: string; password: string }>({

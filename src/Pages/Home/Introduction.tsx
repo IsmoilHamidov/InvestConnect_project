@@ -32,7 +32,7 @@ const Introduction_Image: React.FC = () => {
   return (
     <div
       className="intro_box relative h-[100vh] w-full py-5 z-10"
-      // style={{backgroundImage: `url(${intro_image})`, backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat",}}
+     
     >
       <video
         className="absolute top-0 left-0 w-full h-full object-cover"
@@ -45,7 +45,6 @@ const Introduction_Image: React.FC = () => {
 
       <div
         className="absolute inset-0 bg-black/30 "
-        // style={{position: "absolute", top: 0, left: 0, right: 0, bottom: 0, zIndex: -1,}}
       />
 
       <Navbar />
@@ -90,8 +89,6 @@ const Introduction_Image: React.FC = () => {
           )}
         </div>
 
-        {/* <img className="h-[27rem] object-contain" src={Intro_logo} alt="Intro Logo" 
-            style={{ filter: "brightness(50%)" }}/> */}
       </div>
     </div>
   );

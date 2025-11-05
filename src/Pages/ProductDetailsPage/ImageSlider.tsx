@@ -2,7 +2,7 @@ import { useGetProductQuery } from "@/store/slice/products";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-const imageBasicUrl = "https://bakirali007.pythonanywhere.com/";
+const imageBasicUrl = "https:///ulugbek100.pythonanywhere.com/";
 
 const ImageSlider = () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

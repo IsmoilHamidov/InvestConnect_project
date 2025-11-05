@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const api = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://bakirali007.pythonanywhere.com/api/v1/app",
+    baseUrl: "https://ulugbek100.pythonanywhere.com/api/v1/app/",
     prepareHeaders: (headers) => {
       headers.set("accept", "application/json");
 

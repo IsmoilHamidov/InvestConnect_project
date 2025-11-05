@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const apiSlice = createApi({
   reducerPath: "api", // Уникальное имя для вашего slice
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://bakirali007.pythonanywhere.com/api/v1/app/users/",
+    baseUrl: "https://ulugbek100.pythonanywhere.com/api/v1/app/users/",
   }),
   endpoints: (builder) => ({
     loginUser: builder.mutation({

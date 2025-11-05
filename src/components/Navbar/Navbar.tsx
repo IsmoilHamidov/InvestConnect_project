@@ -13,10 +13,25 @@ import PrivacyPolicy from "../PrivacyPolicy";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "@/store/useTransition";
 import LanguageTriger from "../LanguageTriger";
+import {Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger,} from "../ui/sheet";
+import { AlignJustify, Mail, X } from "lucide-react";
+
+
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
   const [scrollProgress, setScrollProgress] = useState<number>(0);
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) {
+        setIsOpen(false); 
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -55,7 +70,7 @@ const Navbar: React.FC = () => {
     <div>
       {/* Navbar */}
       <div
-        className={`pt-5 fixed w-full top-0 z-[1000] transition-all duration-500 ease-in-out ${
+        className={`hidden lg:block  pt-5 fixed w-full top-0 z-[1000] transition-all duration-500 ease-in-out ${
           isScrolled
             ? "bg-[#242323c8] bg-opacity-97 shadow-md pb-[2px] "
             : "bg-transparent"
@@ -156,6 +171,57 @@ const Navbar: React.FC = () => {
           style={{ width: `${scrollProgress}%` }}
         ></div>
       </div>
+
+
+    {/* Navbar Mobile */}
+    <div className="block lg:hidden">
+      <Sheet open={isOpen} onOpenChange={setIsOpen}>
+        <SheetTrigger
+          aria-label="Open menu"
+          className="rounded-full bg-white p-2 absolute top-7 right-7 cursor-pointer hover:bg-gray-200 transition-colors duration-200"
+          onClick={() => setIsOpen(true)}
+        >
+        <AlignJustify className="text-primary text-xl" size={30} />
+      </SheetTrigger>
+
+      <SheetContent side="right">
+        <SheetHeader>
+          <SheetTitle className="text-xl font-bold text-dark dark:text-white">
+            Menu
+          </SheetTitle>
+        </SheetHeader>
+
+          <div className="flex flex-col gap-4 mt-6">
+            <Link
+              to="/products"
+              className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200"
+            >
+              Projects
+            </Link>
+            <a
+              href="#about_us"
+              className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200"
+            >
+              About Us
+            </a>
+            <a
+              href="#our_service"
+              className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200"
+            >
+              Our Services
+            </a>
+            <LanguageTriger />
+          </div>
+
+          <button
+            className="absolute top-5 right-5 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200"
+            onClick={() => setIsOpen(false)}
+          >
+            <X size={24} className="text-gray-900 dark:text-white" />
+          </button>
+        </SheetContent>
+      </Sheet>
+    </div>
     </div>
   );
 };

@@ -66,7 +66,7 @@ function ProductForm() {
     
 
     try {
-      const response = await fetch('https://bakirali007.pythonanywhere.com/api/v1/app/products/create/', {
+      const response = await fetch('https:///ulugbek100.pythonanywhere.com/api/v1/app/products/create/', {
         method: 'POST',
         headers: {
           'accept': 'application/json',
